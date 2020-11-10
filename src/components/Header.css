@@ -1,0 +1,35 @@
+.navbar {
+  width: 100%;
+  height: 42px;
+  background-color: #232f3e;
+  border-radius: 0 !important;
+}
+
+.logo {
+  display: block;
+  margin: auto;
+  color: white;
+}
+
+button.headerLink {
+  color: #eee;
+  font-weight: 400;
+  vertical-align: baseline;
+  background: transparent;
+  border: 0;
+}
+
+button.headerLink:hover {
+  color: #ec7211;
+  text-decoration: none;
+  background: transparent;
+}
+
+.auth-error {
+  color: red;
+}
+
+.navbar-nav button {
+  margin: 0 5px !important;
+  height: 30px;
+}
