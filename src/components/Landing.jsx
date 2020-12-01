@@ -26,7 +26,7 @@ const Landing = () => {
     }
 
     return (
-        <Layout>
+        <>
             <Container>
                 <Row className={"mainRow align-middle"}>
                     <Col xs={12} md={6}>
@@ -87,7 +87,7 @@ const Landing = () => {
                     </Col>
                 </Row>
             </Container>
-        </Layout>
+        </>
     )
 
 }

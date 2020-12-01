@@ -10,7 +10,7 @@ class Layout extends Component {
         if (this.isConfigurationOk) {
             return (
                 <Fragment>
-                    <ESNavbar/>
+                    <ESNavbar isSignedIn={this.props.isSignedIn}/>
                     <Container>
                         <div className="wrapper">
                             {this.props.children}

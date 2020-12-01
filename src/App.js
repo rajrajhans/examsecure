@@ -20,10 +20,14 @@ class App extends Component {
         const isSignedIn = this.state.authState === "signedin";
 
         return (
-            <>
-                {isSignedIn ? ("Hello") :
-                    (<Login authState={this.state.authState} setAuthState={this.setAuthState}/>)}
-            </>
+            <Layout isSignedIn={isSignedIn}>
+                {isSignedIn ? (
+                        <Landing/>
+                    ) :
+                    (
+                        <Login authState={this.state.authState} setAuthState={this.setAuthState}/>
+                    )}
+            </Layout>
         )
     }
 }

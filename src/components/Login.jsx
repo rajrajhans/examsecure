@@ -38,7 +38,7 @@ const Login = ({authState, setAuthState}) => {
     }, []);
 
     return (
-        <Layout>
+        <>
             <div className="amplify-auth-container">
                 <AmplifyAuthenticator usernameAlias="email">
                     <AmplifySignIn
@@ -66,7 +66,7 @@ const Login = ({authState, setAuthState}) => {
                     </AmplifySignIn>
                 </AmplifyAuthenticator>
             </div>
-        </Layout>
+        </>
     );
 };
 

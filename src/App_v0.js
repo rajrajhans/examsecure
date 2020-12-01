@@ -9,7 +9,6 @@ import gateway from "./utils/gateway";
 import CameraHelp from "./components/helpers/CameraHelp";
 import EngagementSummary from "./components/EngagementsSummary";
 import Header from "./components/Header";
-import SettingsHelp from "./components/SettingsHelp";
 
 export default () => {
   const [authState, setAuthState] = useState(undefined);
@@ -71,7 +70,6 @@ export default () => {
       />
       {signedIn ? (
         <>
-          <SettingsHelp show={!window.rekognitionSettings} />
           <CameraHelp show={!readyToStream} />
           <Row>
             <Col md={8} sm={6}>
