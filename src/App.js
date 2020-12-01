@@ -5,8 +5,9 @@ import './styles/main.css'
 import Home from "./components/Home";
 import Login from "./components/Login";
 import {Router, Link, Redirect} from "@reach/router"
-import Timer from "./components/helpers/Timer";
 import PrivateRoute from "./components/helpers/PrivateRoute";
+import Exam from "./components/Exam";
+import PostSubmit from "./components/PostSubmit";
 
 class App extends Component {
     constructor(props) {
@@ -29,6 +30,8 @@ class App extends Component {
                 <Router>
                     <PrivateRoute component={Landing} isSignedIn={isSignedIn} path={'/landing'}/>
                     <Login isSignedIn={isSignedIn} authState={this.state.authState} setAuthState={this.setAuthState} path={'/'}/>
+                    <PrivateRoute component={Exam} isSignedIn={isSignedIn} path={'/exam'}/>
+                    <PrivateRoute component={PostSubmit} isSignedIn={isSignedIn} path={'/thankyou'}/>
                 </Router>
             </Layout>
 

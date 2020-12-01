@@ -1,0 +1,10 @@
+.questionCard{
+    width: 400px;
+    margin: 40px auto;
+}
+
+.timer{
+    position: fixed;
+    top: 100px;
+    right: 10px;
+}

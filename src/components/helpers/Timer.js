@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Alert from "react-bootstrap/Alert";
 
 // Takes in a "duration" and "Callback Function", waits for "duration" and fires the CallbackFn
 
@@ -42,9 +43,9 @@ class Timer extends Component {
         let timeLeftinSecs = duration - this.state.timePassed;
 
         return (
-            <div className={"timer"}>
+            <Alert variant={"warning"} className={"timer"}>
                 Time Remaining - {this.getTimeFromSeconds(timeLeftinSecs)}
-            </div>
+            </Alert>
         );
     }
 }
