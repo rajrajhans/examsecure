@@ -1,17 +1,30 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import ESNavbar from "./Navbar";
 import Container from "react-bootstrap/Container";
+import Alert from "react-bootstrap/Alert";
 
 class Layout extends Component {
+    isConfigurationOk = window.rekognitionSettings;
+
     render() {
-        return (
-            <Container>
-                <ESNavbar/>
-                <div className="wrapper">
-                    {children}
-                </div>
-            </Container>
-        );
+        if (this.isConfigurationOk) {
+            return (
+                <Fragment>
+                    <ESNavbar/>
+                    <Container>
+                        <div className="wrapper">
+                            {this.props.children}
+                        </div>
+                    </Container>
+                </Fragment>
+            );
+        } else {
+            return (
+                <Alert variant={"danger"}>
+                    Configuration Error. Contact the developers.
+                </Alert>
+            )
+        }
     }
 }
 

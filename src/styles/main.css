@@ -1,0 +1,37 @@
+.logo{
+    font-family: 'Poppins', sans-serif;
+    font-size: 35px;
+}
+
+.brandColor{
+    color: #223466;
+}
+
+.logoTextLink{
+    text-decoration: none!important;
+    color: black;
+}
+
+.logoTextLink:hover{
+    text-decoration: none!important;
+    color: black;
+}
+
+.instructionsBox{
+    margin: auto;
+    width: 600px;
+    color: black;
+}
+
+.instructionsBoxList{
+    text-align: left;
+}
+
+.mainRow{
+    margin-top: 20vh;
+}
+
+.NextButton{
+    width: 600px;
+    margin-top: 26px;
+}
