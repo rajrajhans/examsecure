@@ -2,7 +2,6 @@ import React, {Fragment, useEffect, useRef, useState} from "react";
 import Webcam from "react-webcam";
 import {Col, Row} from "react-bootstrap"
 import Layout from "./Layout";
-import CameraHelp from "./helpers/CameraHelp";
 import Alert from "react-bootstrap/Alert";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
