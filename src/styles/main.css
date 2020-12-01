@@ -1,3 +1,12 @@
+:root {
+    --themeColor: #223466;
+    --hoverColor: #223466;
+    --amplify-primary-color: #223466;
+    --amplify-primary-tint: #223466;
+    --amplify-primary-shade: #223466;
+}
+
+
 .logo{
     font-family: 'Poppins', sans-serif;
     font-size: 35px;

@@ -47,7 +47,7 @@ const Login = ({authState, setAuthState}) => {
                         headerText="Sign In to ExamSecure"
                         formFields={[
                             {
-                                type: "email",
+                                type: "username",
                                 label: "Username",
                                 placeholder: "Enter your username",
                                 required: true,
