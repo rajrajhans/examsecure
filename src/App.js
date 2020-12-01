@@ -29,7 +29,6 @@ class App extends Component {
                 <Router>
                     <PrivateRoute component={Landing} isSignedIn={isSignedIn} path={'/landing'}/>
                     <Login isSignedIn={isSignedIn} authState={this.state.authState} setAuthState={this.setAuthState} path={'/'}/>
-                    <Timer path='/timer'/>
                 </Router>
             </Layout>
 

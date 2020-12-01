@@ -11,6 +11,7 @@ import '../styles/landing.css'
 
 const Landing = () => {
     const [isWebCamReady, setisWebcamReady] = useState(false);
+    const [isConfActive, setIsConfActive] = useState(false);
     const webcam = useRef(undefined);
     const currentUrl = window.location.href;
 
@@ -46,26 +47,54 @@ const Landing = () => {
                     </Col>
                     <Col xs={12} md={6}>
                         {isWebCamReady ? (
-                            <Fragment>
-                                <Alert variant={"info"} width={"500px"} className={"instructionsBox"}>
-                                    <Alert.Heading className={"instrHeading"}>Instructions</Alert.Heading>
-                                    <ul className={"instructionsBoxList"}>
-                                        <li>Ensure your face is clearly visible in the webcam.</li>
-                                        <li>Do not wear cap, scarf, goggles / sunglasses, headphones, earphones.</li>
-                                        <li>Do not attempt to hide your face during the test.</li>
-                                        <li>Ensure that no one else is sitting with you during the entire duration of
-                                            the test.
-                                        </li>
-                                    </ul>
-                                </Alert>
 
-                                <Link to={"/timer"}>
-                                    <Button variant={"success"} size={"lg"} className={"NextButton"} block>
-                                        Next
-                                    </Button>
-                                </Link>
+                            <>
+                                {isConfActive ? (
+                                        <Fragment>
+                                            <Alert variant={"info"} width={"500px"} className={"instructionsBox confirmationBox"}>
+                                                <Alert.Heading className={"instrHeading"}>Confirmation</Alert.Heading>
+                                                <div className={"confirmationText"}>
+                                                    Are you sure you want to start the test?
+                                                </div>
+                                            </Alert>
 
-                            </Fragment>
+                                            <Link to={"/exam"}>
+                                                <Button variant={"success"} size={"lg"} className={"NextButton"} block>
+                                                    Start the Test
+                                                </Button>
+                                            </Link>
+                                        </Fragment>)
+                                    : (
+                                        <Fragment>
+                                            <Alert variant={"info"} width={"500px"} className={"instructionsBox"}>
+                                                <Alert.Heading className={"instrHeading"}>Instructions</Alert.Heading>
+                                                <ul className={"instructionsBoxList"}>
+                                                    <li>Ensure your face is clearly visible in the webcam.</li>
+                                                    <li>Do not wear cap, scarf, goggles / sunglasses, headphones,
+                                                        earphones.
+                                                    </li>
+                                                    <li>Do not attempt to hide your face during the test.</li>
+                                                    <li>Ensure that no one else is sitting with you during the entire
+                                                        duration
+                                                        of
+                                                        the test.
+                                                    </li>
+                                                </ul>
+                                            </Alert>
+
+                                            <Button
+                                                variant={"success"}
+                                                size={"lg"}
+                                                className={"NextButton"}
+                                                block
+                                                onClick={() => setIsConfActive(true)}
+                                            >
+                                                Next
+                                            </Button>
+                                        </Fragment>
+                                    )}
+
+                            </>
                         ) : (
                             <Fragment>
                                 <Alert variant={"warning"} width={"500px"} className={"instructionsBox"}>

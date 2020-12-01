@@ -2,3 +2,11 @@
 video{
     border: 1px solid var(--brandColor);
 }
+
+.confirmationBox{
+    height: 210px;
+}
+
+.confirmationText{
+    margin-top: 60px;
+}
