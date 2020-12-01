@@ -4,6 +4,8 @@ import Landing from "./components/Landing";
 import './styles/main.css'
 import Home from "./components/Home";
 import Login from "./components/Login";
+import {Router, Link, Redirect} from "@reach/router"
+import Timer from "./components/helpers/Timer";
 
 class App extends Component {
     constructor(props) {
@@ -14,6 +16,8 @@ class App extends Component {
 
     setAuthState(s) {
         this.setState({authState: s});
+        if(s === "signedin")
+            return <Redirect to={"/landing"}/>
     }
 
     render() {
@@ -21,13 +25,13 @@ class App extends Component {
 
         return (
             <Layout isSignedIn={isSignedIn}>
-                {isSignedIn ? (
-                        <Landing/>
-                    ) :
-                    (
-                        <Login authState={this.state.authState} setAuthState={this.setAuthState}/>
-                    )}
+                <Router>
+                    <Landing path={'/landing'}/>
+                    <Login isSignedIn={isSignedIn} authState={this.state.authState} setAuthState={this.setAuthState} path={'/'}/>
+                    <Timer path='/timer'/>
+                </Router>
             </Layout>
+
         )
     }
 }

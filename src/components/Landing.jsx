@@ -5,6 +5,8 @@ import Layout from "./Layout";
 import Alert from "react-bootstrap/Alert";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
+import {Link} from "@reach/router";
+import Timer from "./helpers/Timer";
 
 const Landing = () => {
     const [isWebCamReady, setisWebcamReady] = useState(false);
@@ -55,14 +57,19 @@ const Landing = () => {
                                         </li>
                                     </ul>
                                 </Alert>
-                                <Button variant={"success"} size={"lg"} className={"NextButton"} block>
-                                    Next
-                                </Button>
+
+                                <Link to={"/timer"}>
+                                    <Button variant={"success"} size={"lg"} className={"NextButton"} block>
+                                        Next
+                                    </Button>
+                                </Link>
+
                             </Fragment>
                         ) : (
                             <Fragment>
                                 <Alert variant={"warning"} width={"500px"} className={"instructionsBox"}>
-                                    <Alert.Heading className={"instrHeading"}>Please allow required permissions to continue</Alert.Heading>
+                                    <Alert.Heading className={"instrHeading"}>Please allow required permissions to
+                                        continue</Alert.Heading>
                                     <ul className={"instructionsBoxList"}>
                                         <li>
                                             When prompted, you need to click <i>Allow</i> to use the application with
@@ -82,6 +89,7 @@ const Landing = () => {
                                 <Button variant={"secondary"} size={"lg"} className={"NextButton"} disabled block>
                                     Next
                                 </Button>
+
                             </Fragment>
                         )}
                     </Col>

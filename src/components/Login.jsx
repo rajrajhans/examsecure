@@ -3,6 +3,7 @@ import {AmplifyAuthenticator, AmplifySignIn} from "@aws-amplify/ui-react";
 import {onAuthUIStateChange} from "@aws-amplify/ui-components";
 import Amplify, {Auth} from "aws-amplify";
 import Layout from "./Layout";
+import {Redirect} from "@reach/router";
 
 const settings = window.rekognitionSettings || {};
 const region = settings.region || "eu-west-1";
@@ -31,7 +32,7 @@ Amplify.configure({
     },
 });
 
-const Login = ({authState, setAuthState}) => {
+const Login = ({isSignedIn, authState, setAuthState}) => {
 
     useEffect(() => {
         return onAuthUIStateChange((s) => setAuthState(s));
@@ -39,6 +40,7 @@ const Login = ({authState, setAuthState}) => {
 
     return (
         <>
+            {isSignedIn ? (<Redirect to={"/landing"} noThrow/>) : (
             <div className="amplify-auth-container">
                 <AmplifyAuthenticator usernameAlias="email">
                     <AmplifySignIn
@@ -65,7 +67,7 @@ const Login = ({authState, setAuthState}) => {
                         <div slot="secondary-footer-content"></div>
                     </AmplifySignIn>
                 </AmplifyAuthenticator>
-            </div>
+            </div>)}
         </>
     );
 };
