@@ -6,7 +6,7 @@ import { retryWrapper } from "../utils";
 
 import RekognitionButton from "./RekognitionButton";
 
-import "./Header.css";
+import "../styles/Header.css";
 import AddUserModal from "./AddUserModal";
 
 export default ({ addUser, readyToStream, signedIn, toggleRekognition }) => {
