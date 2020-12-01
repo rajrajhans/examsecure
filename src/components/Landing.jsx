@@ -11,7 +11,6 @@ const Landing = () => {
     const webcam = useRef(undefined);
     const currentUrl = window.location.href;
 
-
     const setupWebcam = (instance) => {
         webcam.current = instance;
 
@@ -46,7 +45,7 @@ const Landing = () => {
                         {isWebCamReady ? (
                             <Fragment>
                                 <Alert variant={"info"} width={"500px"} className={"instructionsBox"}>
-                                    <Alert.Heading>Instructions</Alert.Heading>
+                                    <Alert.Heading className={"instrHeading"}>Instructions</Alert.Heading>
                                     <ul className={"instructionsBoxList"}>
                                         <li>Ensure your face is clearly visible in the webcam.</li>
                                         <li>Do not wear cap, scarf, goggles / sunglasses, headphones, earphones.</li>
@@ -63,13 +62,16 @@ const Landing = () => {
                         ) : (
                             <Fragment>
                                 <Alert variant={"warning"} width={"500px"} className={"instructionsBox"}>
-                                    <Alert.Heading>Please allow required permissions to continue</Alert.Heading>
+                                    <Alert.Heading className={"instrHeading"}>Please allow required permissions to continue</Alert.Heading>
                                     <ul className={"instructionsBoxList"}>
                                         <li>
-                                            When prompted, you need to click <i>Allow</i> to use the application with your webcam.
+                                            When prompted, you need to click <i>Allow</i> to use the application with
+                                            your webcam.
                                         </li>
                                         <li>
-                                            If you don't see the dialog, try{" "} <a href={currentUrl}>opening the application</a> in a new incognito window, or review your webcam settings on your browser.
+                                            If you don't see the dialog, try{" "} <a href={currentUrl}>opening the
+                                            application</a> in a new incognito window, or review your webcam settings on
+                                            your browser.
                                         </li>
                                         <li>
                                             We recommend using the latest version of Google Chrome.

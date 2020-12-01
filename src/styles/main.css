@@ -33,5 +33,9 @@
 
 .NextButton{
     width: 600px;
-    margin-top: 26px;
+    margin-top: 17px;
+}
+
+.instrHeading{
+    margin-bottom: 18px;
 }
