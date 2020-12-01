@@ -7,6 +7,7 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import {Link} from "@reach/router";
 import Timer from "./helpers/Timer";
+import '../styles/landing.css'
 
 const Landing = () => {
     const [isWebCamReady, setisWebcamReady] = useState(false);
