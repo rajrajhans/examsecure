@@ -17,17 +17,17 @@ phases:
       - >
         aws s3 cp --acl public-read 
         --cache-control="max-age=0, no-cache, no-store, must-revalidate" 
-        ./build/service-worker.js s3://${DeployBucket}/
+        ./build/service-worker.js s3://edi-ty52-webuibucket-u9l4ezvzdnvt/
       # set the cache-control headers for index.html to prevent
       # browser caching
       - >
         aws s3 cp --acl public-read 
         --cache-control="max-age=0, no-cache, no-store, must-revalidate" 
-        ./build/index.html s3://${DeployBucket}/
+        ./build/index.html s3://edi-ty52-webuibucket-u9l4ezvzdnvt/
       # invalidate the CloudFront cache for index.html and service-worker.js
       # to force CloudFront to update its edge locations with the new versions
       - >
-        aws cloudfront create-invalidation --distribution-id ${Distribution} 
+        aws cloudfront create-invalidation --distribution-id E3552Z2O0OJKV0 
         --paths /index.html /service-worker.js
 artifacts:
   files:
