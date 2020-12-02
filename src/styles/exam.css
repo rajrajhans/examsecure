@@ -5,6 +5,16 @@
 
 .timer{
     position: fixed;
-    top: 100px;
+    top: 200px;
+    width: 200px;
     right: 10px;
+}
+
+.examCamera{
+    position: fixed;
+    width: 250px;
+    top: 200px;
+    left: 0px;
+    height: 102px;
+    border: none;
 }

@@ -44,7 +44,7 @@ class Timer extends Component {
 
         return (
             <Alert variant={"warning"} className={"timer"}>
-                Time Remaining - {this.getTimeFromSeconds(timeLeftinSecs)}
+                <strong>Time Remaining</strong> <br/> {this.getTimeFromSeconds(timeLeftinSecs)}
             </Alert>
         );
     }
