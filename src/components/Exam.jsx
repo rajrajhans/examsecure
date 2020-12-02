@@ -10,7 +10,7 @@ import gateway from "../utils/gateway";
 const Exam = () => {
     const [isWebCamReady, setisWebcamReady] = useState(false);
 
-    const duration = 10000;
+    const duration = 15;
 
     const webcam = useRef(undefined);
     const isStreaming = useRef(true);
@@ -33,8 +33,8 @@ const Exam = () => {
     }
 
     const getSnapshot = () => {
-        const image = webcam.current.getScreenshot();
-        const b64EncodedImg = image.split(",")[1];
+        // const image = webcam.current.getScreenshot();
+        // const b64EncodedImg = image.split(",")[1];
 
         // gateway.processImage(b64EncodedImg).then(
         //     (res) => {
