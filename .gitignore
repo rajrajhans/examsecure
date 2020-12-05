@@ -37,7 +37,7 @@ node_modules/
 jspm_packages/
 build/settings.js
 public/settings.js
-settings.js
+public/settings.js
 
 # Typescript v1 declaration files
 typings/
