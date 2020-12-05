@@ -9,6 +9,7 @@ import PrivateRoute from "./components/helpers/PrivateRoute";
 import Exam from "./components/Exam";
 import PostSubmit from "./components/PostSubmit";
 import Loading from "./components/Loading";
+import Caught from "./components/Caught";
 
 class App extends Component {
   constructor(props) {
@@ -68,6 +69,7 @@ class App extends Component {
             path={"/thankyou"}
             loadForSeconds={this.loadForSeconds}
           />
+          <Caught path={"/caught"} loadForSeconds={this.loadForSeconds} />
         </Router>
       </Layout>
     );

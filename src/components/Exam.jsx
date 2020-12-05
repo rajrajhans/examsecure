@@ -6,6 +6,7 @@ import { Link, navigate } from "@reach/router";
 import "../styles/exam.css";
 import Webcam from "react-webcam";
 import gateway from "../utils/gateway";
+import signOut from "../utils/signOut";
 
 const Exam = ({ loadForSeconds }) => {
   const [isWebCamReady, setisWebcamReady] = useState(false);
@@ -14,13 +15,16 @@ const Exam = ({ loadForSeconds }) => {
     loadForSeconds();
   }, []);
 
-  const duration = 15;
+  const duration = 1000;
 
   const webcam = useRef(undefined);
   const isStreaming = useRef(true);
   const currentUrl = window.location.href;
 
-  const timeUp = () => navigate("/thankyou");
+  const timeUp = () => {
+    isStreaming.current = false;
+    navigate("/thankyou");
+  };
 
   const setupWebcam = (instance) => {
     webcam.current = instance;
@@ -33,7 +37,7 @@ const Exam = ({ loadForSeconds }) => {
       ) {
         setisWebcamReady(true);
       } else {
-        setTimeout(checkIfReady, 250);
+        setTimeout(checkIfReady, 300);
       }
     };
 
@@ -41,17 +45,24 @@ const Exam = ({ loadForSeconds }) => {
   };
 
   const getSnapshot = () => {
-    // const image = webcam.current.getScreenshot();
-    // const b64EncodedImg = image.split(",")[1];
-    // gateway.processImage(b64EncodedImg).then(
-    //     (res) => {
-    //         if (res)
-    //             console.log(res);
-    //
-    //         if (isStreaming.current)
-    //             setTimeout(getSnapshot, 300);
-    //     }
-    // )
+    if (webcam.current) {
+      const image = webcam.current.getScreenshot();
+      const b64EncodedImg = image.split(",")[1];
+      gateway.processImage(b64EncodedImg).then((res) => {
+        if (res) {
+          console.log(res);
+          if (res[0]["Success"] === false) {
+            alert(
+              `Alert! ${res[0]["Details"]} Detected! You will be Logged Out.`
+            );
+            signOut();
+            navigate("/caught");
+          }
+        }
+
+        if (isStreaming.current) setTimeout(getSnapshot, 10000);
+      });
+    }
   };
 
   useEffect(() => {
