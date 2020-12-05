@@ -37,7 +37,7 @@ const Exam = ({ loadForSeconds }) => {
       ) {
         setisWebcamReady(true);
       } else {
-        setTimeout(checkIfReady, 300);
+        setTimeout(checkIfReady, 250);
       }
     };
 
@@ -60,7 +60,7 @@ const Exam = ({ loadForSeconds }) => {
           }
         }
 
-        if (isStreaming.current) setTimeout(getSnapshot, 10000);
+        if (isStreaming.current) setTimeout(getSnapshot, 300);
       });
     }
   };
