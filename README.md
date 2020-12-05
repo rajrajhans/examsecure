@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://examsecure.rajrajhans.com">
-    <img alt="ExamSecure" src="http://assets.rajrajhans.com/examsecure_logo_400.png" width="250"/>
+    <img alt="ExamSecure" src="http://assets.rajrajhans.com/examsecure_logo.png" width="190"/>
   </a>
 </p>
 
