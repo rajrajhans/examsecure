@@ -41,4 +41,4 @@ Following is a sneak peek of how the interface looks.
 
 | Exam Interface                              | Mobile Detected                             | Force Logout                             |
 | ------------------------------------ | ------------------------------------ | ------------------------------------ |
-| ![](https://assets.rajrajhans.com/examsecure_ss4.png) | ![](https://assets.rajrajhans.com/examsecure_ss5.png) | ![](https://assets.rajrajhans.com/examsecure_ss5.png) |
+| ![](https://assets.rajrajhans.com/examsecure_ss4.png) | ![](https://assets.rajrajhans.com/examsecure_ss5.png) | ![](https://assets.rajrajhans.com/examsecure_ss6.png) |
