@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://gradgoggles.com">
-    <img alt="GradGoggles" src="http://assets.rajrajhans.com/examsecure_logo_1.png" width="250"/>
+    <img alt="ExamSecure" src="http://assets.rajrajhans.com/examsecure_logo.png" width="250"/>
   </a>
 </p>
 
@@ -9,9 +9,9 @@
 </h1>
 
 
-<h6 align="center">
+<h4 align="center">
   Automated Virtual Proctoring System 
-</h6>
+</h4>
 
 ### Running ExamSecure Locally
 
