@@ -16,6 +16,7 @@ class App extends Component {
     this.state = { authState: undefined };
     this.setAuthState = this.setAuthState.bind(this);
     this.setLoading = this.setLoading.bind(this);
+    this.loadForSeconds = this.loadForSeconds.bind(this);
     this.state = { isLoading: false };
   }
 
@@ -25,7 +26,14 @@ class App extends Component {
   }
 
   setLoading(val) {
-    this.state.isLoading = val;
+    this.setState({ isLoading: val });
+  }
+
+  loadForSeconds() {
+    this.setLoading(true);
+    setTimeout(() => {
+      this.setLoading(false);
+    }, 1500);
   }
 
   render() {
@@ -33,41 +41,34 @@ class App extends Component {
 
     return (
       <Layout isSignedIn={isSignedIn}>
-        {this.state.isLoading ? (
-          <Loading />
-        ) : (
-          <Router>
-            <PrivateRoute
-              component={Landing}
-              isSignedIn={isSignedIn}
-              path={"/landing"}
-              isLoading={this.state.isLoading}
-              setIsLoading={this.setLoading}
-            />
-            <Login
-              isSignedIn={isSignedIn}
-              authState={this.state.authState}
-              setAuthState={this.setAuthState}
-              path={"/"}
-              isLoading={this.state.isLoading}
-              setIsLoading={this.setLoading}
-            />
-            <PrivateRoute
-              component={Exam}
-              isSignedIn={isSignedIn}
-              path={"/exam"}
-              isLoading={this.state.isLoading}
-              setIsLoading={this.setLoading}
-            />
-            <PrivateRoute
-              component={PostSubmit}
-              isSignedIn={isSignedIn}
-              path={"/thankyou"}
-              isLoading={this.state.isLoading}
-              setIsLoading={this.setLoading}
-            />
-          </Router>
-        )}
+        <Loading show={this.state.isLoading} />
+        <Router>
+          <PrivateRoute
+            component={Landing}
+            isSignedIn={isSignedIn}
+            path={"/landing"}
+            loadForSeconds={this.loadForSeconds}
+          />
+          <Login
+            isSignedIn={isSignedIn}
+            authState={this.state.authState}
+            setAuthState={this.setAuthState}
+            path={"/"}
+            loadForSeconds={this.loadForSeconds}
+          />
+          <PrivateRoute
+            component={Exam}
+            isSignedIn={isSignedIn}
+            path={"/exam"}
+            loadForSeconds={this.loadForSeconds}
+          />
+          <PrivateRoute
+            component={PostSubmit}
+            isSignedIn={isSignedIn}
+            path={"/thankyou"}
+            loadForSeconds={this.loadForSeconds}
+          />
+        </Router>
       </Layout>
     );
   }

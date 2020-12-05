@@ -8,7 +8,7 @@
     text-align: center;
     font-size: 1.2em;
     color: #FFF;
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(0, 0, 0, 0.1);
     z-index: 800;
     transition: opacity 400ms ease-in,
 }
