@@ -21,7 +21,8 @@ class Layout extends Component {
         } else {
             return (
                 <Alert variant={"danger"}>
-                    Configuration Error. Contact the developers.
+                    The deployment folder is missing / has invalid settings.js file. The settings.js file should contain your AWS Configuration Details.
+                    <br/>Please refer to the configuration section of README for more details about configuring AWS for ExamSecure. <br/><br/><b>This should not be visible in production. Please contact the developers.</b>
                 </Alert>
             )
         }
