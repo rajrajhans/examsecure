@@ -1,3 +1,18 @@
+<p align="center">
+  <a href="https://gradgoggles.com">
+    <img alt="GradGoggles" src="http://assets.rajrajhans.com/examsecure_logo_1.png" width="250"/>
+  </a>
+</p>
+
+<h1 align="center">
+  ExamSecure
+</h1>
+
+
+<h6 align="center">
+  Automated Virtual Proctoring System 
+</h6>
+
 ### Running ExamSecure Locally
 
 Note: Running this project will require you to set up and configure 
