@@ -1,3 +1,6 @@
+@tailwind components;
+@tailwind utilities;
+
 :root {
     --themeColor: #223466;
     --hoverColor: #223466;
@@ -7,6 +10,16 @@
     --amplify-primary-shade: #223466;
 }
 
+body{
+    text-align: left;
+    font-family: 'Source Sans Pro', sans-serif;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+p{
+    margin:0;
+}
 
 .logo{
     font-family: 'Poppins', sans-serif;
@@ -31,10 +44,13 @@
     margin: auto;
     width: 600px;
     color: black;
+    text-align: center;
 }
 
 .instructionsBoxList{
     text-align: left;
+    list-style-type: disc;
+    padding-left: 10px;
 }
 
 .mainRow{
@@ -48,4 +64,8 @@
 
 .instrHeading{
     margin-bottom: 18px;
+}
+
+.logoContainer{
+    display: flex;
 }

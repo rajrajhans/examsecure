@@ -1,27 +1,35 @@
-import React, {Component, Fragment} from 'react';
-import Jumbotron from "react-bootstrap/Jumbotron";
-import LogoText from "./helpers/LogoText";
-import Layout from "./Layout";
-import Button from "react-bootstrap/Button";
+import React from "react";
+import tw from "twin.macro";
+import { css } from "styled-components/macro";
+import AnimationRevealPage from "./UIComponentsLibrary/AnimationRevealPage";
+import Hero from "./UIComponentsLibrary/Hero";
+import Features from "./UIComponentsLibrary/Features";
+import FAQ from "./UIComponentsLibrary/FAQ";
+import GetStarted from "./UIComponentsLibrary/GetStarted";
+import StepsFeature from "./UIComponentsLibrary/StepsFeature"; //eslint-disable-line
 
-class Home extends Component {
-    render() {
-        return (
-            <Fragment>
-                <Layout>
-                    <Jumbotron>
-                        <LogoText/>
-                        <p>
-                            Ensure Cheat-free Examinations. Lorem Ipsum Dolor Sit Amet
-                        </p>
-                        <p>
-                            <Button variant="primary">Learn more</Button>
-                        </p>
-                    </Jumbotron>
-                </Layout>
-            </Fragment>
-        );
-    }
-}
+const HighlightedText = tw.span`text-primary-500`;
 
-export default Home;
+export default () => {
+  return (
+    <AnimationRevealPage>
+      <Hero />
+      <Features
+        heading={
+          <>
+            <HighlightedText>Features</HighlightedText>
+          </>
+        }
+      />
+      <StepsFeature />
+      <FAQ
+        heading={
+          <>
+            Any <HighlightedText>Questions ?</HighlightedText>
+          </>
+        }
+      />
+      <GetStarted />
+    </AnimationRevealPage>
+  );
+};

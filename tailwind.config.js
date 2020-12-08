@@ -17,15 +17,15 @@ module.exports = {
       white: "#fff",
 
       primary: {
-        100: "#a273ff",
-        200: "#935bff",
-        300: "#8344ff",
-        400: "#742cff",
-        500: "#6415FF",
-        600: "#5a13e6",
-        700: "#5011cc",
-        800: "#460fb3",
-        900: "#3c0d99",
+        100: "#223466",
+        200: "#223466",
+        300: "#223466",
+        400: "#223466",
+        500: "#223466",
+        600: "#223466",
+        700: "#223466",
+        800: "#223466",
+        900: "#223466",
       },
 
       secondary: {
@@ -109,7 +109,7 @@ module.exports = {
       },
       blue: {
         100: "#ebf8ff",
-        200: "#bee3f8",
+        200: "#cad6fe",
         300: "#90cdf4",
         400: "#63b3ed",
         500: "#4299e1",
@@ -266,8 +266,9 @@ module.exports = {
       default: "1",
     },
     fontFamily: {
-      display: ["Inter", "system-ui"],
+      display: ["Source Sans Pro"],
       sans: [
+        "Source Sans Pro",
         "system-ui",
         "-apple-system",
         "BlinkMacSystemFont",
