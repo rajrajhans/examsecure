@@ -42,3 +42,6 @@ Following is a sneak peek of how the interface looks.
 | Exam Interface                              | Mobile Detected                             | Force Logout                             |
 | ------------------------------------ | ------------------------------------ | ------------------------------------ |
 | ![](https://assets.rajrajhans.com/examsecure_ss4.png) | ![](https://assets.rajrajhans.com/examsecure_ss5.png) | ![](https://assets.rajrajhans.com/examsecure_ss6.png) |
+
+### Related Blog Posts
+- [Automate Deployment of React apps to AWS S3 using a CD Pipeline](https://rajrajhans.com/2020/08/automate-deployment-react-app-aws/)
