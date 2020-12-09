@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://ty52.rajrajhans.com">
+  <a href="https://examsecure.rajrajhans.com">
     <img alt="ExamSecure" src="http://assets.rajrajhans.com/examsecure_logo.png" width="150"/>
   </a>
 </p>
@@ -17,7 +17,7 @@ ExamSecure uses the candidate's camera to detect Electronic objects like Mobile 
 
 It uses the [AWS Rekognition](https://aws.amazon.com/rekognition/) API for Object and Person Detection.
 
-Note: ExamSecure is currently a Work In Progress. It is deployed [here](https://ty52.rajrajhans.com) but only authorized test candidates are given access. If you want to test it, please follow these steps to run ExamSecure locally.
+Note: ExamSecure is currently a Work In Progress. It is deployed [here](https://examsecure.rajrajhans.com) but only authorized test candidates are given access. If you want to test it, please follow these steps to run ExamSecure locally.
 
 ### Running ExamSecure Locally
 
