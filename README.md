@@ -17,7 +17,7 @@ ExamSecure uses the candidate's camera to detect Electronic objects like Mobile 
 
 It uses the [AWS Rekognition](https://aws.amazon.com/rekognition/) API for Object and Person Detection.
 
-Note: ExamSecure is currently a Work In Progress. It is deployed [here](https://examsecure.rajrajhans.com) but only authorized test candidates are given access. If you want to test it, please follow these steps to run ExamSecure locally.
+Note: ExamSecure is currently a Work In Progress. It is deployed [here](https://examsecure.rajrajhans.com) but only authorized test candidates are given access. If you want to test it, please follow [these steps](https://github.com/rajrajhans/examsecure#running-examsecure-locally) to run ExamSecure locally.
 
 
 ### Screenshots
