@@ -11,8 +11,8 @@ class Caught extends Component {
 
   render() {
     return (
-      <Card style={{ marginTop: "50px" }}>
-        <Alert variant={"danger"}>
+      <Card style={{ marginTop: "50px" }} className={"container"}>
+        <Alert variant={"danger"} style={{ textAlign: "center" }}>
           <b>You have been signed out due to detection of malpractice.</b>
           <br />
           Please contact the administrators.
