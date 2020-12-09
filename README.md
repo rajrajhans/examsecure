@@ -19,6 +19,24 @@ It uses the [AWS Rekognition](https://aws.amazon.com/rekognition/) API for Objec
 
 Note: ExamSecure is currently a Work In Progress. It is deployed [here](https://examsecure.rajrajhans.com) but only authorized test candidates are given access. If you want to test it, please follow these steps to run ExamSecure locally.
 
+
+### Screenshots
+
+Following is a sneak peek of how the interface looks.
+
+| Home,  Log In                              | Allow Camera Permissions                             |
+| ------------------------------------ | ------------------------------------ |
+| ![](/docs/examsecure_screenrecord.gif) | ![](https://assets.rajrajhans.com/examsecure/examsecure_2.png) |
+
+| Pre-Exam Instructions                              | Exam Interface                             |
+| ------------------------------------ | ------------------------------------ |
+| ![](https://assets.rajrajhans.com/examsecure/examsecure_3.png) | ![](https://assets.rajrajhans.com/examsecure/examsecure_4.png) |
+
+| Mobile Detected                             | Force Logout                             |
+| ------------------------------------ | ------------------------------------ |
+| ![](https://assets.rajrajhans.com/examsecure/examsecure_5.png) | ![](https://assets.rajrajhans.com/examsecure/examsecure_6.png) |
+
+
 ### Running ExamSecure Locally
 
 Note: Running this project will require you to set up and configure 
@@ -29,19 +47,27 @@ the required AWS resources.
 3. Configure AWS and put required details in `public/settings.js`.
 4. Run `npm start`.
 
-The project should run now. In case of any error, make sure your AWS configuration is correct. A CloudFormation Template which you can directly deploy on one click will be added soon. 
+The project should run now. In case of any error, make sure your AWS configuration is correct. 
 
-### Screenshots
+### AWS Configuration
 
-Following is a sneak peek of how the interface looks.
+This project uses many AWS services - S3, CloudFront, Rekognition, Lambda, Cognito, DynamoDB, API Gateway, and CodePipeline. To make the configuration process easy, a CloudFormation stack template is provided. All you need to deploy that template and CloudFormation will take care of the rest!
 
-| Log In                              | Allow Camera Permissions                             | Pre-Exam Instructions                            |
-| ------------------------------------ | ------------------------------------ | ------------------------------------ |
-| ![](https://assets.rajrajhans.com/examsecure_ss1.png) | ![](https://assets.rajrajhans.com/examsecure_ss2.png) | ![](https://assets.rajrajhans.com/examsecure_ss3.png) |
+- First, you need to make a S3 bucket which contains the build files of the React app. Follow [this documentation by AWS](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) for more details.
+    - To get the build files, run `npm run build`. Build files will be `/build`
+    
+- Now that you have the S3 bucket details, you need to create a CloudFormation stack which will manage all the resources we need. I have provided the stack template at `cloudformation/template.yaml` in this repository. Follow the steps given [this documentation by AWS](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html) to deploy this template. During the creation of stack, it will ask you for S3 Bucket URL. You have to provide the URL got in the prior step. 
+- Once the Stack Creation process is complete, create a file `settings.js` in your public folder and paste the details from the Clouformation console output in the  following format - 
 
-| Exam Interface                              | Mobile Detected                             | Force Logout                             |
-| ------------------------------------ | ------------------------------------ | ------------------------------------ |
-| ![](https://assets.rajrajhans.com/examsecure_ss4.png) | ![](https://assets.rajrajhans.com/examsecure_ss5.png) | ![](https://assets.rajrajhans.com/examsecure_ss6.png) |
+```javascript
+window.rekognitionSettings = {
+    "apiGateway": "YOUR_API_GATEWAY",
+    "cognitoIdentityPool": "YOUR_COGNITO_IDENTITY_POOL",
+    "cognitoUserPoolId": "YOUR_COGNITO_POOLID",
+    "cognitoUserPoolClientId": "YOUR_COGNITO_POOL_CLIENDID",
+    "region": "YOUR_AWS_REGION"
+};
+```   
 
 ### Related Blog Posts
 - [Automate Deployment of React apps to AWS S3 using a CD Pipeline](https://rajrajhans.com/2020/08/automate-deployment-react-app-aws/)
