@@ -1,10 +1,10 @@
 import request from "./request";
 
 export default {
-  addUser(params) {
+  addIndexFace(image, fullName) {
     return request("/faces/index", "post", {
-      image: params.image,
-      fullName: params.fullName,
+      image: image,
+      fullName: fullName,
     });
   },
 

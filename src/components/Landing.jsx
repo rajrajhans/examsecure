@@ -7,10 +7,10 @@ import Button from "react-bootstrap/Button";
 import { Link, navigate } from "@reach/router";
 import "../styles/landing.css";
 import {
-  makeFullScreen,
   defineFullscreenChangeEvent,
-  exitFullScreen,
+  makeFullScreen,
 } from "../utils/fullscreenAPI";
+import AddFaceBox from "./helpers/AddFaceBox";
 
 const Landing = ({ loadForSeconds, currentUser }) => {
   const [isWebCamReady, setIsWebcamReady] = useState(false);
@@ -35,6 +35,15 @@ const Landing = ({ loadForSeconds, currentUser }) => {
     };
 
     checkIfReady();
+  };
+
+  const captureFrame = () => {
+    if (webcam.current) {
+      const image = webcam.current.getScreenshot();
+      if (image) {
+        return image.split(",")[1];
+      }
+    }
   };
 
   useEffect(() => {
@@ -202,7 +211,16 @@ const Landing = ({ loadForSeconds, currentUser }) => {
   const CurrentlyActiveSlide = () => {
     if (activeSlide === 1) return <FullscreenSetup />;
     else if (activeSlide === 2) return <ExamInstructions />;
-    else if (activeSlide === 3) return <ExamStartConfirmation />;
+    else if (activeSlide === 3)
+      return (
+        <AddFaceBox
+          setActiveSlide={setActiveSlide}
+          activeSlide={activeSlide}
+          currentUser={currentUser}
+          captureFrame={captureFrame}
+        />
+      );
+    else if (activeSlide === 4) return <ExamStartConfirmation />;
   };
 
   return (
