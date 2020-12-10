@@ -115,7 +115,7 @@ const Landing = ({ loadForSeconds }) => {
 
       {isFullscreenActive ? (
         <Button
-          variant={"success"}
+          variant={"primary"}
           size={"lg"}
           className={"NextButton"}
           block
@@ -158,7 +158,7 @@ const Landing = ({ loadForSeconds }) => {
       </Alert>
 
       <Button
-        variant={"success"}
+        variant={"primary"}
         size={"lg"}
         className={"NextButton"}
         block
@@ -183,7 +183,7 @@ const Landing = ({ loadForSeconds }) => {
       </Alert>
 
       <Link to={"/exam"}>
-        <Button variant={"success"} size={"lg"} className={"NextButton"} block>
+        <Button variant={"primary"} size={"lg"} className={"NextButton"} block>
           Start the Test
         </Button>
       </Link>
