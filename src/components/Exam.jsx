@@ -7,9 +7,15 @@ import "../styles/exam.css";
 import Webcam from "react-webcam";
 import gateway from "../utils/gateway";
 import signOut from "../utils/signOut";
+import ExamWarningModal from "./helpers/ExamWarningModal";
 
 const Exam = ({ loadForSeconds }) => {
   const [isWebCamReady, setisWebcamReady] = useState(false);
+  const [warning, setWarning] = useState({
+    title: "",
+    text: "",
+    isWarningModalActive: false,
+  });
 
   useEffect(() => {
     loadForSeconds();
@@ -45,6 +51,19 @@ const Exam = ({ loadForSeconds }) => {
     checkIfReady();
   };
 
+  const handleWarningInvokation = (title, text) => {
+    setWarning({
+      ...warning,
+      title: title,
+      text: text,
+      isWarningModalActive: true,
+    });
+  };
+
+  const setIsWarningModalActive = (val) => {
+    setWarning({ ...warning, isWarningModalActive: val });
+  };
+
   // Putting a delay for capturing the first image since first image captured just after renderwas leading to false positives
   const getSnapshotInitial = () => {
     setTimeout(getSnapshot, 5000);
@@ -75,20 +94,25 @@ const Exam = ({ loadForSeconds }) => {
 
               // If "Person Detection" test fails TODO: Change this alert to custom modal
               if (res[1]["Success"] === false && res[3]["Success"] === true) {
-                alert("Warning: Multiple People detected in your frame!");
+                handleWarningInvokation(
+                  "Warning: Multiple Persons",
+                  "There seem to be multiple people in your camera frame."
+                );
               }
 
               // If "Person Recognition" test fails TODO: Change this alert to custom modal
               if (res[2]["Success"] === false && res[3]["Success"] === true) {
-                alert(
-                  "Impersonation Warning: Person in the frame is not recognised!"
+                handleWarningInvokation(
+                  "Impersonation Warning!",
+                  "Person in the camera frame is not recognised. Ensure your face is clearly visible!"
                 );
               }
 
               // If "Face Detection" test fails TODO: Change this alert to custom modal
               if (res[3]["Success"] === false) {
-                alert(
-                  "Face Not Detected Warning: Face was not detected. Ensure your face is clearly visible!"
+                handleWarningInvokation(
+                  "Warning: Face Not Detected!",
+                  "Your face was not detected in the webcam. Ensure your face is clearly visible!"
                 );
               }
             }
@@ -107,6 +131,10 @@ const Exam = ({ loadForSeconds }) => {
   };
 
   useEffect(() => {
+    handleWarningInvokation(
+      "Warning: Face Not Detected!",
+      "Your face was not detected in the webcam. Ensure your face is clearly visible!"
+    );
     return function cleanup() {
       isStreaming.current = false;
     };
@@ -114,6 +142,12 @@ const Exam = ({ loadForSeconds }) => {
 
   return (
     <>
+      <ExamWarningModal
+        show={warning.isWarningModalActive}
+        setShow={setIsWarningModalActive}
+        title={warning.title}
+        text={warning.text}
+      />
       <Webcam
         ref={setupWebcam}
         screenshotFormat={"image/jpeg"}
@@ -124,6 +158,7 @@ const Exam = ({ loadForSeconds }) => {
         }}
         className={"examCamera"}
       />
+
       {isWebCamReady ? (
         <>
           {getSnapshotInitial()}
