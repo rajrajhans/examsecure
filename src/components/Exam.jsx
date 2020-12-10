@@ -45,8 +45,13 @@ const Exam = ({ loadForSeconds }) => {
     checkIfReady();
   };
 
+  // Putting a delay for capturing the first image since first image captured just after renderwas leading to false positives
+  const getSnapshotInitial = () => {
+    setTimeout(getSnapshot, 5000);
+  };
+
   const getSnapshot = () => {
-    if (webcam.current) {
+    if (webcam.current && isStreaming.current) {
       const image = webcam.current.getScreenshot();
 
       if (image) {
@@ -88,11 +93,11 @@ const Exam = ({ loadForSeconds }) => {
               }
             }
 
-            if (isStreaming.current) setTimeout(getSnapshot, 300);
+            if (isStreaming.current) setTimeout(getSnapshot, 3000);
           });
         } else {
           console.log("snapshot captured!", Math.random()); // Testing purposes
-          if (isStreaming.current) setTimeout(getSnapshot, 300); // Testing purposes
+          if (isStreaming.current) setTimeout(getSnapshot, 3000); // Testing purposes
         }
       } else {
         console.log("Waiting for camera to start responding");
@@ -121,7 +126,7 @@ const Exam = ({ loadForSeconds }) => {
       />
       {isWebCamReady ? (
         <>
-          {getSnapshot()}
+          {getSnapshotInitial()}
           <Timer duration={duration} callBackFn={timeUp} />
           <div className={"examQuestions"}>
             {questions.map((q) => (
