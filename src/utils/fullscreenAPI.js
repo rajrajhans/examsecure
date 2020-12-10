@@ -1,8 +1,8 @@
 /* Wrapper functions for common tasks related to the fullscreen API */
 
-// Takes the element with id = "elementID" into fullscreen. Returns 1 on success and 0 on failure
-export async function makeFullScreen(elementID) {
-  let elem = document.getElementById(elementID);
+// Takes the page into fullscreen. Returns 1 on success and 0 on failure
+export async function makeFullScreen() {
+  let elem = document.documentElement;
 
   if (document.fullscreenEnabled) {
     await elem.requestFullscreen();
