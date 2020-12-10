@@ -47,28 +47,34 @@ const Exam = ({ loadForSeconds }) => {
   const getSnapshot = () => {
     if (webcam.current) {
       const image = webcam.current.getScreenshot();
+
       if (image) {
         const b64EncodedImg = image.split(",")[1];
 
-        // console.log("snapshot captured!", Math.random()); // Testing purposes
-        // if (isStreaming.current) setTimeout(getSnapshot, 300); // Testing purposes
+        let mode = 0; // "mode" is to control whether to send frames to rekognition or not. for testing purposes
 
-        gateway.processImage(b64EncodedImg).then((res) => {
-          if (res) {
-            console.log(res);
-            if (res[0]["Success"] === false) {
-              alert(
-                `Alert! ${res[0]["Details"]} Detected! You will be Logged Out.`
-              );
-              signOut();
-              navigate("/caught");
+        if (mode === 1) {
+          gateway.processImage(b64EncodedImg).then((res) => {
+            if (res) {
+              console.log(res);
+              if (res[0]["Success"] === false) {
+                alert(
+                  `Alert! ${res[0]["Details"]} Detected! You will be Logged Out.`
+                );
+                signOut();
+                navigate("/caught");
+              }
             }
-          }
 
-          if (isStreaming.current) setTimeout(getSnapshot, 300);
-        });
+            if (isStreaming.current) setTimeout(getSnapshot, 300);
+          });
+        } else {
+          console.log("snapshot captured!", Math.random()); // Testing purposes
+          if (isStreaming.current) setTimeout(getSnapshot, 300); // Testing purposes
+        }
       } else {
-        setTimeout(getSnapshot, 300);
+        console.log("Waiting for camera to start responding");
+        setTimeout(getSnapshot, 500);
       }
     }
   };
