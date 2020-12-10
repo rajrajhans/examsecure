@@ -95,7 +95,7 @@ const Exam = ({ loadForSeconds }) => {
         <>
           {getSnapshot()}
           <Timer duration={duration} callBackFn={timeUp} />
-          <div>
+          <div className={"examQuestions"}>
             {questions.map((q) => (
               <Question
                 id={q.id}

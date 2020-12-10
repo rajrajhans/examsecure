@@ -18,3 +18,11 @@
     height: 102px;
     border: none;
 }
+
+.examQuestions {
+    -youbkit-touch-callout: none;
+    -youbkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
