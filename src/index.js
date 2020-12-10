@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import "tailwindcss/dist/base.css";
 import { css } from "styled-components/macro";
 import "./styles/bootstrapthemes.scss";
-import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
