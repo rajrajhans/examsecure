@@ -52,18 +52,39 @@ const Exam = ({ loadForSeconds }) => {
       if (image) {
         const b64EncodedImg = image.split(",")[1];
 
-        let mode = 0; // "mode" is to control whether to send frames to rekognition or not. for testing purposes
+        let mode = 1; // "mode" is to control whether to send frames to rekognition or not. for testing purposes
 
         if (mode === 1) {
           gateway.processImage(b64EncodedImg).then((res) => {
             if (res) {
               console.log(res);
+
+              // If "Objects of Interest" test fails
               if (res[0]["Success"] === false) {
                 alert(
                   `Alert! ${res[0]["Details"]} Detected! You will be Logged Out.`
                 );
                 signOut();
                 navigate("/caught");
+              }
+
+              // If "Person Detection" test fails TODO: Change this alert to custom modal
+              if (res[1]["Success"] === false) {
+                alert("Warning: Multiple People detected in your frame!");
+              }
+
+              // If "Person Recognition" test fails TODO: Change this alert to custom modal
+              if (res[2]["Success"] === false) {
+                alert(
+                  "Impersonation Warning: Person in the frame is not recognised!"
+                );
+              }
+
+              // If "Face Detection" test fails TODO: Change this alert to custom modal
+              if (res[3]["Success"] === false) {
+                alert(
+                  "Face Not Detected Warning: Face was not detected. Ensure your face is clearly visible!"
+                );
               }
             }
 

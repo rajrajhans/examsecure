@@ -13,10 +13,12 @@ const AddFaceBox = ({
 
   useEffect(() => {
     if (activeSlide === 3 && isFaceAdded === false) {
-      let b64ImageData = captureFrame();
-      gateway
-        .addIndexFace(b64ImageData, currentUser)
-        .then(() => setIsFaceAdded(true));
+      // let b64ImageData = captureFrame();
+      // gateway
+      //   .addIndexFace(b64ImageData, currentUser)
+      //   .then(() => setIsFaceAdded(true));
+
+      setTimeout(() => setIsFaceAdded(true), 200); // For testing purposes
     }
   }, [activeSlide]);
 
