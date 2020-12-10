@@ -10,20 +10,24 @@ import Exam from "./components/Exam";
 import PostSubmit from "./components/PostSubmit";
 import Loading from "./components/Loading";
 import Caught from "./components/Caught";
+import { Auth } from "@aws-amplify/auth";
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { authState: undefined };
     this.setAuthState = this.setAuthState.bind(this);
     this.setLoading = this.setLoading.bind(this);
     this.loadForSeconds = this.loadForSeconds.bind(this);
-    this.state = { isLoading: false };
+    this.state = { isLoading: false, authState: undefined, currentUser: "" };
   }
 
-  setAuthState(s) {
+  async setAuthState(s) {
     this.setState({ authState: s });
-    if (s === "signedin") return <Redirect to={"/landing"} />;
+    if (s === "signedin") {
+      let user = await Auth.currentAuthenticatedUser();
+      this.setState({ currentUser: user.username });
+      return <Redirect to={"/landing"} />;
+    }
   }
 
   setLoading(val) {
@@ -49,6 +53,7 @@ class App extends Component {
             isSignedIn={isSignedIn}
             path={"/landing"}
             loadForSeconds={this.loadForSeconds}
+            currentUser={this.state.currentUser}
           />
           <Login
             isSignedIn={isSignedIn}

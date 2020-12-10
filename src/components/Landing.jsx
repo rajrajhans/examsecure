@@ -12,7 +12,7 @@ import {
   exitFullScreen,
 } from "../utils/fullscreenAPI";
 
-const Landing = ({ loadForSeconds }) => {
+const Landing = ({ loadForSeconds, currentUser }) => {
   const [isWebCamReady, setIsWebcamReady] = useState(false);
   const [isFullscreenActive, setIsFullscreenActive] = useState(false);
   const [activeSlide, setActiveSlide] = useState(1);
@@ -43,6 +43,7 @@ const Landing = ({ loadForSeconds }) => {
       defineFullscreenChangeEvent(onFullscreenExit, onFullscreenEnter);
       document.isFullscreenListenerSet = true;
     }
+    console.log(currentUser);
   }, []);
 
   const enterFullscreen = async () => {
