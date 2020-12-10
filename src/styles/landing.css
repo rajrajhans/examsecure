@@ -3,8 +3,8 @@ video{
     border: 1px solid var(--brandColor);
 }
 
-.confirmationBox{
-    height: 210px;
+.confirmationBox, .instructionsBox {
+    min-height: 205px;
 }
 
 .confirmationText{

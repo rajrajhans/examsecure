@@ -77,7 +77,10 @@ const Landing = ({ loadForSeconds }) => {
             <a href={currentUrl}>opening the application</a> in a new incognito
             window, or review your webcam settings on your browser.
           </li>
-          <li>We recommend using the latest version of Google Chrome.</li>
+          <li>
+            We recommend using the latest version of <b>Google Chrome</b> for a
+            hassle-free experience.
+          </li>
         </ul>
       </Alert>
 
@@ -97,19 +100,22 @@ const Landing = ({ loadForSeconds }) => {
     <Fragment>
       <Alert variant={"info"} width={"500px"} className={"instructionsBox"}>
         <Alert.Heading className={"instrHeading"}>
-          Enter Full Screen Mode
+          Full Screen Mode Instructions
         </Alert.Heading>
         <ul className={"instructionsBoxList"}>
+          <li>Click the button below to enter Full Screen Mode</li>
           <li>
-            When prompted, you need to click <i>Allow</i> to use the application
-            with your webcam.
+            Do not attempt to exit Full Screen Mode during the exam. You will be
+            logged out!
           </li>
           <li>
-            If you don't see the dialog, try{" "}
-            <a href={currentUrl}>opening the application</a> in a new incognito
-            window, or review your webcam settings on your browser.
+            Ensure all <b>popups have been disabled</b> before proceeding.
           </li>
-          <li>We recommend using the latest version of Google Chrome.</li>
+          <li>
+            If you keep getting redirected to this screen, ensure you are
+            allowing camera permissions to ExamSecure. We recommend using Google
+            Chrome.
+          </li>
         </ul>
       </Alert>
 
@@ -125,7 +131,7 @@ const Landing = ({ loadForSeconds }) => {
         </Button>
       ) : (
         <Button
-          variant={"primary"}
+          variant={"outline-primary"}
           size={"lg"}
           className={"NextButton"}
           block
@@ -140,7 +146,9 @@ const Landing = ({ loadForSeconds }) => {
   const ExamInstructions = () => (
     <Fragment>
       <Alert variant={"info"} width={"500px"} className={"instructionsBox"}>
-        <Alert.Heading className={"instrHeading"}>Instructions</Alert.Heading>
+        <Alert.Heading className={"instrHeading"}>
+          Exam Instructions
+        </Alert.Heading>
         <ul className={"instructionsBoxList"}>
           <li>Ensure your face is clearly visible in the webcam.</li>
           <li>
