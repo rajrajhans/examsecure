@@ -53,8 +53,8 @@ const Landing = ({ loadForSeconds }) => {
   const onFullscreenExit = () => {
     setActiveSlide(1);
     setIsFullscreenActive(false);
-    alert("Full screen exit detected.");
-    navigate("/landing");
+    alert("Please do not exit Full Screen Mode.");
+    navigate("/start");
   };
 
   const onFullscreenEnter = () => {
