@@ -107,15 +107,17 @@ const Exam = ({ loadForSeconds }) => {
               />
             ))}
 
-            <Link to={"/thankyou"}>
-              <Button
-                variant={"success"}
-                size={"lg"}
-                style={{ marginTop: "20px" }}
-              >
-                Submit
-              </Button>
-            </Link>
+            <div style={{ marginBottom: "20px", textAlign: "center" }}>
+              <Link to={"/thankyou"}>
+                <Button
+                  variant={"success"}
+                  size={"lg"}
+                  style={{ marginTop: "20px" }}
+                >
+                  Submit
+                </Button>
+              </Link>
+            </div>
           </div>
         </>
       ) : null}
