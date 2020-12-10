@@ -13,6 +13,7 @@ const Exam = ({ loadForSeconds }) => {
 
   useEffect(() => {
     loadForSeconds();
+    document.oncontextmenu = () => false; // Disables Right Click
   }, []);
 
   const duration = 1000;
