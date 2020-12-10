@@ -14,6 +14,13 @@ export async function makeFullScreen() {
 }
 
 export async function exitFullScreen() {
+  window.addEventListener(
+    "fullscreenchange",
+    function (event) {
+      event.stopPropagation();
+    },
+    true
+  );
   await document.exitFullscreen();
 }
 
