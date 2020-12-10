@@ -70,17 +70,6 @@ p{
     display: flex;
 }
 
-#root,
-.App,
-.container,
-.tab-content,
-.tab-pane,
-.row,
-.h100 {
-    padding: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-}
 
 /* AWS AMPLIFY STYLES FOR LOGIN FORM */
 
