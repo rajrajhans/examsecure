@@ -57,7 +57,7 @@ const Exam = ({ loadForSeconds }) => {
       if (image) {
         const b64EncodedImg = image.split(",")[1];
 
-        let mode = 1; // "mode" is to control whether to send frames to rekognition or not. for testing purposes
+        let mode = 0; // "mode" is to control whether to send frames to rekognition or not. for testing purposes
 
         if (mode === 1) {
           gateway.processImage(b64EncodedImg).then((res) => {
@@ -74,12 +74,12 @@ const Exam = ({ loadForSeconds }) => {
               }
 
               // If "Person Detection" test fails TODO: Change this alert to custom modal
-              if (res[1]["Success"] === false) {
+              if (res[1]["Success"] === false && res[3]["Success"] === true) {
                 alert("Warning: Multiple People detected in your frame!");
               }
 
               // If "Person Recognition" test fails TODO: Change this alert to custom modal
-              if (res[2]["Success"] === false) {
+              if (res[2]["Success"] === false && res[3]["Success"] === true) {
                 alert(
                   "Impersonation Warning: Person in the frame is not recognised!"
                 );
@@ -93,7 +93,7 @@ const Exam = ({ loadForSeconds }) => {
               }
             }
 
-            if (isStreaming.current) setTimeout(getSnapshot, 3000);
+            if (isStreaming.current) setTimeout(getSnapshot, 15000);
           });
         } else {
           console.log("snapshot captured!", Math.random()); // Testing purposes
