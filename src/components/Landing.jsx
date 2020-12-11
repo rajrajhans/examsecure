@@ -50,9 +50,9 @@ const Landing = ({ loadForSeconds, currentUser }) => {
     loadForSeconds();
     if (!document.isFullscreenListenerSet) {
       defineFullscreenChangeEvent(onFullscreenExit, onFullscreenEnter);
+      window.onblur = onFullscreenExit;
       document.isFullscreenListenerSet = true;
     }
-    console.log(currentUser);
   }, []);
 
   const enterFullscreen = async () => {
@@ -63,8 +63,10 @@ const Landing = ({ loadForSeconds, currentUser }) => {
   const onFullscreenExit = () => {
     setActiveSlide(1);
     setIsFullscreenActive(false);
-    alert("Please do not exit Full Screen Mode.");
-    navigate("/start");
+    alert(
+      "Please do not exit Full Screen Mode or click anywhere else. You will be logged out!"
+    );
+    window.location.reload();
   };
 
   const onFullscreenEnter = () => {
