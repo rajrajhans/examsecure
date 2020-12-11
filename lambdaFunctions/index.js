@@ -74,6 +74,7 @@ const fetchFaces = async (imageBytes) => {
     const nFaces = faces.FaceDetails.length;
     facesTest.Success = nFaces === 1;
     facesTest.Details = nFaces;
+    facesTest.MoreDetails = faces.FaceDetails;
   } catch (e) {
     console.log(e);
     facesTest.Success = false;
@@ -128,47 +129,12 @@ const fetchLabels = async (imageBytes) => {
   return [objectsOfInterestTest, peopleTest];
 };
 
-const fetchModerationLabels = async (imageBytes) => {
-  /*
-    Detect Unsafe Content
-    Uses Rekognition's DetectModerationLabels functionality
-  */
-  const moderationLabelsTest = {
-    TestName: "Unsafe Content To be deleted",
-  };
-
-  const detectModerationLabels = () =>
-    rekognition
-      .detectModerationLabels({
-        Image: { Bytes: imageBytes },
-        MinConfidence: MIN_CONFIDENCE,
-      })
-      .promise();
-
-  try {
-    const labels = await detectModerationLabels();
-    const nLabels = labels.ModerationLabels.length;
-    moderationLabelsTest.Success = nLabels === 0;
-    moderationLabelsTest.Details = moderationLabelsTest.Success
-      ? "0"
-      : labels.ModerationLabels.map((l) => l.Name)
-          .sort()
-          .join(", ");
-  } catch (e) {
-    console.log(e);
-    moderationLabelsTest.Success = false;
-    moderationLabelsTest.Details = `Server error`;
-  }
-
-  return moderationLabelsTest;
-};
-
 const searchForIndexedFaces = async (imageBytes) => {
   /*
     Face Matching
 
-    Uses Rekognition's SearchFacesByImage functionality 
-    to match face across the database of previously 
+    Uses Rekognition's SearchFacesByImage functionality
+    to match face across the database of previously
     indexed faces
   */
 
@@ -221,7 +187,6 @@ exports.processHandler = async (event) => {
     fetchLabels(imageBytes),
     searchForIndexedFaces(imageBytes),
     fetchFaces(imageBytes),
-    fetchModerationLabels(imageBytes),
   ]);
 
   return respond(200, result.flat());
