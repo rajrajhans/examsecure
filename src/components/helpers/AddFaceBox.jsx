@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import gateway from "../../utils/gateway";
+import Spinner from "react-bootstrap/Spinner";
 
 const AddFaceBox = ({
   setActiveSlide,
@@ -18,7 +19,7 @@ const AddFaceBox = ({
       //   .addIndexFace(b64ImageData, currentUser)
       //   .then(() => setIsFaceAdded(true));
 
-      setTimeout(() => setIsFaceAdded(true), 200); // For testing purposes
+      setTimeout(() => setIsFaceAdded(true), 3000); // For testing purposes
     }
   }, [activeSlide]);
 
@@ -60,7 +61,16 @@ const AddFaceBox = ({
           block
           onClick={() => {}}
         >
-          Adding your face ...
+          <span
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Spinner animation={"border"} style={{ marginRight: "12px" }} />
+            Adding your face ...
+          </span>
         </Button>
       )}
     </Fragment>
