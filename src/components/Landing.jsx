@@ -50,13 +50,13 @@ const Landing = ({ loadForSeconds, currentUser }) => {
     loadForSeconds();
     if (!document.isFullscreenListenerSet) {
       defineFullscreenChangeEvent(onFullscreenExit, onFullscreenEnter);
-      window.onblur = onFullscreenExit;
       document.isFullscreenListenerSet = true;
     }
   }, []);
 
   const enterFullscreen = async () => {
     await makeFullScreen("rootWrapper");
+    if (!window.onblur) window.onblur = onFocusLost;
     setIsFullscreenActive(true);
   };
 
@@ -67,6 +67,12 @@ const Landing = ({ loadForSeconds, currentUser }) => {
       "Please do not exit Full Screen Mode or click anywhere else. You will be logged out!"
     );
     window.location.reload();
+  };
+
+  const onFocusLost = () => {
+    setActiveSlide(1);
+    setIsFullscreenActive(false);
+    document.exitFullscreen();
   };
 
   const onFullscreenEnter = () => {
