@@ -65,7 +65,7 @@ export default ({
                 css={buttonRoundedCss}
                 className={"heroSectionButton"}
                 href={"#"}
-                onClick={() => navigate("/start")}
+                onClick={() => navigate("/landing")}
               >
                 Get Started
               </PrimaryButton>
