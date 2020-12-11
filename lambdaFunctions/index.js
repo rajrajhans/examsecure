@@ -67,7 +67,24 @@ const fetchFaces = async (imageBytes) => {
   };
 
   const detectFaces = () =>
-    rekognition.detectFaces({ Image: { Bytes: imageBytes } }).promise();
+    rekognition
+      .detectFaces({
+        Attributes: [
+          "AgeRange",
+          "Beard",
+          "Mustache",
+          "Emotions",
+          "Eyeglasses",
+          "Sunglasses",
+          "Smile",
+          "Gender",
+          "MouthOpen",
+          "Quality",
+          "Pose",
+        ],
+        Image: { Bytes: imageBytes },
+      })
+      .promise();
 
   try {
     const faces = await detectFaces();
