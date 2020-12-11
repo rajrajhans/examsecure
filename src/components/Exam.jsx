@@ -131,10 +131,6 @@ const Exam = ({ loadForSeconds }) => {
   };
 
   useEffect(() => {
-    handleWarningInvokation(
-      "Warning: Face Not Detected!",
-      "Your face was not detected in the webcam. Ensure your face is clearly visible!"
-    );
     return function cleanup() {
       isStreaming.current = false;
     };
