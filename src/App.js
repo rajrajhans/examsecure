@@ -11,6 +11,7 @@ import PostSubmit from "./components/PostSubmit";
 import Loading from "./components/Loading";
 import Caught from "./components/Caught";
 import { Auth } from "@aws-amplify/auth";
+import Demo from "./components/Demo";
 
 class App extends Component {
   constructor(props) {
@@ -63,6 +64,7 @@ class App extends Component {
             loadForSeconds={this.loadForSeconds}
           />
           <Home path={"/"} />
+          <Demo path={"/demo"} />
           <PrivateRoute
             component={Exam}
             isSignedIn={isSignedIn}
