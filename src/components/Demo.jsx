@@ -9,6 +9,7 @@ import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import Table from "react-bootstrap/Table";
 import Alert from "react-bootstrap/Alert";
+import Card from "react-bootstrap/Card";
 
 const Demo = () => {
   const [isWebCamReady, setIsWebcamReady] = useState(false);
@@ -118,30 +119,90 @@ const Demo = () => {
             <div
               className={"container"}
               style={{
-                margin: "20px auto",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                margin: "20px auto 30px auto",
               }}
             >
               {isWebCamReady ? (
                 <>
                   {isFetching ? (
-                    <Button
-                      disabled
-                      style={{ display: "flex", alignItems: "center" }}
+                    <div
+                      style={{
+                        margin: "20px auto",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
                     >
-                      <Spinner
-                        animation={"border"}
-                        size={"sm"}
-                        style={{ marginRight: "8px" }}
-                      />
-                      Processing
-                    </Button>
+                      <Button
+                        disabled
+                        style={{ display: "flex", alignItems: "center" }}
+                      >
+                        <Spinner
+                          animation={"border"}
+                          size={"sm"}
+                          style={{ marginRight: "8px" }}
+                        />
+                        Processing
+                      </Button>
+                    </div>
                   ) : (
-                    <Button onClick={handleAnalyze}>
-                      Capture Frame and Analyze
-                    </Button>
+                    <>
+                      {testRes ? (
+                        <div>
+                          <h3>Head Pose Analysis</h3>
+                          <Table striped bordered hover>
+                            <thead>
+                              <tr>
+                                <th>#</th>
+                                <th>Analysis Parameter</th>
+                                <th>Analysis Result</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>1</td>
+                                <td>Roll</td>
+                                <td>
+                                  {testRes[3]["MoreDetails"][0]
+                                    ? testRes[3]["MoreDetails"][0]["Pose"].Roll
+                                    : "No Face Detected"}
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>2</td>
+                                <td>Pitch</td>
+                                <td>
+                                  {testRes[3]["MoreDetails"][0]
+                                    ? testRes[3]["MoreDetails"][0]["Pose"].Pitch
+                                    : "No Face Detected"}
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>3</td>
+                                <td>Yaw</td>
+                                <td>
+                                  {testRes[3]["MoreDetails"][0]
+                                    ? testRes[3]["MoreDetails"][0]["Pose"].Yaw
+                                    : "No Face Detected"}
+                                </td>
+                              </tr>
+                            </tbody>
+                          </Table>
+                        </div>
+                      ) : null}
+                      <div
+                        style={{
+                          margin: "20px auto",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Button onClick={handleAnalyze}>
+                          Capture Frame and Analyze
+                        </Button>
+                      </div>
+                    </>
                   )}
                 </>
               ) : (
@@ -205,7 +266,7 @@ const Demo = () => {
                           {testRes ? (
                             <>
                               {testRes[3]["Details"] === 0
-                                ? "Cannot detect any face!"
+                                ? "<b>Cannot detect any face!</b>"
                                 : "No"}
                             </>
                           ) : (
@@ -222,6 +283,119 @@ const Demo = () => {
                               {testRes[0]["Success"] === false
                                 ? `Yes. ${testRes[0]["Details"]}`
                                 : "No"}
+                            </>
+                          ) : (
+                            "-"
+                          )}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>6</td>
+                        <td>Predicted Age Range</td>
+                        <td>
+                          {testRes[3]["MoreDetails"][0] ? (
+                            <>
+                              {testRes[3]["MoreDetails"][0]["AgeRange"].Low} -{" "}
+                              {testRes[3]["MoreDetails"][0]["AgeRange"].High}
+                            </>
+                          ) : (
+                            "-"
+                          )}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>7</td>
+                        <td>Predicted Gender</td>
+                        <td>
+                          {testRes[3]["MoreDetails"][0] ? (
+                            <>{testRes[3]["MoreDetails"][0]["Gender"].Value}</>
+                          ) : (
+                            "-"
+                          )}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>9</td>
+                        <td>Eyewear</td>
+                        <td>
+                          {testRes[3]["MoreDetails"][0] ? (
+                            <>
+                              {testRes[3]["MoreDetails"][0]["Eyeglasses"]
+                                .Value ||
+                              testRes[3]["MoreDetails"][0]["Sunglasses"].Value
+                                ? "Yes"
+                                : "No"}
+                            </>
+                          ) : (
+                            "-"
+                          )}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>10</td>
+                        <td>Facial Expression - Smile</td>
+                        <td>
+                          {testRes[3]["MoreDetails"][0] ? (
+                            <>
+                              {testRes[3]["MoreDetails"][0]["Smile"].Value
+                                ? "Yes"
+                                : "No"}
+                            </>
+                          ) : (
+                            "-"
+                          )}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>11</td>
+                        <td>Facial Expression - Eyes Open?</td>
+                        <td>
+                          {testRes[3]["MoreDetails"][0] ? (
+                            <>
+                              {testRes[3]["MoreDetails"][0]["EyesOpen"].Value
+                                ? "Yes"
+                                : "No"}
+                            </>
+                          ) : (
+                            "-"
+                          )}
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>12</td>
+                        <td>Facial Expression - Mouth Open?</td>
+                        <td>
+                          {testRes[3]["MoreDetails"][0] ? (
+                            <>
+                              {testRes[3]["MoreDetails"][0]["MouthOpen"].Value
+                                ? "Yes"
+                                : "No"}
+                            </>
+                          ) : (
+                            "-"
+                          )}
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>13</td>
+                        <td>Predicted Prominent Emotion</td>
+                        <td>
+                          {testRes[3]["MoreDetails"][0] ? (
+                            <>
+                              {
+                                testRes[3]["MoreDetails"][0]["Emotions"][0][
+                                  "Type"
+                                ]
+                              }{" "}
+                              -{" "}
+                              {Math.floor(
+                                testRes[3]["MoreDetails"][0]["Emotions"][0][
+                                  "Confidence"
+                                ]
+                              )}
+                              %
                             </>
                           ) : (
                             "-"
