@@ -3,13 +3,12 @@ import Container from "react-bootstrap/Container";
 import { Col, Row } from "react-bootstrap";
 import Webcam from "react-webcam";
 import gateway from "../utils/gateway";
-import signOut from "../utils/signOut";
-import { navigate } from "@reach/router";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import Table from "react-bootstrap/Table";
 import Alert from "react-bootstrap/Alert";
 import Card from "react-bootstrap/Card";
+import { getHeadPoseInterpretation } from "../utils/headPoseAnalysisUtils";
 
 const Demo = () => {
   const [isWebCamReady, setIsWebcamReady] = useState(false);
@@ -104,7 +103,22 @@ const Demo = () => {
   return (
     <>
       <Container>
-        <Row className={"mainRow align-middle"}>
+        <h2>ExamSecure Image Analysis Demo</h2>
+
+        <div>
+          <p>
+            ExamSecure is able to detect many attributes from the camera image
+            capture using the power of AWS Rekognition. Here, you can see a demo
+            of the results that can be derived from a camera frame capture.
+            During an actual examination, ExamSecure will take such a capture at
+            every short random interval and perform the same real-time analysis
+            on it to detect any possible malpractice.
+            <br />
+            <br />
+          </p>
+        </div>
+
+        <Row>
           <Col xs={12} md={6}>
             <Webcam
               ref={setupWebcam}
@@ -186,6 +200,25 @@ const Demo = () => {
                                     : "No Face Detected"}
                                 </td>
                               </tr>
+                              <tr>
+                                <td>4</td>
+                                <td>Interpretation</td>
+                                <td>
+                                  {testRes[3]["MoreDetails"][0] ? (
+                                    <b>
+                                      {getHeadPoseInterpretation(
+                                        testRes[3]["MoreDetails"][0]["Pose"]
+                                          .Roll,
+                                        testRes[3]["MoreDetails"][0]["Pose"]
+                                          .Pitch,
+                                        testRes[3]["MoreDetails"][0]["Pose"].Yaw
+                                      )}
+                                    </b>
+                                  ) : (
+                                    "No Face Detected"
+                                  )}
+                                </td>
+                              </tr>
                             </tbody>
                           </Table>
                         </div>
@@ -250,9 +283,11 @@ const Demo = () => {
                         <td>
                           {testRes ? (
                             <>
-                              {testRes[3]["Details"] > 1
-                                ? "Multiple Persons Detected!"
-                                : "No"}
+                              {testRes[3]["Details"] > 1 ? (
+                                <b>Multiple Persons Detected!</b>
+                              ) : (
+                                "No"
+                              )}
                             </>
                           ) : (
                             "-"
@@ -265,9 +300,11 @@ const Demo = () => {
                         <td>
                           {testRes ? (
                             <>
-                              {testRes[3]["Details"] === 0
-                                ? "<b>Cannot detect any face!</b>"
-                                : "No"}
+                              {testRes[3]["Details"] === 0 ? (
+                                <b>Cannot detect any face!</b>
+                              ) : (
+                                "No"
+                              )}
                             </>
                           ) : (
                             "-"
@@ -287,6 +324,14 @@ const Demo = () => {
                           ) : (
                             "-"
                           )}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colSpan={"3"}>
+                          <i>
+                            Predicted attributes of the most prominent face
+                            detected -
+                          </i>
                         </td>
                       </tr>
                       <tr>
