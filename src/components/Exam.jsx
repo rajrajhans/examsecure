@@ -93,7 +93,7 @@ const Exam = ({ loadForSeconds }) => {
               }
 
               // If "Person Detection" test fails TODO: Change this alert to custom modal
-              if (res[1]["Success"] === false && res[3]["Success"] === true) {
+              if (res[1]["Success"] === false && res[3]["Details"] > 1) {
                 handleWarningInvokation(
                   "Warning: Multiple Persons",
                   "There seem to be multiple people in your camera frame."
@@ -109,7 +109,7 @@ const Exam = ({ loadForSeconds }) => {
               }
 
               // If "Face Detection" test fails TODO: Change this alert to custom modal
-              if (res[3]["Success"] === false) {
+              if (res[3]["Success"] === false && res[3]["Details"] === 0) {
                 handleWarningInvokation(
                   "Warning: Face Not Detected!",
                   "Your face was not detected in the webcam. Ensure your face is clearly visible!"
