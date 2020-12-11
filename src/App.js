@@ -12,6 +12,7 @@ import Loading from "./components/Loading";
 import Caught from "./components/Caught";
 import { Auth } from "@aws-amplify/auth";
 import Demo from "./components/Demo";
+import { AuthState } from "@aws-amplify/ui-components";
 
 class App extends Component {
   constructor(props) {
@@ -19,15 +20,26 @@ class App extends Component {
     this.setAuthState = this.setAuthState.bind(this);
     this.setLoading = this.setLoading.bind(this);
     this.loadForSeconds = this.loadForSeconds.bind(this);
-    this.state = { isLoading: false, authState: undefined, currentUser: "" };
+    this.state = {
+      isLoading: false,
+      authState: undefined,
+      currentUser: "",
+      isSignedIn: false,
+    };
   }
 
   async setAuthState(s) {
     this.setState({ authState: s });
     if (s === "signedin") {
       let user = await Auth.currentAuthenticatedUser();
-      this.setState({ currentUser: user.username });
-      return <Redirect to={"/landing"} />;
+      this.setState({ currentUser: user.username, isSignedIn: true });
+    }
+  }
+
+  async componentDidMount() {
+    if (AuthState.SignedIn) {
+      let user = await Auth.currentAuthenticatedUser();
+      this.setState({ currentUser: user.username, isSignedIn: true });
     }
   }
 
@@ -43,37 +55,42 @@ class App extends Component {
   }
 
   render() {
-    const isSignedIn = this.state.authState === "signedin";
-
     return (
-      <Layout isSignedIn={isSignedIn}>
+      <Layout isSignedIn={this.state.isSignedIn}>
+        {console.log(this.state.isSignedIn, "from App")}
         <Loading show={this.state.isLoading} />
         <Router>
           <PrivateRoute
             component={Landing}
-            isSignedIn={isSignedIn}
+            isSignedIn={this.state.isSignedIn}
             path={"/landing"}
             loadForSeconds={this.loadForSeconds}
             currentUser={this.state.currentUser}
           />
           <Login
-            isSignedIn={isSignedIn}
+            isSignedIn={this.state.isSignedIn}
             authState={this.state.authState}
             setAuthState={this.setAuthState}
             path={"/start"}
             loadForSeconds={this.loadForSeconds}
           />
           <Home path={"/"} />
-          <Demo path={"/demo"} />
           <PrivateRoute
-            component={Exam}
-            isSignedIn={isSignedIn}
+            isSignedIn={this.state.isSignedIn}
+            component={Demo}
+            path={"/demo"}
+            loadForSeconds={this.loadForSeconds}
+            setAuthState={this.setAuthState}
+          />
+          <PrivateRoute
+            component={this.state.isSignedIn}
+            isSignedIn={this.state.isSignedIn}
             path={"/exam"}
             loadForSeconds={this.loadForSeconds}
           />
           <PrivateRoute
             component={PostSubmit}
-            isSignedIn={isSignedIn}
+            isSignedIn={this.state.isSignedIn}
             path={"/thankyou"}
             loadForSeconds={this.loadForSeconds}
           />

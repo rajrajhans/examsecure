@@ -36,14 +36,14 @@ class ESNavbar extends Component {
           className={"justify-content-end"}
         >
           <Nav>
+            <Nav.Link onClick={() => navigate("/demo")}>Demo</Nav.Link>
+
             {isLoggedIn ? (
-              <Nav.Link href="/" onClick={signOut} active>
+              <Nav.Link href="/" onClick={signOut}>
                 Sign Out
               </Nav.Link>
             ) : (
-              <Nav.Link active onClick={() => navigate("/start")}>
-                Sign In
-              </Nav.Link>
+              <Nav.Link onClick={() => navigate("/start")}>Sign In</Nav.Link>
             )}
           </Nav>
         </Navbar.Collapse>
