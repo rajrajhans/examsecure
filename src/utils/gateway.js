@@ -11,4 +11,8 @@ export default {
   processImage(image) {
     return request("/process", "post", { image });
   },
+
+  startExam(username) {
+    return request("/start-exam", "post", { username: username });
+  },
 };

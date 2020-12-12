@@ -9,7 +9,7 @@ import gateway from "../utils/gateway";
 import signOut from "../utils/signOut";
 import ExamWarningModal from "./helpers/ExamWarningModal";
 
-const Exam = ({ loadForSeconds }) => {
+const Exam = ({ loadForSeconds, currentUser }) => {
   const [isWebCamReady, setisWebcamReady] = useState(false);
   const [warning, setWarning] = useState({
     title: "",
@@ -19,6 +19,7 @@ const Exam = ({ loadForSeconds }) => {
 
   useEffect(() => {
     loadForSeconds();
+    gateway.startExam(currentUser);
     document.oncontextmenu = () => false; // Disables Right Click
   }, []);
 
