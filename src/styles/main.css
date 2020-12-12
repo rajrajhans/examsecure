@@ -70,6 +70,16 @@ p{
     display: flex;
 }
 
+.homeFeatureImg{
+    width: 80%;
+    margin: auto;
+}
+
+.homeFeatureImg2{
+    width: 60%;
+    margin: auto;
+}
+
 
 /* AWS AMPLIFY STYLES FOR LOGIN FORM */
 

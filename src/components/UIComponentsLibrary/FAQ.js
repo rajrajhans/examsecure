@@ -47,22 +47,38 @@ export default ({
     },
     {
       question: "What are the advantages of online proctoring?",
-      answer:
-        "The advantages of online proctoring are:\n" +
-        "    * Ensures integrity of remote examinations\n" +
-        "    * Allows time-related flexibility\n" +
-        "    * Favors all students irrespective of the location\n" +
-        "    * Works for all types of exams\n",
+      answer: (
+        <>
+          During the Covid pandemic, Online Examinations have become a
+          necessity. However, there is always a question on the integrity of
+          exam conducted online, since it is relatively easy for the candidates
+          to cheat. This is where Online Proctoring comes into picture.
+          Automated Online Proctoring makes it possible to ensure the integrity
+          of the exams without any need for constant human intervention. It
+          makes sure that the authenticity of exam remains valid by preventing
+          candidates from using unfair means.
+        </>
+      ),
     },
     {
       question: "How does ExamSecure work?",
       answer:
-        "ExamSecure uses Amazon Rekognition service to analyze images in real time and detect any objectionable content. Furthermore, ExamSecure uses AWS Services like Serverless Lambda Functions for processing, Cognito for Authentication, CloudFront and S3 for hosting, which makes it easily scalable to your needs.",
+        "ExamSecure uses Amazon Rekognition service to analyze images in real time and detect any objectionable content in the candidate's camera frames to spot malpractice. ExamSecure also uses Head Pose Estimation to determine whether the candidate is staring away from the screen for long periods of time and triggers a warning if so. Furthermore, during an exam, ExamSecure completely locks down the candidate's browser, triggering a warning if the candidate tries to switch tabs/windows or exit full screen mode. Copying of text is also disabled in the exam environment.",
+    },
+    {
+      question: "What is Head Pose Estimation?",
+      answer:
+        "Head Pose Estimation involves predicting the pose of a human head in an image in terms of the three Euler Anglers - Yaw, Pitch and Roll. These three values are used to describe the rotation of an object in 3D space. Using Rekognition, ExamSecure is able to determine in which direction the human head is facing using these values. To see this in action, check out our free image analysis demo page.",
+    },
+    {
+      question: "Is ExamSecure scalable for my needs?",
+      answer:
+        "ExamSecure uses AWS Services like Serverless Lambda Functions and API Gateway for processing, Cognito for Authentication, Rekognition for Image Analysis, CloudFront and S3 for hosting, which makes it easily scalable to any amount of load.",
     },
     {
       question: "How can I use ExamSecure for my needs?",
       answer:
-        "ExamSecure is still a Work In Progress. The code, however, is open source, so you are free to customize it to your specific needs.",
+        "Currently, ExamSecure is a Work In Progress and is used for a specific usecase. The code, however, is open source, so you are free to customize and deploy it for your specific needs.",
     },
   ],
 }) => {
