@@ -38,7 +38,11 @@ node_modules/
 jspm_packages/
 build/settings.js
 public/settings.js
-public/settings.js
+
+# Firebase Config
+.firebaserc
+firebase.json
+.firebase/
 
 # Typescript v1 declaration files
 typings/
