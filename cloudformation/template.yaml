@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: "2020-12-08"
+AWSTemplateFormatVersion: "2010-09-09"
 Description: This template deploys the resources needed to configure ExamSecure.
 Transform: AWS::Serverless-2016-10-31
 
@@ -223,7 +223,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.indexHandler
-      CodeUri: ../backend/functions/proctor/
+      CodeUri: s3://examsecurelambdas/
       Events:
         Get:
           Type: Api
@@ -240,7 +240,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.processHandler
-      CodeUri: ../backend/functions/proctor/
+      CodeUri: s3://examsecurelambdas/
       Events:
         Get:
           Type: Api
@@ -258,7 +258,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      CodeUri: ../backend/functions/setup/
+      CodeUri: s3://eslambdasetup/
       Description: Custom Lambda resource for the ExamSecure Cloudformation Stack
       Environment:
         Variables:
