@@ -11,7 +11,12 @@ class ESNavbar extends Component {
   render() {
     let isLoggedIn = this.props.isSignedIn;
     return (
-      <Navbar bg={"light"} className={"navContainer"} expand={"lg"}>
+      <Navbar
+        bg={"light"}
+        className={"navContainer"}
+        expand={"lg"}
+        collapseOnSelect={true}
+      >
         <Navbar.Brand>
           <div
             className="logoContainer"
@@ -36,14 +41,18 @@ class ESNavbar extends Component {
           className={"justify-content-end"}
         >
           <Nav>
-            <Nav.Link onClick={() => navigate("/demo")}>Demo</Nav.Link>
+            <Nav.Link onClick={() => navigate("/demo")} eventKey={"1"}>
+              Demo
+            </Nav.Link>
 
             {isLoggedIn ? (
-              <Nav.Link href="/" onClick={signOut}>
+              <Nav.Link href="/" onClick={signOut} eventKey={"2"}>
                 Sign Out
               </Nav.Link>
             ) : (
-              <Nav.Link onClick={() => navigate("/start")}>Sign In</Nav.Link>
+              <Nav.Link onClick={() => navigate("/start")} eventKey={"3"}>
+                Sign In
+              </Nav.Link>
             )}
           </Nav>
         </Navbar.Collapse>
