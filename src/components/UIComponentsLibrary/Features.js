@@ -79,7 +79,7 @@ export default ({
 
   return (
     <Container>
-      <ThreeColumnContainer>
+      <ThreeColumnContainer className={"FeaturesContainer"}>
         <Heading>{heading}</Heading>
         {description && <Description>{description}</Description>}
         <VerticalSpacer />

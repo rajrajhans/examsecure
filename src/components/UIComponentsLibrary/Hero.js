@@ -84,7 +84,9 @@ export default ({
                   src={"http://assets.rajrajhans.com/examsecure_logo.png"}
                   className={"heroLogo"}
                 />
-                {imageDecoratorBlob && <ImageDecoratorBlob />}
+                {imageDecoratorBlob && (
+                  <ImageDecoratorBlob className={"heroDecoratorBlob"} />
+                )}
               </ImageContainer>
               <Offsetbackground />
             </ImageColumn>

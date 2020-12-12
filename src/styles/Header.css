@@ -51,10 +51,30 @@
   /* For mobile phones: */
   .navContainer{
     padding: 10px;
-    font-size: 17px;
   }
 
   .heroLogo{
     width: 120px !important;
+  }
+
+  .heroLogo{
+    display: none;
+  }
+
+  .heroDecoratorBlob{
+    display: none;
+  }
+
+  .logo{
+    font-size: 30px;
+  }
+
+  .navImage{
+    width: 57px;
+    margin-left: 15px;
+  }
+
+  .FeaturesContainer{
+    padding-top: 0!important;
   }
 }

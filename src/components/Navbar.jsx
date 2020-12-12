@@ -11,7 +11,7 @@ class ESNavbar extends Component {
   render() {
     let isLoggedIn = this.props.isSignedIn;
     return (
-      <Navbar bg={"light"} className={"navContainer"}>
+      <Navbar bg={"light"} className={"navContainer"} expand={"lg"}>
         <Navbar.Brand>
           <div
             className="logoContainer"
