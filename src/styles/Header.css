@@ -77,4 +77,8 @@
   .FeaturesContainer{
     padding-top: 0!important;
   }
+
+  .navContainer{
+    font-size: 1rem !important;
+  }
 }
