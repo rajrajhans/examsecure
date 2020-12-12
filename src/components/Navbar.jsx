@@ -46,9 +46,14 @@ class ESNavbar extends Component {
             </Nav.Link>
 
             {isLoggedIn ? (
-              <Nav.Link href="/" onClick={signOut} eventKey={"2"}>
-                Sign Out
-              </Nav.Link>
+              <>
+                <Nav.Link onClick={() => navigate("/landing")} eventKey={"4"}>
+                  Start Exam
+                </Nav.Link>
+                <Nav.Link href="/" onClick={signOut} eventKey={"2"}>
+                  Sign Out
+                </Nav.Link>
+              </>
             ) : (
               <Nav.Link onClick={() => navigate("/start")} eventKey={"3"}>
                 Sign In

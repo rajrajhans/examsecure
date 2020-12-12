@@ -83,7 +83,7 @@ class App extends Component {
             setAuthState={this.setAuthState}
           />
           <PrivateRoute
-            component={this.state.isSignedIn}
+            component={Exam}
             isSignedIn={this.state.isSignedIn}
             path={"/exam"}
             loadForSeconds={this.loadForSeconds}
