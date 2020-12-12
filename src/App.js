@@ -57,7 +57,6 @@ class App extends Component {
   render() {
     return (
       <Layout isSignedIn={this.state.isSignedIn}>
-        {console.log(this.state.isSignedIn, "from App")}
         <Loading show={this.state.isLoading} />
         <Router>
           <PrivateRoute
@@ -66,6 +65,7 @@ class App extends Component {
             path={"/landing"}
             loadForSeconds={this.loadForSeconds}
             currentUser={this.state.currentUser}
+            setAuthState={this.setAuthState}
           />
           <Login
             isSignedIn={this.state.isSignedIn}
