@@ -43,6 +43,7 @@ public/settings.js
 .firebaserc
 firebase.json
 .firebase/
+lambdaFunctions/startexam.js
 
 # Typescript v1 declaration files
 typings/
