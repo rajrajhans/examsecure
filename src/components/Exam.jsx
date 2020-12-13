@@ -77,7 +77,7 @@ const Exam = ({ loadForSeconds, currentUser }) => {
       if (image) {
         const b64EncodedImg = image.split(",")[1];
 
-        let mode = 0; // "mode" is to control whether to send frames to rekognition or not. for testing purposes
+        let mode = 1; // "mode" is to control whether to send frames to rekognition or not. for testing purposes
 
         if (mode === 1) {
           gateway.processImage(b64EncodedImg, currentUser).then((res) => {
@@ -118,7 +118,7 @@ const Exam = ({ loadForSeconds, currentUser }) => {
               }
             }
 
-            if (isStreaming.current) setTimeout(getSnapshot, 15000);
+            if (isStreaming.current) setTimeout(getSnapshot, 20000);
           });
         } else {
           console.log("snapshot captured!", Math.random()); // Testing purposes
