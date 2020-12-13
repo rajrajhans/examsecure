@@ -217,10 +217,15 @@ async function uploadToS3(imageBytes) {
   return location;
 }
 
-async function uploadFlaggedImagetoFirebase(s3ImgURL, username, testRes) {
+async function uploadFlaggedImagetoFirebase(
+  s3ImgURL,
+  username,
+  testRes,
+  reason
+) {
   let firebaseURL = `https://exam-a3da3-default-rtdb.firebaseio.com/triggeredUsers/${username}.json?auth=${firebaseApiKey}`;
 
-  let data = { imageURL: s3ImgURL, testRes: testRes };
+  let data = { imageURL: s3ImgURL, testRes: testRes, reason: reason };
 
   await fetch(firebaseURL, {
     method: "put",
@@ -231,7 +236,43 @@ async function uploadFlaggedImagetoFirebase(s3ImgURL, username, testRes) {
 async function checkIfFrameisOffendingAndUpload(res, image, username) {
   if (res[3]["Success"] === false && res[3]["Details"] === 0) {
     let s3URL = await uploadToS3(image);
-    await uploadFlaggedImagetoFirebase(s3URL, username, res);
+    await uploadFlaggedImagetoFirebase(
+      s3URL,
+      username,
+      res,
+      "Face Not Detected in Candidate's Camera Frame"
+    );
+  } else if (res[1]["Success"] === false && res[3]["Details"] > 1) {
+    let s3URL = await uploadToS3(image);
+    await uploadFlaggedImagetoFirebase(
+      s3URL,
+      username,
+      res,
+      "Multiple People Detected in Candidate's Camera Frame"
+    );
+  } else if (res[0]["Success"] === false) {
+    let s3URL = await uploadToS3(image);
+    await uploadFlaggedImagetoFirebase(
+      s3URL,
+      username,
+      res,
+      "Mobile Phone Detected in Candidate's Camera Frame"
+    );
+  } else if (res[3]["MoreDetails"][0]) {
+    let headPoseAnalysis = isHeadPoseOK(
+      res[3]["MoreDetails"][0]["Pose"].Yaw,
+      res[3]["MoreDetails"][0]["Pose"].Pitch
+    );
+
+    if (headPoseAnalysis !== "OK") {
+      let s3URL = await uploadToS3(image);
+      await uploadFlaggedImagetoFirebase(
+        s3URL,
+        username,
+        res,
+        headPoseAnalysis
+      );
+    }
   }
 }
 
@@ -252,3 +293,27 @@ exports.processHandler = async (event) => {
 
   return respond(200, res);
 };
+
+function isHeadPoseOK(yaw, pitch) {
+  let yawDeviation = "";
+  let pitchDeviation = "";
+  let res = "";
+
+  if (yaw < -8) yawDeviation += "Right";
+  else if (yaw > 8) yawDeviation += "Left";
+
+  if (pitch < -11) pitchDeviation += " Down";
+  else if (pitch > 11) pitchDeviation += " Up";
+
+  if (yawDeviation && pitchDeviation) {
+    res = `The candidate is facing ${yawDeviation} & ${pitchDeviation}`;
+  } else if (yawDeviation) {
+    res = `The candidate is facing ${yawDeviation}.`;
+  } else if (pitchDeviation) {
+    res = `The candidate is facing ${pitchDeviation}`;
+  }
+
+  if (!res) return "OK";
+
+  return res;
+}
