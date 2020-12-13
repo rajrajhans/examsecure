@@ -13,9 +13,21 @@
   Automated Virtual Proctoring System 
 </h4>
 
-ExamSecure uses the candidate's camera to detect Electronic objects like Mobile Phones, Earphones, and other signs of malpractice like  Multiple Persons in the candidate's camera frame and automatically logs them out. 
+ExamSecure is a platform for conducting secure remote examinations and deter candidates from resorting to malpractice. 
 
-It uses the [AWS Rekognition](https://aws.amazon.com/rekognition/) API for Object and Person Detection.
+ExamSecure uses the following techniques to prevent cheating by the candidates -
+
+1. In the exam environment, ExamSecure completely locks down the candidate's browser, triggering a warning if the candidate tries to switch tabs, open a new window, exit full screen mode or click anywhere else except the Exam screen. 
+
+2. Furthermore, ExamSecure uses the candidate's camera feed to perform advanced image analysis in real time to determine if there are multiple people in the candidate's frame, or if there is no one in the candidate's frame. 
+
+3. At the start of the exam, the candidate's face features are saved and if the detected face during the examination do not match the initial face, it triggers an Impersonation Warning. 
+
+4. Using Head Pose estimation, ExamSecure is able to detect the direction in which the candidate is facing and triggers a warning if the candidate is staring away from the screen for long periods of time. 
+
+5. ExamSecure is also able to detect Electronic objects like Mobile Phones, Earphones in the candidate's camera frame and trigger a warning. 
+
+It uses the [AWS Rekognition](https://aws.amazon.com/rekognition/) API for Object Detection, Person Detection, and Face Analysis.
 
 Note: ExamSecure is currently a Work In Progress. It is deployed [here](https://examsecure.rajrajhans.com) but only authorized test candidates are given access. If you want to test it, please follow [these steps](https://github.com/rajrajhans/examsecure#running-examsecure-locally) to run ExamSecure locally.
 
