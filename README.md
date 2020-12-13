@@ -17,15 +17,15 @@ ExamSecure is a platform for conducting secure remote examinations and deter can
 
 ExamSecure uses the following techniques to prevent cheating by the candidates -
 
-1. In the exam environment, ExamSecure completely locks down the candidate's browser, triggering a warning if the candidate tries to switch tabs, open a new window, exit full screen mode or click anywhere else except the Exam screen. 
+1. **Complete Browser Lockdown**: In the exam environment, ExamSecure completely locks down the candidate's browser, triggering a warning if the candidate tries to switch tabs, open a new window, exit full screen mode or click anywhere else except the Exam screen. Text Selection, Text Copying, and Right Click is also disabled in Exam environment. 
 
-2. Furthermore, ExamSecure uses the candidate's camera feed to perform advanced image analysis in real time to determine if there are multiple people in the candidate's frame, or if there is no one in the candidate's frame. 
+2. **Multiple Persons Detection**: Furthermore, ExamSecure uses the candidate's camera feed to perform advanced image analysis in real time to determine if there are multiple people in the candidate's frame, or if there is no one in the candidate's frame. 
 
-3. At the start of the exam, the candidate's face features are saved and if the detected face during the examination do not match the initial face, it triggers an Impersonation Warning. 
+3. **Impersonation Detection**: At the start of the exam, the candidate's face features are saved and if the detected face during the examination do not match the initial face, it triggers an Impersonation Warning. 
 
-4. Using Head Pose estimation, ExamSecure is able to detect the direction in which the candidate is facing and triggers a warning if the candidate is staring away from the screen for long periods of time. 
+4. **Head Pose Estimation**: Using Head Pose estimation, ExamSecure is able to detect the direction in which the candidate is facing and triggers a warning if the candidate is staring away from the screen for long periods of time. This works by using Rekognition to define the human head's rotation in a 3D plane with respect to the camera in terms of the three Euler Angles: Yaw, Pitch and Roll and then using these three angles to determine the direction where the candidate is facing.  
 
-5. ExamSecure is also able to detect Electronic objects like Mobile Phones, Earphones in the candidate's camera frame and trigger a warning. 
+5. **Electronic Objects Detection**: ExamSecure is also able to detect Electronic objects like Mobile Phones, Earphones in the candidate's camera frame and trigger a warning. 
 
 It uses the [AWS Rekognition](https://aws.amazon.com/rekognition/) API for Object Detection, Person Detection, and Face Analysis.
 
@@ -43,6 +43,10 @@ Following is a sneak peek of how the interface looks.
 | Pre-Exam Instructions                              | Exam Interface                             |
 | ------------------------------------ | ------------------------------------ |
 | ![](https://assets.rajrajhans.com/examsecure/examsecure_3.png) | ![](https://assets.rajrajhans.com/examsecure/examsecure_4.png) |
+
+| Impersonation Warning                             | Image Analysis Demo                             |
+| ------------------------------------ | ------------------------------------ |
+| ![](https://assets.rajrajhans.com/examsecure_impersonation.png) | ![](https://assets.rajrajhans.com/examsecure_demo2.png) |
 
 | Mobile Detected                             | Force Logout                             |
 | ------------------------------------ | ------------------------------------ |
