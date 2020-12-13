@@ -49,23 +49,23 @@ const Landing = ({ loadForSeconds, currentUser }) => {
   useEffect(() => {
     loadForSeconds();
     if (!document.isFullscreenListenerSet) {
-      defineFullscreenChangeEvent(onFullscreenExit, onFullscreenEnter);
+      // defineFullscreenChangeEvent(onFullscreenExit, onFullscreenEnter);
       document.isFullscreenListenerSet = true;
     }
   }, []);
 
   const enterFullscreen = async () => {
-    await makeFullScreen("rootWrapper");
-    if (!window.onblur) window.onblur = onFocusLost;
+    // await makeFullScreen("rootWrapper");
+    // if (!window.onblur) window.onblur = onFocusLost;
     setIsFullscreenActive(true);
   };
 
   const onFullscreenExit = () => {
     setActiveSlide(1);
-    setIsFullscreenActive(false);
-    alert(
-      "Please do not exit Full Screen Mode or click anywhere else. You will be logged out!"
-    );
+    // setIsFullscreenActive(false);
+    // alert(
+    //   "Please do not exit Full Screen Mode or click anywhere else. You will be logged out!"
+    // );
     window.location.reload();
   };
 

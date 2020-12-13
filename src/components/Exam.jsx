@@ -137,6 +137,11 @@ const Exam = ({ loadForSeconds, currentUser }) => {
     };
   }, []);
 
+  function onEndExam() {
+    gateway.endExam(currentUser);
+    navigate("/thankyou");
+  }
+
   return (
     <>
       <ExamWarningModal
@@ -173,15 +178,14 @@ const Exam = ({ loadForSeconds, currentUser }) => {
             ))}
 
             <div style={{ marginBottom: "20px", textAlign: "center" }}>
-              <Link to={"/thankyou"}>
-                <Button
-                  variant={"success"}
-                  size={"lg"}
-                  style={{ marginTop: "20px" }}
-                >
-                  Submit
-                </Button>
-              </Link>
+              <Button
+                variant={"success"}
+                size={"lg"}
+                style={{ marginTop: "20px" }}
+                onClick={onEndExam}
+              >
+                Submit
+              </Button>
             </div>
           </div>
         </>
