@@ -72,7 +72,7 @@ const Landing = ({ loadForSeconds, currentUser }) => {
   const onFocusLost = () => {
     setActiveSlide(1);
     setIsFullscreenActive(false);
-    document.exitFullscreen();
+    document.exitFullscreen().catch(() => console.log("not in fullscreen"));
   };
 
   const onFullscreenEnter = () => {
