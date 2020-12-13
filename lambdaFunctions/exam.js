@@ -17,7 +17,7 @@ exports.startExamHandler = async (event) => {
 
   let username = body.username;
 
-  let firebaseURL = `https://exam-a3da3-default-rtdb.firebaseio.com/users/${username}.json?auth=${firebaseApiKey}`;
+  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}.json?auth=${firebaseApiKey}`;
 
   await fetch(firebaseURL, {
     method: "put",
@@ -31,7 +31,7 @@ exports.endExamHandler = async (event) => {
   const body = JSON.parse(event.body);
   let username = body.username;
 
-  let firebaseURL = `https://exam-a3da3-default-rtdb.firebaseio.com/users/${username}.json?auth=${firebaseApiKey}`;
+  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}.json?auth=${firebaseApiKey}`;
 
   await fetch(firebaseURL, {
     method: "delete",

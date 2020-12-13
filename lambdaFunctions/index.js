@@ -223,7 +223,7 @@ async function uploadFlaggedImagetoFirebase(
   testRes,
   reason
 ) {
-  let firebaseURL = `https://exam-a3da3-default-rtdb.firebaseio.com/triggeredUsers/${username}.json?auth=${firebaseApiKey}`;
+  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/triggeredUsers/${username}.json?auth=${firebaseApiKey}`;
 
   let data = { imageURL: s3ImgURL, testRes: testRes, reason: reason };
 
