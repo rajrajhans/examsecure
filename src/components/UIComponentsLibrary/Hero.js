@@ -42,7 +42,7 @@ export default ({
   buttonRounded = true,
   features = [
     "Automated Proctoring via Webcam",
-    "Automatically log out offending candidates",
+    "Complete Browser Lockdown",
     "Completely Open Source and Customizable",
     "Easily Scalable, Powered by AWS",
   ],
