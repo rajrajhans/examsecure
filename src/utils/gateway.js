@@ -8,8 +8,8 @@ export default {
     });
   },
 
-  processImage(image) {
-    return request("/process", "post", { image });
+  processImage(image, username) {
+    return request("/process", "post", { image: image, username: username });
   },
 
   startExam(username) {

@@ -78,6 +78,7 @@ class App extends Component {
           <PrivateRoute
             isSignedIn={this.state.isSignedIn}
             component={Demo}
+            currentUser={this.state.currentUser}
             path={"/demo"}
             loadForSeconds={this.loadForSeconds}
             setAuthState={this.setAuthState}

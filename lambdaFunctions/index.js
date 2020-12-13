@@ -1,5 +1,6 @@
 const AWS = require("aws-sdk");
 const uuid = require("uuid").v4;
+global.fetch = require("node-fetch");
 
 const {
   COLLECTION_ID,
@@ -7,6 +8,7 @@ const {
   MIN_CONFIDENCE,
   OBJECTS_OF_INTEREST_LABELS,
   REGION,
+  firebaseApiKey,
 } = process.env;
 
 const rekognition = new AWS.Rekognition({ region: REGION });
@@ -184,8 +186,58 @@ const searchForIndexedFaces = async (imageBytes) => {
   return faceMatchTest;
 };
 
+async function uploadToS3(imageBytes) {
+  const s3 = new AWS.S3({ region: REGION });
+
+  const base64Data = new Buffer.from(
+    imageBytes.replace(/^data:image\/\w+;base64,/, ""),
+    "base64"
+  );
+  const fileName = uuid();
+
+  const params = {
+    Bucket: "triggered-images",
+    Key: `${fileName}.png`,
+    Body: base64Data,
+    ACL: "public-read",
+    ContentEncoding: "base64",
+    ContentType: `image/png`,
+  };
+
+  let location = "";
+  let key = "";
+  try {
+    const { Location, Key } = await s3.upload(params).promise();
+    location = Location;
+    key = Key;
+  } catch (error) {
+    console.log(error);
+  }
+
+  return location;
+}
+
+async function uploadFlaggedImagetoFirebase(s3ImgURL, username, testRes) {
+  let firebaseURL = `https://exam-a3da3-default-rtdb.firebaseio.com/triggeredUsers/${username}.json?auth=${firebaseApiKey}`;
+
+  let data = { imageURL: s3ImgURL, testRes: testRes };
+
+  await fetch(firebaseURL, {
+    method: "put",
+    body: JSON.stringify(data),
+  }).catch(() => console.log("error"));
+}
+
+async function checkIfFrameisOffendingAndUpload(res, image, username) {
+  if (res[3]["Success"] === false && res[3]["Details"] === 0) {
+    let s3URL = await uploadToS3(image);
+    await uploadFlaggedImagetoFirebase(s3URL, username, res);
+  }
+}
+
 exports.processHandler = async (event) => {
   const body = JSON.parse(event.body);
+  const username = body.username;
   const imageBytes = Buffer.from(body.image, "base64");
 
   const result = await Promise.all([
@@ -194,5 +246,9 @@ exports.processHandler = async (event) => {
     fetchFaces(imageBytes),
   ]);
 
-  return respond(200, result.flat());
+  const res = result.flat();
+
+  await checkIfFrameisOffendingAndUpload(res, body.image, username);
+
+  return respond(200, res);
 };

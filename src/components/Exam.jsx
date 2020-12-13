@@ -80,7 +80,7 @@ const Exam = ({ loadForSeconds, currentUser }) => {
         let mode = 0; // "mode" is to control whether to send frames to rekognition or not. for testing purposes
 
         if (mode === 1) {
-          gateway.processImage(b64EncodedImg).then((res) => {
+          gateway.processImage(b64EncodedImg, currentUser).then((res) => {
             if (res) {
               console.log(res);
 

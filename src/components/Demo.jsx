@@ -10,7 +10,7 @@ import Alert from "react-bootstrap/Alert";
 import Card from "react-bootstrap/Card";
 import { getHeadPoseInterpretation } from "../utils/headPoseAnalysisUtils";
 
-const Demo = () => {
+const Demo = ({ currentUser }) => {
   const [isWebCamReady, setIsWebcamReady] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
   const [testRes, setTestRes] = useState(null);
@@ -25,7 +25,7 @@ const Demo = () => {
       if (image) {
         const b64EncodedImg = image.split(",")[1];
 
-        let res = await gateway.processImage(b64EncodedImg);
+        let res = await gateway.processImage(b64EncodedImg, currentUser);
         if (res) {
           console.log(res);
           setTestRes(res);
