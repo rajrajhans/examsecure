@@ -16,8 +16,8 @@ const HighlightedText = tw.span`text-primary-500`;
 
 export default () => {
   return (
-    <AnimationRevealPage>
-      <div style={{ margin: "0 20px" }}>
+    <div style={{ margin: "0 20px" }}>
+      <AnimationRevealPage>
         <Hero />
         <Features
           heading={
@@ -45,7 +45,7 @@ export default () => {
           }
         />
         <GetStarted />
-      </div>
-    </AnimationRevealPage>
+      </AnimationRevealPage>
+    </div>
   );
 };
