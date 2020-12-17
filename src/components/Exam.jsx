@@ -8,6 +8,7 @@ import Webcam from "react-webcam";
 import gateway from "../utils/gateway";
 import signOut from "../utils/signOut";
 import ExamWarningModal from "./helpers/ExamWarningModal";
+import { mode } from "./helpers/modeSetter";
 
 const Exam = ({ loadForSeconds, currentUser }) => {
   const [isWebCamReady, setisWebcamReady] = useState(false);
@@ -82,8 +83,6 @@ const Exam = ({ loadForSeconds, currentUser }) => {
       if (image) {
         const b64EncodedImg = image.split(",")[1];
 
-        let mode = 1; // "mode" is to control whether to send frames to rekognition or not. for testing purposes
-
         if (mode === 1) {
           gateway.processImage(b64EncodedImg, currentUser).then((res) => {
             if (res) {
@@ -125,7 +124,7 @@ const Exam = ({ loadForSeconds, currentUser }) => {
           });
         } else {
           console.log("snapshot captured!", Math.random()); // Testing purposes
-          if (isStreaming.current) setTimeout(getSnapshot, 3000); // Testing purposes
+          if (isStreaming.current) setTimeout(getSnapshot, 20000); // Testing purposes
         }
       } else {
         console.log("Waiting for camera to start responding");

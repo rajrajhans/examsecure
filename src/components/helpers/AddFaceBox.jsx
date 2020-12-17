@@ -3,6 +3,7 @@ import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import gateway from "../../utils/gateway";
 import Spinner from "react-bootstrap/Spinner";
+import { mode } from "./modeSetter";
 
 const AddFaceBox = ({
   setActiveSlide,
@@ -14,12 +15,15 @@ const AddFaceBox = ({
 
   useEffect(() => {
     if (activeSlide === 3 && isFaceAdded === false) {
-      let b64ImageData = captureFrame();
-      gateway
-        .addIndexFace(b64ImageData, currentUser)
-        .then(() => setIsFaceAdded(true));
-
-      // setTimeout(() => setIsFaceAdded(true), 3000); // For testing purposes
+      if (mode === 1) {
+        let b64ImageData = captureFrame();
+        gateway
+          .addIndexFace(b64ImageData, currentUser)
+          .then(() => setIsFaceAdded(true));
+      } else {
+        console.log("In Development mode, NOT sending request to Lmabda");
+        setTimeout(() => setIsFaceAdded(true), 3000); // For testing purposes
+      }
     }
   }, [activeSlide]);
 
