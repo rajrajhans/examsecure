@@ -123,7 +123,10 @@ const Exam = ({ loadForSeconds, currentUser }) => {
             if (isStreaming.current) setTimeout(getSnapshot, 20000);
           });
         } else {
-          console.log("snapshot captured!", Math.random()); // Testing purposes
+          console.log(
+            "In dev mode. NOT sending req to Lambda. Screenshot captured at - ",
+            new Date().toLocaleString()
+          ); // Testing purposes
           if (isStreaming.current) setTimeout(getSnapshot, 20000); // Testing purposes
         }
       } else {

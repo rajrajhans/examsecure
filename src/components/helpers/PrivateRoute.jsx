@@ -4,9 +4,6 @@ import Login from "../Login";
 
 class PrivateRoute extends Component {
   render() {
-    {
-      console.log(this.props, "from privateroute");
-    }
     let { component: Comp, ...propxs } = this.props;
 
     return (
