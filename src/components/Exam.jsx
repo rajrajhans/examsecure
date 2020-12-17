@@ -21,6 +21,11 @@ const Exam = ({ loadForSeconds, currentUser }) => {
     loadForSeconds();
     gateway.startExam(currentUser);
     document.oncontextmenu = () => false; // Disables Right Click
+    getSnapshotInitial();
+
+    return function cleanup() {
+      isStreaming.current = false;
+    };
   }, []);
 
   const duration = 1000;
@@ -82,8 +87,6 @@ const Exam = ({ loadForSeconds, currentUser }) => {
         if (mode === 1) {
           gateway.processImage(b64EncodedImg, currentUser).then((res) => {
             if (res) {
-              console.log(res);
-
               // If "Objects of Interest" test fails
               if (res[0]["Success"] === false) {
                 alert(
@@ -131,12 +134,6 @@ const Exam = ({ loadForSeconds, currentUser }) => {
     }
   };
 
-  useEffect(() => {
-    return function cleanup() {
-      isStreaming.current = false;
-    };
-  }, []);
-
   function onEndExam() {
     gateway.endExam(currentUser);
     navigate("/thankyou");
@@ -163,7 +160,6 @@ const Exam = ({ loadForSeconds, currentUser }) => {
 
       {isWebCamReady ? (
         <>
-          {getSnapshotInitial()}
           <Timer duration={duration} callBackFn={timeUp} />
           <div className={"examQuestions"}>
             {questions.map((q) => (
