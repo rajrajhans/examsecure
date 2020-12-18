@@ -9,6 +9,7 @@ import gateway from "../utils/gateway";
 import signOut from "../utils/signOut";
 import ExamWarningModal from "./helpers/ExamWarningModal";
 import { mode } from "./helpers/modeSetter";
+import useAnswerResponse from "./helpers/useAnswerResponse";
 
 const Exam = ({ loadForSeconds, currentUser }) => {
   const [isWebCamReady, setisWebcamReady] = useState(false);
@@ -17,6 +18,7 @@ const Exam = ({ loadForSeconds, currentUser }) => {
     text: "",
     isWarningModalActive: false,
   });
+  const [answerResponse, setAnswerResponse] = useAnswerResponse();
 
   useEffect(() => {
     loadForSeconds();
@@ -141,6 +143,14 @@ const Exam = ({ loadForSeconds, currentUser }) => {
     navigate("/thankyou");
   }
 
+  const handleAnswerChange = (e) => {
+    const questionName = e.target.name;
+    const selectedAnswer = e.target.value;
+    if (selectedAnswer) {
+      setAnswerResponse({ ...answerResponse, [questionName]: selectedAnswer });
+    }
+  };
+
   return (
     <>
       <ExamWarningModal
@@ -170,6 +180,7 @@ const Exam = ({ loadForSeconds, currentUser }) => {
                   questionID={q.id}
                   question={q.question}
                   opts={q.opts}
+                  handleAnswerChange={handleAnswerChange}
                 />
               </div>
             ))}
@@ -191,7 +202,7 @@ const Exam = ({ loadForSeconds, currentUser }) => {
   );
 };
 
-const Question = ({ questionID, question, opts }) => {
+const Question = ({ questionID, question, opts, handleAnswerChange }) => {
   return (
     <>
       <div className="card questionCard">
@@ -207,7 +218,8 @@ const Question = ({ questionID, question, opts }) => {
                 type="radio"
                 name={questionID}
                 id={opt.optID}
-                value={opt.optText}
+                value={opt.optID}
+                onChange={handleAnswerChange}
               />
               <label htmlFor={opt.optID} className="form-check-label">
                 {opt.optText}
