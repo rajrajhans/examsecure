@@ -11,6 +11,7 @@ import {
   makeFullScreen,
 } from "../utils/fullscreenAPI";
 import AddFaceBox from "./helpers/AddFaceBox";
+import { mode } from "./helpers/modeSetter";
 
 const Landing = ({ loadForSeconds, currentUser }) => {
   const [isWebCamReady, setIsWebcamReady] = useState(false);
@@ -61,12 +62,14 @@ const Landing = ({ loadForSeconds, currentUser }) => {
   };
 
   const onFullscreenExit = () => {
-    setActiveSlide(1);
-    setIsFullscreenActive(false);
-    alert(
-      "Please do not exit Full Screen Mode or click anywhere else. You will be logged out!"
-    );
-    window.location.href = "/landing";
+    if (mode === 1) {
+      setActiveSlide(1);
+      setIsFullscreenActive(false);
+      alert(
+        "Please do not exit Full Screen Mode or click anywhere else. You will be logged out!"
+      );
+      window.location.href = "/landing";
+    }
   };
 
   const onFocusLost = () => {
