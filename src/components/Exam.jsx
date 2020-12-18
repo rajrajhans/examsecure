@@ -201,7 +201,7 @@ const Question = ({ questionID, question, opts }) => {
           </div>
 
           {opts.map((opt) => (
-            <div className="form-check" key={opt.optID}>
+            <div className="form-check mcqOption" key={opt.optID}>
               <input
                 className="form-check-input"
                 type="radio"
@@ -209,7 +209,7 @@ const Question = ({ questionID, question, opts }) => {
                 id={opt.optID}
                 value={opt.optText}
               />
-              <label className="form-check-label" htmlFor={questionID}>
+              <label htmlFor={opt.optID} className="form-check-label">
                 {opt.optText}
               </label>
             </div>
