@@ -165,14 +165,13 @@ const Exam = ({ loadForSeconds, currentUser }) => {
           <Timer duration={duration} callBackFn={timeUp} />
           <div className={"examQuestions"}>
             {questions.map((q) => (
-              <Question
-                id={q.id}
-                question={q.question}
-                opt1={q.opt1}
-                opt2={q.opt2}
-                opt3={q.opt3}
-                opt4={q.opt4}
-              />
+              <div className={"questionsWrapper"} key={q.id}>
+                <Question
+                  questionID={q.id}
+                  question={q.question}
+                  opts={q.opts}
+                />
+              </div>
             ))}
 
             <div style={{ marginBottom: "20px", textAlign: "center" }}>
@@ -192,30 +191,26 @@ const Exam = ({ loadForSeconds, currentUser }) => {
   );
 };
 
-const Question = ({ id, question, opt1, opt2, opt3, opt4 }) => {
-  const opts = [opt1, opt2, opt3, opt4];
+const Question = ({ questionID, question, opts }) => {
   return (
     <>
-      <div className="card questionCard" id={id}>
+      <div className="card questionCard">
         <div className="card-body">
           <div className="card-title">
             <strong>{question}</strong>
           </div>
 
           {opts.map((opt) => (
-            <div className="form-check" key={String(id) + opt.trim(" ")}>
+            <div className="form-check" key={opt.optID}>
               <input
                 className="form-check-input"
                 type="radio"
-                name={String(id) + opt.trim(" ")}
-                id={String(id) + opt.trim(" ")}
-                value={opt}
+                name={questionID}
+                id={opt.optID}
+                value={opt.optText}
               />
-              <label
-                className="form-check-label"
-                htmlFor={String(id) + opt.trim(" ")}
-              >
-                {opt}
+              <label className="form-check-label" htmlFor={questionID}>
+                {opt.optText}
               </label>
             </div>
           ))}

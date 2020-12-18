@@ -1,62 +1,116 @@
 [
   {
-    "id": 1,
+    "id": "q1",
     "question": "Sample Question 1",
-    "opt1": "Option 1",
-    "opt2": "Option 2",
-    "opt3": "Option 3",
-    "opt4": "Option 4",
-    "opt1id": "q11",
-    "opt2id": "q12",
-    "opt3id": "q13",
-    "opt4id": "q14"
+    "opts": [
+      {
+        "optID": "q11",
+        "optText": "Option 1"
+      },
+      {
+        "optID": "q12",
+        "optText": "Option 2"
+      },
+      {
+        "optID": "q13",
+        "optText": "Option 3"
+      },
+      {
+        "optID": "q14",
+        "optText": "Option 4"
+      },
+      {
+        "optID": "q15",
+        "optText": "Option 5"
+      }
+    ]
   },
   {
-    "id": 2,
+    "id": "q2",
     "question": "Sample Question 2",
-    "opt1": "Option 1",
-    "opt2": "Option 2",
-    "opt3": "Option 3",
-    "opt4": "Option 4",
-    "opt1id": "q11",
-    "opt2id": "q12",
-    "opt3id": "q13",
-    "opt4id": "q14"
+    "opts": [
+      {
+        "optID": "q21",
+        "optText": "Option 1"
+      },
+      {
+        "optID": "q22",
+        "optText": "Option 2"
+      },
+      {
+        "optID": "q23",
+        "optText": "Option 3"
+      },
+      {
+        "optID": "q24",
+        "optText": "Option 4"
+      }
+    ]
   },
   {
-    "id": 3,
+    "id": "q3",
     "question": "Sample Question 3",
-    "opt1": "Option 1",
-    "opt2": "Option 2",
-    "opt3": "Option 3",
-    "opt4": "Option 4",
-    "opt1id": "q11",
-    "opt2id": "q12",
-    "opt3id": "q13",
-    "opt4id": "q14"
+    "opts": [
+      {
+        "optID": "q31",
+        "optText": "Option 1"
+      },
+      {
+        "optID": "q32",
+        "optText": "Option 2"
+      },
+      {
+        "optID": "q33",
+        "optText": "Option 3"
+      },
+      {
+        "optID": "q34",
+        "optText": "Option 4"
+      }
+    ]
   },
   {
-    "id": 4,
+    "id": "q4",
     "question": "Sample Question 4",
-    "opt1": "Option 1",
-    "opt2": "Option 2",
-    "opt3": "Option 3",
-    "opt4": "Option 4",
-    "opt1id": "q11",
-    "opt2id": "q12",
-    "opt3id": "q13",
-    "opt4id": "q14"
+    "opts": [
+      {
+        "optID": "q41",
+        "optText": "Option 1"
+      },
+      {
+        "optID": "q42",
+        "optText": "Option 2"
+      },
+      {
+        "optID": "q43",
+        "optText": "Option 3"
+      }
+    ]
   },
   {
-    "id": 5,
+    "id": "q5",
     "question": "Sample Question 5",
-    "opt1": "Option 1",
-    "opt2": "Option 2",
-    "opt3": "Option 3",
-    "opt4": "Option 4",
-    "opt1id": "q11",
-    "opt2id": "q12",
-    "opt3id": "q13",
-    "opt4id": "q14"
+    "opts": [
+      {
+        "optID": "q51",
+        "optText": "Option 1"
+      },
+      {
+        "optID": "q52",
+        "optText": "Option 2"
+      },
+      {
+        "optID": "q53",
+        "optText": "Option 3"
+      },
+      {
+        "optID": "q54",
+        "optText": "Option 4"
+      },
+      {
+        "optID": "q55",
+        "optText": "Option 5"
+      }
+    ]
   }
 ]
