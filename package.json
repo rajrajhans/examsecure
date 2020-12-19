@@ -16,8 +16,10 @@
     "react": "^16.13.1",
     "react-bootstrap": "1.0.0",
     "react-dom": "^16.13.1",
+    "react-redux": "^7.2.2",
     "react-scripts": "^3.4.1",
     "react-webcam": "^5.0.2",
+    "redux": "^4.0.5",
     "styled-components": "^5.0.1",
     "tailwindcss": "^1.2.0",
     "twin.macro": "1.0.0-alpha.7",
@@ -41,6 +43,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "redux-devtools": "^3.7.0"
   }
 }
