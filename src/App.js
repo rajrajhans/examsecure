@@ -13,6 +13,7 @@ import Caught from "./components/Caught";
 import { Auth } from "@aws-amplify/auth";
 import Demo from "./components/Demo";
 import { AuthState } from "@aws-amplify/ui-components";
+import QuestionSetSelector from "./components/QuestionSetSelector";
 
 class App extends Component {
   constructor(props) {
@@ -87,6 +88,13 @@ class App extends Component {
             component={Exam}
             isSignedIn={this.state.isSignedIn}
             path={"/exam"}
+            currentUser={this.state.currentUser}
+            loadForSeconds={this.loadForSeconds}
+          />
+          <PrivateRoute
+            component={QuestionSetSelector}
+            isSignedIn={this.state.isSignedIn}
+            path={"/selectQuestionSet"}
             currentUser={this.state.currentUser}
             loadForSeconds={this.loadForSeconds}
           />

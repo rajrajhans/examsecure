@@ -1,0 +1,18 @@
+[
+  {
+    "qSetID": 1,
+    "qSetName": "Design & Analysis of Algorithms"
+  },
+  {
+    "qSetID": 2,
+    "qSetName": "World Capitals"
+  },
+  {
+    "qSetID": 3,
+    "qSetName": "Game of Thrones Trivia"
+  },
+  {
+    "qSetID": 4,
+    "qSetName": "Breaking Bad Trivia"
+  }
+]

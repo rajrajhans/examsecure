@@ -65,7 +65,7 @@ export default ({
                 css={buttonRoundedCss}
                 className={"heroSectionButton"}
                 href={"#"}
-                onClick={() => navigate("/landing")}
+                onClick={() => navigate("/selectQuestionSet")}
               >
                 Get Started
               </PrimaryButton>
