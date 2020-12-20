@@ -14,6 +14,7 @@ import { Auth } from "@aws-amplify/auth";
 import Demo from "./components/Demo";
 import { AuthState } from "@aws-amplify/ui-components";
 import QuestionSetSelector from "./components/QuestionSetSelector";
+import QuestionSetSelectorContainer from "./components/containers/QuestionSetSelectorContainer";
 
 class App extends Component {
   constructor(props) {
@@ -92,7 +93,7 @@ class App extends Component {
             loadForSeconds={this.loadForSeconds}
           />
           <PrivateRoute
-            component={QuestionSetSelector}
+            component={QuestionSetSelectorContainer}
             isSignedIn={this.state.isSignedIn}
             path={"/selectQuestionSet"}
             currentUser={this.state.currentUser}

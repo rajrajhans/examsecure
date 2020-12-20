@@ -1,0 +1,1 @@
+export const FETCH_QUESTIONS = "FETCH_QUESTIONS";

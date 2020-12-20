@@ -7,7 +7,7 @@ import { navigate } from "@reach/router";
 import gateway from "../utils/gateway";
 import Spinner from "react-bootstrap/Spinner";
 
-const QuestionSetSelector = () => {
+const QuestionSetSelector = ({ fetchQuestions, questions }) => {
   const [qSet, setQSet] = useState(1);
   const [qSets, setQsets] = useState([]);
   const [isSpinnerActive, setIsSpinnerActive] = useState(false);
@@ -15,12 +15,9 @@ const QuestionSetSelector = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSpinnerActive(true);
-    gateway.getQuestions(qSet).then((data) => {
-      console.log(data);
-    });
-    // todo: send req to server, fetch selected question set, load it in the store, and send user to '/landing'
-    // navigate("/landing");
-    console.log("navigating to landing");
+    console.log(fetchQuestions);
+    fetchQuestions(qSet);
+    navigate("/landing");
   };
 
   useEffect(() => {
