@@ -16,12 +16,18 @@ export default {
     });
   },
 
-  startExam(username) {
-    return request("/start-exam", "post", { username: username });
+  startExam(username, questionSetID) {
+    return request("/start-exam", "post", {
+      username: username,
+      questionSetID: questionSetID,
+    });
   },
 
-  endExam(username) {
-    return request("/end-exam", "post", { username: username });
+  endExam(username, questionSetID) {
+    return request("/end-exam", "post", {
+      username: username,
+      questionSetID: questionSetID,
+    });
   },
 
   getQuestionSets() {
@@ -48,9 +54,10 @@ export default {
     });
   },
 
-  checkIsDisqualified(username) {
+  checkIsDisqualified(username, questionSetID) {
     return request("/is-disqualified", "post", {
       username: username,
+      questionSetID: questionSetID,
     });
   },
 };

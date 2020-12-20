@@ -16,12 +16,14 @@ exports.startExamHandler = async (event) => {
   const body = JSON.parse(event.body);
 
   let username = body.username;
+  let questionSetID = body.questionSetID;
+  let timestamp = Date.now();
 
-  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}.json?auth=${firebaseApiKey}`;
+  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}/${questionSetID}.json?auth=${firebaseApiKey}`;
 
   await fetch(firebaseURL, {
     method: "put",
-    body: '{"examState":"started", "isDisqualified":"false"}',
+    body: `{"examState":1, "isDisqualified":false, startedAt: ${timestamp}`,
   }).catch(() => console.log("error"));
 
   return respond(200, { status: "done" });
@@ -31,11 +33,13 @@ exports.endExamHandler = async (event) => {
   const body = JSON.parse(event.body);
   let username = body.username;
 
-  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}.json?auth=${firebaseApiKey}`;
+  let questionSetID = body.questionSetID;
+
+  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}/${questionSetID}.json?auth=${firebaseApiKey}`;
 
   await fetch(firebaseURL, {
-    method: "delete",
-    body: '{"examState":"ended"}',
+    method: "put",
+    body: '{"examState":0, "isDisqualified":false}',
   }).catch(() => console.log("error"));
 
   return respond(200, { status: "done" });
@@ -45,8 +49,9 @@ exports.checkIsDisqualified = async (event) => {
   const body = JSON.parse(event.body);
   let username = body.username;
   let isDisqualified = false;
+  let questionSetID = body.questionSetID;
 
-  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}/isDisqualified.json?auth=${firebaseApiKey}`;
+  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}/${questionSetID}/isDisqualified.json?auth=${firebaseApiKey}`;
 
   await fetch(firebaseURL)
     .then((data) => data.text())

@@ -30,7 +30,9 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
       });
     }
     loadForSeconds();
-    gateway.startExam(currentUser).catch((e) => console.log(e));
+    gateway
+      .startExam(currentUser, questionsData.questionSetID)
+      .catch((e) => console.log(e));
     document.oncontextmenu = () => false; // Disables Right Click
     gateway
       .getSavedAnswers(currentUser, questionsData.questionSetID)
@@ -86,20 +88,22 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
   };
 
   const checkForDisqualification = () => {
-    gateway.checkIsDisqualified(currentUser).then((res) => {
-      if (res.isDisqualified === "true") {
-        alert("You have been disqualified by the administrator.");
-        navigate("/").catch((e) => {
-          console.log(e);
-        });
-      }
-    });
+    gateway
+      .checkIsDisqualified(currentUser, questionsData.questionSetID)
+      .then((res) => {
+        if (res.isDisqualified === "true") {
+          alert("You have been disqualified by the administrator.");
+          navigate("/").catch((e) => {
+            console.log(e);
+          });
+        }
+      });
   };
 
   // Putting a delay for capturing the first image since first image captured just after renderwas leading to false positives
   const getSnapshotInitial = () => {
     setTimeout(getSnapshot, 5000);
-    setInterval(checkForDisqualification, 5); //todo: handle this in a better way to avoid leak
+    setInterval(checkForDisqualification, 1000); //todo: handle this in a better way to avoid leak
   };
 
   const getSnapshot = () => {
@@ -169,7 +173,9 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
   };
 
   function onEndExam() {
-    gateway.endExam(currentUser);
+    gateway.endExam(currentUser, questionsData.questionSetID).catch((e) => {
+      console.log(e);
+    });
     navigate("/thankyou");
   }
 
