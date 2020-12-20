@@ -85,9 +85,21 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
     setWarning({ ...warning, isWarningModalActive: val });
   };
 
+  const checkForDisqualification = () => {
+    gateway.checkIsDisqualified(currentUser).then((res) => {
+      if (res.isDisqualified === "true") {
+        alert("You have been disqualified by the administrator.");
+        navigate("/").catch((e) => {
+          console.log(e);
+        });
+      }
+    });
+  };
+
   // Putting a delay for capturing the first image since first image captured just after renderwas leading to false positives
   const getSnapshotInitial = () => {
     setTimeout(getSnapshot, 5000);
+    setInterval(checkForDisqualification, 5); //todo: handle this in a better way to avoid leak
   };
 
   const getSnapshot = () => {

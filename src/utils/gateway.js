@@ -43,4 +43,10 @@ export default {
       qSetID: questionSetID,
     });
   },
+
+  checkIsDisqualified(username) {
+    return request("/is-disqualified", "post", {
+      username: username,
+    });
+  },
 };
