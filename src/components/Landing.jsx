@@ -68,7 +68,7 @@ const Landing = ({ loadForSeconds, currentUser }) => {
       alert(
         "Please do not exit Full Screen Mode or click anywhere else. You will be logged out!"
       );
-      window.location.href = "/landing";
+      window.location.href = "/";
     }
   };
 
