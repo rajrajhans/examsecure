@@ -11,6 +11,7 @@ import FeaturesTwoColSection from "./UIComponentsLibrary/FeaturesTwoColSection";
 import browserLockdownImg from "../static/browser_lockdown.svg";
 import headposepng from "../static/headposeestimation.png";
 import FeaturesTwoColSection2 from "./UIComponentsLibrary/FeaturesTwoColSection2";
+import { mode } from "./helpers/modeSetter";
 
 const HighlightedText = tw.span`text-primary-500`;
 
@@ -44,7 +45,7 @@ export default () => {
             </>
           }
         />
-        <GetStarted />
+        {mode === 1 ? <GetStarted /> : null}
       </AnimationRevealPage>
     </div>
   );
