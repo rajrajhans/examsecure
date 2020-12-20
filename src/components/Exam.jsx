@@ -153,6 +153,12 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
     }
   };
 
+  const isRadioChecked = (questionID, answerID) => {
+    if (answerResponse[questionID] && answerResponse[questionID] === answerID) {
+      return true;
+    }
+  };
+
   return (
     <>
       <ExamWarningModal
@@ -183,6 +189,7 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
                   question={q.question}
                   opts={q.opts}
                   handleAnswerChange={handleAnswerChange}
+                  isRadioChecked={isRadioChecked}
                 />
               </div>
             ))}
@@ -204,7 +211,13 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
   );
 };
 
-const Question = ({ questionID, question, opts, handleAnswerChange }) => {
+const Question = ({
+  questionID,
+  question,
+  opts,
+  handleAnswerChange,
+  isRadioChecked,
+}) => {
   return (
     <>
       <div className="card questionCard">
@@ -222,6 +235,9 @@ const Question = ({ questionID, question, opts, handleAnswerChange }) => {
                 id={opt.optID}
                 value={opt.optID}
                 onChange={handleAnswerChange}
+                checked={
+                  isRadioChecked(questionID, opt.optID) ? "checked" : null
+                }
               />
               <label htmlFor={opt.optID} className="form-check-label">
                 {opt.optText}
