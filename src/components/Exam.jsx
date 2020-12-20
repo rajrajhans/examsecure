@@ -110,44 +110,50 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
         const b64EncodedImg = image.split(",")[1];
 
         if (mode === 1) {
-          gateway.processImage(b64EncodedImg, currentUser).then((res) => {
-            if (res) {
-              // If "Objects of Interest" test fails
-              if (res[0]["Success"] === false) {
-                alert(
-                  `Alert! ${res[0]["Details"]} Detected! You will be Logged Out.`
-                );
-                signOut();
-                navigate("/caught");
+          gateway
+            .processImage(
+              b64EncodedImg,
+              currentUser,
+              questionsData.questionSetID
+            )
+            .then((res) => {
+              if (res) {
+                // If "Objects of Interest" test fails
+                if (res[0]["Success"] === false) {
+                  alert(
+                    `Alert! ${res[0]["Details"]} Detected! You will be Logged Out.`
+                  );
+                  signOut();
+                  navigate("/caught");
+                }
+
+                // If "Person Detection" test fails TODO: Change this alert to custom modal
+                if (res[1]["Success"] === false && res[3]["Details"] > 1) {
+                  handleWarningInvokation(
+                    "Warning: Multiple Persons",
+                    "There seem to be multiple people in your camera frame."
+                  );
+                }
+
+                // If "Person Recognition" test fails TODO: Change this alert to custom modal
+                if (res[2]["Success"] === false && res[3]["Success"] === true) {
+                  handleWarningInvokation(
+                    "Impersonation Warning!",
+                    "Person in the camera frame is not recognised. Ensure your face is clearly visible!"
+                  );
+                }
+
+                // If "Face Detection" test fails TODO: Change this alert to custom modal
+                if (res[3]["Success"] === false && res[3]["Details"] === 0) {
+                  handleWarningInvokation(
+                    "Warning: Face Not Detected!",
+                    "Your face was not detected in the webcam. Ensure your face is clearly visible!"
+                  );
+                }
               }
 
-              // If "Person Detection" test fails TODO: Change this alert to custom modal
-              if (res[1]["Success"] === false && res[3]["Details"] > 1) {
-                handleWarningInvokation(
-                  "Warning: Multiple Persons",
-                  "There seem to be multiple people in your camera frame."
-                );
-              }
-
-              // If "Person Recognition" test fails TODO: Change this alert to custom modal
-              if (res[2]["Success"] === false && res[3]["Success"] === true) {
-                handleWarningInvokation(
-                  "Impersonation Warning!",
-                  "Person in the camera frame is not recognised. Ensure your face is clearly visible!"
-                );
-              }
-
-              // If "Face Detection" test fails TODO: Change this alert to custom modal
-              if (res[3]["Success"] === false && res[3]["Details"] === 0) {
-                handleWarningInvokation(
-                  "Warning: Face Not Detected!",
-                  "Your face was not detected in the webcam. Ensure your face is clearly visible!"
-                );
-              }
-            }
-
-            if (isStreaming.current) setTimeout(getSnapshot, 20000);
-          });
+              if (isStreaming.current) setTimeout(getSnapshot, 20000);
+            });
         } else {
           console.log(
             "In dev mode. NOT sending req to Lambda. Screenshot captured at - ",

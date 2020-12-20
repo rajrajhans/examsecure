@@ -221,11 +221,17 @@ async function uploadFlaggedImagetoFirebase(
   s3ImgURL,
   username,
   testRes,
-  reason
+  reason,
+  questionSetID
 ) {
   let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/triggeredUsers/${username}.json?auth=${firebaseApiKey}`;
 
-  let data = { imageURL: s3ImgURL, testRes: testRes, reason: reason };
+  let data = {
+    questionSetID: questionSetID,
+    imageURL: s3ImgURL,
+    testRes: testRes,
+    reason: reason,
+  };
 
   await fetch(firebaseURL, {
     method: "put",
@@ -233,14 +239,20 @@ async function uploadFlaggedImagetoFirebase(
   }).catch(() => console.log("error"));
 }
 
-async function checkIfFrameisOffendingAndUpload(res, image, username) {
+async function checkIfFrameisOffendingAndUpload(
+  res,
+  image,
+  username,
+  questionSetID
+) {
   if (res[3]["Success"] === false && res[3]["Details"] === 0) {
     let s3URL = await uploadToS3(image);
     await uploadFlaggedImagetoFirebase(
       s3URL,
       username,
       res,
-      "Face Not Detected in Candidate's Camera Frame"
+      "Face Not Detected in Candidate's Camera Frame",
+      questionSetID
     );
   } else if (res[1]["Success"] === false && res[3]["Details"] > 1) {
     let s3URL = await uploadToS3(image);
@@ -248,7 +260,8 @@ async function checkIfFrameisOffendingAndUpload(res, image, username) {
       s3URL,
       username,
       res,
-      "Multiple People Detected in Candidate's Camera Frame"
+      "Multiple People Detected in Candidate's Camera Frame",
+      questionSetID
     );
   } else if (res[0]["Success"] === false) {
     let s3URL = await uploadToS3(image);
@@ -256,7 +269,8 @@ async function checkIfFrameisOffendingAndUpload(res, image, username) {
       s3URL,
       username,
       res,
-      "Mobile Phone Detected in Candidate's Camera Frame"
+      "Mobile Phone Detected in Candidate's Camera Frame",
+      questionSetID
     );
   } else if (res[3]["MoreDetails"][0]) {
     let headPoseAnalysis = isHeadPoseOK(
@@ -270,7 +284,8 @@ async function checkIfFrameisOffendingAndUpload(res, image, username) {
         s3URL,
         username,
         res,
-        headPoseAnalysis
+        headPoseAnalysis,
+        questionSetID
       );
     }
   }
@@ -279,6 +294,7 @@ async function checkIfFrameisOffendingAndUpload(res, image, username) {
 exports.processHandler = async (event) => {
   const body = JSON.parse(event.body);
   const username = body.username;
+  const questionSetID = body.questionSetID;
   const imageBytes = Buffer.from(body.image, "base64");
 
   const result = await Promise.all([
@@ -289,7 +305,12 @@ exports.processHandler = async (event) => {
 
   const res = result.flat();
 
-  await checkIfFrameisOffendingAndUpload(res, body.image, username);
+  await checkIfFrameisOffendingAndUpload(
+    res,
+    body.image,
+    username,
+    questionSetID
+  );
 
   return respond(200, res);
 };
