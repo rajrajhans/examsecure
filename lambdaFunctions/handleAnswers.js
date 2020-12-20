@@ -19,7 +19,7 @@ exports.updateAnswer = async (event) => {
   let questionID = body.qID;
   let userSelectedAnswer = body.selectedAnswer;
 
-  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/userAnswers/${username}/${questionSetID}/${questionID}.json?auth=${firebaseApiKey}`;
+  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}/${questionSetID}/userAnswers/${questionID}.json?auth=${firebaseApiKey}`;
 
   await fetch(firebaseURL, {
     method: "PUT",
@@ -35,7 +35,7 @@ exports.getSavedAnswers = async (event) => {
   let questionSetID = body.qSetID;
   let savedAnswers = null;
 
-  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/userAnswers/${username}/${questionSetID}.json?auth=${firebaseApiKey}`;
+  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}/${questionSetID}/userAnswers.json?auth=${firebaseApiKey}`;
 
   await fetch(firebaseURL)
     .then((res) => res.json())

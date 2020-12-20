@@ -23,7 +23,7 @@ exports.startExamHandler = async (event) => {
 
   await fetch(firebaseURL, {
     method: "put",
-    body: `{"examState":1, "isDisqualified":false, startedAt: ${timestamp}`,
+    body: `{"examState":1, "isDisqualified":false, "startedAt": "${timestamp}"`,
   }).catch(() => console.log("error"));
 
   return respond(200, { status: "done" });
