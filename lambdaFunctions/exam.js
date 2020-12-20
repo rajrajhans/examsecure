@@ -40,7 +40,7 @@ exports.endExamHandler = async (event) => {
 
   await fetch(firebaseURL, {
     method: "put",
-    body: "1",
+    body: "0",
   }).catch(() => console.log("error"));
 
   await fetch(firebaseURLExamEnded, {
