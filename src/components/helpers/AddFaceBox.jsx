@@ -22,7 +22,7 @@ const AddFaceBox = ({
           .then(() => setIsFaceAdded(true));
       } else {
         console.log("In Development mode, NOT sending request to Lmabda");
-        setTimeout(() => setIsFaceAdded(true), 3000); // For testing purposes
+        setTimeout(() => setIsFaceAdded(true), 1000); // For testing purposes
       }
     }
   }, [activeSlide]);
