@@ -176,7 +176,11 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
   };
 
   const isRadioChecked = (questionID, answerID) => {
-    if (answerResponse[questionID] && answerResponse[questionID] === answerID) {
+    if (
+      answerResponse &&
+      answerResponse[questionID] &&
+      answerResponse[questionID] === answerID
+    ) {
       return true;
     }
   };
@@ -218,7 +222,7 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
 
             <div style={{ marginBottom: "20px", textAlign: "center" }}>
               <Button
-                variant={"success"}
+                variant={"primary"}
                 size={"lg"}
                 style={{ marginTop: "20px" }}
                 onClick={onEndExam}
