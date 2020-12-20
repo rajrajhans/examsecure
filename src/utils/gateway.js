@@ -36,4 +36,11 @@ export default {
       selectedAnswer: userSelectedAnswer,
     });
   },
+
+  getSavedAnswers(username, questionSetID) {
+    return request("/get-saved-answers", "post", {
+      username: username,
+      qSetID: questionSetID,
+    });
+  },
 };

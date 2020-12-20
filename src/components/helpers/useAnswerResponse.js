@@ -19,7 +19,7 @@ const useAnswerResponse = (username, questionSetID) => {
     console.log("Making req to /answer-response");
   }, [answerResponse]);
 
-  return [answerResponse, updateAnswerHandler];
+  return [answerResponse, updateAnswerHandler, setAnswerResponse];
 };
 
 export default useAnswerResponse;

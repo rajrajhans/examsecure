@@ -17,15 +17,20 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
     text: "",
     isWarningModalActive: false,
   });
-  const [answerResponse, answerResponseHandler] = useAnswerResponse(
-    currentUser,
-    questionsData.questionSetID
-  );
+  const [
+    answerResponse,
+    answerResponseHandler,
+    setAnswerResponse,
+  ] = useAnswerResponse(currentUser, questionsData.questionSetID);
 
   useEffect(() => {
     loadForSeconds();
-    gateway.startExam(currentUser);
+    gateway.startExam(currentUser).catch((e) => console.log(e));
     document.oncontextmenu = () => false; // Disables Right Click
+    gateway
+      .getSavedAnswers(currentUser, questionsData.questionSetID)
+      .then((data) => setAnswerResponse(data.savedAnswers))
+      .catch((e) => console.log(e));
     getSnapshotInitial();
 
     return function cleanup() {
