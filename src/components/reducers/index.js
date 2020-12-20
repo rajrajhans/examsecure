@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
+import questionSetsReducer from "./questionSetsReducer";
 
 export default combineReducers({
-  //reducer
+  questionsSetsState: questionSetsReducer,
 });
