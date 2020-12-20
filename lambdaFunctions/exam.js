@@ -40,3 +40,20 @@ exports.endExamHandler = async (event) => {
 
   return respond(200, { status: "done" });
 };
+
+exports.checkIsDisqualified = async (event) => {
+  const body = JSON.parse(event.body);
+  let username = body.username;
+  let isDisqualified = false;
+
+  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}/isDisqualified.json?auth=${firebaseApiKey}`;
+
+  await fetch(firebaseURL)
+    .then((data) => data.text())
+    .then((res) => {
+      isDisqualified = res;
+    })
+    .catch(() => console.log("error"));
+
+  return respond(200, { isDisqualified: isDisqualified });
+};
