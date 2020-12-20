@@ -39,7 +39,7 @@ const QuestionSetSelector = ({ fetchQuestions, questions, currentUser }) => {
     <Container>
       <div>
         <h2 style={{ marginTop: "10px" }} className="welcomeText">
-          Welcome, {currentUser}
+          👋🏻 Welcome, {currentUser}
         </h2>
 
         <Card style={{ maxWidth: "600px", margin: "70px auto" }}>
