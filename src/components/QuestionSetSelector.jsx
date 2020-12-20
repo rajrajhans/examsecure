@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
-import questionSets from "../static/questionSets.json";
 import { Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { navigate } from "@reach/router";
+import gateway from "../utils/gateway";
+import Spinner from "react-bootstrap/Spinner";
 
 const QuestionSetSelector = () => {
   const [qSet, setQSet] = useState(1);
+  const [qSets, setQsets] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,8 +19,14 @@ const QuestionSetSelector = () => {
   };
 
   useEffect(() => {
-    console.log("Retrieving Available Question Sets");
-    //todo: send req to server, get available qset names for currentUser, and load those in questionSets array
+    gateway
+      .getQuestionSets()
+      .then((data) => {
+        setQsets(data["questionSets"]);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }, []);
 
   const handleSelect = (e) => {
@@ -41,19 +49,30 @@ const QuestionSetSelector = () => {
           <Form onSubmit={handleSubmit}>
             <Card.Body>
               <Form.Group>
-                <Form.Label>Select a Question Set</Form.Label>
-                <Form.Control
-                  as={"select"}
-                  custom
-                  onChange={handleSelect}
-                  name={"questionSetName"}
-                >
-                  {questionSets.map((questionSet) => (
-                    <option key={questionSet.qSetID} value={questionSet.qSetID}>
-                      {questionSet.qSetName}
-                    </option>
-                  ))}
-                </Form.Control>
+                {qSets.length > 0 ? (
+                  <>
+                    <Form.Label>Select a Question Set</Form.Label>
+                    <Form.Control
+                      as={"select"}
+                      custom
+                      onChange={handleSelect}
+                      name={"questionSetName"}
+                    >
+                      {qSets.map((questionSet) => (
+                        <option
+                          key={questionSet.qSetID}
+                          value={questionSet.qSetID}
+                        >
+                          {questionSet.qSetName}
+                        </option>
+                      ))}
+                    </Form.Control>
+                  </>
+                ) : (
+                  <div style={{ textAlign: "center" }}>
+                    <Spinner animation={"border"} />
+                  </div>
+                )}
               </Form.Group>
             </Card.Body>
             <Card.Footer>

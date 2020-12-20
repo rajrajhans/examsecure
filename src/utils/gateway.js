@@ -19,4 +19,8 @@ export default {
   endExam(username) {
     return request("/end-exam", "post", { username: username });
   },
+
+  getQuestionSets() {
+    return request("/get-questionsets", "get");
+  },
 };
