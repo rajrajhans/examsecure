@@ -29,6 +29,8 @@ ExamSecure uses the following techniques to prevent cheating by the candidates -
 
 It uses the [AWS Rekognition](https://aws.amazon.com/rekognition/) API for Object Detection, Person Detection, and Face Analysis.
 
+In addition to the anti-cheating mechanisms, ExamSecure also has the features you might expect in an e-exam software. ExamSecure automatically syncs the candidate's answers with the server as he/she is attempting the test, so, if there is a loss of connectivity in between, the candidate can continue from where he left off.   
+
 Note: ExamSecure is currently a Work In Progress. It is deployed [here](https://examsecure.rajrajhans.com) but only authorized test candidates are given access. If you want to test it, please follow [these steps](https://github.com/rajrajhans/examsecure#running-examsecure-locally) to run ExamSecure locally.
 
 
