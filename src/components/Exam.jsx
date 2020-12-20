@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import Timer from "./helpers/Timer";
-import questions from "../static/questions.json";
 import Button from "react-bootstrap/Button";
 import { Link, navigate } from "@reach/router";
 import "../styles/exam.css";
@@ -11,7 +10,7 @@ import ExamWarningModal from "./helpers/ExamWarningModal";
 import { mode } from "./helpers/modeSetter";
 import useAnswerResponse from "./helpers/useAnswerResponse";
 
-const Exam = ({ loadForSeconds, currentUser }) => {
+const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
   const [isWebCamReady, setisWebcamReady] = useState(false);
   const [warning, setWarning] = useState({
     title: "",
@@ -174,7 +173,7 @@ const Exam = ({ loadForSeconds, currentUser }) => {
         <>
           <Timer duration={duration} callBackFn={timeUp} />
           <div className={"examQuestions"}>
-            {questions.map((q) => (
+            {questionsData.questions.map((q) => (
               <div className={"questionsWrapper"} key={q.id}>
                 <Question
                   questionID={q.id}
