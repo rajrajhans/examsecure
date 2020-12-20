@@ -23,7 +23,7 @@ exports.startExamHandler = async (event) => {
 
   await fetch(firebaseURL, {
     method: "put",
-    body: `{"examState":1, "isDisqualified":false, "startedAt": "${timestamp}"`,
+    body: `{"examState":1, "isDisqualified":false, "startedAt": "${timestamp}"}`,
   }).catch(() => console.log("error"));
 
   return respond(200, { status: "done" });
@@ -34,12 +34,18 @@ exports.endExamHandler = async (event) => {
   let username = body.username;
 
   let questionSetID = body.questionSetID;
-
-  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}/${questionSetID}.json?auth=${firebaseApiKey}`;
+  let timestamp = Date.now();
+  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}/${questionSetID}/examState.json?auth=${firebaseApiKey}`;
+  let firebaseURLExamEnded = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}/${questionSetID}/endedAt.json?auth=${firebaseApiKey}`;
 
   await fetch(firebaseURL, {
     method: "put",
-    body: '{"examState":0, "isDisqualified":false}',
+    body: "1",
+  }).catch(() => console.log("error"));
+
+  await fetch(firebaseURLExamEnded, {
+    method: "put",
+    body: `"${timestamp}"`,
   }).catch(() => console.log("error"));
 
   return respond(200, { status: "done" });
