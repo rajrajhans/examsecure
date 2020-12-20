@@ -28,3 +28,21 @@ exports.updateAnswer = async (event) => {
 
   return respond(200, { status: "done " });
 };
+
+exports.getSavedAnswers = async (event) => {
+  const body = JSON.parse(event.body);
+  let username = body.username;
+  let questionSetID = body.qSetID;
+  let savedAnswers = null;
+
+  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/userAnswers/${username}/${questionSetID}.json?auth=${firebaseApiKey}`;
+
+  await fetch(firebaseURL)
+    .then((res) => res.json())
+    .then((data) => {
+      savedAnswers = data;
+    })
+    .catch(() => console.log("error"));
+
+  return respond(200, { savedAnswers: savedAnswers });
+};
