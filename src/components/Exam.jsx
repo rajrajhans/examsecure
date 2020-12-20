@@ -24,6 +24,11 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
   ] = useAnswerResponse(currentUser, questionsData.questionSetID);
 
   useEffect(() => {
+    if (questionsData.questions.length === 0) {
+      navigate("/selectQuestionSet").catch((e) => {
+        console.log(e);
+      });
+    }
     loadForSeconds();
     gateway.startExam(currentUser).catch((e) => console.log(e));
     document.oncontextmenu = () => false; // Disables Right Click
