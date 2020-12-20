@@ -1,18 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createStore } from "redux";
 import { Provider } from "react-redux";
-import rootReducer from "./components/reducers";
 import "tailwindcss/dist/base.css";
 import { css } from "styled-components/macro";
 import "./styles/bootstrapthemes.scss";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-
-const store = createStore(
-  rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-); //todo: after setting up env vars, call redux devtools only in dev environment and not in prod
+import store from "./store";
 
 ReactDOM.render(
   <Provider store={store}>
