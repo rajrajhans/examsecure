@@ -224,10 +224,10 @@ async function uploadFlaggedImagetoFirebase(
   reason,
   questionSetID
 ) {
-  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/triggeredUsers/${username}.json?auth=${firebaseApiKey}`;
+  let uniqueID = uuid();
+  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/triggeredUsers/${questionSetID}/${username}/${uniqueID}.json?auth=${firebaseApiKey}`;
 
   let data = {
-    questionSetID: questionSetID,
     imageURL: s3ImgURL,
     testRes: testRes,
     reason: reason,

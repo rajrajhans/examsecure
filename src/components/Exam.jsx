@@ -163,7 +163,7 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
             "In dev mode. NOT sending req to Lambda. Screenshot captured at - ",
             new Date().toLocaleString()
           ); // Testing purposes
-          if (isStreaming.current) setTimeout(getSnapshot, 20000); // Testing purposes
+          if (isStreaming.current) setTimeout(getSnapshot, 5000); // Testing purposes
         }
       } else {
         console.log("Waiting for camera to start responding");
