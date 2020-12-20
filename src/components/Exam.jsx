@@ -17,7 +17,10 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
     text: "",
     isWarningModalActive: false,
   });
-  const [answerResponse, setAnswerResponse] = useAnswerResponse();
+  const [answerResponse, answerResponseHandler] = useAnswerResponse(
+    currentUser,
+    "1"
+  );
 
   useEffect(() => {
     loadForSeconds();
@@ -146,7 +149,7 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
     const questionName = e.target.name;
     const selectedAnswer = e.target.value;
     if (selectedAnswer) {
-      setAnswerResponse({ ...answerResponse, [questionName]: selectedAnswer });
+      answerResponseHandler(questionName, selectedAnswer);
     }
   };
 

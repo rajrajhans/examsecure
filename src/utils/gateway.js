@@ -27,4 +27,13 @@ export default {
   getQuestions(qSetID) {
     return request(`/get-questions?qSetID=${qSetID}`, "get");
   },
+
+  updateAnswer(username, questionSetID, questionID, userSelectedAnswer) {
+    return request("/update-answers", "post", {
+      username: username,
+      qSetID: questionSetID,
+      qID: questionID,
+      selectedAnswer: userSelectedAnswer,
+    });
+  },
 };
