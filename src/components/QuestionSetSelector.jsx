@@ -7,7 +7,7 @@ import { navigate } from "@reach/router";
 import gateway from "../utils/gateway";
 import Spinner from "react-bootstrap/Spinner";
 
-const QuestionSetSelector = ({ fetchQuestions, questions }) => {
+const QuestionSetSelector = ({ fetchQuestions, questions, currentUser }) => {
   const [qSet, setQSet] = useState(1);
   const [qSets, setQsets] = useState([]);
   const [isSpinnerActive, setIsSpinnerActive] = useState(false);
@@ -38,9 +38,9 @@ const QuestionSetSelector = ({ fetchQuestions, questions }) => {
   return (
     <Container>
       <div>
-        <h1 style={{ marginTop: "5px" }} className="welcomeText">
-          Welcome, Raj
-        </h1>
+        <h2 style={{ marginTop: "10px" }} className="welcomeText">
+          Welcome, {currentUser}
+        </h2>
 
         <Card style={{ maxWidth: "600px", margin: "70px auto" }}>
           <Card.Header>
