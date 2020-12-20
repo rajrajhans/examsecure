@@ -23,4 +23,8 @@ export default {
   getQuestionSets() {
     return request("/get-questionsets", "get");
   },
+
+  getQuestions(qSetID) {
+    return request(`/get-questions?qSetID=${qSetID}`, "get");
+  },
 };

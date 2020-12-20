@@ -10,12 +10,17 @@ import Spinner from "react-bootstrap/Spinner";
 const QuestionSetSelector = () => {
   const [qSet, setQSet] = useState(1);
   const [qSets, setQsets] = useState([]);
+  const [isSpinnerActive, setIsSpinnerActive] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(qSet);
+    setIsSpinnerActive(true);
+    gateway.getQuestions(qSet).then((data) => {
+      console.log(data);
+    });
     // todo: send req to server, fetch selected question set, load it in the store, and send user to '/landing'
-    navigate("/landing");
+    // navigate("/landing");
+    console.log("navigating to landing");
   };
 
   useEffect(() => {
@@ -49,7 +54,7 @@ const QuestionSetSelector = () => {
           <Form onSubmit={handleSubmit}>
             <Card.Body>
               <Form.Group>
-                {qSets.length > 0 ? (
+                {qSets.length > 0 && isSpinnerActive === false ? (
                   <>
                     <Form.Label>Select a Question Set</Form.Label>
                     <Form.Control
