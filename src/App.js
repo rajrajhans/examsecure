@@ -99,6 +99,8 @@ class App extends Component {
             path={"/selectQuestionSet"}
             currentUser={this.state.currentUser}
             loadForSeconds={this.loadForSeconds}
+            authState={this.state.authState}
+            setAuthState={this.setAuthState}
           />
           <PrivateRoute
             component={PostSubmit}

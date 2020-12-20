@@ -35,8 +35,13 @@ Amplify.configure({
 const Login = ({ isSignedIn, authState, setAuthState, loadForSeconds }) => {
   useEffect(() => {
     loadForSeconds();
-    return onAuthUIStateChange((s) => setAuthState(s));
   }, []);
+
+  const handleAuthStateChange = (state) => {
+    if (state === "signedin" || state === "signedout") {
+      setAuthState(state);
+    }
+  };
 
   return (
     <>
@@ -47,6 +52,7 @@ const Login = ({ isSignedIn, authState, setAuthState, loadForSeconds }) => {
           <AmplifyAuthenticator usernameAlias="email">
             <AmplifySignIn
               slot="sign-in"
+              handleAuthStateChange={handleAuthStateChange}
               usernameAlias="email"
               headerText="Sign In to ExamSecure"
               formFields={[
