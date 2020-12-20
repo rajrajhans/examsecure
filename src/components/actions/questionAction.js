@@ -6,7 +6,7 @@ function fetchQuestions(qSetID) {
     gateway.getQuestions(qSetID).then((questionsData) => {
       dispatch({
         type: FETCH_QUESTIONS,
-        payload: questionsData,
+        payload: { ...questionsData, questionSetID: qSetID },
       });
     });
   };

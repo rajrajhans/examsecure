@@ -19,7 +19,7 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
   });
   const [answerResponse, answerResponseHandler] = useAnswerResponse(
     currentUser,
-    "1"
+    questionsData.questionSetID
   );
 
   useEffect(() => {
