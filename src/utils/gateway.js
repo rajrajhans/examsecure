@@ -60,4 +60,11 @@ export default {
       questionSetID: questionSetID,
     });
   },
+
+  getLastAlive(username, questionSetID) {
+    return request("/get-lastalive", "post", {
+      username: username,
+      questionSetID: questionSetID,
+    });
+  },
 };

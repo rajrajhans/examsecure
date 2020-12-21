@@ -22,6 +22,7 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
     answerResponseHandler,
     setAnswerResponse,
   ] = useAnswerResponse(currentUser, questionsData.questionSetID);
+  const [lastAlive, setLastAlive] = useState(null);
 
   useEffect(() => {
     if (questionsData.questions.length === 0) {
@@ -38,6 +39,14 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
       .getSavedAnswers(currentUser, questionsData.questionSetID)
       .then((data) => setAnswerResponse(data.savedAnswers))
       .catch((e) => console.log(e));
+    gateway
+      .getLastAlive(currentUser, questionsData.questionSetID)
+      .then((res) => {
+        setLastAlive(res);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
     getSnapshotInitial();
 
     return function cleanup() {
@@ -101,7 +110,7 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
   // Putting a delay for capturing the first image since first image captured just after renderwas leading to false positives
   const getSnapshotInitial = () => {
     setTimeout(getSnapshot, 5000);
-    setInterval(checkForDisqualification, 50000); //todo: handle this in a better way to avoid leak
+    setInterval(checkForDisqualification, 5000); //todo: handle this in a better way to avoid leak
   };
 
   const getSnapshot = () => {
@@ -218,6 +227,7 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
         <>
           <Timer
             duration={questionsData.selectedQSetDuration * 60}
+            lastAlive={lastAlive}
             callBackFn={timeUp}
           />
           <div className={"examQuestions"}>
