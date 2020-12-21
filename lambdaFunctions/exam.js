@@ -56,8 +56,10 @@ exports.checkIsDisqualified = async (event) => {
   let username = body.username;
   let isDisqualified = false;
   let questionSetID = body.questionSetID;
+  let timestamp = Date.now();
 
   let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}/${questionSetID}/isDisqualified.json?auth=${firebaseApiKey}`;
+  let firebaseLastAliveURL = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}/${questionSetID}/lastAlive.json?auth=${firebaseApiKey}`;
 
   await fetch(firebaseURL)
     .then((data) => data.text())
@@ -66,5 +68,28 @@ exports.checkIsDisqualified = async (event) => {
     })
     .catch(() => console.log("error"));
 
+  await fetch(firebaseLastAliveURL, {
+    method: "put",
+    body: `"${timestamp}"`,
+  }).catch(() => console.log("error"));
+
   return respond(200, { isDisqualified: isDisqualified });
+};
+
+exports.getLastAlive = async (event) => {
+  const body = JSON.parse(event.body);
+  let username = body.username;
+  let lastAlive = null;
+  let questionSetID = body.questionSetID;
+
+  let firebaseLastAliveURL = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}/${questionSetID}/lastAlive.json?auth=${firebaseApiKey}`;
+
+  await fetch(firebaseLastAliveURL)
+    .then((data) => data.text())
+    .then((res) => {
+      lastAlive = res;
+    })
+    .catch(() => console.log("error"));
+
+  return respond(200, { isDisqualified: lastAlive });
 };
