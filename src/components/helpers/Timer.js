@@ -1,53 +1,53 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 import Alert from "react-bootstrap/Alert";
 
 // Takes in a "duration" and "Callback Function", waits for "duration" and fires the CallbackFn
 
 class Timer extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            timePassed: 0
-        }
+  constructor(props) {
+    super(props);
+    this.state = {
+      timePassed: 0,
+    };
+  }
+
+  tick(duration, callBackFn) {
+    if (this.state.timePassed === duration) {
+      callBackFn();
+    } else {
+      this.setState((prevState) => ({
+        timePassed: prevState.timePassed + 1,
+      }));
     }
+  }
 
-    tick() {
-        const {duration, callBackFn} = this.props;
+  componentDidMount() {
+    const { duration, callBackFn } = this.props;
+    this.interval = setInterval(() => this.tick(duration, callBackFn), 1000);
+  }
 
-        if (this.state.timePassed === duration) {
-            callBackFn();
-        } else {
-            this.setState((prevState) => ({
-                timePassed: prevState.timePassed + 1
-            }));
-        }
-    }
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
 
-    componentDidMount() {
-        this.interval = setInterval(() => this.tick(), 1000);
-    }
+  getTimeFromSeconds = (seconds) => {
+    const minsRemaining = Math.floor(seconds / 60);
+    const secsRemaining = seconds - minsRemaining * 60;
 
-    componentWillUnmount() {
-        clearInterval(this.interval);
-    }
+    return `${minsRemaining} minutes and ${secsRemaining} seconds`;
+  };
 
-    getTimeFromSeconds = (seconds) => {
-        const minsRemaining = Math.floor(seconds / 60);
-        const secsRemaining = seconds - (minsRemaining * 60);
+  render() {
+    const { duration } = this.props;
+    let timeLeftinSecs = duration - this.state.timePassed;
 
-        return `${minsRemaining} minutes and ${secsRemaining} seconds`;
-    }
-
-    render() {
-        const { duration } = this.props;
-        let timeLeftinSecs = duration - this.state.timePassed;
-
-        return (
-            <Alert variant={"warning"} className={"timer"}>
-                <strong>Time Remaining</strong> <br/> {this.getTimeFromSeconds(timeLeftinSecs)}
-            </Alert>
-        );
-    }
+    return (
+      <Alert variant={"warning"} className={"timer"}>
+        <strong>Time Remaining</strong> <br />{" "}
+        {this.getTimeFromSeconds(timeLeftinSecs)}
+      </Alert>
+    );
+  }
 }
 
 export default Timer;

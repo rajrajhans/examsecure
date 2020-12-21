@@ -45,8 +45,6 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
     };
   }, []);
 
-  const duration = 1000;
-
   const webcam = useRef(undefined);
   const isStreaming = useRef(true);
   const currentUrl = window.location.href;
@@ -218,7 +216,10 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
 
       {isWebCamReady ? (
         <>
-          <Timer duration={duration} callBackFn={timeUp} />
+          <Timer
+            duration={questionsData.selectedQSetDuration * 60}
+            callBackFn={timeUp}
+          />
           <div className={"examQuestions"}>
             {questionsData.questions.map((q) => (
               <div className={"questionsWrapper"} key={q.id}>
