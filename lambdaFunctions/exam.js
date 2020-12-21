@@ -91,5 +91,5 @@ exports.getLastAlive = async (event) => {
     })
     .catch(() => console.log("error"));
 
-  return respond(200, { isDisqualified: lastAlive });
+  return respond(200, { lastAlive: lastAlive });
 };
