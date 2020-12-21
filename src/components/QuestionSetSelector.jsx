@@ -8,22 +8,26 @@ import gateway from "../utils/gateway";
 import Spinner from "react-bootstrap/Spinner";
 
 const QuestionSetSelector = ({ fetchQuestions, questions, currentUser }) => {
-  const [qSet, setQSet] = useState(1);
+  const [selectedQSet, setSelectedQSet] = useState("");
+  const [selectedQSetDuration, setSelectedQSetDuration] = useState("");
   const [qSets, setQsets] = useState([]);
   const [isSpinnerActive, setIsSpinnerActive] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSpinnerActive(true);
-    console.log(fetchQuestions);
-    fetchQuestions(qSet);
-    navigate("/landing");
+    fetchQuestions(selectedQSet, selectedQSetDuration);
+    navigate("/landing").catch((e) => {
+      console.log(e);
+    });
   };
 
   useEffect(() => {
     gateway
       .getQuestionSets()
       .then((data) => {
+        setSelectedQSetDuration(data["questionSets"][0].duration);
+        setSelectedQSet(data["questionSets"][0].qSetID);
         setQsets(data["questionSets"]);
       })
       .catch((e) => {
@@ -32,7 +36,10 @@ const QuestionSetSelector = ({ fetchQuestions, questions, currentUser }) => {
   }, []);
 
   const handleSelect = (e) => {
-    setQSet(e.target.value);
+    setSelectedQSet(e.target.value);
+    const { options } = e.target;
+    const selectedDuration = options[e.target.selectedIndex].dataset.duration;
+    setSelectedQSetDuration(selectedDuration);
   };
 
   return (
@@ -64,6 +71,7 @@ const QuestionSetSelector = ({ fetchQuestions, questions, currentUser }) => {
                         <option
                           key={questionSet.qSetID}
                           value={questionSet.qSetID}
+                          data-duration={questionSet.duration}
                         >
                           {questionSet.qSetName}
                         </option>
