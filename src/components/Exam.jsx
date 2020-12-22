@@ -110,7 +110,7 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
   // Putting a delay for capturing the first image since first image captured just after renderwas leading to false positives
   const getSnapshotInitial = () => {
     setTimeout(getSnapshot, 5000);
-    setInterval(checkForDisqualification, 5000); //todo: handle this in a better way to avoid leak
+    if (mode === 1) setInterval(checkForDisqualification, 5000); //todo: handle this in a better way to avoid leak
   };
 
   const getSnapshot = () => {
