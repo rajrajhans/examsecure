@@ -22,7 +22,6 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
     answerResponseHandler,
     setAnswerResponse,
   ] = useAnswerResponse(currentUser, questionsData.questionSetID);
-  const [lastAlive, setLastAlive] = useState(null);
   const [
     checkForDisqualificationIntervalID,
     setCheckForDisqualificationIntervalID,
@@ -46,14 +45,6 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
       .getSavedAnswers(currentUser, questionsData.questionSetID)
       .then((data) => setAnswerResponse(data.savedAnswers))
       .catch((e) => console.log(e));
-    gateway
-      .getLastAlive(currentUser, questionsData.questionSetID)
-      .then((res) => {
-        setLastAlive(res);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
     getSnapshotInitial();
 
     return function cleanup() {
@@ -74,6 +65,18 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
   const timeUp = () => {
     isStreaming.current = false;
     navigate("/thankyou");
+  };
+
+  const getLastAlive = async () => {
+    return gateway
+      .getLastAlive(currentUser, questionsData.questionSetID)
+      .then((res) => {
+        console.log("got last alive", res);
+        return res;
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   const setupWebcam = (instance) => {
@@ -124,7 +127,7 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
   // Putting a delay for capturing the first image since first image captured just after renderwas leading to false positives
   const getSnapshotInitial = () => {
     setTimeout(getSnapshot, 5000);
-    if (mode === 0) {
+    if (mode === 1) {
       let checkDisqInterval = setInterval(checkForDisqualification, 5000); //todo: handle this in a better way to avoid leak
       console.log(checkDisqInterval);
       setCheckForDisqualificationIntervalID(checkDisqInterval);
@@ -248,7 +251,7 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
         <>
           <Timer
             duration={questionsData.selectedQSetDuration * 60}
-            lastAlive={lastAlive}
+            getLastAlive={getLastAlive}
             callBackFn={timeUp}
           />
           <div className={"examQuestions"}>

@@ -22,7 +22,12 @@ class Timer extends Component {
   }
 
   componentDidMount() {
-    const { duration, callBackFn } = this.props;
+    const { duration, callBackFn, getLastAlive } = this.props;
+    getLastAlive().then((res) => {
+      let lastAlive = Number(res.lastAlive.slice(1, -1));
+      console.log("LA: ", lastAlive, "Duration: ", duration);
+    });
+
     this.interval = setInterval(() => this.tick(duration, callBackFn), 1000);
   }
 
