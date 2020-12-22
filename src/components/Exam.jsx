@@ -23,6 +23,13 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
     setAnswerResponse,
   ] = useAnswerResponse(currentUser, questionsData.questionSetID);
   const [lastAlive, setLastAlive] = useState(null);
+  const [
+    checkForDisqualificationIntervalID,
+    setCheckForDisqualificationIntervalID,
+  ] = useState(0);
+  const [shouldIntervalBeCancelled, setShouldIntervalBeCancelled] = useState(
+    false
+  );
 
   useEffect(() => {
     if (questionsData.questions.length === 0) {
@@ -53,6 +60,12 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
       isStreaming.current = false;
     };
   }, []);
+
+  useEffect(() => {
+    if (shouldIntervalBeCancelled) {
+      clearInterval(checkForDisqualificationIntervalID);
+    }
+  }, [shouldIntervalBeCancelled]);
 
   const webcam = useRef(undefined);
   const isStreaming = useRef(true);
@@ -99,7 +112,8 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
       .checkIsDisqualified(currentUser, questionsData.questionSetID)
       .then((res) => {
         if (res.isDisqualified === "true") {
-          alert("You have been disqualified by the administrator.");
+          setShouldIntervalBeCancelled(true);
+          alert("You have been disqualified by the educator.");
           navigate("/").catch((e) => {
             console.log(e);
           });
@@ -110,7 +124,11 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
   // Putting a delay for capturing the first image since first image captured just after renderwas leading to false positives
   const getSnapshotInitial = () => {
     setTimeout(getSnapshot, 5000);
-    if (mode === 1) setInterval(checkForDisqualification, 5000); //todo: handle this in a better way to avoid leak
+    if (mode === 0) {
+      let checkDisqInterval = setInterval(checkForDisqualification, 5000); //todo: handle this in a better way to avoid leak
+      console.log(checkDisqInterval);
+      setCheckForDisqualificationIntervalID(checkDisqInterval);
+    }
   };
 
   const getSnapshot = () => {
@@ -183,7 +201,10 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
     gateway.endExam(currentUser, questionsData.questionSetID).catch((e) => {
       console.log(e);
     });
-    navigate("/thankyou");
+    setShouldIntervalBeCancelled(true);
+    navigate("/thankyou").catch((e) => {
+      console.log(e);
+    });
   }
 
   const handleAnswerChange = (e) => {
