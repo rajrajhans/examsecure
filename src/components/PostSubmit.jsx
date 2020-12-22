@@ -6,7 +6,9 @@ import { exitFullScreen } from "../utils/fullscreenAPI";
 class PostSubmit extends Component {
   async componentDidMount() {
     this.props.loadForSeconds();
-    await exitFullScreen();
+    await exitFullScreen().catch((e) => {
+      console.log(e);
+    });
   }
 
   render() {
