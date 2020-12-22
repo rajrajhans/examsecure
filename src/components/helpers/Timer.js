@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Alert from "react-bootstrap/Alert";
+import Spinner from "react-bootstrap/Spinner";
 
 // Takes in a "duration" and "Callback Function", waits for "duration" and fires the CallbackFn
 
@@ -22,13 +23,37 @@ class Timer extends Component {
   }
 
   componentDidMount() {
-    const { duration, callBackFn, getLastAlive } = this.props;
-    getLastAlive().then((res) => {
-      let lastAlive = Number(res.lastAlive.slice(1, -1));
-      console.log("LA: ", lastAlive, "Duration: ", duration);
-    });
+    const { examDuration, callBackFn, getLastAlive, startExam } = this.props;
+    console.log(examDuration);
 
-    this.interval = setInterval(() => this.tick(duration, callBackFn), 1000);
+    let lastAlive, startedAt, completedDuration, adjustedDuration;
+    getLastAlive()
+      .then((res) => {
+        lastAlive = Number(res.lastAlive.slice(1, -1));
+      })
+      .then(() => {
+        startExam()
+          .then((res) => {
+            startedAt = res.startedAt;
+          })
+          .then(() => {
+            if (lastAlive) {
+              completedDuration = (lastAlive - startedAt) / 1000;
+              adjustedDuration = Math.floor(examDuration - completedDuration);
+
+              console.log(examDuration, completedDuration);
+            } else {
+              adjustedDuration = examDuration;
+            }
+
+            this.adjustedDuration = adjustedDuration;
+          });
+      });
+
+    this.interval = setInterval(
+      () => this.tick(examDuration, callBackFn),
+      1000
+    );
   }
 
   componentWillUnmount() {
@@ -39,17 +64,35 @@ class Timer extends Component {
     const minsRemaining = Math.floor(seconds / 60);
     const secsRemaining = seconds - minsRemaining * 60;
 
-    return `${minsRemaining} minutes and ${secsRemaining} seconds`;
+    return [minsRemaining, secsRemaining];
   };
 
   render() {
-    const { duration } = this.props;
-    let timeLeftinSecs = duration - this.state.timePassed;
+    const timeLeftinSecs = this.adjustedDuration - this.state.timePassed;
+    const [min, sec] = this.getTimeFromSeconds(timeLeftinSecs);
 
     return (
       <Alert variant={"warning"} className={"timer"}>
-        <strong>Time Remaining</strong> <br />{" "}
-        {this.getTimeFromSeconds(timeLeftinSecs)}
+        <strong>Time Remaining</strong> <br />
+        {Number.isNaN(timeLeftinSecs) ? (
+          <>
+            <Spinner
+              animation={"border"}
+              size={"sm"}
+              style={{ margin: "15px 0" }}
+            />
+          </>
+        ) : (
+          <div style={{ margin: "15px 0", fontSize: "20px" }}>
+            <span>
+              <span style={{ fontSize: "40px" }}>{min}</span> m
+            </span>
+            {"  "}
+            <span>
+              <span style={{ fontSize: "40px" }}>{sec}</span> s
+            </span>
+          </div>
+        )}
       </Alert>
     );
   }

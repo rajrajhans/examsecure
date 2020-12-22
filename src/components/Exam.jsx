@@ -37,9 +37,6 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
       });
     }
     loadForSeconds();
-    gateway
-      .startExam(currentUser, questionsData.questionSetID)
-      .catch((e) => console.log(e));
     document.oncontextmenu = () => false; // Disables Right Click
     gateway
       .getSavedAnswers(currentUser, questionsData.questionSetID)
@@ -71,12 +68,20 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
     return gateway
       .getLastAlive(currentUser, questionsData.questionSetID)
       .then((res) => {
-        console.log("got last alive", res);
         return res;
       })
       .catch((e) => {
         console.log(e);
       });
+  };
+
+  const startExam = async () => {
+    return gateway
+      .startExam(currentUser, questionsData.questionSetID)
+      .then((res) => {
+        return res;
+      })
+      .catch((e) => console.log(e));
   };
 
   const setupWebcam = (instance) => {
@@ -250,8 +255,9 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
       {isWebCamReady ? (
         <>
           <Timer
-            duration={questionsData.selectedQSetDuration * 60}
+            examDuration={questionsData.selectedQSetDuration * 60}
             getLastAlive={getLastAlive}
+            startExam={startExam}
             callBackFn={timeUp}
           />
           <div className={"examQuestions"}>
