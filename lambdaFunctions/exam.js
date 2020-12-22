@@ -23,6 +23,7 @@ exports.startExamHandler = async (event) => {
   let firebaseUserExamObjectURL = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}/${questionSetID}.json?auth=${firebaseApiKey}`;
 
   let userExamObj = null;
+  let userExamStartedAt = null;
 
   await fetch(firebaseUserExamObjectURL)
     .then((data) => data.json())
@@ -33,6 +34,7 @@ exports.startExamHandler = async (event) => {
 
   if (userExamObj) {
     userExamObj.loginCount = userExamObj.loginCount + 1;
+    userExamStartedAt = userExamObj.startedAt;
   } else {
     userExamObj = {
       examState: 1,
@@ -47,7 +49,7 @@ exports.startExamHandler = async (event) => {
     body: JSON.stringify(userExamObj),
   }).catch(() => console.log("error"));
 
-  return respond(200, { status: "done" });
+  return respond(200, { startedAt: userExamStartedAt });
 };
 
 exports.endExamHandler = async (event) => {
