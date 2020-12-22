@@ -32,14 +32,12 @@ exports.startExamHandler = async (event) => {
     .catch(() => console.log("error"));
 
   if (userExamObj) {
-    userExamObj.lastAlive = Date.now();
     userExamObj.loginCount = userExamObj.loginCount + 1;
   } else {
     userExamObj = {
       examState: 1,
       isDisqualified: false,
       startedAt: Date.now(),
-      lastAlive: Date.now(),
       loginCount: 1,
     };
   }
