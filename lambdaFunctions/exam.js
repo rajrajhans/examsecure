@@ -12,18 +12,41 @@ const respond = (httpStatusCode, response) => ({
   body: JSON.stringify(response),
 });
 
+//todo: clean up this messy bad bad code
+
 exports.startExamHandler = async (event) => {
   const body = JSON.parse(event.body);
 
   let username = body.username;
   let questionSetID = body.questionSetID;
-  let timestamp = Date.now();
 
-  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}/${questionSetID}.json?auth=${firebaseApiKey}`;
+  let firebaseUserExamObjectURL = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}/${questionSetID}.json?auth=${firebaseApiKey}`;
 
-  await fetch(firebaseURL, {
+  let userExamObj = null;
+
+  await fetch(firebaseUserExamObjectURL)
+    .then((data) => data.json())
+    .then((res) => {
+      userExamObj = res;
+    })
+    .catch(() => console.log("error"));
+
+  if (userExamObj) {
+    userExamObj.lastAlive = Date.now();
+    userExamObj.loginCount = userExamObj.loginCount + 1;
+  } else {
+    userExamObj = {
+      examState: 1,
+      isDisqualified: false,
+      startedAt: Date.now(),
+      lastAlive: Date.now(),
+      loginCount: 1,
+    };
+  }
+
+  await fetch(firebaseUserExamObjectURL, {
     method: "put",
-    body: `{"examState":1, "isDisqualified":false, "startedAt": "${timestamp}"}`,
+    body: JSON.stringify(userExamObj),
   }).catch(() => console.log("error"));
 
   return respond(200, { status: "done" });
@@ -35,17 +58,24 @@ exports.endExamHandler = async (event) => {
 
   let questionSetID = body.questionSetID;
   let timestamp = Date.now();
-  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}/${questionSetID}/examState.json?auth=${firebaseApiKey}`;
-  let firebaseURLExamEnded = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}/${questionSetID}/endedAt.json?auth=${firebaseApiKey}`;
 
-  await fetch(firebaseURL, {
-    method: "put",
-    body: "0",
-  }).catch(() => console.log("error"));
+  let firebaseUserExamObjectURL = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}/${questionSetID}.json?auth=${firebaseApiKey}`;
 
-  await fetch(firebaseURLExamEnded, {
+  let userExamObj = null;
+
+  await fetch(firebaseUserExamObjectURL)
+    .then((data) => data.json())
+    .then((res) => {
+      userExamObj = res;
+    })
+    .catch(() => console.log("error"));
+
+  userExamObj.endedAt = timestamp;
+  userExamObj.examState = 0;
+
+  await fetch(firebaseUserExamObjectURL, {
     method: "put",
-    body: `"${timestamp}"`,
+    body: JSON.stringify(userExamObj),
   }).catch(() => console.log("error"));
 
   return respond(200, { status: "done" });
