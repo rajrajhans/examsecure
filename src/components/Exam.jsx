@@ -22,10 +22,6 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
     answerResponseHandler,
     setAnswerResponse,
   ] = useAnswerResponse(currentUser, questionsData.questionSetID);
-  const [
-    checkForDisqualificationIntervalID,
-    setCheckForDisqualificationIntervalID,
-  ] = useState(0);
   const [shouldIntervalBeCancelled, setShouldIntervalBeCancelled] = useState(
     false
   );
@@ -48,12 +44,6 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
       isStreaming.current = false;
     };
   }, []);
-
-  useEffect(() => {
-    if (shouldIntervalBeCancelled) {
-      clearInterval(checkForDisqualificationIntervalID);
-    }
-  }, [shouldIntervalBeCancelled]);
 
   const webcam = useRef(undefined);
   const isStreaming = useRef(true);
@@ -115,28 +105,9 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
     setWarning({ ...warning, isWarningModalActive: val });
   };
 
-  const checkForDisqualification = () => {
-    gateway
-      .checkIsDisqualified(currentUser, questionsData.questionSetID)
-      .then((res) => {
-        if (res.isDisqualified === "true") {
-          setShouldIntervalBeCancelled(true);
-          alert("You have been disqualified by the educator.");
-          navigate("/").catch((e) => {
-            console.log(e);
-          });
-        }
-      });
-  };
-
   // Putting a delay for capturing the first image since first image captured just after renderwas leading to false positives
   const getSnapshotInitial = () => {
     setTimeout(getSnapshot, 5000);
-    if (mode === 1) {
-      let checkDisqInterval = setInterval(checkForDisqualification, 5000); //todo: handle this in a better way to avoid leak
-      console.log(checkDisqInterval);
-      setCheckForDisqualificationIntervalID(checkDisqInterval);
-    }
   };
 
   const getSnapshot = () => {
@@ -259,6 +230,8 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
             getLastAlive={getLastAlive}
             startExam={startExam}
             callBackFn={timeUp}
+            currentUser={currentUser}
+            questionSetID={questionsData.questionSetID}
           />
           <div className={"examQuestions"}>
             {questionsData.questions.map((q) => (

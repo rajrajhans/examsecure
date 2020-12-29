@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Alert from "react-bootstrap/Alert";
 import Spinner from "react-bootstrap/Spinner";
+import gateway from "../../utils/gateway";
+import { navigate } from "@reach/router";
 
 // Takes in a "duration" and "Callback Function", waits for "duration" and fires the CallbackFn
 
@@ -12,6 +14,20 @@ class Timer extends Component {
       timeRemaining: 0,
     };
   }
+
+  checkForDisqualification = (currentUser, questionSetID) => {
+    gateway
+      .checkIsDisqualified(currentUser, questionSetID, this.state.timeRemaining)
+      .then((res) => {
+        if (res.isDisqualified === "true") {
+          clearInterval(this.checkForDisqInterval);
+          alert("You have been disqualified by the educator.");
+          navigate("/").catch((e) => {
+            console.log(e);
+          });
+        }
+      });
+  };
 
   tick(duration, callBackFn) {
     if (this.state.timePassed === duration) {
@@ -25,7 +41,14 @@ class Timer extends Component {
   }
 
   componentDidMount() {
-    const { examDuration, callBackFn, getLastAlive, startExam } = this.props;
+    const {
+      examDuration,
+      callBackFn,
+      getLastAlive,
+      startExam,
+      currentUser,
+      questionSetID,
+    } = this.props;
 
     let lastAlive, startedAt, completedDuration, adjustedDuration;
     getLastAlive()
@@ -53,10 +76,16 @@ class Timer extends Component {
       () => this.tick(examDuration, callBackFn),
       1000
     );
+
+    this.checkForDisqInterval = setInterval(
+      () => this.checkForDisqualification(currentUser, questionSetID),
+      5000
+    );
   }
 
   componentWillUnmount() {
     clearInterval(this.interval);
+    clearInterval(this.checkForDisqInterval);
   }
 
   getTimeFromSeconds = (seconds) => {
@@ -68,6 +97,10 @@ class Timer extends Component {
 
   render() {
     const [min, sec] = this.getTimeFromSeconds(this.state.timeRemaining);
+
+    if (this.state.shouldIntervalBeCleared) {
+      clearInterval(this.state.intervalID);
+    }
 
     return (
       <Alert variant={"warning"} className={"timer"}>
