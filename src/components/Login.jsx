@@ -72,7 +72,7 @@ const Login = ({ isSignedIn, authState, setAuthState, loadForSeconds }) => {
               </AmplifySignIn>
             </AmplifyAuthenticator>
           </div>
-          <Card style={{ width: "500px", margin: "20px auto" }}>
+          <Card style={{ maxWidth: "500px", margin: "20px auto" }}>
             <Card.Body>
               <div>
                 Note: Currently, we are only allowing full access to our beta to
