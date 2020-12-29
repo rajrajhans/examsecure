@@ -35,14 +35,9 @@ class App extends Component {
   async setAuthState(s) {
     this.setState({ authState: s });
     if (s === "signedin") {
-      let user = await Auth.currentAuthenticatedUser();
-      this.setState({ currentUser: user.username, isSignedIn: true });
-    }
-  }
-
-  async componentDidMount() {
-    if (AuthState.SignedIn) {
-      let user = await Auth.currentAuthenticatedUser();
+      let user = await Auth.currentAuthenticatedUser().catch((e) => {
+        console.log(e);
+      });
       this.setState({ currentUser: user.username, isSignedIn: true });
     }
   }
