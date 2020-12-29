@@ -10,6 +10,7 @@ import { ContentWithVerticalPadding } from "./Layouts.js";
 import { ReactComponent as CheckboxIcon } from "feather-icons/dist/icons/check-circle.svg";
 import { ReactComponent as SvgDecoratorBlob1 } from "../../static/dot-pattern.svg";
 import { navigate } from "@reach/router";
+import examSecureLogo from "../../static/examsecure_logo.png";
 
 const Row = tw.div`flex flex-col lg:flex-row justify-between items-center lg:pt-16 max-w-screen-2xl mx-auto sm:px-8`;
 const Column = tw.div``;
@@ -80,10 +81,7 @@ export default ({
             </TextColumn>
             <ImageColumn>
               <ImageContainer>
-                <Image
-                  src={"http://assets.rajrajhans.com/examsecure_logo.png"}
-                  className={"heroLogo"}
-                />
+                <Image src={examSecureLogo} className={"heroLogo"} />
                 {imageDecoratorBlob && (
                   <ImageDecoratorBlob className={"heroDecoratorBlob"} />
                 )}
