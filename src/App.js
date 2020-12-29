@@ -17,6 +17,7 @@ import QuestionSetSelector from "./components/QuestionSetSelector";
 import QuestionSetSelectorContainer from "./components/containers/QuestionSetSelectorContainer";
 import ExamContainer from "./components/containers/ExamContainer";
 import LandingContainer from "./components/containers/LandingContainer";
+import DemoVideos from "./components/DemoVideos";
 
 class App extends Component {
   constructor(props) {
@@ -82,6 +83,7 @@ class App extends Component {
             loadForSeconds={this.loadForSeconds}
             setAuthState={this.setAuthState}
           />
+          <DemoVideos path={"/demoVideos"} />
           <PrivateRoute
             component={ExamContainer}
             isSignedIn={this.state.isSignedIn}
