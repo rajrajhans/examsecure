@@ -12,6 +12,7 @@ import {
 } from "../utils/fullscreenAPI";
 import AddFaceBox from "./helpers/AddFaceBox";
 import { mode } from "./helpers/modeSetter";
+import isDeviceMobile from "../utils/checkMobileDeviceAPI";
 
 const Landing = ({ loadForSeconds, currentUser }) => {
   const [isWebCamReady, setIsWebcamReady] = useState(false);
@@ -48,6 +49,14 @@ const Landing = ({ loadForSeconds, currentUser }) => {
   };
 
   useEffect(() => {
+    if (isDeviceMobile()) {
+      alert(
+        "Please log in from a PC for the best experience. Using a mobile phone may lead to unexpected behaviour."
+      );
+      navigate("/").catch((e) => {
+        console.log(e);
+      });
+    }
     loadForSeconds();
     if (!document.isFullscreenListenerSet) {
       defineFullscreenChangeEvent(onFullscreenExit, onFullscreenEnter);
