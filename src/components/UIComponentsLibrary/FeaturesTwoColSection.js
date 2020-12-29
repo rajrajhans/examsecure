@@ -5,7 +5,7 @@ import { css } from "styled-components/macro"; //eslint-disable-line
 import { SectionHeading, Subheading as SubheadingBase } from "./Headings";
 import { PrimaryButton as PrimaryButtonBase } from "./Buttons";
 import TeamIllustrationSrc from "../../static/shieldIcon.png";
-import { ReactComponent as SvgDotPattern } from "./dot-pattern.svg";
+import { ReactComponent as SvgDotPattern } from "../../static/dot-pattern.svg";
 
 const Container = tw.div`relative`;
 const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24 items-center`;

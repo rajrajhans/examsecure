@@ -10,7 +10,9 @@ import StepsFeature from "./UIComponentsLibrary/StepsFeature";
 import FeaturesTwoColSection from "./UIComponentsLibrary/FeaturesTwoColSection"; //eslint-disable-line
 import browserLockdownImg from "../static/browser_lockdown.svg";
 import headposepng from "../static/headposeestimation.png";
+import aiIllus from "../static/aiIllustration.svg";
 import FeaturesTwoColSection2 from "./UIComponentsLibrary/FeaturesTwoColSection2";
+import FeaturesTwoColSection3 from "./UIComponentsLibrary/FeaturesTwoColSection3";
 import { mode } from "./helpers/modeSetter";
 
 const HighlightedText = tw.span`text-primary-500`;
@@ -32,10 +34,18 @@ export default () => {
           textOnLeft={false}
           imageSrc={browserLockdownImg}
         />
-        <FeaturesTwoColSection2
+        <FeaturesTwoColSection3
           textOnLeft={true}
+          heading={"A.I. Powered Proctoring"}
+          subheading={
+            "Keeps an eye on the candidate using real time image analysis"
+          }
+          imageSrc={aiIllus}
+        />
+        <FeaturesTwoColSection2
+          textOnLeft={false}
           heading={"Head Pose Estimation"}
-          subheading={"Detect loss of attention from the screen"}
+          subheading={"Detects loss of attention from the screen"}
           imageSrc={headposepng}
         />
         <FAQ

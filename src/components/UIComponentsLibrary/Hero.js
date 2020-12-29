@@ -8,7 +8,7 @@ import { SectionDescription } from "./Typography.js";
 import { PrimaryButton as PrimaryButtonBase } from "./Buttons.js";
 import { ContentWithVerticalPadding } from "./Layouts.js";
 import { ReactComponent as CheckboxIcon } from "feather-icons/dist/icons/check-circle.svg";
-import { ReactComponent as SvgDecoratorBlob1 } from "./dot-pattern.svg";
+import { ReactComponent as SvgDecoratorBlob1 } from "../../static/dot-pattern.svg";
 import { navigate } from "@reach/router";
 
 const Row = tw.div`flex flex-col lg:flex-row justify-between items-center lg:pt-16 max-w-screen-2xl mx-auto sm:px-8`;

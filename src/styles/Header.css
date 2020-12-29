@@ -33,6 +33,15 @@
   text-decoration: none;
 }
 
+.demoButtonHome{
+  background-color: #5b5959bd;
+}
+
+.demoButtonHome:hover{
+  background-color: #4e4f54;
+}
+
+
 .heroLogo{
   width: 280px !important;
 }

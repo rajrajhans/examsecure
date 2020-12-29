@@ -82,6 +82,7 @@ export default ({
             imageBorder={imageBorder}
             imageShadow={imageShadow}
             imageRounded={imageRounded}
+            style={{ width: "85%" }}
           />
           {imageDecoratorBlob && <DecoratorBlob css={imageDecoratorBlobCss} />}
         </ImageColumn>
@@ -90,11 +91,13 @@ export default ({
             <Subheading>{subheading}</Subheading>
             <Heading>{heading}</Heading>
             <Description style={{ color: "#000000bf" }}>
-              ExamSecure is able to determine the{" "}
-              <b>direction in which the user is facing</b> by using Head Pose
-              Estimation technique. If the user is staring away from the screen
-              for long periods of time, ExamSecure can trigger a warning or
-              alert the user.
+              ExamSecure uses the candidate's webcam feed and performs advanced
+              image analysis on it in real time. Using this, it can detect if
+              there is <b>no person in the camera frame</b>, if there are{" "}
+              <b>multiple people in the camera frame</b>, if the{" "}
+              <b>person in the camera frame is not recognized</b>{" "}
+              (impersonation) and much more. To see what all can be inferred
+              from the webcam feed, check out our image analysis demo.
             </Description>
             <PrimaryButton
               as="a"
@@ -102,9 +105,26 @@ export default ({
               className={"heroSectionButton"}
               href={"#"}
               onClick={() => navigate("/demo")}
-              style={{ fontSize: "19px", padding: "0.7rem" }}
+              style={{
+                fontSize: "19px",
+                padding: "0.7rem",
+              }}
             >
-              Try it out
+              Try out the Demo
+            </PrimaryButton>
+            <PrimaryButton
+              as="a"
+              css={buttonRoundedCss}
+              className={"heroSectionButton demoButtonHome"}
+              href={"#"}
+              onClick={() => navigate("/demoVideos")}
+              style={{
+                fontSize: "19px",
+                padding: "0.7rem",
+                marginLeft: "10px",
+              }}
+            >
+              Demo Videos
             </PrimaryButton>
           </TextContent>
         </TextColumn>

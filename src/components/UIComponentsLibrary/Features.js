@@ -6,7 +6,7 @@ import { css } from "styled-components/macro";
 import { SectionHeading, Subheading as SubheadingBase } from "./Headings.js";
 import { SectionDescription } from "./Typography.js";
 
-import { ReactComponent as SvgDecoratorBlob3 } from "./svg-decorator-blob-3.svg";
+import { ReactComponent as SvgDecoratorBlob3 } from "../../static/svg-decorator-blob-3.svg";
 
 import headIcon from "../../static/headIcon.png";
 import personIcon from "../../static/personDetection.png";

@@ -1,10 +1,10 @@
 import React from "react";
 import tw from "twin.macro";
 import { css } from "styled-components/macro"; //eslint-disable-line
-import { ReactComponent as SvgDecoratorBlob1 } from "./svg-decorator-blob-9.svg";
+import { ReactComponent as SvgDecoratorBlob1 } from "../../static/svg-decorator-blob-9.svg";
 import { ContentWithPaddingXl, Container } from "./Layouts";
-import githubicon from "./github.svg";
-import reacticon from "./react.svg";
+import githubicon from "../../static/github.svg";
+import reacticon from "../../static/react.svg";
 
 const PrimaryBackgroundContainer = tw.div`py-16 lg:py-20 bg-blue-200 rounded-lg relative`;
 const Row = tw.div`px-4 sm:px-16 mx-auto flex justify-center items-center relative z-10 flex-col lg:flex-row text-center lg:text-left`;
