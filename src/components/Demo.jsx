@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Container from "react-bootstrap/Container";
 import { Col, Row } from "react-bootstrap";
 import Webcam from "react-webcam";
@@ -9,12 +9,17 @@ import Table from "react-bootstrap/Table";
 import Alert from "react-bootstrap/Alert";
 import Card from "react-bootstrap/Card";
 import { getHeadPoseInterpretation } from "../utils/headPoseAnalysisUtils";
+import { pageview } from "react-ga";
 
 const Demo = ({ currentUser }) => {
   const [isWebCamReady, setIsWebcamReady] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
   const [testRes, setTestRes] = useState(null);
   const webcam = useRef(undefined);
+
+  useEffect(() => {
+    pageview(window.location.pathname + window.location.search);
+  }, []);
 
   const handleFailTestResults = (a, b) => console.log(a);
 

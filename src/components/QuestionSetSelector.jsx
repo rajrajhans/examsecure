@@ -6,6 +6,7 @@ import Card from "react-bootstrap/Card";
 import { navigate } from "@reach/router";
 import gateway from "../utils/gateway";
 import Spinner from "react-bootstrap/Spinner";
+import { pageview } from "react-ga";
 
 const QuestionSetSelector = ({ fetchQuestions, questions, currentUser }) => {
   const [selectedQSet, setSelectedQSet] = useState("");
@@ -33,6 +34,7 @@ const QuestionSetSelector = ({ fetchQuestions, questions, currentUser }) => {
       .catch((e) => {
         console.log(e);
       });
+    pageview(window.location.pathname + window.location.search);
   }, []);
 
   const handleSelect = (e) => {

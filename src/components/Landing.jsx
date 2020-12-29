@@ -13,6 +13,7 @@ import {
 import AddFaceBox from "./helpers/AddFaceBox";
 import { mode } from "./helpers/modeSetter";
 import isDeviceMobile from "../utils/checkMobileDeviceAPI";
+import { pageview } from "react-ga";
 
 const Landing = ({ loadForSeconds, currentUser, questionSetMetadata }) => {
   const [isWebCamReady, setIsWebcamReady] = useState(false);
@@ -58,6 +59,7 @@ const Landing = ({ loadForSeconds, currentUser, questionSetMetadata }) => {
       });
     }
     loadForSeconds();
+    pageview(window.location.pathname + window.location.search);
     if (!document.isFullscreenListenerSet) {
       defineFullscreenChangeEvent(onFullscreenExit, onFullscreenEnter);
       document.isFullscreenListenerSet = true;

@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Card from "react-bootstrap/Card";
 import missingDemo from "../static/videos/face_demo.mp4";
 import multiplePplDemo from "../static/videos/multiple_person_demo.mp4";
 import { navigate } from "@reach/router";
+import { pageview } from "react-ga";
 
 const DemoVideos = ({ navigate }) => {
+  useEffect(() => {
+    pageview(window.location.pathname + window.location.search);
+  }, []);
+
   const demos = [
     {
       title: "No face detected in the Camera Frame",

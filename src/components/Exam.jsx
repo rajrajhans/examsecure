@@ -9,6 +9,7 @@ import signOut from "../utils/signOut";
 import ExamWarningModal from "./helpers/ExamWarningModal";
 import { mode } from "./helpers/modeSetter";
 import useAnswerResponse from "./helpers/useAnswerResponse";
+import { pageview } from "react-ga";
 
 const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
   const [isWebCamReady, setisWebcamReady] = useState(false);
@@ -33,6 +34,7 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
       });
     }
     loadForSeconds();
+    pageview(window.location.pathname + window.location.search);
     document.oncontextmenu = () => false; // Disables Right Click
     startExam().catch((e) => console.log(e));
     gateway

@@ -2,9 +2,8 @@ import React, { useEffect } from "react";
 import { AmplifyAuthenticator, AmplifySignIn } from "@aws-amplify/ui-react";
 import { onAuthUIStateChange } from "@aws-amplify/ui-components";
 import Amplify, { Auth } from "aws-amplify";
-import Layout from "./Layout";
-import { navigate, Redirect } from "@reach/router";
 import Card from "react-bootstrap/Card";
+import { pageview } from "react-ga";
 
 const settings = window.rekognitionSettings || {};
 const region = settings.region || "eu-west-1";
@@ -36,6 +35,7 @@ Amplify.configure({
 const Login = ({ isSignedIn, authState, setAuthState, loadForSeconds }) => {
   useEffect(() => {
     loadForSeconds();
+    pageview(window.location.pathname + window.location.search);
     return onAuthUIStateChange((s) => setAuthState(s));
   }, []);
 
