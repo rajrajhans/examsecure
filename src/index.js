@@ -9,7 +9,7 @@ import * as serviceWorker from "./serviceWorker";
 import store from "./store";
 import ReactGA from "react-ga";
 
-ReactGA.initialize("G-WKV6QPXSM8");
+ReactGA.initialize("UA-186141570-1");
 ReactGA.pageview(window.location.pathname + window.location.search);
 
 ReactDOM.render(
