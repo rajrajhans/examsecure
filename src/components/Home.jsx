@@ -10,7 +10,7 @@ import StepsFeature from "./UIComponentsLibrary/StepsFeature";
 import FeaturesTwoColSection from "./UIComponentsLibrary/FeaturesTwoColSection"; //eslint-disable-line
 import browserLockdownImg from "../static/browser_lockdown.svg";
 import headposepng from "../static/headposeestimation.png";
-import aiIllus from "../static/aiIllustration.svg";
+import aiIllus from "../static/ai_illustration.png";
 import FeaturesTwoColSection2 from "./UIComponentsLibrary/FeaturesTwoColSection2";
 import FeaturesTwoColSection3 from "./UIComponentsLibrary/FeaturesTwoColSection3";
 import { mode } from "./helpers/modeSetter";
