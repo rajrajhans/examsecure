@@ -25,7 +25,7 @@ const Demo = ({ currentUser }) => {
       if (image) {
         const b64EncodedImg = image.split(",")[1];
 
-        let res = await gateway.processImage(b64EncodedImg, currentUser);
+        let res = await gateway.processDemoImage(b64EncodedImg, currentUser);
         if (res) {
           console.log(res);
           setTestRes(res);

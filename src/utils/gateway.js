@@ -16,6 +16,14 @@ export default {
     });
   },
 
+  processDemoImage(image, username) {
+    return request("/process-demo-image", "post", {
+      image: image,
+      username: username,
+      questionSetID: "null",
+    });
+  },
+
   startExam(username, questionSetID) {
     return request("/start-exam", "post", {
       username: username,
