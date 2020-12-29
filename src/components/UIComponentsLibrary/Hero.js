@@ -56,7 +56,7 @@ export default ({
           <Row>
             <TextColumn>
               <Heading>Better, Safer, Secure Remote Exams</Heading>
-              <Description>
+              <Description className={"primaryText"}>
                 Ensure the authenticity and integrity of your examinations with
                 ExamSecure's AI-powered proctoring solution for remote
                 examinations.

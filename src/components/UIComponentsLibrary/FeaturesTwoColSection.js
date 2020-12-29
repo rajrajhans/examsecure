@@ -87,7 +87,9 @@ export default ({
         <TextColumn textOnLeft={textOnLeft}>
           <TextContent>
             <Subheading>No "Searching for Answers"</Subheading>
-            <Heading>Complete Browser Lockdown</Heading>
+            <Heading className={"homeSectionTitle"}>
+              Complete Browser Lockdown
+            </Heading>
             <Description style={{ color: "#000000bf" }}>
               During the test, ExamSecure enforces strict{" "}
               <b>Full Screen Mode</b>. It also{" "}

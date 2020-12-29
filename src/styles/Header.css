@@ -56,6 +56,10 @@
   width: 50px;
 }
 
+.primaryText{
+  font-size: 18px !important;
+}
+
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
   .navContainer{
@@ -93,5 +97,18 @@
 
   .App{
     margin-top: 50px;
+  }
+
+  .homeSectionTitle{
+    text-align: center!important;
+  }
+
+  .homeFeatureCard{
+    padding-top: 0!important;
+    padding-bottom: 20px!important;
+  }
+
+  .primaryText{
+    font-size: 17px !important;
   }
 }

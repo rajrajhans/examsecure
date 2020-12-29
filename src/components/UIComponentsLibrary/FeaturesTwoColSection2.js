@@ -88,7 +88,7 @@ export default ({
         <TextColumn textOnLeft={textOnLeft}>
           <TextContent>
             <Subheading>{subheading}</Subheading>
-            <Heading>{heading}</Heading>
+            <Heading className={"homeSectionTitle"}>{heading}</Heading>
             <Description style={{ color: "#000000bf" }}>
               ExamSecure is able to determine the{" "}
               <b>direction in which the user is facing</b> by using Head Pose

@@ -89,7 +89,7 @@ export default ({
         <TextColumn textOnLeft={textOnLeft}>
           <TextContent>
             <Subheading>{subheading}</Subheading>
-            <Heading>{heading}</Heading>
+            <Heading className={"homeSectionTitle"}>{heading}</Heading>
             <Description style={{ color: "#000000bf" }}>
               ExamSecure uses the candidate's webcam feed and performs advanced
               image analysis on it in real time. Using this, it can detect if

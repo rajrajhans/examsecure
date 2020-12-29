@@ -61,7 +61,7 @@ export default ({
   const defaultCards = [
     {
       imageSrc: aiIcon,
-      title: "Face Detection by AWS Rekognition",
+      title: "Face Detection & Analysis",
     },
     { imageSrc: personIcon, title: "Impersonation Detection" },
     { imageSrc: headIcon, title: "Head Pose Estimation" },
@@ -80,7 +80,7 @@ export default ({
         <VerticalSpacer />
         {cards.map((card, i) => (
           <Column key={i}>
-            <Card>
+            <Card className={"homeFeatureCard"}>
               <span className="imageContainer">
                 <img
                   style={{ width: "2.1rem", height: "2.1rem" }}

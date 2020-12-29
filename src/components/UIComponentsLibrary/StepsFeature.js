@@ -90,7 +90,7 @@ export default ({
         <TextColumn textOnLeft={textOnLeft}>
           <TextContent>
             <Subheading>{subheading}</Subheading>
-            <Heading>{heading}</Heading>
+            <Heading className={"homeSectionTitle"}>{heading}</Heading>
             <Steps>
               {steps.map((step, index) => (
                 <Step key={index}>
