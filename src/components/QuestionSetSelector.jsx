@@ -9,14 +9,14 @@ import Spinner from "react-bootstrap/Spinner";
 
 const QuestionSetSelector = ({ fetchQuestions, questions, currentUser }) => {
   const [selectedQSet, setSelectedQSet] = useState("");
-  const [selectedQSetDuration, setSelectedQSetDuration] = useState("");
+  const [selectedQSetMetadata, setSelectedQSetMetadata] = useState({});
   const [qSets, setQsets] = useState([]);
   const [isSpinnerActive, setIsSpinnerActive] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSpinnerActive(true);
-    fetchQuestions(selectedQSet, selectedQSetDuration);
+    fetchQuestions(selectedQSet, selectedQSetMetadata);
     navigate("/landing").catch((e) => {
       console.log(e);
     });
@@ -26,7 +26,7 @@ const QuestionSetSelector = ({ fetchQuestions, questions, currentUser }) => {
     gateway
       .getQuestionSets()
       .then((data) => {
-        setSelectedQSetDuration(data["questionSets"][0].duration);
+        setSelectedQSetMetadata(data["questionSets"][0]);
         setSelectedQSet(data["questionSets"][0].qSetID);
         setQsets(data["questionSets"]);
       })
@@ -38,8 +38,8 @@ const QuestionSetSelector = ({ fetchQuestions, questions, currentUser }) => {
   const handleSelect = (e) => {
     setSelectedQSet(e.target.value);
     const { options } = e.target;
-    const selectedDuration = options[e.target.selectedIndex].dataset.duration;
-    setSelectedQSetDuration(selectedDuration);
+    const selectedQSetMetaData = options[e.target.selectedIndex].dataset;
+    setSelectedQSetMetadata(selectedQSetMetaData);
   };
 
   return (
@@ -72,6 +72,7 @@ const QuestionSetSelector = ({ fetchQuestions, questions, currentUser }) => {
                           key={questionSet.qSetID}
                           value={questionSet.qSetID}
                           data-duration={questionSet.duration}
+                          data-qSetName={questionSet.qSetName}
                         >
                           {questionSet.qSetName}
                         </option>

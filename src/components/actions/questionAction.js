@@ -1,7 +1,7 @@
 import { FETCH_QUESTIONS } from "./types";
 import gateway from "../../utils/gateway";
 
-function fetchQuestions(qSetID, selectedQSetDuration) {
+function fetchQuestions(qSetID, selectedQSetMetadata) {
   return function (dispatch) {
     gateway.getQuestions(qSetID).then((questionsData) => {
       dispatch({
@@ -9,7 +9,8 @@ function fetchQuestions(qSetID, selectedQSetDuration) {
         payload: {
           ...questionsData,
           questionSetID: qSetID,
-          selectedQSetDuration: selectedQSetDuration,
+          selectedQSetDuration: selectedQSetMetadata.duration,
+          metadata: selectedQSetMetadata,
         },
       });
     });
