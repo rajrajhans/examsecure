@@ -38,7 +38,11 @@ const QuestionSetSelector = ({ fetchQuestions, questions, currentUser }) => {
   const handleSelect = (e) => {
     setSelectedQSet(e.target.value);
     const { options } = e.target;
-    const selectedQSetMetaData = options[e.target.selectedIndex].dataset;
+    const selectedDataset = options[e.target.selectedIndex].dataset;
+    const selectedQSetMetaData = {
+      duration: selectedDataset.duration,
+      qSetName: selectedDataset.qsetname,
+    };
     setSelectedQSetMetadata(selectedQSetMetaData);
   };
 

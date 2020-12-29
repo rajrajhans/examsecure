@@ -14,7 +14,7 @@ import AddFaceBox from "./helpers/AddFaceBox";
 import { mode } from "./helpers/modeSetter";
 import isDeviceMobile from "../utils/checkMobileDeviceAPI";
 
-const Landing = ({ loadForSeconds, currentUser }) => {
+const Landing = ({ loadForSeconds, currentUser, questionSetMetadata }) => {
   const [isWebCamReady, setIsWebcamReady] = useState(false);
   const [isFullscreenActive, setIsFullscreenActive] = useState(false);
   const [activeSlide, setActiveSlide] = useState(1);
@@ -219,9 +219,18 @@ const Landing = ({ loadForSeconds, currentUser }) => {
         className={"instructionsBox confirmationBox"}
       >
         <Alert.Heading className={"instrHeading"}>Confirmation</Alert.Heading>
-        <div className={"confirmationText"}>
-          Are you sure you want to start the test?
-        </div>
+        {questionSetMetadata ? (
+          <div className={"confirmationText"}>
+            <div>
+              Selected Exam: <b>{questionSetMetadata.qSetName}</b>
+            </div>
+            <div>
+              Duration of the Exam:{" "}
+              <b>{questionSetMetadata.duration} minutes</b>
+            </div>
+          </div>
+        ) : null}
+        <div>Are you sure you want to start the test?</div>
       </Alert>
 
       <Link to={"/exam"}>
