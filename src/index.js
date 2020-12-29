@@ -7,6 +7,10 @@ import "./styles/bootstrapthemes.scss";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import store from "./store";
+import ReactGA from "react-ga";
+
+ReactGA.initialize("G-WKV6QPXSM8");
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 ReactDOM.render(
   <Provider store={store}>
