@@ -9,6 +9,7 @@ class Timer extends Component {
     super(props);
     this.state = {
       timePassed: 0,
+      timeRemaining: 0,
     };
   }
 
@@ -18,13 +19,13 @@ class Timer extends Component {
     } else {
       this.setState((prevState) => ({
         timePassed: prevState.timePassed + 1,
+        timeRemaining: duration - prevState.timePassed,
       }));
     }
   }
 
   componentDidMount() {
     const { examDuration, callBackFn, getLastAlive, startExam } = this.props;
-    console.log(examDuration);
 
     let lastAlive, startedAt, completedDuration, adjustedDuration;
     getLastAlive()
@@ -40,8 +41,6 @@ class Timer extends Component {
             if (lastAlive) {
               completedDuration = (lastAlive - startedAt) / 1000;
               adjustedDuration = Math.floor(examDuration - completedDuration);
-
-              console.log(examDuration, completedDuration);
             } else {
               adjustedDuration = examDuration;
             }
@@ -68,13 +67,12 @@ class Timer extends Component {
   };
 
   render() {
-    const timeLeftinSecs = this.adjustedDuration - this.state.timePassed;
-    const [min, sec] = this.getTimeFromSeconds(timeLeftinSecs);
+    const [min, sec] = this.getTimeFromSeconds(this.state.timeRemaining);
 
     return (
       <Alert variant={"warning"} className={"timer"}>
         <strong>Time Remaining</strong> <br />
-        {Number.isNaN(timeLeftinSecs) ? (
+        {typeof this.adjustedDuration === "undefined" ? (
           <>
             <Spinner
               animation={"border"}
