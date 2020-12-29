@@ -293,7 +293,7 @@ svg {
 .amplify-auth-container {
     text-align: center;
     padding: 5%;
-    height: 100vh;
+    min-height: 100vh;
     background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ),url("../static/authbg1.jpg") center bottom;
     background-size: cover;
 }
