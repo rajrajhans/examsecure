@@ -34,6 +34,7 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
     }
     loadForSeconds();
     document.oncontextmenu = () => false; // Disables Right Click
+    startExam().catch((e) => console.log(e));
     gateway
       .getSavedAnswers(currentUser, questionsData.questionSetID)
       .then((data) => setAnswerResponse(data.savedAnswers))
@@ -228,7 +229,6 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
           <Timer
             examDuration={questionsData.selectedQSetDuration * 60}
             getLastAlive={getLastAlive}
-            startExam={startExam}
             callBackFn={timeUp}
             currentUser={currentUser}
             questionSetID={questionsData.questionSetID}

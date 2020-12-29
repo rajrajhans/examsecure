@@ -11,7 +11,7 @@ class Timer extends Component {
     super(props);
     this.state = {
       timePassed: 0,
-      timeRemaining: 0,
+      timeRemaining: undefined,
     };
   }
 
@@ -45,37 +45,34 @@ class Timer extends Component {
       examDuration,
       callBackFn,
       getLastAlive,
-      startExam,
       currentUser,
       questionSetID,
     } = this.props;
 
-    let lastAlive, startedAt, completedDuration, adjustedDuration;
-    getLastAlive()
-      .then((res) => {
-        lastAlive = Number(res.lastAlive.slice(1, -1));
-      })
-      .then(() => {
-        startExam()
-          .then((res) => {
-            startedAt = res.startedAt;
-          })
-          .then(() => {
-            if (lastAlive) {
-              completedDuration = (lastAlive - startedAt) / 1000;
-              adjustedDuration = Math.floor(examDuration - completedDuration);
-            } else {
-              adjustedDuration = examDuration;
-            }
+    let remainingTimeGotFromServer, adjustedDuration;
 
-            this.adjustedDuration = adjustedDuration;
-          });
-      });
+    getLastAlive().then((res) => {
+      if (res.lastAlive !== "null") {
+        remainingTimeGotFromServer = Number(res.lastAlive.slice(1, -1));
+        adjustedDuration = remainingTimeGotFromServer;
 
-    this.interval = setInterval(
-      () => this.tick(examDuration, callBackFn),
-      1000
-    );
+        this.setState((prevState) => ({
+          timePassed: examDuration - remainingTimeGotFromServer,
+          timeRemaining: remainingTimeGotFromServer,
+        }));
+      } else {
+        adjustedDuration = examDuration;
+        this.setState((prevState) => ({
+          timePassed: 0,
+          timeRemaining: examDuration,
+        }));
+      }
+
+      this.interval = setInterval(
+        () => this.tick(examDuration, callBackFn),
+        1000
+      );
+    });
 
     this.checkForDisqInterval = setInterval(
       () => this.checkForDisqualification(currentUser, questionSetID),
@@ -98,14 +95,10 @@ class Timer extends Component {
   render() {
     const [min, sec] = this.getTimeFromSeconds(this.state.timeRemaining);
 
-    if (this.state.shouldIntervalBeCleared) {
-      clearInterval(this.state.intervalID);
-    }
-
     return (
       <Alert variant={"warning"} className={"timer"}>
         <strong>Time Remaining</strong> <br />
-        {typeof this.adjustedDuration === "undefined" ? (
+        {typeof this.state.timeRemaining === "undefined" ? (
           <>
             <Spinner
               animation={"border"}
