@@ -16,6 +16,7 @@ import { AuthState } from "@aws-amplify/ui-components";
 import QuestionSetSelector from "./components/QuestionSetSelector";
 import QuestionSetSelectorContainer from "./components/containers/QuestionSetSelectorContainer";
 import ExamContainer from "./components/containers/ExamContainer";
+import LandingContainer from "./components/containers/LandingContainer";
 
 class App extends Component {
   constructor(props) {
@@ -63,7 +64,7 @@ class App extends Component {
         <Loading show={this.state.isLoading} />
         <Router>
           <PrivateRoute
-            component={Landing}
+            component={LandingContainer}
             isSignedIn={this.state.isSignedIn}
             path={"/landing"}
             loadForSeconds={this.loadForSeconds}
