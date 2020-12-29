@@ -54,10 +54,11 @@ export default {
     });
   },
 
-  checkIsDisqualified(username, questionSetID) {
+  checkIsDisqualified(username, questionSetID, timeRemaining) {
     return request("/is-disqualified", "post", {
       username: username,
       questionSetID: questionSetID,
+      timeRemaining: timeRemaining,
     });
   },
 
