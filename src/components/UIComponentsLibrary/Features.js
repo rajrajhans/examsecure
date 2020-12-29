@@ -6,16 +6,14 @@ import { css } from "styled-components/macro";
 import { SectionHeading, Subheading as SubheadingBase } from "./Headings.js";
 import { SectionDescription } from "./Typography.js";
 
-import defaultCardImage from "./shield-icon.svg";
-
 import { ReactComponent as SvgDecoratorBlob3 } from "./svg-decorator-blob-3.svg";
 
-import SupportIconImage from "./support-icon.svg";
-import ShieldIconImage from "./shield-icon.svg";
-import CustomizeIconImage from "./customize-icon.svg";
-import FastIconImage from "./fast-icon.svg";
-import ReliableIconImage from "./reliable-icon.svg";
-import SimpleIconImage from "./simple-icon.svg";
+import headIcon from "../../static/headIcon.png";
+import personIcon from "../../static/personDetection.png";
+import aiIcon from "../../static/aiIcon.png";
+import shieldIcon from "../../static/shieldIcon.png";
+import bandwidthIcon from "../../static/bandwidthIcon.png";
+import forkIcon from "../../static/forkIcon.png";
 
 const Container = tw.div`relative`;
 
@@ -36,9 +34,6 @@ const Card = styled.div`
   ${tw`flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left h-full mx-4 px-2 py-8`}
   .imageContainer {
     ${tw`border text-center rounded-full p-5 flex-shrink-0`}
-    img {
-      ${tw`w-6 h-6`}
-    }
   }
 
   .textContainer {
@@ -65,14 +60,14 @@ export default ({
 }) => {
   const defaultCards = [
     {
-      imageSrc: ShieldIconImage,
+      imageSrc: aiIcon,
       title: "Face Detection by AWS Rekognition",
     },
-    { imageSrc: SupportIconImage, title: "Detect Impersonation" },
-    { imageSrc: CustomizeIconImage, title: "Complete Browser Lockdown" },
-    { imageSrc: ReliableIconImage, title: "Disable Copy Paste in the exam" },
-    { imageSrc: FastIconImage, title: "Low Bandwidth Requirement" },
-    { imageSrc: SimpleIconImage, title: "Open Source and Customizable" },
+    { imageSrc: personIcon, title: "Impersonation Detection" },
+    { imageSrc: headIcon, title: "Head Pose Estimation" },
+    { imageSrc: shieldIcon, title: "Complete Browser Lockdown" },
+    { imageSrc: bandwidthIcon, title: "Low Bandwidth Requirement" },
+    { imageSrc: forkIcon, title: "Open Source and Customizable" },
   ];
 
   if (!cards) cards = defaultCards;
@@ -87,7 +82,11 @@ export default ({
           <Column key={i}>
             <Card>
               <span className="imageContainer">
-                <img src={card.imageSrc || defaultCardImage} alt="" />
+                <img
+                  style={{ width: "2.1rem", height: "2.1rem" }}
+                  src={card.imageSrc || shieldIcon}
+                  alt=""
+                />
               </span>
               <span className="textContainer">
                 <span className="title">{card.title || "Fully Secure"}</span>
