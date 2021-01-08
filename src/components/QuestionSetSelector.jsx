@@ -99,6 +99,18 @@ const QuestionSetSelector = ({ fetchQuestions, questions, currentUser }) => {
             </Card.Footer>
           </Form>
         </Card>
+
+        <Card style={{ maxWidth: "500px", margin: "20px auto" }}>
+          <Card.Body>
+            <div>
+              Note: Currently, we are only allowing full access to our beta to
+              selected Educators and Candidates. Exam will run in a limited
+              mode. We encourage you to check out the{" "}
+              <a href={"/demo"}>Demo Page</a> for a quick demo on image analysis
+              that ExamSecure does during the Exam.
+            </div>
+          </Card.Body>
+        </Card>
       </div>
     </Container>
   );
