@@ -8,7 +8,6 @@
   ExamSecure
 </h1>
 
-
 <h4 align="center">
   Automated Virtual Proctoring System 
 </h4>
@@ -35,8 +34,7 @@ In addition to the anti-cheating mechanisms, ExamSecure also has the features yo
 
 ... and many more features to be added soon.
 
-Note: ExamSecure is currently a Work In Progress. It is deployed [here](https://examsecure.rajrajhans.com) but only authorized test candidates are given access. If you want to test it, please follow [these steps](https://github.com/rajrajhans/examsecure#running-examsecure-locally) to run ExamSecure locally.
-
+Note: ExamSecure is currently a **Work In Progress**. It is deployed [here](https://examsecure.rajrajhans.com) but only authorized test candidates are given access. If you want to test it, please follow [these steps](https://github.com/rajrajhans/examsecure#running-examsecure-locally) to run ExamSecure locally.
 
 ### Screenshots
 
@@ -91,6 +89,12 @@ window.rekognitionSettings = {
     "region": "YOUR_AWS_REGION"
 };
 ```   
+
+### Challenges & Learnings
+
+- **Increasing Complexity of State Management**: Initially, I used simple React state. However, as I added more and more features, the state management became increasingly complex and I was facing issues like prop drilling on a regular basis. More time was being spent on refactoring components in a way to enable them to share state, than on implementing new features. So, I learned and integrated Redux into the project. The concept of global state store made it easy to add new features. (Although I still use simple React state for managing ephemeral state)
+- **Locking Down the Browser**: The requirement was that the user should not be allowed to do anything else while attempting the exam. To implement this, I learned about a lot of DOM APIs for Full Screen, Focus Lost, Context Menu, Text Selection, etc.
+- **AWS Rekognition & Lambda**: For the server side, I've used AWS Lamdba along with AWS API Gateway. For real time image analysis, AWS Rekognition is used. This project allowed me to learn a lot about these AWS services and the "serverless" paradigm.
 
 ### Related Blog Posts
 - [Automate Deployment of React apps to AWS S3 using a CD Pipeline](https://rajrajhans.com/2020/08/automate-deployment-react-app-aws/)
