@@ -20,6 +20,10 @@ const DemoVideos = ({ navigate }) => {
       title: "Multiple Persons in the Camera Frame",
       vidSrc: multiplePplDemo,
     },
+    {
+      title: "Impersonation Warning",
+      vidSrc: multiplePplDemo,
+    },
   ];
   return (
     <>
