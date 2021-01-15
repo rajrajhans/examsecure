@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout Component renders correctly 1`] = `
+<div
+  className="fade alert alert-danger show"
+  role="alert"
+>
+  The deployment folder is missing / has invalid settings.js file. The settings.js file should contain your AWS Configuration Details.
+  <br />
+  Please refer to the configuration section of README for more details about configuring AWS for ExamSecure. 
+  <br />
+  <br />
+  <b>
+    This should not be visible in production. Please contact the developers.
+  </b>
+</div>
+`;
