@@ -58,6 +58,14 @@ Following is a sneak peek of how the interface looks.
 
 For more, check out the [Demo Videos page](https://examsecure.rajrajhans.com/demoVideos), and [the Image Analysis Demo](https://examsecure.rajrajhans.com/demo)
 
+### What's next?
+
+These are the things I plan to work on next on ExamSecure 👉🏻
+- Work on having good unit tests for the codebase.
+- Incrementally refactor the codebase to TypeScript.
+- Work on the Educator interface for scheduling and monitoring exams, and aggregating results once the Exam is over into relevant reports.
+- Optimise the code that runs on Lambda functions.
+
 ### Running ExamSecure Locally
 
 Note: Running this project will require you to set up and configure 
