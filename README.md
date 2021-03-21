@@ -62,8 +62,8 @@ For more, check out the [Demo Videos page](https://examsecure.rajrajhans.com/dem
 
 These are the things I plan to work on next on ExamSecure 👉🏻
 - Work on having good unit tests for the codebase.
-- Incrementally refactor the codebase to TypeScript.
 - Work on the Educator interface for scheduling and monitoring exams, and aggregating results once the Exam is over into relevant reports.
+  - Here's the [Figma Prototype](https://www.figma.com/proto/RIsibmqXUtjutPBGPilQKq/Home?node-id=1%3A12&scaling=min-zoom) for the educator interface that I'm currently working on.
 - Optimise the code that runs on Lambda functions.
 
 ### Running ExamSecure Locally
@@ -106,3 +106,4 @@ window.rekognitionSettings = {
 
 ### Related Blog Posts
 - [Automate Deployment of React apps to AWS S3 using a CD Pipeline](https://rajrajhans.com/2020/08/automate-deployment-react-app-aws/)
+- [Using AWS Rekognition, Lambda & API Gateway to build ML Powered WebApps](https://rajrajhans.com/2021/03/image-analyzer-aws-rekognition/)
