@@ -1,0 +1,12 @@
+
+video{
+    border: 1px solid var(--brandColor);
+}
+
+.confirmationBox, .instructionsBox {
+    min-height: 205px;
+}
+
+.confirmationText{
+    margin-top: 30px;
+}

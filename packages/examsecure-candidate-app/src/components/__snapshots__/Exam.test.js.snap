@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loading Component renders correctly 1`] = `
+<video
+  autoPlay={true}
+  className="examCamera"
+  muted={true}
+  playsInline={true}
+  style={Object {}}
+/>
+`;
