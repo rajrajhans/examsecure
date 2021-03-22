@@ -1,0 +1,25 @@
+{
+  "short_name": "ExamSecure Educator",
+  "name": "Virtual Proctoring",
+  "icons": [
+    {
+      "src": "logo_without_boxshadow.png",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo_without_boxshadow.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo_without_boxshadow.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

@@ -1,0 +1,67 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.mycard {
+    box-shadow: 3px 3px 3px 3px rgba(0,0,0,0.253);
+    margin: 10px;
+    background-color: black;
+}
+
+.mycard-body {
+
+}
+
+.correct-response {
+    color: rgb(8, 207, 8);
+    font-weight: bold;
+}
+
+.wrong-response {
+    color: red;
+    font-weight: bold;
+}
+
+.text-color {
+    color: blanchedalmond!important;
+}
+
+.accordion-title {
+    font-weight: bold;
+    color: white;
+    background-color: rgb(24, 24, 56)!important;
+    margin: 5px;
+}
+
+.accordion-details {
+    margin-left: 15px;
+}
+
+.userAnswers {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-self: center;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.253);
+}
+
+.modal-button:hover {
+    background-color: white!important;
+    border-color: gray!important;
+    color: gray!important;
+    font-weight: bold;
+}
+
+.response {
+    padding: 10px;
+    margin: 5px;
+    box-shadow: 3px 3px 3px 1px rgba(0,0,0,0.253);
+}
+
+.flex-css {
+    display:'flex'!important;
+    flex-wrap:'wrap'!important;
+    justify-content:'center'!important;
+    align-self:'center'!important;
+}
