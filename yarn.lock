@@ -3367,6 +3367,18 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@examsecure/design-system@D:\\MyFiles\\Projects\\EDI Remote Proctoring ExamSecure\\ExamSecure UI\\packages\\examsecure-design-system":
+  version "1.0.0"
+  dependencies:
+    react "^17.0.2"
+    react-dom "^17.0.2"
+
+"@examsecure/design-system@file:packages/examsecure-design-system":
+  version "1.0.0"
+  dependencies:
+    react "^17.0.2"
+    react-dom "^17.0.2"
+
 "@firebase/analytics-types@0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@firebase/analytics-types/-/analytics-types-0.4.0.tgz#d6716f9fa36a6e340bc0ecfe68af325aa6f60508"
