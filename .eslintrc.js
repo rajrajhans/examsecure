@@ -8,7 +8,6 @@ module.exports = {
     extends: [
         'airbnb/hooks',
         'react-app',
-        'react-app/jest',
         'plugin:jest/recommended',
         'prettier',
         'prettier/@typescript-eslint',
