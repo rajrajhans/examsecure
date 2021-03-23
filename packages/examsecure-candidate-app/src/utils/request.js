@@ -1,8 +1,8 @@
-import Amplify, { API, Auth } from "aws-amplify";
-import { retryWrapper } from "./index";
+import Amplify, { API, Auth } from 'aws-amplify';
+import { retryWrapper } from '.';
 
 const settings = window.rekognitionSettings || {};
-const region = settings.region || "eu-west-1";
+const region = settings.region || 'eu-west-1';
 
 Amplify.configure({
   Auth: {
@@ -15,7 +15,7 @@ Amplify.configure({
   API: {
     endpoints: [
       {
-        name: "apiGateway",
+        name: 'apiGateway',
         endpoint: settings.apiGateway,
         region,
         custom_header: async () => {
@@ -30,8 +30,8 @@ Amplify.configure({
 
 export default (url, method, data) =>
   retryWrapper(() =>
-    API[method || "get"]("apiGateway", url, {
+    API[method || 'get']('apiGateway', url, {
       body: data || undefined,
-      headers: { "Content-Type": "application/json" },
-    })
+      headers: { 'Content-Type': 'application/json' },
+    }),
   );
