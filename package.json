@@ -9,7 +9,7 @@
     "packages/*"
   ],
   "devDependencies": {
-    "eslint": "^7.19.0",
+    "eslint": "^7.22.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^7.2.0",
     "eslint-config-react-app": "^6.0.0",
@@ -27,5 +27,13 @@
     "prettier": "^2.2.1",
     "redux-devtools": "^3.7.0",
     "rimraf": "^3.0.0"
+  },
+  "scripts": {
+    "build": "lerna run build",
+    "lint": "lerna exec -- eslint . --ext .js,.jsx,.ts,.tsx",
+    "start-candidate-app": "cd packages/examsecure-candidate-app && node scripts/start.js",
+    "start-educator-app": "cd packages/examsecure-educator-app && node scripts/start.js",
+    "test-changed": "lerna run test --since master",
+    "test": "lerna run test"
   }
 }
