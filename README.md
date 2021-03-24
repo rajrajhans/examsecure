@@ -14,6 +14,8 @@
 
 ExamSecure is a platform for conducting secure remote examinations and deter candidates from resorting to malpractice. 
 
+## Features
+
 ExamSecure uses the following techniques to prevent cheating by the candidates -
 
 1. **Complete Browser Lockdown**: In the exam environment, ExamSecure completely locks down the candidate's browser, triggering a warning if the candidate tries to switch tabs, open a new window, exit full screen mode or click anywhere else except the Exam screen. Text Selection, Text Copying, and Right Click is also disabled in Exam environment. 
@@ -36,7 +38,15 @@ In addition to the anti-cheating mechanisms, ExamSecure also has the features yo
 
 Note: ExamSecure is currently a **Work In Progress**. It is deployed [here](https://examsecure.rajrajhans.com) but only authorized test candidates are given access. If you want to test it, please follow [these steps](https://github.com/rajrajhans/examsecure#running-examsecure-locally) to run ExamSecure locally.
 
-### Screenshots
+## Codebase Organization
+
+The codebase is organized following the [monorepo architecture](https://www.toptal.com/front-end/guide-to-monorepos). It uses [Yarn Workspaces](https://classic.yarnpkg.com/en/docs/workspaces/) and [Lerna](https://lerna.js.org/) for managing the monorepo. The monorepo currently has three packages 
+
+- `@examsecure/candidate-app`: React webapp for the candidate portal. It was created using Create React App, but is now [ejected](https://create-react-app.dev/docs/available-scripts/#npm-run-eject) to support custom Babel config for monorepo architecture. 
+- `@examsecure/educator-app`: React webapp for the educator portal. 
+- `@examsecure/design-system`: A simple design system for shared UI components between both webapps. Created using [Storybook](https://storybook.js.org/).
+
+## Screenshots
 
 Following is a sneak peek of how the interface looks.
 
@@ -58,7 +68,7 @@ Following is a sneak peek of how the interface looks.
 
 For more, check out the [Demo Videos page](https://examsecure.rajrajhans.com/demoVideos), and [the Image Analysis Demo](https://examsecure.rajrajhans.com/demo)
 
-### What's next?
+## What's next?
 
 These are the things I plan to work on next on ExamSecure 👉🏻
 - Work on having good unit tests for the codebase.
@@ -66,7 +76,7 @@ These are the things I plan to work on next on ExamSecure 👉🏻
   - Here's the [Figma Prototype](https://www.figma.com/proto/RIsibmqXUtjutPBGPilQKq/Home?node-id=1%3A12&scaling=min-zoom) for the educator interface that I'm currently working on.
 - Optimise the code that runs on Lambda functions.
 
-### Running ExamSecure Locally
+## Running ExamSecure Locally
 
 Note: Running this project will require you to set up and configure 
 the required AWS resources.
@@ -78,7 +88,7 @@ the required AWS resources.
 
 The project should run now. In case of any error, make sure your AWS configuration is correct. 
 
-### AWS Configuration
+## AWS Configuration
 
 This project uses many AWS services - S3, CloudFront, Rekognition, Lambda, Cognito, DynamoDB, API Gateway, and CodePipeline. To make the configuration process easy, a CloudFormation stack template is provided. All you need to deploy that template and CloudFormation will take care of the rest!
 
@@ -98,12 +108,12 @@ window.rekognitionSettings = {
 };
 ```   
 
-### Challenges & Learnings
+## Challenges & Learnings
 
 - **Increasing Complexity of State Management**: Initially, I used simple React state. However, as I added more and more features, the state management became increasingly complex and I was facing issues like prop drilling on a regular basis. More time was being spent on refactoring components in a way to enable them to share state, than on implementing new features. So, I learned and integrated Redux into the project. The concept of global state store made it easy to add new features. (Although I still use simple React state for managing ephemeral state)
 - **Locking Down the Browser**: The requirement was that the user should not be allowed to do anything else while attempting the exam. To implement this, I learned about a lot of DOM APIs for Full Screen, Focus Lost, Context Menu, Text Selection, etc.
 - **AWS Rekognition & Lambda**: For the server side, I've used AWS Lamdba along with AWS API Gateway. For real time image analysis, AWS Rekognition is used. This project allowed me to learn a lot about these AWS services and the "serverless" paradigm.
 
-### Related Blog Posts
+## Related Blog Posts
 - [Automate Deployment of React apps to AWS S3 using a CD Pipeline](https://rajrajhans.com/2020/08/automate-deployment-react-app-aws/)
 - [Using AWS Rekognition, Lambda & API Gateway to build ML Powered WebApps](https://rajrajhans.com/2021/03/image-analyzer-aws-rekognition/)
