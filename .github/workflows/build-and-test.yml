@@ -26,6 +26,6 @@ jobs:
         env:
           CI: ""
       - name: "Run tests and generate coverage report"
-        run: yarn test -- --coverage
+        run: yarn test -- -- -- --coverage
       - name: Upload test coverage to Codecov
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v1.3.1
