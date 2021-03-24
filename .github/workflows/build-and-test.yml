@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     strategy:
@@ -29,4 +29,3 @@ jobs:
         run: yarn test -- --coverage
       - name: Upload test coverage to Codecov
         uses: codecov/codecov-action@v1
-        
