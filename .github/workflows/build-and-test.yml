@@ -21,9 +21,12 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: yarn
-      - run: yarn build
-        name: "Build packages"
+      - name: "Build packages"
+        run: yarn build
         env:
           CI: ""
-      - run: yarn test
-        name: "Run tests"
+      - name: "Run tests and generate coverage report"
+        run: yarn test -- --coverage
+      - name: Upload test coverage to Codecov
+        uses: codecov/codecov-action@v1
+        
