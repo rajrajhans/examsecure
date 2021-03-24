@@ -20,10 +20,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-        env:
-          CI: ""
       - run: yarn
       - run: yarn build
+        env:
+          CI: ""
 
   test:
     needs: build
