@@ -42,9 +42,9 @@ Note: ExamSecure is currently a **Work In Progress**. It is deployed [here](http
 
 The codebase is organized following the [monorepo architecture](https://www.toptal.com/front-end/guide-to-monorepos). It uses [Yarn Workspaces](https://classic.yarnpkg.com/en/docs/workspaces/) and [Lerna](https://lerna.js.org/) for managing the monorepo. The monorepo currently has three packages 
 
-- `@examsecure/candidate-app`: React webapp for the candidate portal. It was created using Create React App, but is now [ejected](https://create-react-app.dev/docs/available-scripts/#npm-run-eject) to support custom Babel config for monorepo architecture. 
-- `@examsecure/educator-app`: React webapp for the educator portal. 
-- `@examsecure/design-system`: A simple design system for shared UI components between both webapps. Created using [Storybook](https://storybook.js.org/).
+- [`@examsecure/candidate-app`](packages/examsecure-candidate-app): React webapp for the candidate portal. It was created using Create React App, but is now [ejected](https://create-react-app.dev/docs/available-scripts/#npm-run-eject) to support custom Babel config for monorepo architecture. 
+- [`@examsecure/educator-app`](packages/examsecure-educator-app): React webapp for the educator portal. 
+- [`@examsecure/design-system`](packages/examsecure-design-system): A simple design system for shared UI components between both webapps. Created using [Storybook](https://storybook.js.org/).
 
 ## Screenshots
 
