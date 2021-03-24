@@ -1,3 +1,3 @@
-# examsecure-educator
+# @examsecure/educator-app
 
-<img src='/src/assets/logo_without_boxshadow.png' width=200 height=200/>
+⚒ Work In Progress. Visit [examsecure.rajrajhans.com](https://examsecure.rajrajhans.com/).
