@@ -35,5 +35,8 @@
     "start-educator-app": "cd packages/examsecure-educator-app && node scripts/start.js",
     "test-changed": "lerna run test --since master",
     "test": "lerna run test"
+  },
+  "dependencies": {
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2"
   }
 }
