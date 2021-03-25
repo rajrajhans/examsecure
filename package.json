@@ -32,8 +32,13 @@
     "build": "lerna run build",
     "lint": "lerna exec -- eslint . --ext .js,.jsx,.ts,.tsx",
     "start-candidate-app": "cd packages/examsecure-candidate-app && node scripts/start.js",
+    "build-candidate-app": "cd packages/examsecure-candidate-app && node scripts/build.js",
     "start-educator-app": "cd packages/examsecure-educator-app && node scripts/start.js",
+    "build-educator-app": "cd packages/examsecure-educator-app && node scripts/build.js",
     "test-changed": "lerna run test --since master",
     "test": "lerna run test"
+  },
+  "dependencies": {
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2"
   }
 }
