@@ -15,7 +15,7 @@
   "scripts": {
     "start": "start-storybook -p 6006 -s public --no-manager-cache",
     "build": "build-storybook -s public",
-    "test": "react-scripts test",
+    "test": "jest --passWithNoTests",
     "eject": "react-scripts eject"
   },
   "browserslist": {
