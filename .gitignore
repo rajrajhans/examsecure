@@ -76,3 +76,4 @@ yarn-error.log
 build/
 
 bfg.jar
+packages/examsecure-design-system/storybook-static
