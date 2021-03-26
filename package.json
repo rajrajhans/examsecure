@@ -35,6 +35,7 @@
     "build-candidate-app": "cd packages/examsecure-candidate-app && node scripts/build.js",
     "start-educator-app": "cd packages/examsecure-educator-app && node scripts/start.js",
     "build-educator-app": "cd packages/examsecure-educator-app && node scripts/build.js",
+    "build-storybook": "cd packages/examsecure-design-system && yarn build",
     "test-changed": "lerna run test --since master",
     "test": "lerna run test"
   },
