@@ -46,6 +46,14 @@ The codebase is organized following the [monorepo architecture](https://www.topt
 - [`@examsecure/educator-app`](packages/examsecure-educator-app): React webapp for the educator portal. 
 - [`@examsecure/design-system`](packages/examsecure-design-system): A simple design system for shared UI components between both webapps. Created using [Storybook](https://storybook.js.org/).
 
+### The CI/CD pipeline
+
+Following tasks are run on every PR against `master`.
+- Build code and run tests for all three packages through [a Github Actions workflow](https://github.com/rajrajhans/examsecure/tree/master/.github/workflows). Since the project uses Lerna, it's easy to build and test all the packages in one single command. 
+- Upload test coverage to [codecov](https://about.codecov.io/).
+- Deploy each React app separately using [Netlify Deploy Previews](https://www.netlify.com/blog/2016/07/20/introducing-deploy-previews-in-netlify/). So, there will be three Netlify deploy previews, one each for the candidate app, educator app, and StoryBook design system.
+- Continuous Security Analysis and Automated Code Reviews using [LGTM.com](https://lgtm.com/).
+
 ## Screenshots
 
 Following is a sneak peek of how the interface looks.
