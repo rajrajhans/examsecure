@@ -16,7 +16,7 @@ const styles = {
       if (isFocused) {
         return colors.primary;
       } else {
-        return colors.text;
+        return colors.slate['960'];
       }
     },
     fontSize({ isFocused, hasText, position, width }) {
