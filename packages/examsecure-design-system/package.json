@@ -5,6 +5,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "feather-icons": "^4.28.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "4.0.3",
