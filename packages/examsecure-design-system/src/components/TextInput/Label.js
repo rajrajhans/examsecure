@@ -55,7 +55,7 @@ const FloatView = styled.div`
   position: absolute;
   will-change: transform;
   transition: transform 0.1s ease-in;
-  top: 5px;
+  top: ${(props) => (props.iconLeft ? '5px' : '2px')};
   left: ${(props) => props.layoutDimensions.initialLeftPosition}px;
   pointer-events: none;
 `;
@@ -80,6 +80,7 @@ const Label = ({
   layoutDimensions,
   width,
   id,
+  iconLeft,
 }) => {
   const floatViewAnimationStyle = getFloatViewAnimationStyle({
     isFocused,
@@ -90,6 +91,7 @@ const Label = ({
     <FloatView
       layoutDimensions={layoutDimensions}
       style={floatViewAnimationStyle}
+      iconLeft={iconLeft}
     >
       <StyledText
         as={'label'}

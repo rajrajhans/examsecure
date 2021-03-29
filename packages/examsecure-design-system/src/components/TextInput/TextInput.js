@@ -228,6 +228,7 @@ const TextInput = ({
               position={labelPosition}
               value={input}
               width={width}
+              iconLeft={iconLeft}
             >
               {label}
             </Label>
