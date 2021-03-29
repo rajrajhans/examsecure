@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import colors from '../../colors';
 
 const StyledTitle = styled.div`
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Playfair Display', serif;
   font-size: 27px;
 `;
 
