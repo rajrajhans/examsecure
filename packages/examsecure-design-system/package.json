@@ -13,6 +13,7 @@
   },
   "scripts": {
     "start": "start-storybook -p 6006 -s public --no-manager-cache",
+    "start-cra": "react-scripts start",
     "build": "build-storybook -s public",
     "test": "jest --passWithNoTests",
     "eject": "react-scripts eject"
