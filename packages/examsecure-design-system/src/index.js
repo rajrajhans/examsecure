@@ -13,6 +13,7 @@ ReactDOM.render(
     onBlur={(t) => {
       console.log('blurred ', t);
     }}
+    iconLeft={'User'}
   />,
   document.getElementById('root'),
 );

@@ -112,6 +112,12 @@ const StyledInput = styled.input`
   }
 `;
 
+const InputFlex = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const TextInput = ({
   placeholder,
   onChange,
@@ -226,41 +232,43 @@ const TextInput = ({
               {label}
             </Label>
           ) : null}
+          <InputFlex>
+            {hasPrefix ? (
+              <AccessoryText
+                position="left"
+                disabled={disabled}
+                isFocused={isFocused}
+              >
+                {prefix}
+              </AccessoryText>
+            ) : null}
+            {hasLeftIcon ? (
+              <AccessoryIcon
+                name={iconLeft}
+                disabled={disabled}
+                hasError={hasError}
+                isFocused={isFocused}
+                position="left"
+              />
+            ) : null}
+            <StyledInput
+              id={id}
+              name={name}
+              placeholder={placeholder}
+              placeholderTextColor={placeholderTextColor}
+              onFocus={onFocus}
+              onBlur={onBlurText}
+              onChange={onChangeText}
+              hasText={hasText}
+              disabled={disabled}
+              hasPrefix={hasPrefix}
+              hasLeftIcon={hasLeftIcon}
+              value={input}
+              as={'input'}
+              ref={inputRef}
+            />
+          </InputFlex>
         </FillContainer>
-        {hasPrefix ? (
-          <AccessoryText
-            position="left"
-            disabled={disabled}
-            isFocused={isFocused}
-          >
-            {prefix}
-          </AccessoryText>
-        ) : null}
-        {hasLeftIcon ? (
-          <AccessoryIcon
-            name={iconLeft}
-            disabled={disabled}
-            hasError={hasError}
-            isFocused={isFocused}
-            position="left"
-          />
-        ) : null}
-        <StyledInput
-          id={id}
-          name={name}
-          placeholder={placeholder}
-          placeholderTextColor={placeholderTextColor}
-          onFocus={onFocus}
-          onBlur={onBlurText}
-          onChange={onChangeText}
-          hasText={hasText}
-          disabled={disabled}
-          hasPrefix={hasPrefix}
-          hasLeftIcon={hasLeftIcon}
-          value={input}
-          as={'input'}
-          ref={inputRef}
-        />
         <Line isFocused={isFocused} hasError={hasError} disabled={disabled} />
       </InteractionContainer>
     </div>

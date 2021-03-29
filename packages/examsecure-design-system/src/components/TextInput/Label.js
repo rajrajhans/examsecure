@@ -55,7 +55,7 @@ const FloatView = styled.div`
   position: absolute;
   will-change: transform;
   transition: transform 0.1s ease-in;
-  top: 2px;
+  top: 5px;
   left: ${(props) => props.layoutDimensions.initialLeftPosition}px;
   pointer-events: none;
 `;
