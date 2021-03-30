@@ -80,7 +80,7 @@ const styles = {
       case 'small':
         return '10px 14px';
       default:
-        return '13px 25px';
+        return '10px 25px';
     }
   },
   width({ width }) {
@@ -94,6 +94,7 @@ const styles = {
 
 const StyledButton = styled.button`
   font-family: 'Source Sans Pro', sans-serif;
+  font-size: 18px;
   background-color: ${styles.backgroundColor};
   border-radius: 100px;
   border: none;
@@ -122,13 +123,14 @@ const Button = ({
   size,
   label,
   props,
+  type,
   width = '',
 }) => {
   return (
     <StyledButton
       size={size}
       variant={variant}
-      type="button"
+      type={type}
       className={customClass}
       {...props}
       onClick={onClick}

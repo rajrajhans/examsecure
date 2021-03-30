@@ -14,9 +14,9 @@ const StyledHR = styled.hr`
   margin: 8px 0 0 0;
 `;
 
-const Title = ({ value }) => {
+const Title = ({ value, style }) => {
   return (
-    <div>
+    <div style={style}>
       <StyledTitle>{value}</StyledTitle>
       <StyledHR />
     </div>
