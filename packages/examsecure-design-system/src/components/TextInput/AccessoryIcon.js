@@ -45,6 +45,7 @@ const AccessoryIcon = ({ name, disabled, hasError, isFocused, position }) => {
       <IconComponent
         color={styles.color({ disabled, hasError, isFocused })}
         size={24}
+        style={{ padding: '0px 1px 3px 1px' }}
       />
     </StyledIconComponent>
   );
