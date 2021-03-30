@@ -136,6 +136,7 @@ const TextInput = ({
   type,
   id,
   name,
+  ...rest
 }) => {
   const inputRef = useRef();
   const containerRef = useRef();
@@ -267,6 +268,8 @@ const TextInput = ({
               value={input}
               as={'input'}
               ref={inputRef}
+              type={type}
+              {...rest}
             />
           </InputFlex>
         </FillContainer>
