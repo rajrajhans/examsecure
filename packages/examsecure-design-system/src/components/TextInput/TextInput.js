@@ -76,6 +76,7 @@ const FillContainer = styled.div`
 `;
 
 const StyledInput = styled.input`
+  font-family: 'Source Sans Pro', sans-serif;
   font-size: ${fontSize.medium};
   line-height: ${lineHeight.medium};
   color: ${styles.textInput.color};
@@ -136,6 +137,7 @@ const TextInput = ({
   type,
   id,
   name,
+  ...rest
 }) => {
   const inputRef = useRef();
   const containerRef = useRef();
@@ -267,6 +269,8 @@ const TextInput = ({
               value={input}
               as={'input'}
               ref={inputRef}
+              type={type}
+              {...rest}
             />
           </InputFlex>
         </FillContainer>
