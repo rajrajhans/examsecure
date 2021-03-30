@@ -80,7 +80,7 @@ const styles = {
       case 'small':
         return '10px 14px';
       default:
-        return '17px 25px';
+        return '13px 25px';
     }
   },
   width({ width }) {
