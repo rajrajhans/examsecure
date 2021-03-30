@@ -93,6 +93,7 @@ const styles = {
 };
 
 const StyledButton = styled.button`
+  font-family: 'Source Sans Pro', sans-serif;
   background-color: ${styles.backgroundColor};
   border-radius: 100px;
   border: none;
@@ -114,7 +115,15 @@ const StyledButton = styled.button`
   }
 `;
 
-const Button = ({ onClick, variant, customClass, size, label, props, width = '' }) => {
+const Button = ({
+  onClick,
+  variant,
+  customClass,
+  size,
+  label,
+  props,
+  width = '',
+}) => {
   return (
     <StyledButton
       size={size}
