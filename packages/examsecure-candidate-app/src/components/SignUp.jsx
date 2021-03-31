@@ -7,7 +7,7 @@ import colors from '@examsecure/design-system/src/colors';
 import { Link, navigate } from '@reach/router';
 
 const AuthContainer = styled.div`
-  min-height: 100vh;
+  flex: 1;
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     url(${backgroundImg}) center bottom;
   background-size: cover;

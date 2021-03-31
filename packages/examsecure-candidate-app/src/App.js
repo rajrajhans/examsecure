@@ -54,7 +54,14 @@ class App extends Component {
     return (
       <Layout isSignedIn={this.state.isSignedIn}>
         <Loading show={this.state.isLoading} />
-        <Router>
+        <Router
+          style={{
+            height: '100%',
+            flex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
           <Home path={'/'} />
           <PrivateRoute
             component={LandingContainer}

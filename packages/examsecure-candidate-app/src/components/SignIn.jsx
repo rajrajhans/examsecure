@@ -9,9 +9,9 @@ import { Link, navigate } from '@reach/router';
 import colors from '@examsecure/design-system/src/colors';
 
 const AuthContainer = styled.div`
-  min-height: 100vh;
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     url(${backgroundImg}) center bottom;
+  flex: 1;
   background-size: cover;
   display: flex;
   align-content: center;

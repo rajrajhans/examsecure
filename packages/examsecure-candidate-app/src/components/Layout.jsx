@@ -1,7 +1,7 @@
-import React, { Component, Fragment } from "react";
-import ESNavbar from "./Navbar";
-import Container from "react-bootstrap/Container";
-import Alert from "react-bootstrap/Alert";
+import React, { Component, Fragment } from 'react';
+import ESNavbar from './Navbar';
+import Container from 'react-bootstrap/Container';
+import Alert from 'react-bootstrap/Alert';
 
 class Layout extends Component {
   isConfigurationOk = window.rekognitionSettings;
@@ -11,14 +11,21 @@ class Layout extends Component {
       return (
         <Fragment>
           <ESNavbar isSignedIn={this.props.isSignedIn} />
-          <div>
-            <div className="wrapper">{this.props.children}</div>
+          <div
+            style={{
+              minHeight: '100%',
+              flex: 1,
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            {this.props.children}
           </div>
         </Fragment>
       );
     } else {
       return (
-        <Alert variant={"danger"}>
+        <Alert variant={'danger'}>
           The deployment folder is missing / has invalid settings.js file. The
           settings.js file should contain your AWS Configuration Details.
           <br />
