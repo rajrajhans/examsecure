@@ -32,6 +32,7 @@
     "build": "lerna run build",
     "lint": "lerna exec -- eslint . --ext .js,.jsx,.ts,.tsx",
     "start-candidate-app": "cd packages/examsecure-candidate-app && node scripts/start.js",
+    "start-candidate-app-with-api-calls": "cd packages/examsecure-candidate-app && set \"REACT_APP_TURN_ON_API_CALLS=1\" && node scripts/start.js",
     "build-candidate-app": "cd packages/examsecure-candidate-app && node scripts/build.js",
     "start-educator-app": "cd packages/examsecure-educator-app && node scripts/start.js",
     "build-educator-app": "cd packages/examsecure-educator-app && node scripts/build.js",

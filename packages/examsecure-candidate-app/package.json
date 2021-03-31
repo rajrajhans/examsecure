@@ -82,7 +82,7 @@
   "scripts": {
     "start": "SET HTTPS=true && node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "jest",
+    "test": "set \"REACT_APP_TURN_ON_API_CALLS=1\" && jest",
     "deploy": "npm run build && firebase deploy"
   },
   "browserslist": [
