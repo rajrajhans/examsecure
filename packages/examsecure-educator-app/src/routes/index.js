@@ -1,4 +1,4 @@
-import SignIn from '../authentication/sign_in.js';
+import SignIn from '../authentication/SignIn.js';
 import AddData from '../components/addData/flaggedData/add_data'
 import AdminHome from '../components/admin_home.js'
 import ProctorPage from '../components/proctor/proctor_page.js';
