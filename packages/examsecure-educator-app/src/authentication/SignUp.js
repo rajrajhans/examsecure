@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import backgroundImg from '../assets/authbg1.jpg';
 import { Title, TextInput, Button, WhiteCard } from '@examsecure/design-system';
 import colors from '@examsecure/design-system/src/colors';
+import { connect } from "react-redux";
+import { Link, Redirect } from 'react-router-dom';
+import { signUp } from '../actions/auth_actions.js'
 
 const AuthContainer = styled.div`
   min-height: 100vh;
@@ -51,7 +54,7 @@ const HelperText = styled.div`
   padding: 15px 0;
 `;
 
-const SignUp = () => {
+const SignUp = (props) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
@@ -61,12 +64,16 @@ const SignUp = () => {
 
   const handleSignUp = (e) => {
     e.preventDefault();
-    console.log(email);
-    console.log(pwd);
+    //console.log(email);
+    //console.log(pwd);
     if (pwd !== confirmPwd) {
       alert('Passwords do not match');
     }
+    props.signUp({name,email,pwd})
   };
+
+  const {authError, auth} = props 
+  if(auth.uid) return <Redirect to='/'/>
 
   return (
     <>
@@ -161,4 +168,17 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+const mapStateToProps = (state) => {
+  return {
+      authError: state.auth.authError,
+      auth: state.firebase.auth
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      signUp: (newUser) => dispatch(signUp(newUser))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
