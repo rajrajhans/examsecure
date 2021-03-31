@@ -3,6 +3,7 @@ let mode = 0;
 
 if (
   process.env.NODE_ENV === 'production' ||
+  process.env.NODE_ENV === 'test' ||
   process.env.REACT_APP_TURN_ON_API_CALLS === '1'
 ) {
   mode = 1;
