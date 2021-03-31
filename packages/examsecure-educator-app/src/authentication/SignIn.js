@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import backgroundImg from '../assets/authbg1.jpg';
 import { Title, TextInput, Button, WhiteCard } from '@examsecure/design-system';
 import colors from '@examsecure/design-system/src/colors';
+import { connect } from "react-redux";
+import { Link, Redirect } from 'react-router-dom';
+import { signIn } from "../actions/auth_actions";
 
 const AuthContainer = styled.div`
   min-height: 100vh;
@@ -48,7 +51,8 @@ const HelperText = styled.div`
   padding: 15px 0;
 `;
 
-const SignIn = () => {
+const SignIn = (props) => {
+
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
 
@@ -56,9 +60,14 @@ const SignIn = () => {
 
   const handleSignIn = (e) => {
     e.preventDefault();
-    console.log(email);
-    console.log(pwd);
+    //console.log(email);
+    //console.log(pwd);
+    //console.log({email,pwd})
+    props.signIn({email,pwd})
   };
+
+  const {authError, auth} = props 
+  if(auth.uid) return <Redirect to='/'/>
 
   return (
     <>
@@ -71,7 +80,10 @@ const SignIn = () => {
                 For a test drive of the platform, enter "demo@vit.edu" as both
                 the username and password
               </div>
-              <div>Don't have an account? Create one</div>
+              <div>
+                Don't have an account?  
+                <Link to="/signup"> Create one</Link>
+              </div>
               <div>Forgot Password?</div>
             </HelperText>
           </FlexLeft>
@@ -122,5 +134,17 @@ const SignIn = () => {
     </>
   );
 };
+const mapStateToProps = (state) => {
+  return {
+      authError: state.auth.authError,
+      auth: state.firebase.auth
+  }
+}
 
-export default SignIn;
+const mapDispatchToProps = (dispatch) => {
+  return {
+      signIn: (creds) => dispatch(signIn(creds))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
