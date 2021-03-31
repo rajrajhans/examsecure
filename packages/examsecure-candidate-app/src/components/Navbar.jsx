@@ -1,34 +1,34 @@
-import Navbar from "react-bootstrap/Navbar";
-import React, { Component } from "react";
-import { navigate } from "@reach/router";
-import { Auth } from "aws-amplify";
-import logo from "../static/logo.png";
-import LogoText from "./helpers/LogoText";
-import Nav from "react-bootstrap/Nav";
-import signOut from "../utils/signOut";
+import Navbar from 'react-bootstrap/Navbar';
+import React, { Component } from 'react';
+import { navigate } from '@reach/router';
+import { Auth } from 'aws-amplify';
+import logo from '../static/logo.png';
+import LogoText from './helpers/LogoText';
+import Nav from 'react-bootstrap/Nav';
+import signOut from '../utils/signOut';
 
 class ESNavbar extends Component {
   render() {
     let isLoggedIn = this.props.isSignedIn;
     return (
       <Navbar
-        bg={"light"}
-        className={"navContainer"}
-        expand={"lg"}
+        bg={'light'}
+        className={'navContainer'}
+        expand={'lg'}
         collapseOnSelect={true}
       >
         <Navbar.Brand>
           <div
             className="logoContainer"
-            onClick={() => navigate("/")}
-            style={{ cursor: "pointer" }}
+            onClick={() => navigate('/')}
+            style={{ cursor: 'pointer' }}
           >
             <img
-              alt={"examsecure"}
+              alt={'examsecure'}
               src={logo}
               width={70}
               height={70}
-              className={"navImage"}
+              className={'navImage'}
             />
             &nbsp;
             <LogoText />
@@ -38,30 +38,26 @@ class ESNavbar extends Component {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse
           id="basic-navbar-nav"
-          className={"justify-content-end"}
+          className={'justify-content-end'}
         >
           <Nav>
-            <Nav.Link onClick={() => navigate("/demo")} eventKey={"1"}>
+            <Nav.Link onClick={() => navigate('/demo')} eventKey={'1'}>
               Demo
             </Nav.Link>
 
             {isLoggedIn ? (
               <>
                 <Nav.Link
-                  onClick={() => navigate("/selectQuestionSet")}
-                  eventKey={"4"}
+                  onClick={() => navigate('/selectQuestionSet')}
+                  eventKey={'4'}
                 >
                   Exam
                 </Nav.Link>
-                <Nav.Link href="/" onClick={signOut} eventKey={"2"}>
+                <Nav.Link href="/" onClick={signOut} eventKey={'2'}>
                   Sign Out
                 </Nav.Link>
               </>
-            ) : (
-              <Nav.Link onClick={() => navigate("/start")} eventKey={"3"}>
-                Sign In
-              </Nav.Link>
-            )}
+            ) : null}
           </Nav>
         </Navbar.Collapse>
       </Navbar>

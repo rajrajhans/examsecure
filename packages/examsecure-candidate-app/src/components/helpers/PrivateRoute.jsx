@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Redirect } from "@reach/router";
-import Login from "../Login";
+import React, { Component } from 'react';
+import { Redirect } from '@reach/router';
+import SignIn from '../SignIn';
 
 class PrivateRoute extends Component {
   render() {
@@ -11,7 +11,7 @@ class PrivateRoute extends Component {
         {this.props.isSignedIn ? (
           <Comp {...propxs} />
         ) : (
-          <Login isSignedIn={this.props.isSignedIn} {...propxs} />
+          <SignIn isSignedIn={this.props.isSignedIn} {...propxs} />
         )}
       </>
     );
