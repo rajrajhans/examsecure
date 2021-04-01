@@ -1,11 +1,8 @@
 .navContainer{
-  padding: 20px 60px;
-  font-size: 21px;
+  font-size: 20px;
+  padding: 12px 1.8rem;
 }
 
-.navImage{
-  padding-right: 10px;
-}
 
 .heroSectionButton{
   line-height: 1.5;

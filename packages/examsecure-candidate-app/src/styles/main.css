@@ -22,22 +22,14 @@ p{
 }
 
 .logo{
-    font-family: 'Poppins', sans-serif;
-    font-size: 35px;
+    font-family: 'Playfair Display', sans-serif;
+    font-size: 27px;
+    padding-left: 15px;
+    color: black;
 }
 
 .brandColor{
     color: #223466;
-}
-
-.logoTextLink{
-    text-decoration: none!important;
-    color: black;
-}
-
-.logoTextLink:hover{
-    text-decoration: none!important;
-    color: black;
 }
 
 .instructionsBox{
@@ -64,10 +56,6 @@ p{
 
 .instrHeading{
     margin-bottom: 18px;
-}
-
-.logoContainer{
-    display: flex;
 }
 
 .homeFeatureImg{

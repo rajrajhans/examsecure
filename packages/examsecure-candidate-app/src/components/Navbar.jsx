@@ -1,6 +1,6 @@
 import Navbar from 'react-bootstrap/Navbar';
 import React, { Component } from 'react';
-import { navigate } from '@reach/router';
+import { Link, navigate } from '@reach/router';
 import { Auth } from 'aws-amplify';
 import logo from '../static/logo.png';
 import LogoText from './helpers/LogoText';
@@ -9,7 +9,6 @@ import signOut from '../utils/signOut';
 
 class ESNavbar extends Component {
   render() {
-    let isLoggedIn = this.props.isSignedIn;
     return (
       <Navbar
         bg={'light'}
@@ -17,22 +16,13 @@ class ESNavbar extends Component {
         expand={'lg'}
         collapseOnSelect={true}
       >
-        <Navbar.Brand>
-          <div
-            className="logoContainer"
-            onClick={() => navigate('/')}
-            style={{ cursor: 'pointer' }}
-          >
-            <img
-              alt={'examsecure'}
-              src={logo}
-              width={70}
-              height={70}
-              className={'navImage'}
-            />
-            &nbsp;
+        <Navbar.Brand style={{ display: 'flex', alignContent: 'center' }}>
+          <Link to={'/'} style={{ textDecoration: 'none' }}>
+            <img alt={'examsecure'} src={logo} width={40} height={40} />
+          </Link>
+          <Link to={'/'} style={{ textDecoration: 'none' }}>
             <LogoText />
-          </div>
+          </Link>
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -45,7 +35,7 @@ class ESNavbar extends Component {
               Demo
             </Nav.Link>
 
-            {isLoggedIn ? (
+            {this.props.isSignedIn ? (
               <>
                 <Nav.Link
                   onClick={() => navigate('/selectQuestionSet')}
