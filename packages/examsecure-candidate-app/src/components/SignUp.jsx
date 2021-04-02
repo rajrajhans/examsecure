@@ -30,6 +30,9 @@ const TextInputContainer = styled.div`
 const StyledWhiteCard = styled(WhiteCard)`
   display: flex;
   flex-wrap: wrap;
+  @media only screen and (max-width: 768px) {
+    width: 95%;
+  }
 `;
 
 const FlexRight = styled.div`
