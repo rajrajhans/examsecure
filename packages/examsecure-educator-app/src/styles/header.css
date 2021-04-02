@@ -1,14 +1,10 @@
 .navContainer{
-  padding: 20px 60px;
-  font-size: 21px;
+  font-size: 18px;
+  padding: 12px 1.8rem !important;
 }
 
 .navbar-title:hover {
   text-decoration: none;
-}
-
-.navImage{
-  padding-right: 10px;
 }
 
 .nav-bar-items {
@@ -20,13 +16,10 @@
     text-decoration: none;
 }
 
-.logoContainer {
-  text-decoration: none;
-  color: black;
-}
-
-.logoContainer:hover {
-  text-decoration: none;
+.logo{
+  font-family: 'Playfair Display', sans-serif;
+  font-size: 27px;
+  padding-left: 15px;
   color: black;
 }
 
