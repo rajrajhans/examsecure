@@ -365,7 +365,7 @@ module.exports = function (webpackEnv) {
               test: /\.(js|mjs|jsx|ts|tsx)$/,
               include: paths.appLernaModules.concat(
                 paths.appSrc,
-                paths.appNodeModules,
+                paths.ESNodeModules,
               ),
               loader: require.resolve('babel-loader'),
               options: {

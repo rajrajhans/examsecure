@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import backgroundImg from '../assets/authbg1.jpg';
 import { Title, TextInput, Button, WhiteCard } from '@examsecure/design-system';
 import colors from '@examsecure/design-system/src/colors';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import { signUp } from '../actions/auth_actions.js'
+import { signUp } from '../actions/auth_actions.js';
+import ESNavbar from '../components/nav_bar';
 
 const AuthContainer = styled.div`
   min-height: 100vh;
@@ -31,6 +32,9 @@ const TextInputContainer = styled.div`
 const StyledWhiteCard = styled(WhiteCard)`
   display: flex;
   flex-wrap: wrap;
+  @media only screen and (max-width: 768px) {
+    width: 95%;
+  }
 `;
 
 const FlexRight = styled.div`
@@ -64,19 +68,18 @@ const SignUp = (props) => {
 
   const handleSignUp = (e) => {
     e.preventDefault();
-    //console.log(email);
-    //console.log(pwd);
     if (pwd !== confirmPwd) {
       alert('Passwords do not match');
     }
-    props.signUp({name,email,pwd})
+    props.signUp({ name, email, pwd });
   };
 
-  const {authError, auth} = props 
-  if(auth.uid) return <Redirect to='/'/>
+  const { authError, auth } = props;
+  if (auth.uid) return <Redirect to="/" />;
 
   return (
     <>
+      <ESNavbar />
       <AuthContainer>
         <StyledWhiteCard>
           <FlexLeft>
@@ -170,15 +173,15 @@ const SignUp = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-      authError: state.auth.authError,
-      auth: state.firebase.auth
-  }
-}
+    authError: state.auth.authError,
+    auth: state.firebase.auth,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      signUp: (newUser) => dispatch(signUp(newUser))
-  }
-}
+    signUp: (newUser) => dispatch(signUp(newUser)),
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

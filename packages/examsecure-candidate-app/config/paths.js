@@ -37,7 +37,9 @@ const moduleFileExtensions = [
 
 // Resolve file paths in the same order as webpack
 const resolveModule = (resolveFn, filePath) => {
-  const extension = moduleFileExtensions.find((extension) => fs.existsSync(resolveFn(`${filePath}.${extension}`)));
+  const extension = moduleFileExtensions.find((extension) =>
+    fs.existsSync(resolveFn(`${filePath}.${extension}`)),
+  );
 
   if (extension) {
     return resolveFn(`${filePath}.${extension}`);
@@ -62,16 +64,23 @@ module.exports = {
   testsSetup: resolveModule(resolveApp, 'src/setupTests'),
   proxySetup: resolveApp('src/setupProxy.js'),
   appNodeModules: resolveApp('node_modules'),
+  ESNodeModules: resolveApp('node_modules/@examsecure'),
   publicUrlOrPath,
 };
 
 module.exports.moduleFileExtensions = moduleFileExtensions;
 
-module.exports.lernaRoot = path.resolve(module.exports.appPath, '../').endsWith('packages')
+module.exports.lernaRoot = path
+  .resolve(module.exports.appPath, '../')
+  .endsWith('packages')
   ? path.resolve(module.exports.appPath, '../../')
   : module.exports.appPath;
 
 module.exports.appLernaModules = [
-  fs.realpathSync(path.join(module.exports.lernaRoot, 'packages/examsecure-design-system')),
+  fs.realpathSync(
+    path.join(module.exports.lernaRoot, 'packages/examsecure-design-system'),
+  ),
 ];
-module.exports.allLernaModules = fs.readdirSync(path.join(module.exports.lernaRoot, 'packages'));
+module.exports.allLernaModules = fs.readdirSync(
+  path.join(module.exports.lernaRoot, 'packages'),
+);

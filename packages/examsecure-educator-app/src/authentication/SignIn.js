@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import backgroundImg from '../assets/authbg1.jpg';
 import { Title, TextInput, Button, WhiteCard } from '@examsecure/design-system';
 import colors from '@examsecure/design-system/src/colors';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import { signIn } from "../actions/auth_actions";
+import { signIn } from '../actions/auth_actions';
+import ESNavbar from '../components/nav_bar';
 
 const AuthContainer = styled.div`
   min-height: 100vh;
@@ -31,6 +32,9 @@ const TextInputContainer = styled.div`
 const StyledWhiteCard = styled(WhiteCard)`
   display: flex;
   flex-wrap: wrap;
+  @media only screen and (max-width: 768px) {
+    width: 95%;
+  }
 `;
 
 const FlexRight = styled.div`
@@ -52,7 +56,6 @@ const HelperText = styled.div`
 `;
 
 const SignIn = (props) => {
-
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
 
@@ -60,17 +63,15 @@ const SignIn = (props) => {
 
   const handleSignIn = (e) => {
     e.preventDefault();
-    //console.log(email);
-    //console.log(pwd);
-    //console.log({email,pwd})
-    props.signIn({email,pwd})
+    props.signIn({ email, pwd });
   };
 
-  const {authError, auth} = props 
-  if(auth.uid) return <Redirect to='/'/>
+  const { authError, auth } = props;
+  if (auth.uid) return <Redirect to="/" />;
 
   return (
     <>
+      <ESNavbar />
       <AuthContainer>
         <StyledWhiteCard>
           <FlexLeft>
@@ -81,7 +82,7 @@ const SignIn = (props) => {
                 the username and password
               </div>
               <div>
-                Don't have an account?  
+                Don't have an account?
                 <Link to="/signup"> Create one</Link>
               </div>
               <div>Forgot Password?</div>
@@ -136,15 +137,15 @@ const SignIn = (props) => {
 };
 const mapStateToProps = (state) => {
   return {
-      authError: state.auth.authError,
-      auth: state.firebase.auth
-  }
-}
+    authError: state.auth.authError,
+    auth: state.firebase.auth,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      signIn: (creds) => dispatch(signIn(creds))
-  }
-}
+    signIn: (creds) => dispatch(signIn(creds)),
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
