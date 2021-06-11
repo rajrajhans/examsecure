@@ -8,6 +8,7 @@ import ImageDetail from '../components/proctor/image_detail.js';
 import StudentPage from '../components/students/student_page';
 import AddQuestions from '../components/addData/createTest/add_questions';
 import Tests from '../components/Tests/Tests';
+import Dashboard from '../components/ProctorDashboard/Dashboard';
 
 const routes = [
   {
@@ -58,6 +59,11 @@ const routes = [
   {
     path: '/tests',
     component: Tests,
+    title: 'Tests',
+  },
+  {
+    path: '/dashboard',
+    component: Dashboard,
     title: 'Tests',
   },
 ];
