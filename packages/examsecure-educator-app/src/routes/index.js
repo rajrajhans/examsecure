@@ -7,7 +7,7 @@ import DisqualifiedUsers from '../components/disqualified/disqualified_page.js';
 import ImageDetail from '../components/proctor/image_detail.js';
 import StudentPage from '../components/students/student_page';
 import AddQuestions from '../components/addData/questions/add_questions';
-import Tests from '../components/Tests';
+import Tests from '../components/Tests/Tests';
 
 const routes = [
   {
