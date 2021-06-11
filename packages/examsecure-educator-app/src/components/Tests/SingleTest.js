@@ -8,11 +8,15 @@ const SingleTest = ({ test }) => {
         <div className="s-test-name">{test.name}</div>
         <div className="s-test-stats">
           <div className="s-test-stat">
-            Started at 06:09 AM, ends at 04:20 PM
+            Started at {test.starts_at}, ends at {test.ends_at}
           </div>
-          <div className="s-test-stat">50 Candidates Invited</div>
-          <div className="s-test-stat">20 Questions</div>
-          <div className="s-test-stat">20 Candidates Submitted</div>
+          <div className="s-test-stat">
+            {test.candidates_invited} Candidates Invited
+          </div>
+          <div className="s-test-stat">{test.num_of_questions} Questions</div>
+          <div className="s-test-stat">
+            {test.candidates_submitted} Candidates Submitted
+          </div>
         </div>
       </div>
 
