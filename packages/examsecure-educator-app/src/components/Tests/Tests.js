@@ -3,14 +3,18 @@ import ESNavbar from '../nav_bar';
 import { Button } from '@examsecure/design-system';
 import tests from '../../sampleData/tests';
 import SingleTest from './SingleTest';
+import '../../styles/Tests.css';
+import Container from 'react-bootstrap/Container';
 
 const Tests = () => {
   return (
     <>
       <ESNavbar />
-      <div className="tests-view-container">
+      <Container className="tests-view-container">
         <div className="tests-header">
-          <div className="your-tests-cntnr">Your Tests</div>
+          <div className="your-tests-cntnr">
+            <h2>Your Tests</h2>
+          </div>
 
           <div className="create-new-test-container">
             <Button label={'Create New Test'} variant={'secondary'} />
@@ -22,7 +26,7 @@ const Tests = () => {
             <SingleTest test={test} />
           ))}
         </div>
-      </div>
+      </Container>
     </>
   );
 };

@@ -1,0 +1,35 @@
+.tests-header {
+    display: flex;
+    justify-content: space-between;
+    margin: 25px 0;
+}
+
+.your-tests-cntnr {
+    border-bottom: 2px solid #223466;
+}
+
+.single-test {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+.s-test-btns {
+    display: flex;
+    gap: 14px;
+}
+
+.s-test-name {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.s-test-stats {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.s-test-stat {
+    flex-basis: 50%;
+    color: #888;
+}
