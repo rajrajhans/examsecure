@@ -5,6 +5,7 @@ import tests from '../../sampleData/tests';
 import SingleTest from './SingleTest';
 import '../../styles/Tests.css';
 import Container from 'react-bootstrap/Container';
+import { Link } from 'react-router-dom';
 
 const Tests = () => {
   return (
@@ -17,7 +18,9 @@ const Tests = () => {
           </div>
 
           <div className="create-new-test-container">
-            <Button label={'Create New Test'} variant={'secondary'} />
+            <Link to={'/add-questions'}>
+              <Button label={'Create New Test'} variant={'secondary'} />
+            </Link>
           </div>
         </div>
 

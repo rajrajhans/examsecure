@@ -51,9 +51,9 @@ const routes = [
     title: 'Student Details Page',
   },
   {
-    path: '/addquestions',
+    path: '/add-questions',
     component: AddQuestions,
-    title: 'Adding Questions',
+    title: 'Add Questions',
   },
   {
     path: '/tests',

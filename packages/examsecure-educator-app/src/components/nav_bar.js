@@ -54,8 +54,8 @@ const ESNavbar = (props) => {
           </li>
           <li>
             <Nav.Link>
-              <NavLink to="/addquestions" className="nav-bar-items">
-                Add Questions
+              <NavLink to="/tests" className="nav-bar-items">
+                Tests
               </NavLink>
             </Nav.Link>
           </li>
