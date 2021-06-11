@@ -6,7 +6,7 @@ import { uploadQuestions } from '../../../actions/questions_actions';
 import { uploadQuestionSet } from '../../../actions/question_set_actions';
 import ESNavbar from '../../nav_bar';
 import '../../../styles/add_questions.css';
-import { Button, Form, Modal } from 'react-bootstrap';
+import { Button, Col, Form, FormControl, Modal, Row } from 'react-bootstrap';
 import { compose } from 'redux';
 import { firebaseConnect } from 'react-redux-firebase';
 
@@ -16,6 +16,7 @@ function AddQuestionSet(props) {
   const qSetID = props.questionSets
     ? String(Number(Object.keys(props.questionSets).slice(-1)[0]) + 1)
     : 0;
+
   return (
     <Modal
       show={props.show}
@@ -30,28 +31,88 @@ function AddQuestionSet(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Enter question set name</h4>
-        <input
-          type="text"
-          className="form-control"
-          id="testname"
-          rows="1"
-          onChange={(e) => {
-            setTestName(e.target.value);
-          }}
-          value={testName}
-        />
-        <h4>Enter duration</h4>
-        <input
-          type="text"
-          className="form-control"
-          id="duration"
-          rows="1"
-          onChange={(e) => {
-            setTestDuration(e.target.value);
-          }}
-          value={testDuration}
-        />
+        <Row style={{ margin: '15px 0' }}>
+          <Col>
+            <b>Enter question set name</b>
+            <input
+              type="text"
+              className="form-control"
+              id="testname"
+              rows="1"
+              onChange={(e) => {
+                setTestName(e.target.value);
+              }}
+              value={testName}
+            />
+          </Col>
+
+          <Col>
+            <b>Enter duration</b>
+            <input
+              type="text"
+              className="form-control"
+              id="duration"
+              rows="1"
+              onChange={(e) => {
+                setTestDuration(e.target.value);
+              }}
+              value={testDuration}
+            />
+          </Col>
+        </Row>
+
+        <Row style={{ margin: '15px 0' }}>
+          <Col>
+            <b>Test starts at </b>
+            <Row>
+              <Col>
+                <input
+                  type="date"
+                  className="form-control"
+                  id="testname"
+                  rows="1"
+                />
+              </Col>
+              <Col>
+                <input
+                  type="time"
+                  className="form-control"
+                  id="testname"
+                  rows="1"
+                />
+              </Col>
+            </Row>
+          </Col>
+
+          <Col>
+            <b>Test ends at</b>
+            <Row>
+              <Col>
+                <input
+                  type="date"
+                  className="form-control"
+                  id="testname"
+                  rows="1"
+                />
+              </Col>
+              <Col>
+                <input
+                  type="time"
+                  className="form-control"
+                  id="testname"
+                  rows="1"
+                />
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+
+        <Row style={{ margin: '15px 0' }}>
+          <Col>
+            <b>Test Description</b>
+            <FormControl as="textarea" />
+          </Col>
+        </Row>
       </Modal.Body>
       <Modal.Footer>
         <Button
@@ -136,9 +197,9 @@ class AddQuestions extends Component {
       <>
         <div>
           <ESNavbar />
-          <div className="container w-50 h-50">
+          <div className="container">
             <div className="mx-auto py-5 px-5 border mt-5">
-              <h1 className="mb-3">Adding Questions</h1>
+              <h3 className="mb-3">Add Questions / Create New Test</h3>
               <Form onSubmit={this.onSubmit}>
                 <div className="form-group px-5">
                   <label htmlFor="exampleFormControlSelect1">
