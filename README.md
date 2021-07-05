@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://examsecure.rajrajhans.com">
-    <img alt="ExamSecure" src="http://assets.rajrajhans.com/examsecure_logo.png" width="150"/>
+    <img alt="ExamSecure" src="docs/logo.png" width="150"/>
   </a>
 </p>
 
@@ -60,19 +60,19 @@ Following is a sneak peek of how the interface looks.
 
 | Home,  Log In                              | Allow Camera Permissions                             |
 | ------------------------------------ | ------------------------------------ |
-| ![](/docs/examsecure_screenrecord.gif) | ![](https://assets.rajrajhans.com/examsecure/examsecure_2.png) |
+| ![](/docs/examsecure_screenrecord.gif) | ![](docs/ss_permissions.png) |
 
 | Pre-Exam Instructions                              | Exam Interface                             |
 | ------------------------------------ | ------------------------------------ |
-| ![](https://assets.rajrajhans.com/examsecure/examsecure_3.png) | ![](https://assets.rajrajhans.com/examsecure/examsecure_4.png) |
+| ![](docs/ss_pre_exam.png) | ![](docs/ss_exam.png) |
 
 | Impersonation Warning                             | Image Analysis Demo                             |
 | ------------------------------------ | ------------------------------------ |
-| ![](https://assets.rajrajhans.com/examsecure_impersonation.png) | ![](https://assets.rajrajhans.com/examsecure_demo2.png) |
+| ![](docs/ss_pre_exam.png) | ![](docs/ss_demo.png) |
 
 | Mobile Detected                             | Force Logout                             |
 | ------------------------------------ | ------------------------------------ |
-| ![](https://assets.rajrajhans.com/examsecure/examsecure_5.png) | ![](https://assets.rajrajhans.com/examsecure/examsecure_6.png) |
+| ![](docs/ss_mobile.png) | ![](docs/ss_force_logout.png) |
 
 For more, check out the [Demo Videos page](https://examsecure.rajrajhans.com/demoVideos), and [the Image Analysis Demo](https://examsecure.rajrajhans.com/demo)
 
