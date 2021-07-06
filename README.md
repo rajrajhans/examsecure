@@ -68,7 +68,7 @@ Following is a sneak peek of how the interface looks.
 
 | Impersonation Warning                             | Image Analysis Demo                             |
 | ------------------------------------ | ------------------------------------ |
-| ![](docs/ss_pre_exam.png) | ![](docs/ss_demo.png) |
+| ![](docs/ss_impersonation.png) | ![](docs/ss_demo.png) |
 
 | Mobile Detected                             | Force Logout                             |
 | ------------------------------------ | ------------------------------------ |
