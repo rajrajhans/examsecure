@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from '@reach/router';
 import SignIn from '../SignIn';
 
 class PrivateRoute extends Component {

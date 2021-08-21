@@ -1,24 +1,26 @@
-import React, { useEffect, useState } from "react";
-import Container from "react-bootstrap/Container";
-import { Form } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
-import { navigate } from "@reach/router";
-import gateway from "../utils/gateway";
-import Spinner from "react-bootstrap/Spinner";
-import { pageview } from "react-ga";
+import React, { useEffect, useState } from 'react';
+import Container from 'react-bootstrap/Container';
+import { Form } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import { useHistory } from 'react-router-dom';
+import gateway from '../utils/gateway';
+import Spinner from 'react-bootstrap/Spinner';
+import { pageview } from 'react-ga';
 
 const QuestionSetSelector = ({ fetchQuestions, questions, currentUser }) => {
-  const [selectedQSet, setSelectedQSet] = useState("");
+  const [selectedQSet, setSelectedQSet] = useState('');
   const [selectedQSetMetadata, setSelectedQSetMetadata] = useState({});
   const [qSets, setQsets] = useState([]);
   const [isSpinnerActive, setIsSpinnerActive] = useState(false);
+
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSpinnerActive(true);
     fetchQuestions(selectedQSet, selectedQSetMetadata);
-    navigate("/landing").catch((e) => {
+    history.push('/landing').catch((e) => {
       console.log(e);
     });
   };
@@ -27,9 +29,9 @@ const QuestionSetSelector = ({ fetchQuestions, questions, currentUser }) => {
     gateway
       .getQuestionSets()
       .then((data) => {
-        setSelectedQSetMetadata(data["questionSets"][0]);
-        setSelectedQSet(data["questionSets"][0].qSetID);
-        setQsets(data["questionSets"]);
+        setSelectedQSetMetadata(data['questionSets'][0]);
+        setSelectedQSet(data['questionSets'][0].qSetID);
+        setQsets(data['questionSets']);
       })
       .catch((e) => {
         console.log(e);
@@ -51,13 +53,13 @@ const QuestionSetSelector = ({ fetchQuestions, questions, currentUser }) => {
   return (
     <Container>
       <div>
-        <h2 style={{ marginTop: "10px" }} className="welcomeText">
+        <h2 style={{ marginTop: '10px' }} className="welcomeText">
           👋🏻 Welcome, {currentUser}
         </h2>
 
-        <Card style={{ maxWidth: "600px", margin: "70px auto" }}>
+        <Card style={{ maxWidth: '600px', margin: '70px auto' }}>
           <Card.Header>
-            <Card.Title style={{ marginBottom: "0" }}>
+            <Card.Title style={{ marginBottom: '0' }}>
               To begin, select a Question Set available to you
             </Card.Title>
           </Card.Header>
@@ -68,10 +70,10 @@ const QuestionSetSelector = ({ fetchQuestions, questions, currentUser }) => {
                   <>
                     <Form.Label>Select a Question Set</Form.Label>
                     <Form.Control
-                      as={"select"}
+                      as={'select'}
                       custom
                       onChange={handleSelect}
-                      name={"questionSetName"}
+                      name={'questionSetName'}
                     >
                       {qSets.map((questionSet) => (
                         <option
@@ -86,27 +88,27 @@ const QuestionSetSelector = ({ fetchQuestions, questions, currentUser }) => {
                     </Form.Control>
                   </>
                 ) : (
-                  <div style={{ textAlign: "center" }}>
-                    <Spinner animation={"border"} />
+                  <div style={{ textAlign: 'center' }}>
+                    <Spinner animation={'border'} />
                   </div>
                 )}
               </Form.Group>
             </Card.Body>
             <Card.Footer>
-              <Button variant={"primary"} type={"submit"}>
+              <Button variant={'primary'} type={'submit'}>
                 Submit
               </Button>
             </Card.Footer>
           </Form>
         </Card>
 
-        <Card style={{ maxWidth: "500px", margin: "20px auto" }}>
+        <Card style={{ maxWidth: '500px', margin: '20px auto' }}>
           <Card.Body>
             <div>
               Note: Currently, we are only allowing full access to our beta to
               selected Educators and Candidates. Exam will run in a limited
-              mode. We encourage you to check out the{" "}
-              <a href={"/demo"}>Demo Page</a> for a quick demo on image analysis
+              mode. We encourage you to check out the{' '}
+              <a href={'/demo'}>Demo Page</a> for a quick demo on image analysis
               that ExamSecure does during the Exam.
             </div>
           </Card.Body>

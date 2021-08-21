@@ -1,21 +1,21 @@
-import React, { useEffect, useRef, useState } from "react";
-import Timer from "./helpers/Timer";
-import Button from "react-bootstrap/Button";
-import { Link, navigate } from "@reach/router";
-import "../styles/exam.css";
-import Webcam from "react-webcam";
-import gateway from "../utils/gateway";
-import signOut from "../utils/signOut";
-import ExamWarningModal from "./helpers/ExamWarningModal";
-import { mode } from "./helpers/modeSetter";
-import useAnswerResponse from "./helpers/useAnswerResponse";
-import { pageview } from "react-ga";
+import React, { useEffect, useRef, useState } from 'react';
+import Timer from './helpers/Timer';
+import Button from 'react-bootstrap/Button';
+import { useHistory } from 'react-router-dom';
+import '../styles/exam.css';
+import Webcam from 'react-webcam';
+import gateway from '../utils/gateway';
+import signOut from '../utils/signOut';
+import ExamWarningModal from './helpers/ExamWarningModal';
+import { mode } from './helpers/modeSetter';
+import useAnswerResponse from './helpers/useAnswerResponse';
+import { pageview } from 'react-ga';
 
 const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
   const [isWebCamReady, setisWebcamReady] = useState(false);
   const [warning, setWarning] = useState({
-    title: "",
-    text: "",
+    title: '',
+    text: '',
     isWarningModalActive: false,
   });
   const [
@@ -24,12 +24,13 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
     setAnswerResponse,
   ] = useAnswerResponse(currentUser, questionsData.questionSetID);
   const [shouldIntervalBeCancelled, setShouldIntervalBeCancelled] = useState(
-    false
+    false,
   );
+  const history = useHistory();
 
   useEffect(() => {
     if (questionsData.questions.length === 0) {
-      navigate("/selectQuestionSet").catch((e) => {
+      history.push('/selectQuestionSet').catch((e) => {
         console.log(e);
       });
     }
@@ -54,7 +55,7 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
 
   const timeUp = () => {
     isStreaming.current = false;
-    navigate("/thankyou");
+    history.push('/thankyou');
   };
 
   const getLastAlive = async () => {
@@ -118,47 +119,47 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
       const image = webcam.current.getScreenshot();
 
       if (image) {
-        const b64EncodedImg = image.split(",")[1];
+        const b64EncodedImg = image.split(',')[1];
 
         if (mode === 1) {
           gateway
             .processImage(
               b64EncodedImg,
               currentUser,
-              questionsData.questionSetID
+              questionsData.questionSetID,
             )
             .then((res) => {
               if (res) {
                 // If "Objects of Interest" test fails
-                if (res[0]["Success"] === false) {
+                if (res[0]['Success'] === false) {
                   alert(
-                    `Alert! ${res[0]["Details"]} Detected! You will be Logged Out.`
+                    `Alert! ${res[0]['Details']} Detected! You will be Logged Out.`,
                   );
                   signOut();
-                  navigate("/caught");
+                  history.push('/caught');
                 }
 
                 // If "Person Detection" test fails TODO: Change this alert to custom modal
-                if (res[1]["Success"] === false && res[3]["Details"] > 1) {
+                if (res[1]['Success'] === false && res[3]['Details'] > 1) {
                   handleWarningInvokation(
-                    "Warning: Multiple Persons",
-                    "There seem to be multiple people in your camera frame."
+                    'Warning: Multiple Persons',
+                    'There seem to be multiple people in your camera frame.',
                   );
                 }
 
                 // If "Person Recognition" test fails TODO: Change this alert to custom modal
-                if (res[2]["Success"] === false && res[3]["Success"] === true) {
+                if (res[2]['Success'] === false && res[3]['Success'] === true) {
                   handleWarningInvokation(
-                    "Impersonation Warning!",
-                    "Person in the camera frame is not recognised. Ensure your face is clearly visible!"
+                    'Impersonation Warning!',
+                    'Person in the camera frame is not recognised. Ensure your face is clearly visible!',
                   );
                 }
 
                 // If "Face Detection" test fails TODO: Change this alert to custom modal
-                if (res[3]["Success"] === false && res[3]["Details"] === 0) {
+                if (res[3]['Success'] === false && res[3]['Details'] === 0) {
                   handleWarningInvokation(
-                    "Warning: Face Not Detected!",
-                    "Your face was not detected in the webcam. Ensure your face is clearly visible!"
+                    'Warning: Face Not Detected!',
+                    'Your face was not detected in the webcam. Ensure your face is clearly visible!',
                   );
                 }
               }
@@ -167,13 +168,13 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
             });
         } else {
           console.log(
-            "In dev mode. NOT sending req to Lambda. Screenshot captured at - ",
-            new Date().toLocaleString()
+            'In dev mode. NOT sending req to Lambda. Screenshot captured at - ',
+            new Date().toLocaleString(),
           ); // Testing purposes
           if (isStreaming.current) setTimeout(getSnapshot, 40000); // Testing purposes
         }
       } else {
-        console.log("Waiting for camera to start responding");
+        console.log('Waiting for camera to start responding');
         setTimeout(getSnapshot, 500);
       }
     }
@@ -184,7 +185,7 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
       console.log(e);
     });
     setShouldIntervalBeCancelled(true);
-    navigate("/thankyou").catch((e) => {
+    history.push('/thankyou').catch((e) => {
       console.log(e);
     });
   }
@@ -217,13 +218,13 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
       />
       <Webcam
         ref={setupWebcam}
-        screenshotFormat={"image/jpeg"}
+        screenshotFormat={'image/jpeg'}
         videoConstraints={{
           width: 1280,
           height: 640,
-          facingMode: "user",
+          facingMode: 'user',
         }}
-        className={"examCamera"}
+        className={'examCamera'}
       />
 
       {isWebCamReady ? (
@@ -235,9 +236,9 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
             currentUser={currentUser}
             questionSetID={questionsData.questionSetID}
           />
-          <div className={"examQuestions"}>
+          <div className={'examQuestions'}>
             {questionsData.questions.map((q) => (
-              <div className={"questionsWrapper"} key={q.id}>
+              <div className={'questionsWrapper'} key={q.id}>
                 <Question
                   questionID={q.id}
                   question={q.question}
@@ -248,11 +249,11 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
               </div>
             ))}
 
-            <div style={{ marginBottom: "20px", textAlign: "center" }}>
+            <div style={{ marginBottom: '20px', textAlign: 'center' }}>
               <Button
-                variant={"primary"}
-                size={"lg"}
-                style={{ marginTop: "20px" }}
+                variant={'primary'}
+                size={'lg'}
+                style={{ marginTop: '20px' }}
                 onClick={onEndExam}
               >
                 Submit
@@ -290,7 +291,7 @@ const Question = ({
                 value={opt.optID}
                 onChange={handleAnswerChange}
                 checked={
-                  isRadioChecked(questionID, opt.optID) ? "checked" : null
+                  isRadioChecked(questionID, opt.optID) ? 'checked' : null
                 }
               />
               <label htmlFor={opt.optID} className="form-check-label">

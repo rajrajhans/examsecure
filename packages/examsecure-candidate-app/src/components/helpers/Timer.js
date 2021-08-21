@@ -1,9 +1,8 @@
-import React, { Component } from "react";
-import Alert from "react-bootstrap/Alert";
-import Spinner from "react-bootstrap/Spinner";
-import gateway from "../../utils/gateway";
-import { navigate } from "@reach/router";
-
+import React, { Component } from 'react';
+import Alert from 'react-bootstrap/Alert';
+import Spinner from 'react-bootstrap/Spinner';
+import gateway from '../../utils/gateway';
+import { withRouter } from 'react-router-dom';
 // Takes in a "duration" and "Callback Function", waits for "duration" and fires the CallbackFn
 
 class Timer extends Component {
@@ -19,10 +18,10 @@ class Timer extends Component {
     gateway
       .checkIsDisqualified(currentUser, questionSetID, this.state.timeRemaining)
       .then((res) => {
-        if (res.isDisqualified === "true") {
+        if (res.isDisqualified === 'true') {
           clearInterval(this.checkForDisqInterval);
-          alert("You have been disqualified by the educator.");
-          navigate("/").catch((e) => {
+          alert('You have been disqualified by the educator.');
+          this.props.history.push('/').catch((e) => {
             console.log(e);
           });
         }
@@ -52,7 +51,7 @@ class Timer extends Component {
     let remainingTimeGotFromServer, adjustedDuration;
 
     getLastAlive().then((res) => {
-      if (res.lastAlive !== "null") {
+      if (res.lastAlive !== 'null') {
         remainingTimeGotFromServer = Number(res.lastAlive.slice(1, -1));
         adjustedDuration = remainingTimeGotFromServer;
 
@@ -70,13 +69,13 @@ class Timer extends Component {
 
       this.interval = setInterval(
         () => this.tick(examDuration, callBackFn),
-        1000
+        1000,
       );
     });
 
     this.checkForDisqInterval = setInterval(
       () => this.checkForDisqualification(currentUser, questionSetID),
-      5000
+      5000,
     );
   }
 
@@ -96,24 +95,24 @@ class Timer extends Component {
     const [min, sec] = this.getTimeFromSeconds(this.state.timeRemaining);
 
     return (
-      <Alert variant={"warning"} className={"timer"}>
+      <Alert variant={'warning'} className={'timer'}>
         <strong>Time Remaining</strong> <br />
-        {typeof this.state.timeRemaining === "undefined" ? (
+        {typeof this.state.timeRemaining === 'undefined' ? (
           <>
             <Spinner
-              animation={"border"}
-              size={"sm"}
-              style={{ margin: "15px 0" }}
+              animation={'border'}
+              size={'sm'}
+              style={{ margin: '15px 0' }}
             />
           </>
         ) : (
-          <div style={{ margin: "15px 0", fontSize: "20px" }}>
+          <div style={{ margin: '15px 0', fontSize: '20px' }}>
             <span>
-              <span style={{ fontSize: "40px" }}>{min}</span> m
+              <span style={{ fontSize: '40px' }}>{min}</span> m
             </span>
-            {"  "}
+            {'  '}
             <span>
-              <span style={{ fontSize: "40px" }}>{sec}</span> s
+              <span style={{ fontSize: '40px' }}>{sec}</span> s
             </span>
           </div>
         )}
@@ -122,4 +121,4 @@ class Timer extends Component {
   }
 }
 
-export default Timer;
+export default withRouter(Timer);

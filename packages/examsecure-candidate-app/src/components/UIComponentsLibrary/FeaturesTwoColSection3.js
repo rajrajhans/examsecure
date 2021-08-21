@@ -1,12 +1,12 @@
-import React from "react";
-import tw from "twin.macro";
-import styled from "styled-components";
-import { css } from "styled-components/macro"; //eslint-disable-line
-import { SectionHeading, Subheading as SubheadingBase } from "./Headings";
-import { PrimaryButton as PrimaryButtonBase } from "./Buttons";
-import TeamIllustrationSrc from "../../static/shieldIcon.png";
-import { ReactComponent as SvgDotPattern } from "../../static/dot-pattern.svg";
-import { navigate } from "@reach/router";
+import React from 'react';
+import tw from 'twin.macro';
+import styled from 'styled-components';
+import { css } from 'styled-components/macro'; //eslint-disable-line
+import { SectionHeading, Subheading as SubheadingBase } from './Headings';
+import { PrimaryButton as PrimaryButtonBase } from './Buttons';
+import TeamIllustrationSrc from '../../static/shieldIcon.png';
+import { ReactComponent as SvgDotPattern } from '../../static/dot-pattern.svg';
+import { useHistory } from 'react-router-dom';
 
 const Container = tw.div`relative`;
 const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24 items-center`;
@@ -33,7 +33,7 @@ const TextContent = tw.div`lg:py-8 text-center md:text-left`;
 
 const Subheading = tw(SubheadingBase)`text-center md:text-left`;
 const Heading = tw(
-  SectionHeading
+  SectionHeading,
 )`mt-4 font-black text-left text-3xl sm:text-4xl lg:text-5xl text-center md:text-left leading-tight`;
 const Description = tw.p`mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-secondary-100`;
 
@@ -43,7 +43,7 @@ const PrimaryButton = styled(PrimaryButtonBase)((props) => [
 ]);
 
 export default ({
-  subheading = "Our Expertise",
+  subheading = 'Our Expertise',
   heading = (
     <>
       Designed & Developed by <span tw="text-primary-500">Professionals.</span>
@@ -57,8 +57,8 @@ export default ({
       commodo consequat.
     </>
   ),
-  primaryButtonText = "Learn More",
-  primaryButtonUrl = "https://rajrajhans.com",
+  primaryButtonText = 'Learn More',
+  primaryButtonUrl = 'https://rajrajhans.com',
   imageSrc = TeamIllustrationSrc,
   buttonRounded = true,
   imageRounded = true,
@@ -71,43 +71,44 @@ export default ({
 }) => {
   // The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
   const buttonRoundedCss = buttonRounded && tw`rounded-full`;
+  const history = useHistory();
   return (
     <Container>
       <TwoColumn>
         <ImageColumn>
           <Image
-            className={"homeFeatureImg2"}
+            className={'homeFeatureImg2'}
             css={imageCss}
             src={imageSrc}
             imageBorder={imageBorder}
             imageShadow={imageShadow}
             imageRounded={imageRounded}
-            style={{ width: "85%" }}
+            style={{ width: '85%' }}
           />
           {imageDecoratorBlob && <DecoratorBlob css={imageDecoratorBlobCss} />}
         </ImageColumn>
         <TextColumn textOnLeft={textOnLeft}>
           <TextContent>
             <Subheading>{subheading}</Subheading>
-            <Heading className={"homeSectionTitle"}>{heading}</Heading>
-            <Description style={{ color: "#000000bf" }}>
+            <Heading className={'homeSectionTitle'}>{heading}</Heading>
+            <Description style={{ color: '#000000bf' }}>
               ExamSecure uses the candidate's webcam feed and performs advanced
               image analysis on it in real time. Using this, it can detect if
-              there is <b>no person in the camera frame</b>, if there are{" "}
-              <b>multiple people in the camera frame</b>, if the{" "}
-              <b>person in the camera frame is not recognized</b>{" "}
+              there is <b>no person in the camera frame</b>, if there are{' '}
+              <b>multiple people in the camera frame</b>, if the{' '}
+              <b>person in the camera frame is not recognized</b>{' '}
               (impersonation) and much more. To see what all can be inferred
               from the webcam feed, check out our image analysis demo.
             </Description>
             <PrimaryButton
               as="a"
               css={buttonRoundedCss}
-              className={"heroSectionButton"}
-              href={"#"}
-              onClick={() => navigate("/demo")}
+              className={'heroSectionButton'}
+              href={'#'}
+              onClick={() => history.push('/demo')}
               style={{
-                fontSize: "19px",
-                padding: "0.7rem",
+                fontSize: '19px',
+                padding: '0.7rem',
               }}
             >
               Try out the Demo
@@ -115,13 +116,13 @@ export default ({
             <PrimaryButton
               as="a"
               css={buttonRoundedCss}
-              className={"heroSectionButton demoButtonHome"}
-              href={"#"}
-              onClick={() => navigate("/demoVideos")}
+              className={'heroSectionButton demoButtonHome'}
+              href={'#'}
+              onClick={() => history.push('/demoVideos')}
               style={{
-                fontSize: "19px",
-                padding: "0.7rem",
-                marginLeft: "10px",
+                fontSize: '19px',
+                padding: '0.7rem',
+                marginLeft: '10px',
               }}
             >
               Demo Videos

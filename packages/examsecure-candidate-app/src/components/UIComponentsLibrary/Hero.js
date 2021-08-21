@@ -1,30 +1,30 @@
-import React from "react";
-import styled from "styled-components";
-import tw from "twin.macro";
-import { css } from "styled-components/macro"; //eslint-disable-line
-import "../../styles/Header.css";
-import { SectionHeading } from "./Headings.js";
-import { SectionDescription } from "./Typography.js";
-import { PrimaryButton as PrimaryButtonBase } from "./Buttons.js";
-import { ContentWithVerticalPadding } from "./Layouts.js";
-import { ReactComponent as CheckboxIcon } from "feather-icons/dist/icons/check-circle.svg";
-import { ReactComponent as SvgDecoratorBlob1 } from "../../static/dot-pattern.svg";
-import { navigate } from "@reach/router";
-import examSecureLogo from "../../static/examsecure_logo.png";
+import React from 'react';
+import styled from 'styled-components';
+import tw from 'twin.macro';
+import { css } from 'styled-components/macro'; //eslint-disable-line
+import '../../styles/Header.css';
+import { SectionHeading } from './Headings.js';
+import { SectionDescription } from './Typography.js';
+import { PrimaryButton as PrimaryButtonBase } from './Buttons.js';
+import { ContentWithVerticalPadding } from './Layouts.js';
+import { ReactComponent as CheckboxIcon } from 'feather-icons/dist/icons/check-circle.svg';
+import { ReactComponent as SvgDecoratorBlob1 } from '../../static/dot-pattern.svg';
+import { useHistory } from 'react-router-dom';
+import examSecureLogo from '../../static/examsecure_logo.png';
 
 const Row = tw.div`flex flex-col lg:flex-row justify-between items-center lg:pt-16 max-w-screen-2xl mx-auto sm:px-8`;
 const Column = tw.div``;
 const TextColumn = tw(
-  Column
+  Column,
 )`mr-auto lg:mr-0 max-w-lg lg:max-w-xl xl:max-w-2xl`;
 const Heading = tw(
-  SectionHeading
+  SectionHeading,
 )`text-left text-primary-900 leading-snug xl:text-6xl`;
 const Description = tw(
-  SectionDescription
+  SectionDescription,
 )`mt-4 lg:text-base text-gray-700 max-w-lg`;
 const PrimaryButton = tw(
-  PrimaryButtonBase
+  PrimaryButtonBase,
 )`mt-8 inline-block w-56 tracking-wide text-center py-5`;
 const FeatureList = tw.ul`mt-12 leading-loose`;
 const Feature = tw.li`flex items-center`;
@@ -42,21 +42,22 @@ export default ({
   imageDecoratorBlob = true,
   buttonRounded = true,
   features = [
-    "Automated Proctoring via Webcam",
-    "Complete Browser Lockdown",
-    "Completely Open Source and Customizable",
-    "Easily Scalable, Powered by AWS",
+    'Automated Proctoring via Webcam',
+    'Complete Browser Lockdown',
+    'Completely Open Source and Customizable',
+    'Easily Scalable, Powered by AWS',
   ],
 }) => {
   const buttonRoundedCss = buttonRounded && tw`rounded-full`;
+  const history = useHistory();
   return (
     <>
-      <div style={{ position: "relative" }}>
+      <div style={{ position: 'relative' }}>
         <ContentWithVerticalPadding>
           <Row>
             <TextColumn>
               <Heading>Better, Safer, Secure Remote Exams</Heading>
-              <Description className={"primaryText"}>
+              <Description className={'primaryText'}>
                 Ensure the authenticity and integrity of your examinations with
                 ExamSecure's AI-powered proctoring solution for remote
                 examinations.
@@ -64,9 +65,9 @@ export default ({
               <PrimaryButton
                 as="a"
                 css={buttonRoundedCss}
-                className={"heroSectionButton"}
-                href={"#"}
-                onClick={() => navigate("/selectQuestionSet")}
+                className={'heroSectionButton'}
+                href={'#'}
+                onClick={() => history.push('/selectQuestionSet')}
               >
                 Get Started
               </PrimaryButton>
@@ -81,9 +82,9 @@ export default ({
             </TextColumn>
             <ImageColumn>
               <ImageContainer>
-                <Image src={examSecureLogo} className={"heroLogo"} />
+                <Image src={examSecureLogo} className={'heroLogo'} />
                 {imageDecoratorBlob && (
-                  <ImageDecoratorBlob className={"heroDecoratorBlob"} />
+                  <ImageDecoratorBlob className={'heroDecoratorBlob'} />
                 )}
               </ImageContainer>
               <Offsetbackground />

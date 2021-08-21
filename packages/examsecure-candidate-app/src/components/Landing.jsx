@@ -1,25 +1,26 @@
-import React, { Fragment, useEffect, useRef, useState } from "react";
-import Webcam from "react-webcam";
-import { Col, Row } from "react-bootstrap";
-import Alert from "react-bootstrap/Alert";
-import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
-import { Link, navigate } from "@reach/router";
-import "../styles/landing.css";
+import React, { Fragment, useEffect, useRef, useState } from 'react';
+import Webcam from 'react-webcam';
+import { Col, Row } from 'react-bootstrap';
+import Alert from 'react-bootstrap/Alert';
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
+import { Link, useHistory } from 'react-router-dom';
+import '../styles/landing.css';
 import {
   defineFullscreenChangeEvent,
   makeFullScreen,
-} from "../utils/fullscreenAPI";
-import AddFaceBox from "./helpers/AddFaceBox";
-import { mode } from "./helpers/modeSetter";
-import isDeviceMobile from "../utils/checkMobileDeviceAPI";
-import { pageview } from "react-ga";
+} from '../utils/fullscreenAPI';
+import AddFaceBox from './helpers/AddFaceBox';
+import { mode } from './helpers/modeSetter';
+import isDeviceMobile from '../utils/checkMobileDeviceAPI';
+import { pageview } from 'react-ga';
 
 const Landing = ({ loadForSeconds, currentUser, questionSetMetadata }) => {
   const [isWebCamReady, setIsWebcamReady] = useState(false);
   const [isFullscreenActive, setIsFullscreenActive] = useState(false);
   const [activeSlide, setActiveSlide] = useState(1);
   const webcam = useRef(undefined);
+  const history = useHistory();
   const currentUrl = window.location.href;
 
   const setupWebcam = (instance) => {
@@ -44,7 +45,7 @@ const Landing = ({ loadForSeconds, currentUser, questionSetMetadata }) => {
     if (webcam.current) {
       const image = webcam.current.getScreenshot();
       if (image) {
-        return image.split(",")[1];
+        return image.split(',')[1];
       }
     }
   };
@@ -52,11 +53,9 @@ const Landing = ({ loadForSeconds, currentUser, questionSetMetadata }) => {
   useEffect(() => {
     if (isDeviceMobile()) {
       alert(
-        "Please log in from a PC for the best experience. Using a mobile phone may lead to unexpected behaviour."
+        'Please log in from a PC for the best experience. Using a mobile phone may lead to unexpected behaviour.',
       );
-      navigate("/").catch((e) => {
-        console.log(e);
-      });
+      history.push('/');
     }
     loadForSeconds();
     pageview(window.location.pathname + window.location.search);
@@ -67,7 +66,7 @@ const Landing = ({ loadForSeconds, currentUser, questionSetMetadata }) => {
   }, []);
 
   const enterFullscreen = async () => {
-    await makeFullScreen("rootWrapper");
+    await makeFullScreen('rootWrapper');
     if (!window.onblur) window.onblur = onFocusLost;
     setIsFullscreenActive(true);
   };
@@ -77,16 +76,16 @@ const Landing = ({ loadForSeconds, currentUser, questionSetMetadata }) => {
       setActiveSlide(1);
       setIsFullscreenActive(false);
       alert(
-        "Please do not exit Full Screen Mode or click anywhere else. You will be logged out!"
+        'Please do not exit Full Screen Mode or click anywhere else. You will be logged out!',
       );
-      window.location.href = "/";
+      window.location.href = '/';
     }
   };
 
   const onFocusLost = () => {
     setActiveSlide(1);
     setIsFullscreenActive(false);
-    document.exitFullscreen().catch(() => console.log("not in fullscreen"));
+    document.exitFullscreen().catch(() => console.log('not in fullscreen'));
   };
 
   const onFullscreenEnter = () => {
@@ -95,17 +94,17 @@ const Landing = ({ loadForSeconds, currentUser, questionSetMetadata }) => {
 
   const WebcamSetupInstructions = () => (
     <Fragment>
-      <Alert variant={"warning"} width={"500px"} className={"instructionsBox"}>
-        <Alert.Heading className={"instrHeading"}>
+      <Alert variant={'warning'} width={'500px'} className={'instructionsBox'}>
+        <Alert.Heading className={'instrHeading'}>
           Please allow required permissions to continue
         </Alert.Heading>
-        <ul className={"instructionsBoxList"}>
+        <ul className={'instructionsBoxList'}>
           <li>
             When prompted, you need to click <i>Allow</i> to use the application
             with your webcam.
           </li>
           <li>
-            If you don't see the dialog, try{" "}
+            If you don't see the dialog, try{' '}
             <a href={currentUrl}>opening the application</a> in a new incognito
             window, or review your webcam settings on your browser.
           </li>
@@ -117,9 +116,9 @@ const Landing = ({ loadForSeconds, currentUser, questionSetMetadata }) => {
       </Alert>
 
       <Button
-        variant={"secondary"}
-        size={"lg"}
-        className={"NextButton"}
+        variant={'secondary'}
+        size={'lg'}
+        className={'NextButton'}
         disabled
         block
       >
@@ -130,11 +129,11 @@ const Landing = ({ loadForSeconds, currentUser, questionSetMetadata }) => {
 
   const FullscreenSetup = () => (
     <Fragment>
-      <Alert variant={"info"} width={"500px"} className={"instructionsBox"}>
-        <Alert.Heading className={"instrHeading"}>
+      <Alert variant={'info'} width={'500px'} className={'instructionsBox'}>
+        <Alert.Heading className={'instrHeading'}>
           Full Screen Mode Instructions
         </Alert.Heading>
-        <ul className={"instructionsBoxList"}>
+        <ul className={'instructionsBoxList'}>
           <li>Click the button below to enter Full Screen Mode</li>
           <li>
             Do not attempt to exit Full Screen Mode during the exam. You will be
@@ -153,9 +152,9 @@ const Landing = ({ loadForSeconds, currentUser, questionSetMetadata }) => {
 
       {isFullscreenActive ? (
         <Button
-          variant={"primary"}
-          size={"lg"}
-          className={"NextButton"}
+          variant={'primary'}
+          size={'lg'}
+          className={'NextButton'}
           block
           onClick={() => setActiveSlide(2)}
         >
@@ -163,13 +162,13 @@ const Landing = ({ loadForSeconds, currentUser, questionSetMetadata }) => {
         </Button>
       ) : (
         <Button
-          variant={"outline-primary"}
-          size={"lg"}
-          className={"NextButton"}
+          variant={'outline-primary'}
+          size={'lg'}
+          className={'NextButton'}
           block
           onClick={() =>
             enterFullscreen().catch(() =>
-              console.log("Couldn't enter full screen")
+              console.log("Couldn't enter full screen"),
             )
           }
         >
@@ -181,11 +180,11 @@ const Landing = ({ loadForSeconds, currentUser, questionSetMetadata }) => {
 
   const ExamInstructions = () => (
     <Fragment>
-      <Alert variant={"info"} width={"500px"} className={"instructionsBox"}>
-        <Alert.Heading className={"instrHeading"}>
+      <Alert variant={'info'} width={'500px'} className={'instructionsBox'}>
+        <Alert.Heading className={'instrHeading'}>
           Exam Instructions
         </Alert.Heading>
-        <ul className={"instructionsBoxList"}>
+        <ul className={'instructionsBoxList'}>
           <li>Ensure your face is clearly visible in the webcam.</li>
           <li>
             Do not attempt to exit fullscreen mode. You will be logged out.
@@ -202,9 +201,9 @@ const Landing = ({ loadForSeconds, currentUser, questionSetMetadata }) => {
       </Alert>
 
       <Button
-        variant={"primary"}
-        size={"lg"}
-        className={"NextButton"}
+        variant={'primary'}
+        size={'lg'}
+        className={'NextButton'}
         block
         onClick={() => setActiveSlide(3)}
       >
@@ -216,18 +215,18 @@ const Landing = ({ loadForSeconds, currentUser, questionSetMetadata }) => {
   const ExamStartConfirmation = () => (
     <Fragment>
       <Alert
-        variant={"info"}
-        width={"500px"}
-        className={"instructionsBox confirmationBox"}
+        variant={'info'}
+        width={'500px'}
+        className={'instructionsBox confirmationBox'}
       >
-        <Alert.Heading className={"instrHeading"}>Confirmation</Alert.Heading>
+        <Alert.Heading className={'instrHeading'}>Confirmation</Alert.Heading>
         {questionSetMetadata ? (
-          <div className={"confirmationText"}>
+          <div className={'confirmationText'}>
             <div>
               Selected Exam: <b>{questionSetMetadata.qSetName}</b>
             </div>
             <div>
-              Duration of the Exam:{" "}
+              Duration of the Exam:{' '}
               <b>{questionSetMetadata.duration} minutes</b>
             </div>
           </div>
@@ -235,8 +234,8 @@ const Landing = ({ loadForSeconds, currentUser, questionSetMetadata }) => {
         <div>Are you sure you want to start the test?</div>
       </Alert>
 
-      <Link to={"/exam"}>
-        <Button variant={"primary"} size={"lg"} className={"NextButton"} block>
+      <Link to={'/exam'}>
+        <Button variant={'primary'} size={'lg'} className={'NextButton'} block>
           Start the Test
         </Button>
       </Link>
@@ -261,17 +260,17 @@ const Landing = ({ loadForSeconds, currentUser, questionSetMetadata }) => {
   return (
     <>
       <Container>
-        <Row className={"mainRow align-middle"}>
+        <Row className={'mainRow align-middle'}>
           <Col xs={12} md={6}>
             <Webcam
               ref={setupWebcam}
-              screenshotFormat={"image/jpeg"}
+              screenshotFormat={'image/jpeg'}
               videoConstraints={{
                 width: 1280,
                 height: 640,
-                facingMode: "user",
+                facingMode: 'user',
               }}
-              style={{ width: "100%" }}
+              style={{ width: '100%' }}
             />
           </Col>
           <Col xs={12} md={6}>
