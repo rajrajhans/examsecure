@@ -1,19 +1,18 @@
-
 /* .proctor {
     background: radial-gradient(#e5e5e5, #ffff, #e5e5e5);
 } */
 
 .flex-css {
-    display:'flex'!important;
-    flex-wrap:'wrap'!important;
-    justify-content:'center'!important;
-    align-self:'center'!important;
+    display: 'flex' !important;
+    flex-wrap: 'wrap' !important;
+    justify-content: 'center' !important;
+    align-self: 'center' !important;
 }
 
 .accordion-title {
     font-weight: bold;
     color: white;
-    background-color: rgb(24, 24, 56)!important;
+    background-color: rgb(24, 24, 56) !important;
     margin: 5px;
     text-align: center;
 }
@@ -41,17 +40,17 @@
 }
 
 .card {
-    width:25rem;
+    width: 25rem;
     margin: 5px;
 
 }
 
 .card:hover {
-    box-shadow: 5px 10px 20px 1px rgba(0,0,0,0.253) !important;
+    box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.253) !important;
 }
 
 .card-body {
-    padding: 3rem 0!important;
+    padding: 3rem 0 !important;
 }
 
 .card-text {
@@ -72,7 +71,7 @@
 } */
 
 .carousel {
-    border-radius: 0!important;
+    border-radius: 0 !important;
 }
 
 .carousel-caption {
@@ -95,21 +94,21 @@
 }
 
 .disqualify {
-    color: red!important;
-    border-color: red!important;
+    color: red !important;
+    border-color: red !important;
 }
 
 .navigation-button {
-    color: black!important;
-    border-color: black!important;
+    color: black !important;
+    border-color: black !important;
 }
 
 .disqualify:hover {
-    background-color: red!important;
-    color: white!important;
+    background-color: red !important;
+    color: white !important;
 }
 
 .navigation-button:hover {
-    background-color: black!important;
-    color: white!important;
+    background-color: black !important;
+    color: white !important;
 }

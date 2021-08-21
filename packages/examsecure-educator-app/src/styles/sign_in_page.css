@@ -3,18 +3,22 @@
     margin: 0;
     box-sizing: border-box;
 }
+
 body {
     background-color: rgb(219, 226, 226);
 }
-.row{
+
+.row {
     background-color: white;
     border-radius: 30px;
     box-shadow: 12px 12px 22px;
 }
+
 img {
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
 }
+
 .btn1 {
     border: none;
     outline: none;
@@ -30,6 +34,7 @@ img {
     border: 1px solid;
     color: black;
 }
+
 .error {
     color: red;
     font-weight: bold;
