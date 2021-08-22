@@ -16,7 +16,7 @@ import {
   getFirebase,
   isLoaded,
 } from 'react-redux-firebase';
-import fbConfig from './config/firebase_config';
+import fbConfig from './firebase_config';
 import firebase from 'firebase/app';
 
 const store = createStore(
