@@ -1,6 +1,6 @@
 import BootstrapNavbar from 'react-bootstrap/Navbar';
 import React from 'react';
-import logo from '../../assets/logo_without_boxshadow.png';
+import logo from '../../assets/logo.png';
 import { Nav } from 'react-bootstrap';
 import '../../styles/header.css';
 import { Link, useHistory } from 'react-router-dom';

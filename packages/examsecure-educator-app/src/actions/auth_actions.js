@@ -1,5 +1,8 @@
+import { startLoading, stopLoading } from './loading_actions';
+
 export const signIn = (credentials) => {
   return (dispatch, getState, { getFirebase }) => {
+    dispatch(startLoading());
     const firebase = getFirebase();
 
     firebase
@@ -7,9 +10,11 @@ export const signIn = (credentials) => {
       .signInWithEmailAndPassword(credentials.email, credentials.pwd)
       .then(() => {
         dispatch({ type: 'LOGIN_SUCCESS' });
+        dispatch(stopLoading());
       })
       .catch((error) => {
         dispatch({ type: 'LOGIN_ERROR', error });
+        dispatch(stopLoading());
       });
   };
 };
