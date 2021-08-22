@@ -4,9 +4,8 @@ import backgroundImg from '../assets/authbg1.jpg';
 import { Title, TextInput, Button, WhiteCard } from '@examsecure/design-system';
 import colors from '@examsecure/design-system/src/colors';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { signUp } from '../actions/auth_actions.js';
-import ESNavbar from '../components/nav_bar';
 
 const AuthContainer = styled.div`
   min-height: 100vh;
@@ -79,7 +78,6 @@ const SignUp = (props) => {
 
   return (
     <>
-      <ESNavbar />
       <AuthContainer>
         <StyledWhiteCard>
           <FlexLeft>

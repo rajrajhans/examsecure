@@ -6,7 +6,6 @@ import colors from '@examsecure/design-system/src/colors';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { signIn } from '../actions/auth_actions';
-import ESNavbar from '../components/nav_bar';
 
 const AuthContainer = styled.div`
   min-height: 100vh;
@@ -71,7 +70,6 @@ const SignIn = (props) => {
 
   return (
     <>
-      <ESNavbar />
       <AuthContainer>
         <StyledWhiteCard>
           <FlexLeft>
