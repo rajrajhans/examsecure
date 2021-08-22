@@ -66,6 +66,7 @@ const SignIn = (props) => {
   };
 
   const { authError, auth } = props;
+
   if (auth.uid) return <Redirect to="/" />;
 
   return (
@@ -76,8 +77,16 @@ const SignIn = (props) => {
             <Title value={'Sign In as Educator'} />
             <HelperText>
               <div style={{ paddingBottom: '20px', paddingTop: '16px' }}>
-                For a test drive of the platform, enter "demo@vit.edu" as both
-                the username and password
+                {authError ? (
+                  <div style={{ color: 'red' }}>
+                    {authError.error.message} Please try again.
+                  </div>
+                ) : (
+                  <>
+                    For a test drive of the platform, enter "demo@vit.edu" as
+                    both the username and password
+                  </>
+                )}
               </div>
               <div>
                 Don't have an account?
@@ -133,6 +142,7 @@ const SignIn = (props) => {
     </>
   );
 };
+
 const mapStateToProps = (state) => {
   return {
     authError: state.auth.authError,
