@@ -18,6 +18,7 @@ import {
 } from 'react-redux-firebase';
 import fbConfig from './firebase_config';
 import firebase from 'firebase/app';
+import Loading from './components/layout/Loading';
 
 const store = createStore(
   rootReducer,
@@ -46,7 +47,7 @@ const rrfProps = {
 
 function AuthIsLoaded({ children }) {
   const auth = useSelector((state) => state.firebase.auth);
-  if (!isLoaded(auth)) return <div>Loading Screen...</div>;
+  if (!isLoaded(auth)) return <Loading show={true} />;
   return children;
 }
 
