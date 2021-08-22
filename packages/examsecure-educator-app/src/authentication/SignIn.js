@@ -90,7 +90,7 @@ const SignIn = (props) => {
               </div>
               <div>
                 Don't have an account?
-                <Link to="/signup"> Create one</Link>
+                <Link to="/sign-up"> Create one</Link>
               </div>
               <div>Forgot Password?</div>
             </HelperText>

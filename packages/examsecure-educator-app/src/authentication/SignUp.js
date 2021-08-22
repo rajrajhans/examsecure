@@ -4,7 +4,7 @@ import backgroundImg from '../assets/authbg1.jpg';
 import { Title, TextInput, Button, WhiteCard } from '@examsecure/design-system';
 import colors from '@examsecure/design-system/src/colors';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { signUp } from '../actions/auth_actions.js';
 
 const AuthContainer = styled.div`
@@ -84,13 +84,23 @@ const SignUp = (props) => {
             <Title value={'Sign Up as Educator'} />
             <HelperText>
               <div>
-                Sign up for an Educator account for free to create, schedule
-                remote examinations with AI powered proctoring and powerful
-                analytics.
+                {authError ? (
+                  <div style={{ color: 'red' }}>
+                    Error: {authError.error.message}
+                  </div>
+                ) : (
+                  <>
+                    Sign up for an Educator account for free to create, schedule
+                    remote examinations with AI powered proctoring and powerful
+                    analytics.
+                  </>
+                )}
               </div>
             </HelperText>
             <HelperText>
-              <div>Already have an account? Sign in.</div>
+              <div>
+                Already have an account? <Link to="/sign-in"> Sign In</Link>
+              </div>
             </HelperText>
           </FlexLeft>
           <FlexRight>

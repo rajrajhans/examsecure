@@ -21,6 +21,7 @@ export const signIn = (credentials) => {
 
 export const signUp = (newUser) => {
   return (dispatch, getState, { getFirebase }) => {
+    dispatch(startLoading());
     const firebase = getFirebase();
     const database = firebase.database();
     firebase
@@ -32,10 +33,12 @@ export const signUp = (newUser) => {
         });
       })
       .then(() => {
+        dispatch(stopLoading());
         dispatch({ type: 'SIGN_UP_SUCCESS' });
       })
       .catch((error) => {
-        dispatch({ type: 'SIGN_UP_FAILED' });
+        dispatch(stopLoading());
+        dispatch({ type: 'SIGN_UP_FAILED', error });
       });
   };
 };
