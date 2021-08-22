@@ -1,9 +1,21 @@
-.content-wrapper{
+.content-wrapper {
     padding: 15px 40px;
 }
 
-.dash-top-bar{
+.dash-top-bar {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.dash-ct-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 0;
+}
+
+.dash-ct-bar-left {
+    display: flex;
     align-items: center;
 }
