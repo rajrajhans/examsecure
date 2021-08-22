@@ -8,7 +8,7 @@ const Dashboard = () => {
     <div>
       <div className="dash-top-bar">
         <Title value={'Your Tests'} />
-        <Link to={'/add-questions'}>
+        <Link to={'/create-new-test'}>
           <Button label={'Create New Test'} variant={'secondary'} />
         </Link>
       </div>
