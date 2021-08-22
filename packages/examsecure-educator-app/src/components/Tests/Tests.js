@@ -1,11 +1,12 @@
 import React from 'react';
 import ESNavbar from '../nav_bar';
 import { Button } from '@examsecure/design-system';
-import tests from '../../sampleData/tests';
 import SingleTest from './SingleTest';
 import '../../styles/Tests.css';
 import Container from 'react-bootstrap/Container';
 import { Link } from 'react-router-dom';
+
+const tests = [];
 
 const Tests = () => {
   return (
