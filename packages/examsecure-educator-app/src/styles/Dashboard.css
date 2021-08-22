@@ -1,0 +1,9 @@
+.content-wrapper{
+    padding: 15px 40px;
+}
+
+.dash-top-bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
