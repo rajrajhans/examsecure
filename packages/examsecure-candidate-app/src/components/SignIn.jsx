@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import Amplify, { Auth } from 'aws-amplify';
-import Card from 'react-bootstrap/Card';
+import { Auth } from 'aws-amplify';
 import { pageview } from 'react-ga';
 import { Button, TextInput, Title, WhiteCard } from '@examsecure/design-system';
 import styled from 'styled-components';
 import backgroundImg from '../static/authbg1.jpg';
-import { Link, navigate } from '@reach/router';
+import { Link } from 'react-router-dom';
 import colors from '@examsecure/design-system/src/colors';
 
 const AuthContainer = styled.div`

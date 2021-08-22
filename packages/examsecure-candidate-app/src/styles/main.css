@@ -10,60 +10,60 @@
     --amplify-primary-shade: #223466;
 }
 
-body{
+body {
     text-align: left;
     font-family: 'Source Sans Pro', sans-serif;
     background: #fff;
     box-sizing: border-box;
 }
 
-p{
-    margin:0;
+p {
+    margin: 0;
 }
 
-.logo{
+.logo {
     font-family: 'Playfair Display', sans-serif;
     font-size: 27px;
     padding-left: 15px;
     color: black;
 }
 
-.brandColor{
+.brandColor {
     color: #223466;
 }
 
-.instructionsBox{
+.instructionsBox {
     margin: auto;
     width: 600px;
     color: black;
     text-align: center;
 }
 
-.instructionsBoxList{
+.instructionsBoxList {
     text-align: left;
     list-style-type: disc;
     padding-left: 10px;
 }
 
-.mainRow{
+.mainRow {
     margin-top: 20vh;
 }
 
-.NextButton{
+.NextButton {
     width: 600px;
     margin-top: 17px;
 }
 
-.instrHeading{
+.instrHeading {
     margin-bottom: 18px;
 }
 
-.homeFeatureImg{
+.homeFeatureImg {
     width: 80%;
     margin: auto;
 }
 
-.homeFeatureImg2{
+.homeFeatureImg2 {
     width: 60%;
     margin: auto;
 }
@@ -282,6 +282,6 @@ svg {
     text-align: center;
     padding: 5%;
     min-height: 100vh;
-    background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ),url("../static/authbg1.jpg") center bottom;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../static/authbg1.jpg") center bottom;
     background-size: cover;
 }

@@ -6,7 +6,6 @@ import colors from '@examsecure/design-system/src/colors';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { signUp } from '../actions/auth_actions.js';
-import ESNavbar from '../components/nav_bar';
 
 const AuthContainer = styled.div`
   min-height: 100vh;
@@ -79,20 +78,29 @@ const SignUp = (props) => {
 
   return (
     <>
-      <ESNavbar />
       <AuthContainer>
         <StyledWhiteCard>
           <FlexLeft>
             <Title value={'Sign Up as Educator'} />
             <HelperText>
               <div>
-                Sign up for an Educator account for free to create, schedule
-                remote examinations with AI powered proctoring and powerful
-                analytics.
+                {authError ? (
+                  <div style={{ color: 'red' }}>
+                    Error: {authError.error.message}
+                  </div>
+                ) : (
+                  <>
+                    Sign up for an Educator account for free to create, schedule
+                    remote examinations with AI powered proctoring and powerful
+                    analytics.
+                  </>
+                )}
               </div>
             </HelperText>
             <HelperText>
-              <div>Already have an account? Sign in.</div>
+              <div>
+                Already have an account? <Link to="/sign-in"> Sign In</Link>
+              </div>
             </HelperText>
           </FlexLeft>
           <FlexRight>

@@ -1,12 +1,12 @@
-import React from "react";
-import tw from "twin.macro";
-import styled from "styled-components";
-import { css } from "styled-components/macro"; //eslint-disable-line
-import { SectionHeading, Subheading as SubheadingBase } from "./Headings";
-import { PrimaryButton as PrimaryButtonBase } from "./Buttons";
-import TeamIllustrationSrc from "../../static/shieldIcon.png";
-import { ReactComponent as SvgDotPattern } from "../../static/dot-pattern.svg";
-import { navigate } from "@reach/router";
+import React from 'react';
+import tw from 'twin.macro';
+import styled from 'styled-components';
+import { css } from 'styled-components/macro'; //eslint-disable-line
+import { SectionHeading, Subheading as SubheadingBase } from './Headings';
+import { PrimaryButton as PrimaryButtonBase } from './Buttons';
+import TeamIllustrationSrc from '../../static/shieldIcon.png';
+import { ReactComponent as SvgDotPattern } from '../../static/dot-pattern.svg';
+import { useHistory } from 'react-router-dom';
 
 const Container = tw.div`relative`;
 const TwoColumn = tw.div`flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto py-20 md:py-24 items-center`;
@@ -33,7 +33,7 @@ const TextContent = tw.div`lg:py-8 text-center md:text-left`;
 
 const Subheading = tw(SubheadingBase)`text-center md:text-left`;
 const Heading = tw(
-  SectionHeading
+  SectionHeading,
 )`mt-4 font-black text-left text-3xl sm:text-4xl lg:text-5xl text-center md:text-left leading-tight`;
 const Description = tw.p`mt-4 text-center md:text-left text-sm md:text-base lg:text-lg font-medium leading-relaxed text-secondary-100`;
 
@@ -43,7 +43,7 @@ const PrimaryButton = styled(PrimaryButtonBase)((props) => [
 ]);
 
 export default ({
-  subheading = "Our Expertise",
+  subheading = 'Our Expertise',
   heading = (
     <>
       Designed & Developed by <span tw="text-primary-500">Professionals.</span>
@@ -57,8 +57,8 @@ export default ({
       commodo consequat.
     </>
   ),
-  primaryButtonText = "Learn More",
-  primaryButtonUrl = "https://rajrajhans.com",
+  primaryButtonText = 'Learn More',
+  primaryButtonUrl = 'https://rajrajhans.com',
   imageSrc = TeamIllustrationSrc,
   buttonRounded = true,
   imageRounded = true,
@@ -71,12 +71,13 @@ export default ({
 }) => {
   // The textOnLeft boolean prop can be used to display either the text on left or right side of the image.
   const buttonRoundedCss = buttonRounded && tw`rounded-full`;
+  const history = useHistory();
   return (
     <Container>
       <TwoColumn>
         <ImageColumn>
           <Image
-            className={"homeFeatureImg2"}
+            className={'homeFeatureImg2'}
             css={imageCss}
             src={imageSrc}
             imageBorder={imageBorder}
@@ -88,9 +89,9 @@ export default ({
         <TextColumn textOnLeft={textOnLeft}>
           <TextContent>
             <Subheading>{subheading}</Subheading>
-            <Heading className={"homeSectionTitle"}>{heading}</Heading>
-            <Description style={{ color: "#000000bf" }}>
-              ExamSecure is able to determine the{" "}
+            <Heading className={'homeSectionTitle'}>{heading}</Heading>
+            <Description style={{ color: '#000000bf' }}>
+              ExamSecure is able to determine the{' '}
               <b>direction in which the user is facing</b> by using Head Pose
               Estimation technique. If the user is staring away from the screen
               for long periods of time, ExamSecure can trigger a warning or
@@ -99,10 +100,10 @@ export default ({
             <PrimaryButton
               as="a"
               css={buttonRoundedCss}
-              className={"heroSectionButton"}
-              href={"#"}
-              onClick={() => navigate("/demo")}
-              style={{ fontSize: "19px", padding: "0.7rem" }}
+              className={'heroSectionButton'}
+              href={'#'}
+              onClick={() => history.push('/demo')}
+              style={{ fontSize: '19px', padding: '0.7rem' }}
             >
               Try it out
             </PrimaryButton>

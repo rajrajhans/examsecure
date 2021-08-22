@@ -1,19 +1,14 @@
 import React, { Component, useState } from 'react';
 import Layout from './components/Layout';
-import Landing from './components/Landing';
 import './styles/main.css';
 import Home from './components/Home';
 import SignIn from './components/SignIn';
-import { Router, Link, Redirect } from '@reach/router';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PrivateRoute from './components/helpers/PrivateRoute';
-import Exam from './components/Exam';
 import PostSubmit from './components/PostSubmit';
 import Loading from './components/Loading';
 import Caught from './components/Caught';
-import { Auth } from '@aws-amplify/auth';
 import Demo from './components/Demo';
-import { AuthState } from '@aws-amplify/ui-components';
-import QuestionSetSelector from './components/QuestionSetSelector';
 import QuestionSetSelectorContainer from './components/containers/QuestionSetSelectorContainer';
 import ExamContainer from './components/containers/ExamContainer';
 import LandingContainer from './components/containers/LandingContainer';
@@ -52,72 +47,77 @@ class App extends Component {
 
   render() {
     return (
-      <Layout isSignedIn={this.state.isSignedIn}>
-        <Loading show={this.state.isLoading} />
-        <Router
-          style={{
-            height: '100%',
-            flex: 1,
-            display: 'flex',
-            flexDirection: 'column',
-          }}
-        >
-          <Home path={'/'} />
-          <PrivateRoute
-            component={LandingContainer}
-            isSignedIn={this.state.isSignedIn}
-            path={'/landing'}
-            loadForSeconds={this.loadForSeconds}
-            currentUser={this.state.currentUser}
-            setAuthState={this.setAuthState}
-            setLoading={this.setLoading}
-          />
-          <SignIn
-            isSignedIn={this.state.isSignedIn}
-            authState={this.state.authState}
-            setAuthState={this.setAuthState}
-            path={'/signin'}
-            setLoading={this.setLoading}
-          />
-          <SignUp setLoading={this.setLoading} path={'/signup'} />
-          <PrivateRoute
-            isSignedIn={this.state.isSignedIn}
-            component={Demo}
-            currentUser={this.state.currentUser}
-            path={'/demo'}
-            loadForSeconds={this.loadForSeconds}
-            setAuthState={this.setAuthState}
-            setLoading={this.setLoading}
-          />
-          <DemoVideos path={'/demoVideos'} />
-          <PrivateRoute
-            component={ExamContainer}
-            isSignedIn={this.state.isSignedIn}
-            path={'/exam'}
-            currentUser={this.state.currentUser}
-            loadForSeconds={this.loadForSeconds}
-            setLoading={this.setLoading}
-          />
-          <PrivateRoute
-            component={QuestionSetSelectorContainer}
-            isSignedIn={this.state.isSignedIn}
-            path={'/selectQuestionSet'}
-            currentUser={this.state.currentUser}
-            loadForSeconds={this.loadForSeconds}
-            authState={this.state.authState}
-            setAuthState={this.setAuthState}
-            setLoading={this.setLoading}
-          />
-          <PrivateRoute
-            component={PostSubmit}
-            isSignedIn={this.state.isSignedIn}
-            path={'/thankyou'}
-            loadForSeconds={this.loadForSeconds}
-            setLoading={this.setLoading}
-          />
-          <Caught path={'/caught'} loadForSeconds={this.loadForSeconds} />
-        </Router>
-      </Layout>
+      <Router
+        style={{
+          height: '100%',
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        <Layout isSignedIn={this.state.isSignedIn}>
+          <Loading show={this.state.isLoading} />
+
+          <Switch>
+            <PrivateRoute
+              component={LandingContainer}
+              isSignedIn={this.state.isSignedIn}
+              path={'/landing'}
+              loadForSeconds={this.loadForSeconds}
+              currentUser={this.state.currentUser}
+              setAuthState={this.setAuthState}
+              setLoading={this.setLoading}
+            />
+            <SignIn
+              isSignedIn={this.state.isSignedIn}
+              authState={this.state.authState}
+              setAuthState={this.setAuthState}
+              path={'/signin'}
+              setLoading={this.setLoading}
+            />
+            <SignUp setLoading={this.setLoading} path={'/signup'} />
+            <PrivateRoute
+              isSignedIn={this.state.isSignedIn}
+              component={Demo}
+              currentUser={this.state.currentUser}
+              path={'/demo'}
+              loadForSeconds={this.loadForSeconds}
+              setAuthState={this.setAuthState}
+              setLoading={this.setLoading}
+            />
+            <DemoVideos path={'/demoVideos'} />
+            <PrivateRoute
+              component={ExamContainer}
+              isSignedIn={this.state.isSignedIn}
+              path={'/exam'}
+              currentUser={this.state.currentUser}
+              loadForSeconds={this.loadForSeconds}
+              setLoading={this.setLoading}
+            />
+            <PrivateRoute
+              component={QuestionSetSelectorContainer}
+              isSignedIn={this.state.isSignedIn}
+              path={'/selectQuestionSet'}
+              currentUser={this.state.currentUser}
+              loadForSeconds={this.loadForSeconds}
+              authState={this.state.authState}
+              setAuthState={this.setAuthState}
+              setLoading={this.setLoading}
+            />
+            <PrivateRoute
+              component={PostSubmit}
+              isSignedIn={this.state.isSignedIn}
+              path={'/thankyou'}
+              loadForSeconds={this.loadForSeconds}
+              setLoading={this.setLoading}
+            />
+            <Caught path={'/caught'} loadForSeconds={this.loadForSeconds} />
+            <Route path={'/'}>
+              <Home />
+            </Route>
+          </Switch>
+        </Layout>
+      </Router>
     );
   }
 }

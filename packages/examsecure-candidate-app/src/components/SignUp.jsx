@@ -4,7 +4,7 @@ import { Auth } from 'aws-amplify';
 import backgroundImg from '../static/authbg1.jpg';
 import { Title, TextInput, Button, WhiteCard } from '@examsecure/design-system';
 import colors from '@examsecure/design-system/src/colors';
-import { Link, navigate } from '@reach/router';
+import { Link, useHistory } from 'react-router-dom';
 
 const AuthContainer = styled.div`
   flex: 1;
@@ -64,6 +64,8 @@ const SignUp = ({ setLoading }) => {
   const [stage, setStage] = useState(0); // 0 for sign up stage, 1 for verification stage
   const [verificationCode, setVerificationCode] = useState('');
 
+  const history = useHistory();
+
   const onBlur = () => {};
 
   const handleSignUp = (e) => {
@@ -101,7 +103,7 @@ const SignUp = ({ setLoading }) => {
         console.log(data);
       })
       .then(() => {
-        navigate('/signin');
+        history.push('/signin');
       })
       .catch((err) => {
         console.log(err);
@@ -111,7 +113,6 @@ const SignUp = ({ setLoading }) => {
 
   return (
     <>
-      {console.log(navigate)}
       <AuthContainer>
         <StyledWhiteCard>
           <FlexLeft>

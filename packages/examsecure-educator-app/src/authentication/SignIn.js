@@ -6,7 +6,6 @@ import colors from '@examsecure/design-system/src/colors';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { signIn } from '../actions/auth_actions';
-import ESNavbar from '../components/nav_bar';
 
 const AuthContainer = styled.div`
   min-height: 100vh;
@@ -67,23 +66,31 @@ const SignIn = (props) => {
   };
 
   const { authError, auth } = props;
+
   if (auth.uid) return <Redirect to="/" />;
 
   return (
     <>
-      <ESNavbar />
       <AuthContainer>
         <StyledWhiteCard>
           <FlexLeft>
             <Title value={'Sign In as Educator'} />
             <HelperText>
               <div style={{ paddingBottom: '20px', paddingTop: '16px' }}>
-                For a test drive of the platform, enter "demo@vit.edu" as both
-                the username and password
+                {authError ? (
+                  <div style={{ color: 'red' }}>
+                    {authError.error.message} Please try again.
+                  </div>
+                ) : (
+                  <>
+                    For a test drive of the platform, enter "demo@vit.edu" as
+                    both the username and password
+                  </>
+                )}
               </div>
               <div>
                 Don't have an account?
-                <Link to="/signup"> Create one</Link>
+                <Link to="/sign-up"> Create one</Link>
               </div>
               <div>Forgot Password?</div>
             </HelperText>
@@ -135,6 +142,7 @@ const SignIn = (props) => {
     </>
   );
 };
+
 const mapStateToProps = (state) => {
   return {
     authError: state.auth.authError,

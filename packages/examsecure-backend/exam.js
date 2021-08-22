@@ -1,4 +1,4 @@
-global.fetch = require("node-fetch");
+global.fetch = require('node-fetch');
 
 const { firebaseApiKey } = process.env;
 
@@ -6,8 +6,8 @@ const respond = (httpStatusCode, response) => ({
   isBase64Encoded: false,
   statusCode: httpStatusCode,
   headers: {
-    "Access-Control-Allow-Origin": "*",
-    "Content-Type": "application/json",
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'application/json',
   },
   body: JSON.stringify(response),
 });
@@ -17,7 +17,7 @@ const respond = (httpStatusCode, response) => ({
 exports.startExamHandler = async (event) => {
   const body = JSON.parse(event.body);
 
-  let username = body.username;
+  let username = body.username.replace(/[., $, \[, \], #, \/]/g, '');
   let questionSetID = body.questionSetID;
 
   let firebaseUserExamObjectURL = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}/${questionSetID}.json?auth=${firebaseApiKey}`;
@@ -30,7 +30,7 @@ exports.startExamHandler = async (event) => {
     .then((res) => {
       userExamObj = res;
     })
-    .catch(() => console.log("error"));
+    .catch(() => console.log('error'));
 
   if (userExamObj) {
     userExamObj.loginCount = userExamObj.loginCount + 1;
@@ -45,16 +45,16 @@ exports.startExamHandler = async (event) => {
   }
 
   await fetch(firebaseUserExamObjectURL, {
-    method: "put",
+    method: 'put',
     body: JSON.stringify(userExamObj),
-  }).catch(() => console.log("error"));
+  }).catch(() => console.log('error'));
 
   return respond(200, { startedAt: userExamStartedAt });
 };
 
 exports.endExamHandler = async (event) => {
   const body = JSON.parse(event.body);
-  let username = body.username;
+  let username = body.username.replace(/[., $, \[, \], #, \/]/g, '');
 
   let questionSetID = body.questionSetID;
   let timestamp = Date.now();
@@ -68,22 +68,22 @@ exports.endExamHandler = async (event) => {
     .then((res) => {
       userExamObj = res;
     })
-    .catch(() => console.log("error"));
+    .catch(() => console.log('error'));
 
   userExamObj.endedAt = timestamp;
   userExamObj.examState = 0;
 
   await fetch(firebaseUserExamObjectURL, {
-    method: "put",
+    method: 'put',
     body: JSON.stringify(userExamObj),
-  }).catch(() => console.log("error"));
+  }).catch(() => console.log('error'));
 
-  return respond(200, { status: "done" });
+  return respond(200, { status: 'done' });
 };
 
 exports.checkIsDisqualified = async (event) => {
   const body = JSON.parse(event.body);
-  let username = body.username;
+  let username = body.username.replace(/[., $, \[, \], #, \/]/g, '');
   let isDisqualified = false;
   let questionSetID = body.questionSetID;
   let timestamp = body.timeRemaining;
@@ -96,19 +96,19 @@ exports.checkIsDisqualified = async (event) => {
     .then((res) => {
       isDisqualified = res;
     })
-    .catch(() => console.log("error"));
+    .catch(() => console.log('error'));
 
   await fetch(firebaseLastAliveURL, {
-    method: "put",
+    method: 'put',
     body: `"${timestamp}"`,
-  }).catch(() => console.log("error"));
+  }).catch(() => console.log('error'));
 
   return respond(200, { isDisqualified: isDisqualified });
 };
 
 exports.getLastAlive = async (event) => {
   const body = JSON.parse(event.body);
-  let username = body.username;
+  let username = body.username.replace(/[., $, \[, \], #, \/]/g, '');
   let timeRemaining = null;
   let questionSetID = body.questionSetID;
 
@@ -119,7 +119,7 @@ exports.getLastAlive = async (event) => {
     .then((res) => {
       timeRemaining = res;
     })
-    .catch(() => console.log("error"));
+    .catch(() => console.log('error'));
 
   return respond(200, { lastAlive: timeRemaining });
 };

@@ -1,104 +1,105 @@
-.navContainer{
-  font-size: 18px;
-  padding: 12px 1.8rem !important;
+.navContainer {
+    font-size: 18px;
+    padding: 12px 1.8rem !important;
 }
 
 .navbar-title:hover {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .nav-bar-items {
     color: black;
     padding: 5px;
 }
+
 .nav-bar-items:hover {
     color: black;
     text-decoration: none;
 }
 
-.logo{
-  font-family: 'Playfair Display', sans-serif;
-  font-size: 27px;
-  padding-left: 15px;
-  color: black;
+.logo {
+    font-family: 'Playfair Display', sans-serif;
+    font-size: 27px;
+    padding-left: 15px;
+    color: black;
 }
 
-.heroSectionButton{
-  line-height: 1.5;
-  box-sizing: border-box;
-  border: 0 solid #e2e8f0;
-  text-decoration: inherit;
-  padding: 1.25rem 2rem;
-  font-weight: 700;
-  background-color: #35519f;
-  color: rgb(247, 250, 252);
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
-  transition-duration: 300ms;
-  margin-top: 2rem;
-  display: inline-block;
-  width: 14rem;
-  letter-spacing: 0.025em;
-  text-align: center;
-  border-radius: 9999px;
-  text-decoration: none;
+.heroSectionButton {
+    line-height: 1.5;
+    box-sizing: border-box;
+    border: 0 solid #e2e8f0;
+    text-decoration: inherit;
+    padding: 1.25rem 2rem;
+    font-weight: 700;
+    background-color: #35519f;
+    color: rgb(247, 250, 252);
+    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+    transition-duration: 300ms;
+    margin-top: 2rem;
+    display: inline-block;
+    width: 14rem;
+    letter-spacing: 0.025em;
+    text-align: center;
+    border-radius: 9999px;
+    text-decoration: none;
 }
 
-.heroSectionButton:hover{
-  background-color: #152140;
-  color: rgb(237, 242, 247);
-  text-decoration: none;
+.heroSectionButton:hover {
+    background-color: #152140;
+    color: rgb(237, 242, 247);
+    text-decoration: none;
 }
 
-.heroLogo{
-  width: 280px !important;
+.heroLogo {
+    width: 280px !important;
 }
 
-.buttonicon{
-  padding-right: 10px;
-  width: 40px;
+.buttonicon {
+    padding-right: 10px;
+    width: 40px;
 }
 
-.buttoniconreact{
-  padding-left: 10px;
-  width: 50px;
+.buttoniconreact {
+    padding-left: 10px;
+    width: 50px;
 }
 
 @media only screen and (max-width: 768px) {
-  /* For mobile phones: */
-  .navContainer{
-    padding: 10px;
-  }
+    /* For mobile phones: */
+    .navContainer {
+        padding: 10px;
+    }
 
-  .heroLogo{
-    width: 120px !important;
-  }
+    .heroLogo {
+        width: 120px !important;
+    }
 
-  .heroLogo{
-    display: none;
-  }
+    .heroLogo {
+        display: none;
+    }
 
-  .heroDecoratorBlob{
-    display: none;
-  }
+    .heroDecoratorBlob {
+        display: none;
+    }
 
-  .logo{
-    font-size: 30px;
-  }
+    .logo {
+        font-size: 30px;
+    }
 
-  .navImage{
-    width: 57px;
-    margin-left: 15px;
-  }
+    .navImage {
+        width: 57px;
+        margin-left: 15px;
+    }
 
-  .FeaturesContainer{
-    padding-top: 0!important;
-  }
+    .FeaturesContainer {
+        padding-top: 0 !important;
+    }
 
-  .navContainer{
-    font-size: 1rem !important;
-  }
+    .navContainer {
+        font-size: 1rem !important;
+    }
 
-  .App{
-    margin-top: 50px;
-  }
+    .App {
+        margin-top: 50px;
+    }
 }

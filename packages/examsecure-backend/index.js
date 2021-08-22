@@ -1,6 +1,6 @@
-const AWS = require("aws-sdk");
-const uuid = require("uuid").v4;
-global.fetch = require("node-fetch");
+const AWS = require('aws-sdk');
+const uuid = require('uuid').v4;
+global.fetch = require('node-fetch');
 
 const {
   COLLECTION_ID,
@@ -18,8 +18,8 @@ const respond = (statusCode, response) => ({
   statusCode,
   body: JSON.stringify(response),
   headers: {
-    "Access-Control-Allow-Origin": "*",
-    "Content-Type": "application/json",
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'application/json',
   },
 });
 
@@ -32,7 +32,7 @@ exports.indexHandler = async (event) => {
       .indexFaces({
         CollectionId: COLLECTION_ID,
         ExternalImageId,
-        Image: { Bytes: Buffer.from(body.image, "base64") },
+        Image: { Bytes: Buffer.from(body.image, 'base64') },
       })
       .promise();
 
@@ -65,13 +65,13 @@ const fetchFaces = async (imageBytes) => {
   */
 
   const facesTest = {
-    TestName: "Face Detection",
+    TestName: 'Face Detection',
   };
 
   const detectFaces = () =>
     rekognition
       .detectFaces({
-        Attributes: ["ALL"],
+        Attributes: ['ALL'],
         Image: { Bytes: imageBytes },
       })
       .promise();
@@ -85,7 +85,7 @@ const fetchFaces = async (imageBytes) => {
   } catch (e) {
     console.log(e);
     facesTest.Success = false;
-    facesTest.Details = "Server error";
+    facesTest.Details = 'Server error';
   }
   return facesTest;
 };
@@ -96,9 +96,9 @@ const fetchLabels = async (imageBytes) => {
     Uses Rekognition's DetectLabels functionality
   */
 
-  const objectsOfInterestLabels = OBJECTS_OF_INTEREST_LABELS.trim().split(",");
-  const objectsOfInterestTest = { TestName: "Objects of Interest" };
-  const peopleTest = { TestName: "Person Detection" };
+  const objectsOfInterestLabels = OBJECTS_OF_INTEREST_LABELS.trim().split(',');
+  const objectsOfInterestTest = { TestName: 'Objects of Interest' };
+  const peopleTest = { TestName: 'Person Detection' };
 
   const detectLabels = () =>
     rekognition
@@ -111,27 +111,27 @@ const fetchLabels = async (imageBytes) => {
   try {
     const labels = await detectLabels();
 
-    const people = labels.Labels.find((x) => x.Name === "Person");
+    const people = labels.Labels.find((x) => x.Name === 'Person');
     const nPeople = people ? people.Instances.length : 0;
     peopleTest.Success = nPeople === 1;
     peopleTest.Details = nPeople;
 
     const objectsOfInterest = labels.Labels.filter((x) =>
-      objectsOfInterestLabels.includes(x.Name)
+      objectsOfInterestLabels.includes(x.Name),
     );
     objectsOfInterestTest.Success = objectsOfInterest.length === 0;
     objectsOfInterestTest.Details = objectsOfInterestTest.Success
-      ? "0"
+      ? '0'
       : objectsOfInterest
           .map((x) => x.Name)
           .sort()
-          .join(", ");
+          .join(', ');
   } catch (e) {
     console.log(e);
     objectsOfInterestTest.Success = false;
-    objectsOfInterestTest.Details = "Server error";
+    objectsOfInterestTest.Details = 'Server error';
     peopleTest.Success = false;
-    peopleTest.Details = "Server error";
+    peopleTest.Details = 'Server error';
   }
   return [objectsOfInterestTest, peopleTest];
 };
@@ -146,9 +146,9 @@ const searchForIndexedFaces = async (imageBytes) => {
   */
 
   const faceMatchTest = {
-    TestName: "Person Recognition",
+    TestName: 'Person Recognition',
     Success: false,
-    Details: "0",
+    Details: '0',
   };
 
   const searchFace = () =>
@@ -172,7 +172,7 @@ const searchForIndexedFaces = async (imageBytes) => {
   try {
     const faces = await searchFace();
     const faceDetails = await getFaceByExternalImageId(
-      faces.FaceMatches[0].Face.ExternalImageId
+      faces.FaceMatches[0].Face.ExternalImageId,
     );
 
     if (faceDetails.Item) {
@@ -190,22 +190,22 @@ async function uploadToS3(imageBytes) {
   const s3 = new AWS.S3({ region: REGION });
 
   const base64Data = new Buffer.from(
-    imageBytes.replace(/^data:image\/\w+;base64,/, ""),
-    "base64"
+    imageBytes.replace(/^data:image\/\w+;base64,/, ''),
+    'base64',
   );
   const fileName = uuid();
 
   const params = {
-    Bucket: "triggered-images",
+    Bucket: 'triggered-images',
     Key: `${fileName}.png`,
     Body: base64Data,
-    ACL: "public-read",
-    ContentEncoding: "base64",
+    ACL: 'public-read',
+    ContentEncoding: 'base64',
     ContentType: `image/png`,
   };
 
-  let location = "";
-  let key = "";
+  let location = '';
+  let key = '';
   try {
     const { Location, Key } = await s3.upload(params).promise();
     location = Location;
@@ -222,7 +222,7 @@ async function uploadFlaggedImagetoFirebase(
   username,
   testRes,
   reason,
-  questionSetID
+  questionSetID,
 ) {
   let uniqueID = uuid();
   let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/triggeredUsers/${questionSetID}/${username}/${uniqueID}.json?auth=${firebaseApiKey}`;
@@ -234,58 +234,58 @@ async function uploadFlaggedImagetoFirebase(
   };
 
   await fetch(firebaseURL, {
-    method: "put",
+    method: 'put',
     body: JSON.stringify(data),
-  }).catch(() => console.log("error"));
+  }).catch(() => console.log('error'));
 }
 
 async function checkIfFrameisOffendingAndUpload(
   res,
   image,
   username,
-  questionSetID
+  questionSetID,
 ) {
-  if (res[3]["Success"] === false && res[3]["Details"] === 0) {
+  if (res[3]['Success'] === false && res[3]['Details'] === 0) {
     let s3URL = await uploadToS3(image);
     await uploadFlaggedImagetoFirebase(
       s3URL,
       username,
       res,
       "Face Not Detected in Candidate's Camera Frame",
-      questionSetID
+      questionSetID,
     );
-  } else if (res[1]["Success"] === false && res[3]["Details"] > 1) {
+  } else if (res[1]['Success'] === false && res[3]['Details'] > 1) {
     let s3URL = await uploadToS3(image);
     await uploadFlaggedImagetoFirebase(
       s3URL,
       username,
       res,
       "Multiple People Detected in Candidate's Camera Frame",
-      questionSetID
+      questionSetID,
     );
-  } else if (res[0]["Success"] === false) {
+  } else if (res[0]['Success'] === false) {
     let s3URL = await uploadToS3(image);
     await uploadFlaggedImagetoFirebase(
       s3URL,
       username,
       res,
       "Mobile Phone Detected in Candidate's Camera Frame",
-      questionSetID
+      questionSetID,
     );
-  } else if (res[3]["MoreDetails"][0]) {
+  } else if (res[3]['MoreDetails'][0]) {
     let headPoseAnalysis = isHeadPoseOK(
-      res[3]["MoreDetails"][0]["Pose"].Yaw,
-      res[3]["MoreDetails"][0]["Pose"].Pitch
+      res[3]['MoreDetails'][0]['Pose'].Yaw,
+      res[3]['MoreDetails'][0]['Pose'].Pitch,
     );
 
-    if (headPoseAnalysis !== "OK") {
+    if (headPoseAnalysis !== 'OK') {
       let s3URL = await uploadToS3(image);
       await uploadFlaggedImagetoFirebase(
         s3URL,
         username,
         res,
         headPoseAnalysis,
-        questionSetID
+        questionSetID,
       );
     }
   }
@@ -293,9 +293,9 @@ async function checkIfFrameisOffendingAndUpload(
 
 exports.processHandler = async (event) => {
   const body = JSON.parse(event.body);
-  const username = body.username;
+  const username = body.username.replace(/[., $, \[, \], #, \/]/g, '');
   const questionSetID = body.questionSetID;
-  const imageBytes = Buffer.from(body.image, "base64");
+  const imageBytes = Buffer.from(body.image, 'base64');
 
   const result = await Promise.all([
     fetchLabels(imageBytes),
@@ -309,22 +309,22 @@ exports.processHandler = async (event) => {
     res,
     body.image,
     username,
-    questionSetID
+    questionSetID,
   );
 
   return respond(200, res);
 };
 
 function isHeadPoseOK(yaw, pitch) {
-  let yawDeviation = "";
-  let pitchDeviation = "";
-  let res = "";
+  let yawDeviation = '';
+  let pitchDeviation = '';
+  let res = '';
 
-  if (yaw < -8) yawDeviation += "Right";
-  else if (yaw > 8) yawDeviation += "Left";
+  if (yaw < -8) yawDeviation += 'Right';
+  else if (yaw > 8) yawDeviation += 'Left';
 
-  if (pitch < -11) pitchDeviation += " Down";
-  else if (pitch > 11) pitchDeviation += " Up";
+  if (pitch < -11) pitchDeviation += ' Down';
+  else if (pitch > 11) pitchDeviation += ' Up';
 
   if (yawDeviation && pitchDeviation) {
     res = `The candidate is facing ${yawDeviation} & ${pitchDeviation}`;
@@ -334,7 +334,7 @@ function isHeadPoseOK(yaw, pitch) {
     res = `The candidate is facing ${pitchDeviation}`;
   }
 
-  if (!res) return "OK";
+  if (!res) return 'OK';
 
   return res;
 }
