@@ -1,28 +1,41 @@
 .dash-top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .dash-ct-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 25px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 0;
 }
 
 .dash-ct-bar-left {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .dash-ct-bar-btn button {
-    padding: 8px 15px;
-    border: none;
-    border-radius: 10px;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 10px;
+  background: #e6e6e6;
+  transition-property: all;
+  transition-duration: 0.3s;
+}
+
+.dash-ct-bar-btn button:hover {
+  background: #d9d9d9;
+}
+
+.dash-ct-bar-btn button:active {
+  background: #cccccc;
 }
 
 .dash-ct-bar-btn-active {
-    background: #e6dede;
-    font-weight: 600;
+  background: #bababa !important;
+  transition-property: all;
+  transition-duration: 0.3s;
+  font-weight: 600;
 }
