@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   return (
-    <div>
+    <div className={'dash-wrapper'}>
       <div className="dash-top-bar">
         <Title value={'Your Tests'} />
         <Link to={'/create-new-test'}>

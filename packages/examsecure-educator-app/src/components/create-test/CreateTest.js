@@ -11,7 +11,7 @@ const CreateTest = () => {
   };
 
   return (
-    <div>
+    <div className={'dash-wrapper'}>
       <Title value={'Create New Test'} />
 
       <div className="dash-ct-bar">
@@ -21,6 +21,7 @@ const CreateTest = () => {
               onClick={() => {
                 changeView(0);
               }}
+              className={currentView === 0 ? 'dash-ct-bar-btn-active' : null}
             >
               Overview
             </button>
@@ -30,6 +31,7 @@ const CreateTest = () => {
               onClick={() => {
                 changeView(1);
               }}
+              className={currentView === 1 ? 'dash-ct-bar-btn-active' : null}
             >
               Questions
             </button>

@@ -15,3 +15,14 @@
     display: flex;
     align-items: center;
 }
+
+.dash-ct-bar-btn button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 10px;
+}
+
+.dash-ct-bar-btn-active {
+    background: #e6dede;
+    font-weight: 600;
+}
