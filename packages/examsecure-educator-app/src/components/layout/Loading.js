@@ -1,5 +1,5 @@
 import logo from '../../assets/logo.png';
-import '../../styles/Loading.css';
+import '../../styles/Loading.scss';
 import React from 'react';
 
 const Loading = ({ show }) => {
