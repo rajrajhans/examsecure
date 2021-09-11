@@ -6,11 +6,42 @@
   width: 50%;
   margin: 9% auto;
   text-align: center;
-  border: 1px solid grey;
+  border: 1px solid #868181;
   padding: 25px;
   border-radius: 15px;
 
   button {
     margin-top: 10px;
+  }
+}
+
+.proc-mode-top-bar{
+  display: flex;
+  gap: 80px;
+  padding: 20px 30px 10px 30px;
+  align-items: center;
+  border-bottom: 0.5px solid #c6c4c4;
+}
+
+.proc-mode-top-bar-test-name{
+  font-size: 25px;
+}
+
+.proc-mode-top-bar-test-details{
+  display: flex;
+  gap: 20px;
+  color: #868181;
+  font-size: 16px;
+  flex: 1;
+
+  svg{
+    width: 16px;
+    height: 16px;
+  }
+
+  .copy-link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
   }
 }

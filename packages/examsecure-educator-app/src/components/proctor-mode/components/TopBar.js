@@ -1,4 +1,5 @@
 import React from 'react';
+import { ReactComponent as CopyIcon } from '../../../assets/icons/copy.svg';
 
 const ProctorModeTopBar = () => {
   return (
@@ -7,11 +8,13 @@ const ProctorModeTopBar = () => {
       <div className="proc-mode-top-bar-test-details">
         <div>Ongoing</div>
         <div>|</div>
-        <div>Test Link</div>
+        <div className="copy-link">
+          <CopyIcon /> Test Link
+        </div>
         <div>|</div>
-        <div>Started at 06:09 AM</div>
+        <div>Started at 11/09/21 06:09 AM</div>
         <div>|</div>
-        <div>Ends at 04:20 PM</div>
+        <div>Ends at 11/09/21 04:20 PM</div>
       </div>
     </div>
   );
