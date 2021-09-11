@@ -48,3 +48,24 @@
   font-size: 1rem;
   padding: 20px;
 }
+
+.dash-op-add-invite-emails {
+  padding: 0 !important;
+
+  button, button:focus {
+    background: transparent;
+    border: none;
+    color: #000;
+    font-weight: 800;
+  }
+
+  button:hover {
+    background: #b2b6b9;
+    color: #000;
+  }
+
+  button:active {
+    background: #989898b8 !important;
+    color: black !important;
+  }
+}

@@ -5,6 +5,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import DateTime from 'react-datetime';
+import Button from 'react-bootstrap/Button';
+import InviteCandidateEmails from './InviteCandidateEmails';
 
 // todo: if test is set to be invite only, then show option for adding candidate emails
 
@@ -76,6 +78,12 @@ const OverviewPane = () => {
           </Col>
         </Row>
       </Form>
+      <Row>
+        <Col>
+          <InviteCandidateEmails />
+        </Col>
+        <Col />
+      </Row>
     </Container>
   );
 };
