@@ -4,7 +4,7 @@ import OverviewPane from './OverviewPane';
 import QuestionsPane from './QuestionsPane';
 
 const CreateTest = () => {
-  const [currentView, setCurrentView] = useState(); // 0 for overview, 1 for questions view
+  const [currentView, setCurrentView] = useState(0); // 0 for overview, 1 for questions view
 
   const changeView = (i) => {
     setCurrentView(i);
@@ -37,7 +37,15 @@ const CreateTest = () => {
             </button>
           </div>
         </div>
-        <Button label={'Publish'} variant={'secondary'} />
+        {currentView === 0 ? (
+          <>
+            <Button label={'Publish'} variant={'secondary'} />
+          </>
+        ) : (
+          <>
+            <Button label={'Add a Question'} variant={'secondary'} />
+          </>
+        )}
       </div>
 
       <div className="dash-ct-content">
