@@ -1,11 +1,17 @@
 import React from 'react';
-import ProctorModeTopBar from './components/TopBar';
+import TopBar from './components/TopBar';
+import LeftPanel from './components/LeftPanel';
 
 const ProctorMode = ({ testID }) => {
   return (
-    <div>
-      <ProctorModeTopBar />
-    </div>
+    <>
+      <TopBar />
+
+      <div className="proc-mode-content-container">
+        <LeftPanel />
+        <div className="proc-mode-content">All the other content hereeee</div>
+      </div>
+    </>
   );
 };
 
