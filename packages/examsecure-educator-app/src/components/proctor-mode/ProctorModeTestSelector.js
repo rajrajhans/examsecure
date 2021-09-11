@@ -7,7 +7,7 @@ const ProctorModeTestSelector = () => {
   const router = useHistory();
 
   const handleGoToDashboard = () => {
-    router.push('/proctor-mode?test=123123');
+    router.push('/proctor-mode/proctor_dashboard?test=123123');
   };
 
   return (
