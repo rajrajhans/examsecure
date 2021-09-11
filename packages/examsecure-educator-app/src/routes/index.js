@@ -1,6 +1,6 @@
 import Dashboard from '../components/dashboard/Dashboard';
 import CreateTest from '../components/create-test/CreateTest';
-import ProctorModeLanding from '../components/proctor-mode/ProctorModeLanding';
+import ProctorModeWrapper from '../components/proctor-mode/ProctorModeWrapper';
 
 const routes = [
   {
@@ -15,7 +15,7 @@ const routes = [
   },
   {
     path: '/proctor-mode',
-    component: ProctorModeLanding,
+    component: ProctorModeWrapper,
     title: 'Proctor Mode',
   },
 ];

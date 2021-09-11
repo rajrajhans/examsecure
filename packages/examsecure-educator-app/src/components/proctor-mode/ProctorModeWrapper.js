@@ -4,7 +4,7 @@ import ProctorModeTestSelector from './ProctorModeTestSelector';
 import useQuery from '../../utils/useQuery';
 import ProctorMode from './ProctorMode';
 
-const ProctorModeLanding = () => {
+const ProctorModeWrapper = () => {
   const query = useQuery();
   const testID = query.get('test');
 
@@ -15,4 +15,4 @@ const ProctorModeLanding = () => {
   }
 };
 
-export default ProctorModeLanding;
+export default ProctorModeWrapper;
