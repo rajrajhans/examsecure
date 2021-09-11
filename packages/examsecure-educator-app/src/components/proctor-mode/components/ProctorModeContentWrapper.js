@@ -19,29 +19,48 @@ import QuestionsAnalytics from '../proctor-mode-views/QuestionsAnalytics';
 import TestOverview from '../proctor-mode-views/TestOverview';
 import TestQuestions from '../proctor-mode-views/TestQuestions';
 import ProctorDashboard from '../proctor-mode-views/ProctorDashboard';
+import { Route, Switch } from 'react-router-dom';
+import { useRouteMatch } from 'react-router';
 
-const ProctorModeContentWrapper = ({ currentView }) => {
-  if (currentView === PROC_MODE_CURRENT_CANDIDATES) {
-    return <CurrentCandidates />;
-  } else if (currentView === PROC_MODE_CANDIDATES_TEST_TAKEN) {
-    return <TestTakenCandidates />;
-  } else if (currentView === PROC_MODE_CANDIDATES_TEST_INVITED) {
-    return <InvitedCandidates />;
-  } else if (currentView === PROC_MODE_CANDIDATES_TEST_DISQUALIFIED) {
-    return <DisqualifiedCandidates />;
-  } else if (currentView === PROC_MODE_TEST_REPORTS) {
-    return <TestReports />;
-  } else if (currentView === PROC_MODE_QUESTIONS_ANALYTICS) {
-    return <QuestionsAnalytics />;
-  } else if (currentView === PROC_MODE_TEST_OVERVIEW) {
-    return <TestOverview />;
-  } else if (currentView === PROC_MODE_TEST_QUESTIONS) {
-    return <TestQuestions />;
-  } else if (currentView === PROC_MODE_DASHBOARD) {
-    return <ProctorDashboard />;
-  } else {
-    return <ProctorDashboard />;
-  }
+const ProctorModeContentWrapper = () => {
+  const { path } = useRouteMatch();
+
+  return (
+    <Switch>
+      <Route exact path={path}>
+        <ProctorDashboard />
+      </Route>
+
+      <Route path={`${path}/${PROC_MODE_CURRENT_CANDIDATES}`}>
+        <CurrentCandidates />
+      </Route>
+
+      <Route path={`${path}/${PROC_MODE_CANDIDATES_TEST_TAKEN}`}>
+        <TestTakenCandidates />
+      </Route>
+      <Route path={`${path}/${PROC_MODE_CANDIDATES_TEST_INVITED}`}>
+        <InvitedCandidates />
+      </Route>
+      <Route path={`${path}/${PROC_MODE_CANDIDATES_TEST_DISQUALIFIED}`}>
+        <DisqualifiedCandidates />
+      </Route>
+      <Route path={`${path}/${PROC_MODE_TEST_REPORTS}`}>
+        <TestReports />
+      </Route>
+      <Route path={`${path}/${PROC_MODE_QUESTIONS_ANALYTICS}`}>
+        <QuestionsAnalytics />
+      </Route>
+      <Route path={`${path}/${PROC_MODE_TEST_OVERVIEW}`}>
+        <TestOverview />
+      </Route>
+      <Route path={`${path}/${PROC_MODE_TEST_QUESTIONS}`}>
+        <TestQuestions />
+      </Route>
+      <Route path={`${path}/${PROC_MODE_DASHBOARD}`}>
+        <ProctorDashboard />
+      </Route>
+    </Switch>
+  );
 };
 
 export default ProctorModeContentWrapper;
