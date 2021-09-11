@@ -13,7 +13,7 @@ const ProctorModeTestSelector = () => {
   return (
     <div>
       <div className="proc-dash-wrapper">
-        <div className="proc-dash-top-bar">
+        <div>
           <Title value={'Proctor Dashboard'} />
         </div>
 
