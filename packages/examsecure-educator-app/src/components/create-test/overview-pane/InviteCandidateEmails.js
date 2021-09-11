@@ -13,11 +13,11 @@ const InviteCandidateEmails = () => {
   const addEmail = (e) => {
     e.preventDefault();
     if (emailInput.endsWith('@vit.edu')) {
-      if (emails.includes(emailInput)) {
+      if (!emails.includes(emailInput)) {
         setEmails((prevState) => [...prevState, emailInput]);
         setEmailInput('');
       } else {
-        alert('To ');
+        alert(`${emailInput} is already invited.`);
       }
     } else {
       alert(
