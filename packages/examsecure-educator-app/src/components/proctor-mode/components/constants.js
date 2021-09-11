@@ -1,5 +1,5 @@
 export const PROC_MODE_DASHBOARD = 'proctor_dashboard';
-export const PROC_MODE_CURRENT_CANDIDATES_ = 'current_candidates';
+export const PROC_MODE_CURRENT_CANDIDATES = 'current_candidates';
 export const PROC_MODE_CANDIDATES_TEST_TAKEN = 'candidates_test_taken';
 export const PROC_MODE_CANDIDATES_TEST_INVITED = 'invited_candidates';
 export const PROC_MODE_CANDIDATES_TEST_DISQUALIFIED = 'disqualified_candidates';

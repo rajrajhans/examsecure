@@ -7,9 +7,10 @@ import ProctorMode from './ProctorMode';
 const ProctorModeWrapper = () => {
   const query = useQuery();
   const testID = query.get('test');
+  const view = query.get('view');
 
   if (testID) {
-    return <ProctorMode testID={testID} />;
+    return <ProctorMode testID={testID} view={view} />;
   } else {
     return <ProctorModeTestSelector />;
   }
