@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export default function useForm(initialState) {
+export default function useForm(initialState = {}) {
   const [inputState, setInputState] = useState();
   const initialValues = Object.values(initialState).join('');
 
