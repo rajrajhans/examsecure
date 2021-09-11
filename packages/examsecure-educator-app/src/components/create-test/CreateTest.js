@@ -3,13 +3,19 @@ import { Button, Title } from '@examsecure/design-system';
 import OverviewPane from './overview-pane/OverviewPane';
 import QuestionsPane from './questions-pane/QuestionsPane';
 import AddNewQuestionModal from './questions-pane/add-question-modal/AddNewQuestionModal';
+import PublishTestModal from './overview-pane/PublishTestModal';
 
 const CreateTest = () => {
   const [currentView, setCurrentView] = useState(0); // 0 for overview, 1 for questions view
+
   const [
     isAddNewQuestionModalVisible,
     setIsAddNewQuestionModalVisible,
   ] = useState(false);
+
+  const [isPublishTestModalVisible, setIsPublishTestModalVisible] = useState(
+    false,
+  );
 
   const changeView = (i) => {
     setCurrentView(i);
@@ -17,6 +23,10 @@ const CreateTest = () => {
 
   const toggleAddNewQuestionModal = () => {
     setIsAddNewQuestionModalVisible((prevState) => !prevState);
+  };
+
+  const togglePublishTestModal = () => {
+    setIsPublishTestModalVisible((prevState) => !prevState);
   };
 
   return (
@@ -48,7 +58,11 @@ const CreateTest = () => {
         </div>
         {currentView === 0 ? (
           <>
-            <Button label={'Publish'} variant={'secondary'} />
+            <Button
+              label={'Publish'}
+              variant={'secondary'}
+              onClick={togglePublishTestModal}
+            />
           </>
         ) : (
           <>
@@ -65,6 +79,10 @@ const CreateTest = () => {
         {currentView === 0 ? (
           <>
             <OverviewPane />
+            <PublishTestModal
+              show={isPublishTestModalVisible}
+              onModalHide={togglePublishTestModal}
+            />
           </>
         ) : (
           <>
