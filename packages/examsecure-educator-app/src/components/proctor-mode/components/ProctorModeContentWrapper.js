@@ -18,7 +18,7 @@ import TestReports from '../proctor-mode-views/TestReports';
 import QuestionsAnalytics from '../proctor-mode-views/QuestionsAnalytics';
 import TestOverview from '../proctor-mode-views/TestOverview';
 import TestQuestions from '../proctor-mode-views/TestQuestions';
-import ProctorDashboard from '../proctor-mode-views/ProctorDashboard';
+import ProctorDashboard from '../proctor-mode-views/proctor-dashboard/ProctorDashboard';
 import { Route, Switch } from 'react-router-dom';
 import { useRouteMatch } from 'react-router';
 

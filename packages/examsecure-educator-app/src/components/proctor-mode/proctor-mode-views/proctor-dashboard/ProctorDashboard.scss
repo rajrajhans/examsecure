@@ -1,0 +1,70 @@
+.proc-dash-top-bar {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 40px;
+}
+
+.proc-dash-top-bar-box {
+  padding: 20px;
+  width: 250px;
+  font-size: 16px;
+  background: #E5E9F6;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+}
+
+.proc-dash-top-bar-box-num {
+  font-size: 34px;
+}
+
+.proc-dash-flagged-images-text {
+  margin: 15px 0;
+  color: #868181;
+}
+
+.proc-dash-flagged-images {
+  padding: 20px;
+}
+
+.proc-dash-flagged-image-record {
+  display: flex;
+  justify-content: space-between;
+  background: rgba(179, 180, 184, 0.25);
+  padding: 25px;
+  border-radius: 20px;
+  margin: 20px 0;
+
+  button {
+    padding: 5px 15px;
+    border-radius: 8px;
+    background: rgba(196, 196, 196, 0.65);
+    font-size: 16px;
+  }
+}
+
+.proc-dash-flagged-image-src {
+  padding: 10px;
+  width: 200px;
+
+  img{
+    max-width: 180px;
+  }
+}
+
+.proc-dash-flagged-image-details {
+  flex: 1;
+  padding: 0 10px;
+}
+
+.proc-dash-flagged-image-details-btn {
+  margin-top: 15px;
+}
+
+.proc-dash-flagged-image-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
