@@ -1,6 +1,16 @@
 .proc-mode-left-panel {
   padding: 10px 5px 10px 10px;
   border-right: 0.5px solid #c6c4c4;
+
+  a,
+  a:link,
+  a:visited,
+  a:hover,
+  a:active {
+    color: inherit;
+    text-decoration: inherit;
+    font-weight: inherit;
+  }
 }
 
 .proc-mode-left-panel-item {
