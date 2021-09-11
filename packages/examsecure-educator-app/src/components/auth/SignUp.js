@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import backgroundImg from '../assets/authbg1.jpg';
+import backgroundImg from '../../assets/authbg1.jpg';
 import { Title, TextInput, Button, WhiteCard } from '@examsecure/design-system';
 import colors from '@examsecure/design-system/src/colors';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import { signUp } from '../actions/auth_actions.js';
+import { signUp } from '../../actions/auth_actions.js';
 
 const AuthContainer = styled.div`
   min-height: 100vh;

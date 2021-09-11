@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import routes from './routes';
-import SignIn from './authentication/SignIn';
-import SignUp from './authentication/SignUp';
+import SignIn from './components/auth/SignIn';
+import SignUp from './components/auth/SignUp';
 import PrivateRoute from './components/helpers/PrivateRoute';
 import Layout from './components/layout/Layout';
 

@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
     <>
       <Loading show={isLoading} />
       <NavBar />
-      {children}
+      <div className="content-wrapper">{children}</div>
     </>
   );
 };

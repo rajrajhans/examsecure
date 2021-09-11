@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-datetime/css/react-datetime.css';
+import './styles/index.scss';
 import rootReducer from './reducers/rootReducer';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider, useSelector } from 'react-redux';
@@ -16,8 +18,9 @@ import {
   getFirebase,
   isLoaded,
 } from 'react-redux-firebase';
-import fbConfig from './config/firebase_config';
+import fbConfig from './firebase_config';
 import firebase from 'firebase/app';
+import Loading from './components/layout/Loading';
 
 const store = createStore(
   rootReducer,
@@ -46,7 +49,7 @@ const rrfProps = {
 
 function AuthIsLoaded({ children }) {
   const auth = useSelector((state) => state.firebase.auth);
-  if (!isLoaded(auth)) return <div>Loading Screen...</div>;
+  if (!isLoaded(auth)) return <Loading show={true} />;
   return children;
 }
 

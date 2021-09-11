@@ -1,0 +1,107 @@
+.dash-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dash-ct-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 0 0 0;
+}
+
+.dash-ct-bar-left {
+  display: flex;
+  align-items: center;
+}
+
+.dash-ct-bar-btn button {
+  padding: 8px 35px;
+  border: none;
+  background: #e6e6e6;
+  transition-property: all;
+  transition-duration: 0.3s;
+}
+
+.dash-ct-bar-btn button:hover {
+  background: #d9d9d9;
+}
+
+.dash-ct-bar-btn button:active {
+  background: #cccccc;
+}
+
+.dash-ct-bar-btn-active {
+  background: #bababa !important;
+  transition-property: all;
+  transition-duration: 0.3s;
+  font-weight: 600;
+}
+
+.dash-ct-content {
+  border: 1px solid #bababa;
+  border-top-color: #e3e2e2;
+}
+
+.dash-op-container {
+  font-size: 1rem;
+  padding: 20px;
+}
+
+.dash-op-add-invite-emails {
+  padding: 0 !important;
+
+  button, button:focus {
+    background: transparent;
+    border: none;
+    color: #000;
+    font-weight: 800;
+  }
+
+  button:hover {
+    background: #b2b6b9;
+    color: #000;
+  }
+
+  button:active {
+    background: #989898b8 !important;
+    color: black !important;
+  }
+}
+
+.dash-single-test-view {
+  box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  margin: 30px 0;
+  display: flex;
+}
+
+.dash-single-test-view-left {
+  flex: 1;
+}
+
+.dash-single-test-view-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  button {
+    font-size: 16px;
+    border-radius: 12px;
+    background: rgba(196, 196, 196, 0.65);
+  }
+}
+
+.dash-single-test-view-left-test-details {
+  display: flex;
+  gap: 25px;
+  margin-top: 10px;
+  font-size: 16px;
+  color: #868181;
+}
+
+.dash-single-test-view-left-test-name {
+  font-weight: 600;
+  font-size: 19px;
+}
