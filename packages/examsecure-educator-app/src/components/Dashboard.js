@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Title } from '@examsecure/design-system';
-import '../styles/Dashboard.scss';
+import './Dashboard.scss';
 import { Link } from 'react-router-dom';
 
 const Dashboard = () => {

@@ -2,7 +2,7 @@ import BootstrapNavbar from 'react-bootstrap/Navbar';
 import React from 'react';
 import logo from '../../assets/logo.png';
 import { Nav } from 'react-bootstrap';
-import '../../styles/header.scss';
+import './NavBar.scss';
 import { Link, useHistory } from 'react-router-dom';
 import { connect, useSelector } from 'react-redux';
 import { signOut } from '../../actions/auth_actions';
