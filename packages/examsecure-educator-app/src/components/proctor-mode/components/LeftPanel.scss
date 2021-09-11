@@ -18,11 +18,11 @@
   background: rgba(179, 180, 184, 0.4);
 }
 
-.proc-mode-left-panel-item:active {
+.proc-mode-left-panel-item:active, .proc-mode-left-panel-item-active {
   background: rgba(179, 180, 184, 0.6);
 }
 
-.proc-mode-left-panel-title{
+.proc-mode-left-panel-title {
   color: rgba(134, 129, 129, 0.7);
   letter-spacing: 2px;
   text-transform: uppercase;

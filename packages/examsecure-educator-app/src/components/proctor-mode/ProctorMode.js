@@ -14,7 +14,10 @@ const ProctorMode = ({ testID, view }) => {
     <>
       <TopBar />
       <div className="proc-mode-content-container">
-        <LeftPanel changeCurrentView={changeCurrentView} />
+        <LeftPanel
+          currentView={currentView}
+          changeCurrentView={changeCurrentView}
+        />
         <div className="proc-mode-content">
           <ProctorModeContentWrapper currentView={currentView} />
         </div>
