@@ -11,7 +11,7 @@ function App() {
     <Router>
       <Switch>
         {routes.map((route, index) => (
-          <PrivateRoute key={index} path={route.path} exact>
+          <PrivateRoute key={index} path={route.path} exact={route.exact}>
             <Layout>
               <route.component />
             </Layout>
