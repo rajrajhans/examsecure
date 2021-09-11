@@ -1,0 +1,25 @@
+.proc-dash-wrapper {
+  padding: 20px 55px;
+}
+
+.proc-test-selector-container {
+  width: 50%;
+  margin: 9% auto;
+  text-align: center;
+  border: 1px solid #868181;
+  padding: 25px;
+  border-radius: 15px;
+
+  button {
+    margin-top: 10px;
+  }
+}
+
+.proc-mode-content-container {
+  display: flex;
+}
+
+.proc-mode-content {
+  padding: 10px 10px;
+  flex: 1;
+}

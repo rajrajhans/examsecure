@@ -12,6 +12,22 @@ const Navbar = (props) => {
   const router = useHistory();
   const isSignedIn = !!auth.uid;
 
+  const NavbarItem = ({ name, path }) => (
+    <li>
+      <Nav.Link
+        onClick={() => {
+          router.push(path);
+        }}
+        className={`nav-bar-items ${
+          path === router.location.pathname ? 'active' : ''
+        }`}
+        style={{ cursor: 'pointer' }}
+      >
+        {name}
+      </Nav.Link>
+    </li>
+  );
+
   return (
     <BootstrapNavbar
       bg={'light'}
@@ -38,6 +54,10 @@ const Navbar = (props) => {
         <Nav>
           {isSignedIn ? (
             <>
+              <NavbarItem name={'Your Tests'} path={'/'} />
+              <NavbarItem name={'Create New Test'} path={'/create-new-test'} />
+              <NavbarItem name={'Proctor Mode'} path={'/proctor-mode'} />
+
               <li>
                 <Nav.Link
                   onClick={props.signOut}

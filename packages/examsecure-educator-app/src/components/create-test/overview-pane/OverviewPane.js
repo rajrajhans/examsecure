@@ -28,7 +28,7 @@ const OverviewPane = () => {
             <Form.Group>
               <Form.Label>Test Duration</Form.Label>
               <InputGroup>
-                <Form.Control type="number" placeholder="60" />
+                <Form.Control type="number" placeholder="60" min="0" />
                 <InputGroup.Text>mins</InputGroup.Text>
               </InputGroup>
             </Form.Group>

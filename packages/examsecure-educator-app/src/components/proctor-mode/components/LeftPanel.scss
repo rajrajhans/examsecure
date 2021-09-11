@@ -1,0 +1,42 @@
+.proc-mode-left-panel {
+  padding: 10px 5px 10px 10px;
+  border-right: 0.5px solid #c6c4c4;
+
+  a,
+  a:link,
+  a:visited,
+  a:hover,
+  a:active {
+    color: inherit;
+    text-decoration: inherit;
+    font-weight: inherit;
+  }
+}
+
+.proc-mode-left-panel-item {
+  width: 200px;
+  padding: 5px 10px 5px 15px;
+  margin: 5px 5px;
+  background: rgba(179, 180, 184, 0.2);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.2s ease;
+}
+
+.proc-mode-left-panel-item:hover {
+  background: rgba(179, 180, 184, 0.4);
+}
+
+.proc-mode-left-panel-item:active, .proc-mode-left-panel-item-active {
+  background: rgba(179, 180, 184, 0.6);
+}
+
+.proc-mode-left-panel-title {
+  color: rgba(134, 129, 129, 0.7);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-left: 10px;
+  font-size: 15px;
+  margin-top: 15px;
+}
