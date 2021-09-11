@@ -3,7 +3,7 @@ import { Button } from '@examsecure/design-system';
 
 // todo: show more details modal when user clicks on the image as well
 
-const FlaggedImageRecord = () => {
+const FlaggedImageRecord = ({ archived }) => {
   return (
     <div className="proc-dash-flagged-image-record">
       <div className="proc-dash-flagged-image-src">
@@ -31,9 +31,14 @@ const FlaggedImageRecord = () => {
           <Button label={'More Details'} variant={'secondary'} />
         </div>
       </div>
+
       <div className="proc-dash-flagged-image-actions">
-        <Button label={'Disqualify'} variant={'secondary'} />
-        <Button label={'Archive'} variant={'secondary'} />
+        {!archived && (
+          <>
+            <Button label={'Disqualify'} variant={'secondary'} />
+            <Button label={'Archive'} variant={'secondary'} />
+          </>
+        )}
       </div>
     </div>
   );

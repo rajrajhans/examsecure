@@ -22,7 +22,14 @@ const ProctorDashboard = () => {
           </div>
 
           {[1, 2, 3, 4, 5, 6].map((i) => (
-            <FlaggedImageRecord key={i} />
+            <FlaggedImageRecord key={i} archived={false} />
+          ))}
+        </div>
+
+        <div className="proc-dash-flagged-images">
+          <Title value={'Flagged Images (Archived)'} />
+          {[14, 235, 623].map((i) => (
+            <FlaggedImageRecord key={i} archived={true} />
           ))}
         </div>
       </div>
