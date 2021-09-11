@@ -12,55 +12,80 @@ import {
   PROC_MODE_TEST_REPORTS,
 } from './constants';
 import { useRouteMatch } from 'react-router';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const ProctorModeLeftPanel = ({ testID }) => {
   const { url } = useRouteMatch();
+  const { pathname } = useLocation();
 
   const generateLink = (path) => `${url}/${path}?test=${testID}`;
+  const generateClassName = (path) =>
+    `proc-mode-left-panel-item ${
+      pathname.endsWith(path) ? 'proc-mode-left-panel-item-active' : ''
+    }`;
 
   return (
     <div className="proc-mode-left-panel">
       <Link to={generateLink(PROC_MODE_DASHBOARD)}>
-        <div className={`proc-mode-left-panel-item`}>Proctor Mode</div>
+        <div className={generateClassName(PROC_MODE_DASHBOARD)}>
+          Proctor Mode
+        </div>
       </Link>
 
       <div className="proc-mode-left-panel-title">Candidates</div>
 
       <Link to={generateLink(PROC_MODE_CURRENT_CANDIDATES)}>
-        <div className={`proc-mode-left-panel-item`}>Currently Taking (10)</div>
+        <div className={generateClassName(PROC_MODE_CURRENT_CANDIDATES)}>
+          Currently Taking (10)
+        </div>
       </Link>
 
       <Link to={generateLink(PROC_MODE_CANDIDATES_TEST_TAKEN)}>
-        <div className={`proc-mode-left-panel-item`}>Test Taken (5)</div>
+        <div className={generateClassName(PROC_MODE_CANDIDATES_TEST_TAKEN)}>
+          Test Taken (5)
+        </div>
       </Link>
 
       <Link to={generateLink(PROC_MODE_CANDIDATES_TEST_INVITED)}>
-        <div className={`proc-mode-left-panel-item`}>Invited (5)</div>
+        <div className={generateClassName(PROC_MODE_CANDIDATES_TEST_INVITED)}>
+          Invited (5)
+        </div>
       </Link>
 
       <Link to={generateLink(PROC_MODE_CANDIDATES_TEST_DISQUALIFIED)}>
-        <div className={`proc-mode-left-panel-item`}>Disqualified (5)</div>
+        <div
+          className={generateClassName(PROC_MODE_CANDIDATES_TEST_DISQUALIFIED)}
+        >
+          Disqualified (5)
+        </div>
       </Link>
 
       <div className="proc-mode-left-panel-title">Analytics</div>
 
       <Link to={generateLink(PROC_MODE_TEST_REPORTS)}>
-        <div className={`proc-mode-left-panel-item`}>Test Reports</div>
+        <div className={generateClassName(PROC_MODE_TEST_REPORTS)}>
+          Test Reports
+        </div>
       </Link>
 
       <Link to={generateLink(PROC_MODE_QUESTIONS_ANALYTICS)}>
-        <div className={`proc-mode-left-panel-item`}>Questions Analytics</div>
+        <div className={generateClassName(PROC_MODE_QUESTIONS_ANALYTICS)}>
+          Questions Analytics
+        </div>
       </Link>
 
       <div className="proc-mode-left-panel-title">Test Details</div>
 
       <Link to={generateLink(PROC_MODE_TEST_OVERVIEW)}>
-        <div className={`proc-mode-left-panel-item`}>Test Overview</div>
+        <div className={generateClassName(PROC_MODE_TEST_OVERVIEW)}>
+          Test Overview
+        </div>
       </Link>
 
       <Link to={generateLink(PROC_MODE_TEST_QUESTIONS)}>
-        <div className={`proc-mode-left-panel-item`}>Questions</div>
+        <div className={generateClassName(PROC_MODE_TEST_QUESTIONS)}>
+          Questions
+        </div>
       </Link>
     </div>
   );
