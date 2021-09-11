@@ -64,7 +64,7 @@ const ProctorModeLeftPanel = ({ testID }) => {
 
       <Link to={generateLink(PROC_MODE_TEST_REPORTS)}>
         <div className={generateClassName(PROC_MODE_TEST_REPORTS)}>
-          Test Reports
+          Test Analytics
         </div>
       </Link>
 
