@@ -69,8 +69,8 @@ const OverviewPane = () => {
             <Form.Group>
               <Form.Label>Email Test Report to candidates?</Form.Label>
               <Form.Control as={'select'} required>
-                <option value={'invite'}>No</option>
-                <option value={'open'}>Yes</option>
+                <option value={'no'}>No</option>
+                <option value={'yes'}>Yes</option>
               </Form.Control>
             </Form.Group>
           </Col>
