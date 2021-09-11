@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
 import { Form, InputGroup } from 'react-bootstrap';
+import { Button as ESButton } from '@examsecure/design-system';
 
 const AddNewQuestionModal = ({ show, onModalHide }) => {
   return (
@@ -111,12 +111,12 @@ const AddNewQuestionModal = ({ show, onModalHide }) => {
       </Modal.Body>
 
       <Modal.Footer>
-        <Button variant="secondary" onClick={onModalHide}>
-          Close
-        </Button>
-        <Button variant="primary" onClick={onModalHide}>
-          Save Changes
-        </Button>
+        <ESButton variant="secondary" onClick={onModalHide} label={'Close'} />
+        <ESButton
+          variant="primary"
+          onClick={onModalHide}
+          label={'Save Changes'}
+        />
       </Modal.Footer>
     </Modal>
   );
