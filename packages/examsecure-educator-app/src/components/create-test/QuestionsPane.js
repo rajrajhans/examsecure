@@ -1,5 +1,6 @@
 import React from 'react';
 import SingleQuestion from './SingleQuestion';
+import './QuestionsPane.scss';
 
 const DEMO_QUESTION = {
   questionText:
@@ -9,7 +10,7 @@ const DEMO_QUESTION = {
 };
 
 const QuestionsPaneTopBar = () => (
-  <div className={'dash-qp-top-bar'}>
+  <div className="dash-qp-top-bar">
     <div className="dash-qp-top-bar-left">Total Questions Added: 3</div>
 
     <div className="dash-qp-top-bar-right">
@@ -24,9 +25,11 @@ const QuestionsPane = () => {
   return (
     <div>
       <QuestionsPaneTopBar />
-      {[1, 2, 3, 4, 5, 6].map((question) => (
-        <SingleQuestion question={DEMO_QUESTION} key={question} />
-      ))}
+      <div className="dash-qp-questions">
+        {[1, 2, 3, 4, 5, 6].map((question) => (
+          <SingleQuestion question={DEMO_QUESTION} key={question} />
+        ))}
+      </div>
     </div>
   );
 };
