@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Title } from '@examsecure/design-system';
-import OverviewPane from './OverviewPane';
-import QuestionsPane from './QuestionsPane';
-import AddNewQuestionModal from './AddNewQuestionModal';
+import OverviewPane from './overview-pane/OverviewPane';
+import QuestionsPane from './questions-pane/QuestionsPane';
+import AddNewQuestionModal from './questions-pane/add-question-modal/AddNewQuestionModal';
 
 const CreateTest = () => {
   const [currentView, setCurrentView] = useState(0); // 0 for overview, 1 for questions view

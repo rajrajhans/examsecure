@@ -1,6 +1,6 @@
 import React from 'react';
-import { ReactComponent as EditIcon } from '../../assets/icons/edit.svg';
-import { ReactComponent as DeleteIcon } from '../../assets/icons/trash.svg';
+import { ReactComponent as EditIcon } from '../../../assets/icons/edit.svg';
+import { ReactComponent as DeleteIcon } from '../../../assets/icons/trash.svg';
 
 const SingleQuestion = ({ question }) => {
   return (
