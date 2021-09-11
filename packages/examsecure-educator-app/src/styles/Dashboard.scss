@@ -8,7 +8,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 25px 0;
+  padding: 25px 0 0 0;
 }
 
 .dash-ct-bar-left {
@@ -17,9 +17,8 @@
 }
 
 .dash-ct-bar-btn button {
-  padding: 8px 15px;
+  padding: 8px 35px;
   border: none;
-  border-radius: 10px;
   background: #e6e6e6;
   transition-property: all;
   transition-duration: 0.3s;
@@ -38,4 +37,14 @@
   transition-property: all;
   transition-duration: 0.3s;
   font-weight: 600;
+}
+
+.dash-ct-content {
+  border: 1px solid #bababa;
+  border-top-color: #e3e2e2;
+  padding: 20px;
+}
+
+.dash-op-container {
+  font-size: 1rem;
 }
