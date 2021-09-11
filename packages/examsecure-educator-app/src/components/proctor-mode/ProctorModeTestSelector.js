@@ -3,7 +3,7 @@ import { Button, Title } from '@examsecure/design-system';
 import { Form } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
-const ProctorModeSelectTest = () => {
+const ProctorModeTestSelector = () => {
   const router = useHistory();
 
   const handleGoToDashboard = () => {
@@ -44,4 +44,4 @@ const ProctorModeSelectTest = () => {
   );
 };
 
-export default ProctorModeSelectTest;
+export default ProctorModeTestSelector;

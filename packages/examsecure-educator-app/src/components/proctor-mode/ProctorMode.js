@@ -1,18 +1,12 @@
 import React from 'react';
-import './ProctorMode.scss';
-import ProctorModeSelectTest from './ProctorModeSelectTest';
-import useQuery from '../../utils/useQuery';
-import TestProctorMode from './TestProctorMode';
+import ProctorModeTopBar from './components/TopBar';
 
-const ProctorMode = () => {
-  const query = useQuery();
-  const testID = query.get('test');
-
-  if (testID) {
-    return <TestProctorMode testID={testID} />;
-  } else {
-    return <ProctorModeSelectTest />;
-  }
+const ProctorMode = ({ testID }) => {
+  return (
+    <div>
+      <ProctorModeTopBar />
+    </div>
+  );
 };
 
 export default ProctorMode;
