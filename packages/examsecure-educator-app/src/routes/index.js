@@ -1,4 +1,4 @@
-import Dashboard from '../components/Dashboard';
+import Dashboard from '../components/dashboard/Dashboard';
 import CreateTest from '../components/create-test/CreateTest';
 
 const routes = [
