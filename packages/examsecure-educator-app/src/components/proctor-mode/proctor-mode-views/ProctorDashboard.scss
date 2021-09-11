@@ -1,0 +1,19 @@
+.proc-dash-top-bar{
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.proc-dash-top-bar-box {
+  padding: 20px;
+  width: 200px;
+  background: #E5E9F6;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+}
+
+.proc-dash-top-bar-box-num{
+  font-size: 34px;
+}
