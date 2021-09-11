@@ -1,5 +1,6 @@
 import React from 'react';
 import { ReactComponent as CopyIcon } from '../../../assets/icons/copy.svg';
+import './TopBar.scss';
 
 const ProctorModeTopBar = () => {
   return (
