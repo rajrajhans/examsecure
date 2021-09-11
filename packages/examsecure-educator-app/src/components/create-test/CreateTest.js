@@ -2,12 +2,21 @@ import React, { useState } from 'react';
 import { Button, Title } from '@examsecure/design-system';
 import OverviewPane from './OverviewPane';
 import QuestionsPane from './QuestionsPane';
+import AddNewQuestionModal from './AddNewQuestionModal';
 
 const CreateTest = () => {
   const [currentView, setCurrentView] = useState(0); // 0 for overview, 1 for questions view
+  const [
+    isAddNewQuestionModalVisible,
+    setIsAddNewQuestionModalVisible,
+  ] = useState(false);
 
   const changeView = (i) => {
     setCurrentView(i);
+  };
+
+  const toggleAddNewQuestionModal = () => {
+    setIsAddNewQuestionModalVisible((prevState) => !prevState);
   };
 
   return (
@@ -43,7 +52,11 @@ const CreateTest = () => {
           </>
         ) : (
           <>
-            <Button label={'Add a Question'} variant={'secondary'} />
+            <Button
+              label={'Add a Question'}
+              variant={'secondary'}
+              onClick={toggleAddNewQuestionModal}
+            />
           </>
         )}
       </div>
@@ -56,6 +69,10 @@ const CreateTest = () => {
         ) : (
           <>
             <QuestionsPane />
+            <AddNewQuestionModal
+              show={isAddNewQuestionModalVisible}
+              onModalHide={toggleAddNewQuestionModal}
+            />
           </>
         )}
       </div>
