@@ -3,12 +3,16 @@ import { Form, InputGroup } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import DateTime from 'react-datetime';
+import DateTime from '../../helpers/DateTimeWrapper';
 import InviteCandidateEmails from './InviteCandidateEmails';
 
 // todo: if test is set to be invite only, then show option for adding candidate emails
 
-const OverviewPane = ({ testDetailsInput, handleTestDetailsInputChange }) => {
+const OverviewPane = ({
+  testDetailsInput,
+  handleTestDetailsInputChange,
+  handleTestDateTimeChange,
+}) => {
   return (
     <Container fluid className={'dash-op-container'}>
       <Form>
@@ -46,14 +50,28 @@ const OverviewPane = ({ testDetailsInput, handleTestDetailsInputChange }) => {
           <Col>
             <Form.Group>
               <Form.Label>Starts On</Form.Label>
-              <DateTime />
+              <DateTime
+                inputProps={{
+                  placeholder: 'Test Start Time & Date',
+                  name: 'test_starts_at',
+                }}
+                name={'test_starts_at'}
+                onDateTimeChange={handleTestDateTimeChange}
+              />
             </Form.Group>
           </Col>
 
           <Col>
             <Form.Group>
               <Form.Label>Ends On</Form.Label>
-              <DateTime />
+              <DateTime
+                inputProps={{
+                  placeholder: 'Test Start Time & Date',
+                  name: 'test_ends_at',
+                }}
+                name={'test_ends_at'}
+                onDateTimeChange={handleTestDateTimeChange}
+              />
             </Form.Group>
           </Col>
         </Row>

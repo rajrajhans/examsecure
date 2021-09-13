@@ -6,7 +6,11 @@ import AddNewQuestionModal from './questions-pane/add-question-modal/AddNewQuest
 import PublishTestModal from './overview-pane/PublishTestModal';
 import withCreateTestState from './withCreateTestState';
 
-const CreateTest = ({ testDetailsInput, handleTestDetailsInputChange }) => {
+const CreateTest = ({
+  testDetailsInput,
+  handleTestDetailsInputChange,
+  handleTestDateTimeChange,
+}) => {
   const [currentView, setCurrentView] = useState(0); // 0 for overview, 1 for questions view
 
   const [
@@ -82,6 +86,7 @@ const CreateTest = ({ testDetailsInput, handleTestDetailsInputChange }) => {
             <OverviewPane
               testDetailsInput={testDetailsInput}
               handleTestDetailsInputChange={handleTestDetailsInputChange}
+              handleTestDateTimeChange={handleTestDateTimeChange}
             />
             <PublishTestModal
               show={isPublishTestModalVisible}

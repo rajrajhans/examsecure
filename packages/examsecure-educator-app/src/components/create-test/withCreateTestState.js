@@ -9,9 +9,11 @@ const initialTestDetails = {
 };
 
 const withCreateTestState = (Component) => (props) => {
-  const [testDetailsInput, handleTestDetailsInputChange] = useForm(
-    initialTestDetails,
-  );
+  const [
+    testDetailsInput,
+    handleTestDetailsInputChange,
+    handleTestDateTimeChange,
+  ] = useForm(initialTestDetails);
 
   console.log(testDetailsInput);
 
@@ -20,6 +22,7 @@ const withCreateTestState = (Component) => (props) => {
       {...props}
       testDetailsInput={testDetailsInput}
       handleTestDetailsInputChange={handleTestDetailsInputChange}
+      handleTestDateTimeChange={handleTestDateTimeChange}
     />
   );
 };
