@@ -1,4 +1,4 @@
-import { startLoading, stopLoading } from './loading_actions';
+import { startLoading, stopLoading } from './loading';
 
 export const create_test_action = (testDetails) => {
   return (dispatch, getState, { getFirebase }) => {

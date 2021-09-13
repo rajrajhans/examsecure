@@ -1,4 +1,4 @@
-import { startLoading, stopLoading } from './loading_actions';
+import { startLoading, stopLoading } from './loading';
 
 export const signIn = (credentials) => {
   return (dispatch, getState, { getFirebase }) => {

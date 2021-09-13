@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import { Form } from 'react-bootstrap';
 import { Button as ESButton } from '@examsecure/design-system';
 import { useDispatch } from 'react-redux';
-import { create_test_action } from '../../../actions/create_tests';
+import { create_test_action } from '../../../action-creators/create_tests';
 import { useHistory } from 'react-router-dom';
 
 const PublishTestModal = ({ show, onModalHide, testDetailsInput }) => {
