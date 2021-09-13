@@ -91,6 +91,7 @@ const CreateTest = ({
             <PublishTestModal
               show={isPublishTestModalVisible}
               onModalHide={togglePublishTestModal}
+              testDetailsInput={testDetailsInput}
             />
           </>
         ) : (
