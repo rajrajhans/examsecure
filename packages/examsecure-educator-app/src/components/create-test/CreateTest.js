@@ -6,7 +6,7 @@ import AddNewQuestionModal from './questions-pane/add-question-modal/AddNewQuest
 import PublishTestModal from './overview-pane/PublishTestModal';
 import withCreateTestState from './withCreateTestState';
 
-const CreateTest = () => {
+const CreateTest = ({ testDetailsInput, handleTestDetailsInputChange }) => {
   const [currentView, setCurrentView] = useState(0); // 0 for overview, 1 for questions view
 
   const [
@@ -79,7 +79,10 @@ const CreateTest = () => {
       <div className="dash-ct-content">
         {currentView === 0 ? (
           <>
-            <OverviewPane />
+            <OverviewPane
+              testDetailsInput={testDetailsInput}
+              handleTestDetailsInputChange={handleTestDetailsInputChange}
+            />
             <PublishTestModal
               show={isPublishTestModalVisible}
               onModalHide={togglePublishTestModal}

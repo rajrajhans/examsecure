@@ -8,7 +8,7 @@ import InviteCandidateEmails from './InviteCandidateEmails';
 
 // todo: if test is set to be invite only, then show option for adding candidate emails
 
-const OverviewPane = () => {
+const OverviewPane = ({ testDetailsInput, handleTestDetailsInputChange }) => {
   return (
     <Container fluid className={'dash-op-container'}>
       <Form>
@@ -16,7 +16,13 @@ const OverviewPane = () => {
           <Col>
             <Form.Group>
               <Form.Label>Test Name</Form.Label>
-              <Form.Control type="text" placeholder="My Sample Test" />
+              <Form.Control
+                type="text"
+                placeholder="My Sample Test"
+                value={testDetailsInput.test_name}
+                name={'test_name'}
+                onChange={handleTestDetailsInputChange}
+              />
             </Form.Group>
           </Col>
 
@@ -24,7 +30,14 @@ const OverviewPane = () => {
             <Form.Group>
               <Form.Label>Test Duration</Form.Label>
               <InputGroup>
-                <Form.Control type="number" placeholder="60" min="0" />
+                <Form.Control
+                  type="number"
+                  placeholder="60"
+                  min="0"
+                  value={testDetailsInput.test_duration}
+                  name={'test_duration'}
+                  onChange={handleTestDetailsInputChange}
+                />
                 <InputGroup.Text>mins</InputGroup.Text>
               </InputGroup>
             </Form.Group>
