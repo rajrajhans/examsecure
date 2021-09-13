@@ -32,7 +32,7 @@ const Dashboard = () => {
             </div>
           ) : (
             <div className="dash-tests-container">
-              {Object.entries(tests)?.map((id, test) => (
+              {Object.entries(tests)?.map(([id, test]) => (
                 <SingleTestView key={id} test={test} />
               ))}
             </div>
