@@ -3,6 +3,10 @@ import { ReactComponent as EditIcon } from '../../../assets/icons/edit.svg';
 import { ReactComponent as DeleteIcon } from '../../../assets/icons/trash.svg';
 
 const SingleQuestion = ({ question, i, deleteQuestion }) => {
+  const handleDelete = () => {
+    deleteQuestion(question.question_id);
+  };
+
   return (
     <div className="dash-qp-sq">
       <div className="dash-qp-sq-left">{i}</div>
@@ -25,7 +29,7 @@ const SingleQuestion = ({ question, i, deleteQuestion }) => {
           <EditIcon title="Edit Question" />
         </div>
         <div className="dash-qp-sq-right-icon">
-          <DeleteIcon title="Delete Question" />
+          <DeleteIcon title="Delete Question" onClick={handleDelete} />
         </div>
       </div>
     </div>
