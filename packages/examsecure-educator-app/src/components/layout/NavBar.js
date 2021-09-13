@@ -5,7 +5,7 @@ import { Nav } from 'react-bootstrap';
 import './NavBar.scss';
 import { Link, useHistory } from 'react-router-dom';
 import { connect, useSelector } from 'react-redux';
-import { signOut } from '../../action-creators/auth';
+import { signOut } from '../../redux/action-creators/auth';
 
 const Navbar = (props) => {
   const auth = useSelector((state) => state.firebase.auth);

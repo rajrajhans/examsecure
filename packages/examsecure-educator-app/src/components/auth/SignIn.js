@@ -5,7 +5,7 @@ import { Title, TextInput, Button, WhiteCard } from '@examsecure/design-system';
 import colors from '@examsecure/design-system/src/colors';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import { signIn } from '../../action-creators/auth';
+import { signIn } from '../../redux/action-creators/auth';
 
 const AuthContainer = styled.div`
   min-height: 100vh;

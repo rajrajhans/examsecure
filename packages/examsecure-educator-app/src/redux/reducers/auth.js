@@ -2,7 +2,7 @@ const initState = {
   authError: null,
 };
 
-const authReducer = (state = initState, action) => {
+const auth = (state = initState, action) => {
   switch (action.type) {
     case 'LOGIN_ERROR':
       console.log('Login Failed');
@@ -39,4 +39,4 @@ const authReducer = (state = initState, action) => {
       return state;
   }
 };
-export default authReducer;
+export default auth;
