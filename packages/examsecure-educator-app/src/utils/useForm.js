@@ -25,10 +25,12 @@ export default function useForm(initialState = {}) {
   };
 
   const handleDateTimeChange = (moment, name) => {
-    setInputState((prevState) => ({
-      ...prevState,
-      [name]: moment.format(DATE_TIME_FORMAT),
-    }));
+    if (moment.format) {
+      setInputState((prevState) => ({
+        ...prevState,
+        [name]: moment.format(DATE_TIME_FORMAT),
+      }));
+    }
   };
 
   const resetForm = () => {
