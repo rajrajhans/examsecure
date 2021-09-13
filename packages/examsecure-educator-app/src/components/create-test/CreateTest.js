@@ -4,6 +4,7 @@ import OverviewPane from './overview-pane/OverviewPane';
 import QuestionsPane from './questions-pane/QuestionsPane';
 import AddNewQuestionModal from './questions-pane/add-question-modal/AddNewQuestionModal';
 import PublishTestModal from './overview-pane/PublishTestModal';
+import withCreateTestState from './withCreateTestState';
 
 const CreateTest = () => {
   const [currentView, setCurrentView] = useState(0); // 0 for overview, 1 for questions view
@@ -98,4 +99,4 @@ const CreateTest = () => {
   );
 };
 
-export default CreateTest;
+export default withCreateTestState(CreateTest);
