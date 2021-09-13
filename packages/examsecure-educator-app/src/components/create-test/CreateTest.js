@@ -10,6 +10,9 @@ const CreateTest = ({
   testDetailsInput,
   handleTestDetailsInputChange,
   handleTestDateTimeChange,
+  questions,
+  addQuestion,
+  deleteQuestion,
 }) => {
   const [currentView, setCurrentView] = useState(0); // 0 for overview, 1 for questions view
 
@@ -96,10 +99,14 @@ const CreateTest = ({
           </>
         ) : (
           <>
-            <QuestionsPane />
+            <QuestionsPane
+              questions={questions}
+              deleteQuestion={deleteQuestion}
+            />
             <AddNewQuestionModal
               show={isAddNewQuestionModalVisible}
               onModalHide={toggleAddNewQuestionModal}
+              addQuestion={addQuestion}
             />
           </>
         )}
