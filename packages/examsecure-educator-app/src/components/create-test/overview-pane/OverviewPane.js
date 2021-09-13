@@ -80,14 +80,25 @@ const OverviewPane = ({
           <Col>
             <Form.Group>
               <Form.Label>Test Description</Form.Label>
-              <Form.Control as="textarea" style={{ height: '40px' }} />
+              <Form.Control
+                as="textarea"
+                style={{ height: '40px' }}
+                value={testDetailsInput.test_description}
+                name={'test_description'}
+                onChange={handleTestDetailsInputChange}
+              />
             </Form.Group>
           </Col>
 
           <Col>
             <Form.Group>
               <Form.Label>Test Type</Form.Label>
-              <Form.Control as={'select'}>
+              <Form.Control
+                as={'select'}
+                value={testDetailsInput.test_type}
+                name={'test_type'}
+                onChange={handleTestDetailsInputChange}
+              >
                 <option value={'open'}>Open to All</option>
                 <option value={'invite'}>Invite Only</option>
               </Form.Control>
@@ -97,7 +108,13 @@ const OverviewPane = ({
           <Col>
             <Form.Group>
               <Form.Label>Email Test Report to candidates?</Form.Label>
-              <Form.Control as={'select'} required>
+              <Form.Control
+                as={'select'}
+                required
+                value={testDetailsInput.test_email_report}
+                name={'test_email_report'}
+                onChange={handleTestDetailsInputChange}
+              >
                 <option value={'no'}>No</option>
                 <option value={'yes'}>Yes</option>
               </Form.Control>
