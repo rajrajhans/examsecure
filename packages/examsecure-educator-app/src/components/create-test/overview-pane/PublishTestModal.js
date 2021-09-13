@@ -2,17 +2,18 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { Form } from 'react-bootstrap';
 import { Button as ESButton } from '@examsecure/design-system';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { create_test_action } from '../../../redux/action-creators/create_tests';
 import { useHistory } from 'react-router-dom';
 
 const PublishTestModal = ({ show, onModalHide, testDetailsInput }) => {
+  const uid = useSelector((state) => state.firebase.auth.uid);
   const dispatch = useDispatch();
   const history = useHistory();
 
   const onSubmit = () => {
     if (validateTestDetails(testDetailsInput)) {
-      dispatch(create_test_action(testDetailsInput));
+      dispatch(create_test_action(testDetailsInput, uid));
       history.push('/');
     }
   };

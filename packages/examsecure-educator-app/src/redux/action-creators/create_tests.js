@@ -1,6 +1,6 @@
 import { startLoading, stopLoading } from './loading';
 
-export const create_test_action = (testDetails) => {
+export const create_test_action = (testDetails, uid) => {
   return (dispatch, getState, { getFirebase }) => {
     const firebase = getFirebase();
     const database = firebase.database();
@@ -8,7 +8,7 @@ export const create_test_action = (testDetails) => {
     dispatch(startLoading());
 
     database
-      .ref('tests/')
+      .ref(`tests/${uid}`)
       .push(testDetails)
       .then(() => {
         dispatch(stopLoading());
