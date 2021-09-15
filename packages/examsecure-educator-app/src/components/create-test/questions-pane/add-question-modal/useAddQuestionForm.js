@@ -117,6 +117,10 @@ export default function useAddQuestionForm() {
     setInputs(emptyQuestion);
   };
 
+  const replaceQuestionInputState = (questionState) => {
+    setInputs(questionState);
+  };
+
   return {
     inputs,
     onChangeHandler,
@@ -125,5 +129,6 @@ export default function useAddQuestionForm() {
     removeChoice,
     choiceTextChangeHandler,
     resetQuestionInputState,
+    replaceQuestionInputState,
   };
 }
