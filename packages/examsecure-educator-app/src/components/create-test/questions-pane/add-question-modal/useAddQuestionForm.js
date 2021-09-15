@@ -1,11 +1,11 @@
 import useForm from '../../../../utils/useForm';
 
 const emptyQuestion = {
-  question_text: 'sample question',
+  question_text: '',
   question_type: 'mcq_single',
   question_max_score: 4,
-  negative_marking: false,
-  negative_marks: -2,
+  negative_marking: 'no',
+  negative_marks: 0,
   choices: [
     {
       id: 1,
@@ -25,6 +25,7 @@ const emptyQuestion = {
     },
   ],
   correct_choices: new Set(),
+  correct_choice_id: '',
 };
 
 export default function useAddQuestionForm() {
