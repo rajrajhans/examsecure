@@ -27,10 +27,10 @@ const QuestionsPane = ({
   questions,
   deleteQuestion,
   changeQuestionInputStateTo,
-  toggleAddNewQuestionModal,
+  openEditQuestionModal,
 }) => {
   const handleQuestionEdit = (question_id) => {
-    toggleAddNewQuestionModal();
+    openEditQuestionModal();
     changeQuestionInputStateTo(question_id);
   };
   return (

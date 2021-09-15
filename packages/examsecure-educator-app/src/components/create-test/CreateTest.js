@@ -23,6 +23,10 @@ const CreateTest = ({
     setIsAddNewQuestionModalVisible,
   ] = useState(false);
 
+  const [isCurrentlyEditingQuestion, setIsCurrentlyEditingQuestion] = useState(
+    false,
+  );
+
   const [isPublishTestModalVisible, setIsPublishTestModalVisible] = useState(
     false,
   );
@@ -32,7 +36,13 @@ const CreateTest = ({
   };
 
   const toggleAddNewQuestionModal = () => {
+    setIsCurrentlyEditingQuestion(false);
     setIsAddNewQuestionModalVisible((prevState) => !prevState);
+  };
+
+  const openEditQuestionModal = () => {
+    setIsCurrentlyEditingQuestion(true);
+    setIsAddNewQuestionModalVisible(true);
   };
 
   const togglePublishTestModal = () => {
@@ -105,13 +115,14 @@ const CreateTest = ({
               questions={questions}
               deleteQuestion={deleteQuestion}
               changeQuestionInputStateTo={changeQuestionInputStateTo}
-              toggleAddNewQuestionModal={toggleAddNewQuestionModal}
+              openEditQuestionModal={openEditQuestionModal}
             />
             <AddNewQuestionModal
               show={isAddNewQuestionModalVisible}
               onModalHide={toggleAddNewQuestionModal}
               addQuestion={addQuestion}
               addQuestionForm={addQuestionForm}
+              isCurrentlyEditingQuestion={isCurrentlyEditingQuestion}
             />
           </>
         )}

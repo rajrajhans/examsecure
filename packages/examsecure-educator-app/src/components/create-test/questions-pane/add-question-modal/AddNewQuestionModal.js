@@ -11,6 +11,7 @@ const AddNewQuestionModal = ({
   onModalHide,
   addQuestion,
   addQuestionForm,
+  isCurrentlyEditingQuestion,
 }) => {
   const {
     inputs,
@@ -22,10 +23,18 @@ const AddNewQuestionModal = ({
 
   const onSubmit = () => {
     if (validateQuestionInput(inputs)) {
-      addQuestion(inputs);
+      if (isCurrentlyEditingQuestion) {
+      } else {
+        addQuestion(inputs);
+      }
       onModalHide();
       resetQuestionInputState();
     }
+  };
+
+  const onClose = () => {
+    onModalHide();
+    resetQuestionInputState();
   };
 
   return (
@@ -131,8 +140,14 @@ const AddNewQuestionModal = ({
       </Modal.Body>
 
       <Modal.Footer>
-        <ESButton variant="secondary" onClick={onModalHide} label={'Close'} />
-        <ESButton variant="primary" onClick={onSubmit} label={'Save Changes'} />
+        <ESButton variant="secondary" onClick={onClose} label={'Close'} />
+        <ESButton
+          variant="primary"
+          onClick={onSubmit}
+          label={
+            isCurrentlyEditingQuestion ? 'Update Question' : 'Save Changes'
+          }
+        />
       </Modal.Footer>
     </Modal>
   );
