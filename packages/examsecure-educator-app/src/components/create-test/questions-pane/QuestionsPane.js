@@ -23,7 +23,7 @@ const QuestionsPaneTopBar = ({ questions }) => {
   );
 };
 
-const QuestionsPane = ({ questions, deleteQuestion }) => {
+const QuestionsPane = ({ questions, deleteQuestion, addQuestionForm }) => {
   return (
     <div>
       <QuestionsPaneTopBar questions={questions} />

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import useForm from '../../utils/useForm';
+import useAddQuestionForm from './questions-pane/add-question-modal/useAddQuestionForm';
 
 const initialTestDetails = {
   test_name: '',
@@ -19,6 +20,8 @@ const withCreateTestState = (Component) => (props) => {
   ] = useForm(initialTestDetails);
 
   const [questions, setQuestions] = useState([]);
+
+  const addQuestionForm = useAddQuestionForm();
 
   const addQuestion = (question) => {
     question.question_id = questions.length
@@ -42,6 +45,7 @@ const withCreateTestState = (Component) => (props) => {
       questions={questions}
       addQuestion={addQuestion}
       deleteQuestion={deleteQuestion}
+      addQuestionForm={addQuestionForm}
     />
   );
 };

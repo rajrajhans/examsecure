@@ -4,17 +4,21 @@ import { Form, InputGroup } from 'react-bootstrap';
 import { Button as ESButton } from '@examsecure/design-system';
 import MCQSingleChoicesInput from './MCQSingleChoicesInput';
 import MCQMultipleChoicesInput from './MCQMultipleChoicesInput';
-import useAddQuestionForm from './useAddQuestionForm';
 import validateQuestionInput from './validateQuestionInput';
 
-const AddNewQuestionModal = ({ show, onModalHide, addQuestion }) => {
+const AddNewQuestionModal = ({
+  show,
+  onModalHide,
+  addQuestion,
+  addQuestionForm,
+}) => {
   const {
     inputs,
     onChangeHandler,
     choiceSelectChangeHandler,
     choiceTextChangeHandler,
     resetQuestionInputState,
-  } = useAddQuestionForm();
+  } = addQuestionForm;
 
   const onSubmit = () => {
     if (validateQuestionInput(inputs)) {
