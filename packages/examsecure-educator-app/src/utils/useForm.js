@@ -37,5 +37,11 @@ export default function useForm(initialState = {}) {
     setInputState(initialState);
   };
 
-  return [inputState, handleChange, handleDateTimeChange, resetForm];
+  return [
+    inputState,
+    handleChange,
+    handleDateTimeChange,
+    resetForm,
+    setInputState,
+  ];
 }
