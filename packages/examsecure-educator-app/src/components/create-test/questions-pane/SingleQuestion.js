@@ -19,7 +19,17 @@ const SingleQuestion = ({ question, i, deleteQuestion }) => {
           <div>Maximum Score: {question.question_max_score}</div>
           <div>
             Negative Marking:{' '}
-            {question.negative_marking ? question.negative_marks : 'No'}
+            {question.negative_marking === 'yes'
+              ? question.negative_marks
+              : 'No'}
+          </div>
+          <div>
+            Question Type:{' '}
+            {question.question_type === 'mcq_single' &&
+              'MCQ with a Single Correct Answer'}
+            {question.question_type === 'mcq_multiple' &&
+              'MCQ with Multiple Correct Answers'}
+            {question.question_type === 'subjective' && 'Subjective Answer'}
           </div>
         </div>
       </div>
