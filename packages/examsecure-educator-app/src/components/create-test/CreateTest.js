@@ -14,6 +14,7 @@ const CreateTest = ({
   addQuestion,
   deleteQuestion,
   addQuestionForm,
+  changeQuestionInputStateTo,
 }) => {
   const [currentView, setCurrentView] = useState(1); // 0 for overview, 1 for questions view
 
@@ -103,7 +104,8 @@ const CreateTest = ({
             <QuestionsPane
               questions={questions}
               deleteQuestion={deleteQuestion}
-              addQuestionForm={addQuestionForm}
+              changeQuestionInputStateTo={changeQuestionInputStateTo}
+              toggleAddNewQuestionModal={toggleAddNewQuestionModal}
             />
             <AddNewQuestionModal
               show={isAddNewQuestionModalVisible}

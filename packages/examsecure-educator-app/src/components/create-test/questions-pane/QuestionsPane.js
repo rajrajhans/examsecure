@@ -23,7 +23,16 @@ const QuestionsPaneTopBar = ({ questions }) => {
   );
 };
 
-const QuestionsPane = ({ questions, deleteQuestion, addQuestionForm }) => {
+const QuestionsPane = ({
+  questions,
+  deleteQuestion,
+  changeQuestionInputStateTo,
+  toggleAddNewQuestionModal,
+}) => {
+  const handleQuestionEdit = (question_id) => {
+    toggleAddNewQuestionModal();
+    changeQuestionInputStateTo(question_id);
+  };
   return (
     <div>
       <QuestionsPaneTopBar questions={questions} />
@@ -38,6 +47,7 @@ const QuestionsPane = ({ questions, deleteQuestion, addQuestionForm }) => {
                     key={question.question_id}
                     i={i}
                     deleteQuestion={deleteQuestion}
+                    handleQuestionEdit={handleQuestionEdit}
                   />
                 ))}
               </>
