@@ -36,6 +36,13 @@ const withCreateTestState = (Component) => (props) => {
     );
   };
 
+  const changeQuestionInputStateTo = (questionID) => {
+    const q = questions.filter((q) => q.question_id === questionID)[0];
+    if (q) {
+      addQuestionForm.replaceQuestionInputState(q);
+    }
+  };
+
   return (
     <Component
       {...props}
@@ -46,6 +53,7 @@ const withCreateTestState = (Component) => (props) => {
       addQuestion={addQuestion}
       deleteQuestion={deleteQuestion}
       addQuestionForm={addQuestionForm}
+      changeQuestionInputStateTo={changeQuestionInputStateTo}
     />
   );
 };
