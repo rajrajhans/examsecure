@@ -14,7 +14,7 @@ const CreateTest = ({
   addQuestion,
   deleteQuestion,
 }) => {
-  const [currentView, setCurrentView] = useState(0); // 0 for overview, 1 for questions view
+  const [currentView, setCurrentView] = useState(1); // 0 for overview, 1 for questions view
 
   const [
     isAddNewQuestionModalVisible,
