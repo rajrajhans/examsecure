@@ -4,14 +4,30 @@ import OverviewPane from './overview-pane/OverviewPane';
 import QuestionsPane from './questions-pane/QuestionsPane';
 import AddNewQuestionModal from './questions-pane/add-question-modal/AddNewQuestionModal';
 import PublishTestModal from './overview-pane/PublishTestModal';
+import withCreateTestState from './withCreateTestState';
 
-const CreateTest = () => {
-  const [currentView, setCurrentView] = useState(0); // 0 for overview, 1 for questions view
+const CreateTest = ({
+  testDetailsInput,
+  handleTestDetailsInputChange,
+  handleTestDateTimeChange,
+  questions,
+  addQuestion,
+  editQuestion,
+  deleteQuestion,
+  addQuestionForm,
+  changeQuestionInputStateTo,
+  publishTest,
+}) => {
+  const [currentView, setCurrentView] = useState(1); // 0 for overview, 1 for questions view
 
   const [
     isAddNewQuestionModalVisible,
     setIsAddNewQuestionModalVisible,
   ] = useState(false);
+
+  const [isCurrentlyEditingQuestion, setIsCurrentlyEditingQuestion] = useState(
+    false,
+  );
 
   const [isPublishTestModalVisible, setIsPublishTestModalVisible] = useState(
     false,
@@ -22,7 +38,13 @@ const CreateTest = () => {
   };
 
   const toggleAddNewQuestionModal = () => {
+    setIsCurrentlyEditingQuestion(false);
     setIsAddNewQuestionModalVisible((prevState) => !prevState);
+  };
+
+  const openEditQuestionModal = () => {
+    setIsCurrentlyEditingQuestion(true);
+    setIsAddNewQuestionModalVisible(true);
   };
 
   const togglePublishTestModal = () => {
@@ -78,18 +100,35 @@ const CreateTest = () => {
       <div className="dash-ct-content">
         {currentView === 0 ? (
           <>
-            <OverviewPane />
+            <OverviewPane
+              testDetailsInput={testDetailsInput}
+              handleTestDetailsInputChange={handleTestDetailsInputChange}
+              handleTestDateTimeChange={handleTestDateTimeChange}
+            />
             <PublishTestModal
               show={isPublishTestModalVisible}
               onModalHide={togglePublishTestModal}
+              testDetailsInput={testDetailsInput}
+              publishTest={publishTest}
+              numOfQuestions={questions.length}
             />
           </>
         ) : (
           <>
-            <QuestionsPane />
+            <QuestionsPane
+              questions={questions}
+              deleteQuestion={deleteQuestion}
+              changeQuestionInputStateTo={changeQuestionInputStateTo}
+              openEditQuestionModal={openEditQuestionModal}
+              testDuration={testDetailsInput.test_duration}
+            />
             <AddNewQuestionModal
               show={isAddNewQuestionModalVisible}
               onModalHide={toggleAddNewQuestionModal}
+              addQuestion={addQuestion}
+              editQuestion={editQuestion}
+              addQuestionForm={addQuestionForm}
+              isCurrentlyEditingQuestion={isCurrentlyEditingQuestion}
             />
           </>
         )}
@@ -98,4 +137,4 @@ const CreateTest = () => {
   );
 };
 
-export default CreateTest;
+export default withCreateTestState(CreateTest);

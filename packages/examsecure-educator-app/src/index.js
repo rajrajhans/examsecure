@@ -4,7 +4,7 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-datetime/css/react-datetime.css';
 import './styles/index.scss';
-import rootReducer from './reducers/rootReducer';
+import root from './redux/reducers/root';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider, useSelector } from 'react-redux';
 import thunk from 'redux-thunk';
@@ -23,7 +23,7 @@ import firebase from 'firebase/app';
 import Loading from './components/layout/Loading';
 
 const store = createStore(
-  rootReducer,
+  root,
   compose(
     applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
     reduxFirestore(fbConfig),

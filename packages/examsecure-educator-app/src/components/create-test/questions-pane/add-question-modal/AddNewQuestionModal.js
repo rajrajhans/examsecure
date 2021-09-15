@@ -2,8 +2,43 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { Form, InputGroup } from 'react-bootstrap';
 import { Button as ESButton } from '@examsecure/design-system';
+import MCQSingleChoicesInput from './MCQSingleChoicesInput';
+import MCQMultipleChoicesInput from './MCQMultipleChoicesInput';
+import validateQuestionInput from './validateQuestionInput';
 
-const AddNewQuestionModal = ({ show, onModalHide }) => {
+const AddNewQuestionModal = ({
+  show,
+  onModalHide,
+  addQuestion,
+  editQuestion,
+  addQuestionForm,
+  isCurrentlyEditingQuestion,
+}) => {
+  const {
+    inputs,
+    onChangeHandler,
+    choiceSelectChangeHandler,
+    choiceTextChangeHandler,
+    resetQuestionInputState,
+  } = addQuestionForm;
+
+  const onSubmit = () => {
+    if (validateQuestionInput(inputs)) {
+      if (isCurrentlyEditingQuestion) {
+        editQuestion(inputs);
+      } else {
+        addQuestion(inputs);
+      }
+      onModalHide();
+      resetQuestionInputState();
+    }
+  };
+
+  const onClose = () => {
+    onModalHide();
+    resetQuestionInputState();
+  };
+
   return (
     <Modal
       show={show}
@@ -21,7 +56,12 @@ const AddNewQuestionModal = ({ show, onModalHide }) => {
           <Form>
             <Form.Group>
               <Form.Label>Question Type</Form.Label>
-              <Form.Control as={'select'}>
+              <Form.Control
+                as={'select'}
+                value={inputs.question_type}
+                name={'question_type'}
+                onChange={onChangeHandler}
+              >
                 <option value={'mcq_single'}>
                   Multiple Choice (Single Answer)
                 </option>
@@ -34,7 +74,13 @@ const AddNewQuestionModal = ({ show, onModalHide }) => {
 
             <Form.Group>
               <Form.Label>Question Text</Form.Label>
-              <Form.Control as="textarea" style={{ height: '150px' }} />
+              <Form.Control
+                as="textarea"
+                style={{ height: '150px' }}
+                value={inputs.question_text}
+                name={'question_text'}
+                onChange={onChangeHandler}
+              />
             </Form.Group>
 
             <Form.Group>
@@ -42,80 +88,67 @@ const AddNewQuestionModal = ({ show, onModalHide }) => {
               <Form.Control
                 type="number"
                 placeholder="Marks for the question"
+                value={inputs.question_max_score}
+                name={'question_max_score'}
+                onChange={onChangeHandler}
               />
             </Form.Group>
 
             <Form.Group>
               <Form.Label>Negative Marking</Form.Label>
-              <Form.Control as={'select'}>
+              <Form.Control
+                as={'select'}
+                value={inputs.negative_marking}
+                name={'negative_marking'}
+                onChange={onChangeHandler}
+              >
                 <option value={'no'}>No</option>
                 <option value={'yes'}>Yes</option>
               </Form.Control>
             </Form.Group>
 
-            <Form.Group>
-              <Form.Label>Negative Marks for this question</Form.Label>
-              <InputGroup>
-                <InputGroup.Text>-</InputGroup.Text>
-                <Form.Control
-                  type="number"
-                  placeholder="How many marks to deduct if candidate answers this question incorrectly"
-                />
-              </InputGroup>
-            </Form.Group>
-
-            <Form.Group className="qp-add-new-question-choices-container">
-              <Form.Label>Answer Choices</Form.Label>
-              {[1, 2, 3, 4].map((x) => (
-                <Form.Check key={x}>
-                  <Form.Check.Input
-                    type={'radio'}
-                    name={'mcq-answer-choice'}
-                    id={'mcq-answer-choice-1'}
+            {inputs.negative_marking === 'yes' && (
+              <Form.Group>
+                <Form.Label>Negative Marks for this question</Form.Label>
+                <InputGroup>
+                  <InputGroup.Text>-</InputGroup.Text>
+                  <Form.Control
+                    type="number"
+                    placeholder="How many marks to deduct if candidate answers this question incorrectly"
+                    value={inputs.negative_marks}
+                    name={'negative_marks'}
+                    onChange={onChangeHandler}
                   />
-                  <Form.Check.Label>
-                    <Form.Group>
-                      <Form.Control type="text" placeholder="Option #1" />
-                    </Form.Group>
-                  </Form.Check.Label>
-                </Form.Check>
-              ))}
-              <Form.Text muted>
-                Please choose the correct answer among the options
-              </Form.Text>
-            </Form.Group>
+                </InputGroup>
+              </Form.Group>
+            )}
 
-            <Form.Group className="qp-add-new-question-choices-container">
-              <Form.Label>Answer Choices</Form.Label>
-              {[1, 2, 3, 4].map((x) => (
-                <Form.Check key={x}>
-                  <Form.Check.Input
-                    type={'checkbox'}
-                    name={'mcq-answers-choice'}
-                    id={'mcq-answers-choice-1'}
-                  />
-                  <Form.Check.Label>
-                    <Form.Group>
-                      <Form.Control type="text" placeholder="Option #1" />
-                    </Form.Group>
-                  </Form.Check.Label>
-                </Form.Check>
-              ))}
-
-              <Form.Text muted>
-                Please choose the correct answers among the options
-              </Form.Text>
-            </Form.Group>
+            {inputs.question_type === 'mcq_single' && (
+              <MCQSingleChoicesInput
+                choiceSelectChangeHandler={choiceSelectChangeHandler}
+                choiceTextChangeHandler={choiceTextChangeHandler}
+                inputs={inputs}
+              />
+            )}
+            {inputs.question_type === 'mcq_multiple' && (
+              <MCQMultipleChoicesInput
+                choiceSelectChangeHandler={choiceSelectChangeHandler}
+                choiceTextChangeHandler={choiceTextChangeHandler}
+                inputs={inputs}
+              />
+            )}
           </Form>
         </div>
       </Modal.Body>
 
       <Modal.Footer>
-        <ESButton variant="secondary" onClick={onModalHide} label={'Close'} />
+        <ESButton variant="secondary" onClick={onClose} label={'Close'} />
         <ESButton
           variant="primary"
-          onClick={onModalHide}
-          label={'Save Changes'}
+          onClick={onSubmit}
+          label={
+            isCurrentlyEditingQuestion ? 'Update Question' : 'Save Changes'
+          }
         />
       </Modal.Footer>
     </Modal>

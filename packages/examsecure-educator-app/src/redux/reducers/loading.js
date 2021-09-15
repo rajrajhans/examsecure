@@ -2,7 +2,7 @@ const initialState = {
   isLoading: false,
 };
 
-export const loadingReducer = (state = initialState, action) => {
+export const loading = (state = initialState, action) => {
   if (action.type === 'START_LOADING') {
     return { ...state, isLoading: true };
   }

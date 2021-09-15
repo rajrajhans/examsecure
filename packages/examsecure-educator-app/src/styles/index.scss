@@ -6,3 +6,10 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 18px;
 }
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
