@@ -10,6 +10,7 @@ const AddNewQuestionModal = ({
   show,
   onModalHide,
   addQuestion,
+  editQuestion,
   addQuestionForm,
   isCurrentlyEditingQuestion,
 }) => {
@@ -24,6 +25,7 @@ const AddNewQuestionModal = ({
   const onSubmit = () => {
     if (validateQuestionInput(inputs)) {
       if (isCurrentlyEditingQuestion) {
+        editQuestion(inputs);
       } else {
         addQuestion(inputs);
       }

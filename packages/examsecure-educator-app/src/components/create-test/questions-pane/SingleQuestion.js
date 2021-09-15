@@ -29,7 +29,7 @@ const SingleQuestion = ({
           <div>
             Negative Marking:{' '}
             {question.negative_marking === 'yes'
-              ? question.negative_marks
+              ? '-' + question.negative_marks
               : 'No'}
           </div>
           <div>

@@ -30,6 +30,19 @@ const withCreateTestState = (Component) => (props) => {
     setQuestions((prevState) => [...prevState, question]);
   };
 
+  const editQuestion = (question) => {
+    const { question_id } = question;
+    setQuestions((prevState) =>
+      prevState.map((q) => {
+        if (q.question_id === question_id) {
+          return question;
+        } else {
+          return q;
+        }
+      }),
+    );
+  };
+
   const deleteQuestion = (questionID) => {
     setQuestions((prevState) =>
       prevState.filter((q) => q.question_id !== questionID),
@@ -51,6 +64,7 @@ const withCreateTestState = (Component) => (props) => {
       handleTestDateTimeChange={handleTestDateTimeChange}
       questions={questions}
       addQuestion={addQuestion}
+      editQuestion={editQuestion}
       deleteQuestion={deleteQuestion}
       addQuestionForm={addQuestionForm}
       changeQuestionInputStateTo={changeQuestionInputStateTo}

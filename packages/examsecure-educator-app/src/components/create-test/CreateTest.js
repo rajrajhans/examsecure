@@ -12,6 +12,7 @@ const CreateTest = ({
   handleTestDateTimeChange,
   questions,
   addQuestion,
+  editQuestion,
   deleteQuestion,
   addQuestionForm,
   changeQuestionInputStateTo,
@@ -121,6 +122,7 @@ const CreateTest = ({
               show={isAddNewQuestionModalVisible}
               onModalHide={toggleAddNewQuestionModal}
               addQuestion={addQuestion}
+              editQuestion={editQuestion}
               addQuestionForm={addQuestionForm}
               isCurrentlyEditingQuestion={isCurrentlyEditingQuestion}
             />
