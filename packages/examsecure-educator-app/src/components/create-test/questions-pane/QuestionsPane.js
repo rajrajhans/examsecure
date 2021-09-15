@@ -2,24 +2,31 @@ import React from 'react';
 import SingleQuestion from './SingleQuestion';
 import './QuestionsPane.scss';
 
-const QuestionsPaneTopBar = ({ numOfQuestions }) => (
-  <div className="dash-qp-top-bar">
-    <div className="dash-qp-top-bar-left">
-      Total Questions Added: {numOfQuestions}
-    </div>
+const QuestionsPaneTopBar = ({ questions }) => {
+  const totalScore = questions.reduce(
+    (acc, val) => acc + val.question_max_score,
+    0,
+  );
 
-    <div className="dash-qp-top-bar-right">
-      <div>Total Test Score: 200</div>
+  return (
+    <div className="dash-qp-top-bar">
+      <div className="dash-qp-top-bar-left">
+        Total Questions Added: {questions.length}
+      </div>
 
-      <div>Duration: 60 minutes</div>
+      <div className="dash-qp-top-bar-right">
+        <div>Total Test Score: {totalScore}</div>
+
+        <div>Duration: 60 minutes</div>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const QuestionsPane = ({ questions, deleteQuestion }) => {
   return (
     <div>
-      <QuestionsPaneTopBar numOfQuestions={questions ? questions.length : 0} />
+      <QuestionsPaneTopBar questions={questions} />
       <div className="dash-qp-questions">
         {questions && (
           <>
