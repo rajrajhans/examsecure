@@ -30,7 +30,7 @@ export default function validateQuestionInput(questionsInput) {
         errorMessage += ' Make sure to select the correct choices. \n';
         isTestDetailsOK = false;
       }
-    } else if (v === '') {
+    } else if (v === '' && k !== 'correct_choice_id') {
       errorMessage += ` Please fill the ${k} field! \n`;
       isTestDetailsOK = false;
     }
