@@ -117,6 +117,7 @@ const CreateTest = ({
               deleteQuestion={deleteQuestion}
               changeQuestionInputStateTo={changeQuestionInputStateTo}
               openEditQuestionModal={openEditQuestionModal}
+              testDuration={testDetailsInput.test_duration}
             />
             <AddNewQuestionModal
               show={isAddNewQuestionModalVisible}

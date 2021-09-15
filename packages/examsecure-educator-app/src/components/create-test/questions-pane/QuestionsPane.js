@@ -2,7 +2,7 @@ import React from 'react';
 import SingleQuestion from './SingleQuestion';
 import './QuestionsPane.scss';
 
-const QuestionsPaneTopBar = ({ questions }) => {
+const QuestionsPaneTopBar = ({ questions, testDuration }) => {
   const totalScore = questions.reduce(
     (acc, val) => acc + val.question_max_score,
     0,
@@ -17,7 +17,9 @@ const QuestionsPaneTopBar = ({ questions }) => {
       <div className="dash-qp-top-bar-right">
         <div>Total Test Score: {totalScore}</div>
 
-        <div>Duration: 60 minutes</div>
+        <div>
+          Duration: {testDuration ? `${testDuration} minutes` : 'Not set'}
+        </div>
       </div>
     </div>
   );
@@ -28,6 +30,7 @@ const QuestionsPane = ({
   deleteQuestion,
   changeQuestionInputStateTo,
   openEditQuestionModal,
+  testDuration,
 }) => {
   const handleQuestionEdit = (question_id) => {
     openEditQuestionModal();
@@ -35,7 +38,7 @@ const QuestionsPane = ({
   };
   return (
     <div>
-      <QuestionsPaneTopBar questions={questions} />
+      <QuestionsPaneTopBar questions={questions} testDuration={testDuration} />
       <div className="dash-qp-questions">
         {questions && (
           <>
