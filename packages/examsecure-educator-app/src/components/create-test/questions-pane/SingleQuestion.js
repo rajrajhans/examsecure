@@ -9,7 +9,7 @@ const SingleQuestion = ({ question, i, deleteQuestion }) => {
 
   return (
     <div className="dash-qp-sq">
-      <div className="dash-qp-sq-left">{i}</div>
+      <div className="dash-qp-sq-left">{i + 1}</div>
 
       <div className="dash-qp-sq-center">
         <div className="dash-qp-sq-center-questionText">

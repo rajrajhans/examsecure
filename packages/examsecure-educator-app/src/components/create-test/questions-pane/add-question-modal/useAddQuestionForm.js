@@ -1,6 +1,7 @@
 import useForm from '../../../../utils/useForm';
 
 const emptyQuestion = {
+  question_id: 1,
   question_text: '',
   question_type: 'mcq_single',
   question_max_score: 4,

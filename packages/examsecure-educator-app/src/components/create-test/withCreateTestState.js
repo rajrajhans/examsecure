@@ -21,6 +21,9 @@ const withCreateTestState = (Component) => (props) => {
   const [questions, setQuestions] = useState([]);
 
   const addQuestion = (question) => {
+    question.question_id = questions.length
+      ? questions.slice(-1)[0].question_id + 1
+      : 1;
     setQuestions((prevState) => [...prevState, question]);
   };
 
