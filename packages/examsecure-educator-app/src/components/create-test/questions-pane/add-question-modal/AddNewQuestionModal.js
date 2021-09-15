@@ -5,6 +5,7 @@ import { Button as ESButton } from '@examsecure/design-system';
 import MCQSingleChoicesInput from './MCQSingleChoicesInput';
 import MCQMultipleChoicesInput from './MCQMultipleChoicesInput';
 import useAddQuestionForm from './useAddQuestionForm';
+import validateQuestionInput from './validateQuestionInput';
 
 const AddNewQuestionModal = ({ show, onModalHide, addQuestion }) => {
   const {
@@ -12,8 +13,16 @@ const AddNewQuestionModal = ({ show, onModalHide, addQuestion }) => {
     onChangeHandler,
     choiceSelectChangeHandler,
     choiceTextChangeHandler,
+    resetQuestionInputState,
   } = useAddQuestionForm();
-  console.log(inputs);
+
+  const onSubmit = () => {
+    if (validateQuestionInput(inputs)) {
+      addQuestion(inputs);
+      onModalHide();
+      resetQuestionInputState();
+    }
+  };
 
   return (
     <Modal
@@ -50,7 +59,13 @@ const AddNewQuestionModal = ({ show, onModalHide, addQuestion }) => {
 
             <Form.Group>
               <Form.Label>Question Text</Form.Label>
-              <Form.Control as="textarea" style={{ height: '150px' }} />
+              <Form.Control
+                as="textarea"
+                style={{ height: '150px' }}
+                value={inputs.question_text}
+                name={'question_text'}
+                onChange={onChangeHandler}
+              />
             </Form.Group>
 
             <Form.Group>
@@ -58,27 +73,40 @@ const AddNewQuestionModal = ({ show, onModalHide, addQuestion }) => {
               <Form.Control
                 type="number"
                 placeholder="Marks for the question"
+                value={inputs.question_max_score}
+                name={'question_max_score'}
+                onChange={onChangeHandler}
               />
             </Form.Group>
 
             <Form.Group>
               <Form.Label>Negative Marking</Form.Label>
-              <Form.Control as={'select'}>
+              <Form.Control
+                as={'select'}
+                value={inputs.negative_marking}
+                name={'negative_marking'}
+                onChange={onChangeHandler}
+              >
                 <option value={'no'}>No</option>
                 <option value={'yes'}>Yes</option>
               </Form.Control>
             </Form.Group>
 
-            <Form.Group>
-              <Form.Label>Negative Marks for this question</Form.Label>
-              <InputGroup>
-                <InputGroup.Text>-</InputGroup.Text>
-                <Form.Control
-                  type="number"
-                  placeholder="How many marks to deduct if candidate answers this question incorrectly"
-                />
-              </InputGroup>
-            </Form.Group>
+            {inputs.negative_marking === 'yes' && (
+              <Form.Group>
+                <Form.Label>Negative Marks for this question</Form.Label>
+                <InputGroup>
+                  <InputGroup.Text>-</InputGroup.Text>
+                  <Form.Control
+                    type="number"
+                    placeholder="How many marks to deduct if candidate answers this question incorrectly"
+                    value={inputs.negative_marks}
+                    name={'negative_marks'}
+                    onChange={onChangeHandler}
+                  />
+                </InputGroup>
+              </Form.Group>
+            )}
 
             {inputs.question_type === 'mcq_single' && (
               <MCQSingleChoicesInput
@@ -100,11 +128,7 @@ const AddNewQuestionModal = ({ show, onModalHide, addQuestion }) => {
 
       <Modal.Footer>
         <ESButton variant="secondary" onClick={onModalHide} label={'Close'} />
-        <ESButton
-          variant="primary"
-          onClick={onModalHide}
-          label={'Save Changes'}
-        />
+        <ESButton variant="primary" onClick={onSubmit} label={'Save Changes'} />
       </Modal.Footer>
     </Modal>
   );
