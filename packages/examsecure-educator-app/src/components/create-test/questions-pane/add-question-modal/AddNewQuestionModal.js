@@ -2,8 +2,19 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { Form, InputGroup } from 'react-bootstrap';
 import { Button as ESButton } from '@examsecure/design-system';
+import MCQSingleChoicesInput from './MCQSingleChoicesInput';
+import MCQMultipleChoicesInput from './MCQMultipleChoicesInput';
+import useAddQuestionForm from './useAddQuestionForm';
 
-const AddNewQuestionModal = ({ show, onModalHide }) => {
+const AddNewQuestionModal = ({ show, onModalHide, addQuestion }) => {
+  const {
+    inputs,
+    onChangeHandler,
+    choiceSelectChangeHandler,
+    choiceTextChangeHandler,
+  } = useAddQuestionForm();
+  console.log(inputs);
+
   return (
     <Modal
       show={show}
@@ -21,7 +32,12 @@ const AddNewQuestionModal = ({ show, onModalHide }) => {
           <Form>
             <Form.Group>
               <Form.Label>Question Type</Form.Label>
-              <Form.Control as={'select'}>
+              <Form.Control
+                as={'select'}
+                value={inputs.question_type}
+                name={'question_type'}
+                onChange={onChangeHandler}
+              >
                 <option value={'mcq_single'}>
                   Multiple Choice (Single Answer)
                 </option>
@@ -64,48 +80,20 @@ const AddNewQuestionModal = ({ show, onModalHide }) => {
               </InputGroup>
             </Form.Group>
 
-            <Form.Group className="qp-add-new-question-choices-container">
-              <Form.Label>Answer Choices</Form.Label>
-              {[1, 2, 3, 4].map((x) => (
-                <Form.Check key={x}>
-                  <Form.Check.Input
-                    type={'radio'}
-                    name={'mcq-answer-choice'}
-                    id={'mcq-answer-choice-1'}
-                  />
-                  <Form.Check.Label>
-                    <Form.Group>
-                      <Form.Control type="text" placeholder="Option #1" />
-                    </Form.Group>
-                  </Form.Check.Label>
-                </Form.Check>
-              ))}
-              <Form.Text muted>
-                Please choose the correct answer among the options
-              </Form.Text>
-            </Form.Group>
-
-            <Form.Group className="qp-add-new-question-choices-container">
-              <Form.Label>Answer Choices</Form.Label>
-              {[1, 2, 3, 4].map((x) => (
-                <Form.Check key={x}>
-                  <Form.Check.Input
-                    type={'checkbox'}
-                    name={'mcq-answers-choice'}
-                    id={'mcq-answers-choice-1'}
-                  />
-                  <Form.Check.Label>
-                    <Form.Group>
-                      <Form.Control type="text" placeholder="Option #1" />
-                    </Form.Group>
-                  </Form.Check.Label>
-                </Form.Check>
-              ))}
-
-              <Form.Text muted>
-                Please choose the correct answers among the options
-              </Form.Text>
-            </Form.Group>
+            {inputs.question_type === 'mcq_single' && (
+              <MCQSingleChoicesInput
+                choiceSelectChangeHandler={choiceSelectChangeHandler}
+                choiceTextChangeHandler={choiceTextChangeHandler}
+                inputs={inputs}
+              />
+            )}
+            {inputs.question_type === 'mcq_multiple' && (
+              <MCQMultipleChoicesInput
+                choiceSelectChangeHandler={choiceSelectChangeHandler}
+                choiceTextChangeHandler={choiceTextChangeHandler}
+                inputs={inputs}
+              />
+            )}
           </Form>
         </div>
       </Modal.Body>
