@@ -16,6 +16,7 @@ const CreateTest = ({
   deleteQuestion,
   addQuestionForm,
   changeQuestionInputStateTo,
+  publishTest,
 }) => {
   const [currentView, setCurrentView] = useState(1); // 0 for overview, 1 for questions view
 
@@ -108,6 +109,8 @@ const CreateTest = ({
               show={isPublishTestModalVisible}
               onModalHide={togglePublishTestModal}
               testDetailsInput={testDetailsInput}
+              publishTest={publishTest}
+              numOfQuestions={questions.length}
             />
           </>
         ) : (

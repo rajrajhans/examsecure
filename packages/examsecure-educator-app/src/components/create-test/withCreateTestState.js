@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import useForm from '../../utils/useForm';
 import useAddQuestionForm from './questions-pane/add-question-modal/useAddQuestionForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { create_test_action } from '../../redux/action-creators/create_tests';
 
 const initialTestDetails = {
   test_name: '',
@@ -18,10 +21,19 @@ const withCreateTestState = (Component) => (props) => {
     handleTestDetailsInputChange,
     handleTestDateTimeChange,
   ] = useForm(initialTestDetails);
-
   const [questions, setQuestions] = useState([]);
-
   const addQuestionForm = useAddQuestionForm();
+  const uid = useSelector((state) => state.firebase.auth.uid);
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const publishTest = () => {
+    testDetailsInput.questions = questions;
+    if (validateTestDetails(testDetailsInput, questions.length)) {
+      dispatch(create_test_action(testDetailsInput, uid));
+      history.push('/');
+    }
+  };
 
   const addQuestion = (question) => {
     question.question_id = questions.length
@@ -68,8 +80,37 @@ const withCreateTestState = (Component) => (props) => {
       deleteQuestion={deleteQuestion}
       addQuestionForm={addQuestionForm}
       changeQuestionInputStateTo={changeQuestionInputStateTo}
+      publishTest={publishTest}
     />
   );
 };
 
 export default withCreateTestState;
+
+const validateTestDetails = (testDetailsInput, numOfQuestions) => {
+  let isTestDetailsOK = true;
+  let errorMessage = '';
+
+  Object.entries(testDetailsInput).map(([k, v]) => {
+    if (k === 'test_duration' && v <= 0) {
+      errorMessage += ' Enter a valid test duration. \n';
+      isTestDetailsOK = false;
+    }
+
+    if (v === '') {
+      errorMessage += ` Please fill the ${k} field! \n`;
+      isTestDetailsOK = false;
+    }
+  });
+
+  if (numOfQuestions <= 1) {
+    errorMessage += ` Please add at least one question to publish this test \n`;
+    isTestDetailsOK = false;
+  }
+
+  if (errorMessage) {
+    alert(errorMessage);
+  }
+
+  return isTestDetailsOK;
+};

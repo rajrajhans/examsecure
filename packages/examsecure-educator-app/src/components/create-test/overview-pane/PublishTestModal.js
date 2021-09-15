@@ -2,20 +2,16 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { Form } from 'react-bootstrap';
 import { Button as ESButton } from '@examsecure/design-system';
-import { useDispatch, useSelector } from 'react-redux';
-import { create_test_action } from '../../../redux/action-creators/create_tests';
-import { useHistory } from 'react-router-dom';
 
-const PublishTestModal = ({ show, onModalHide, testDetailsInput }) => {
-  const uid = useSelector((state) => state.firebase.auth.uid);
-  const dispatch = useDispatch();
-  const history = useHistory();
-
+const PublishTestModal = ({
+  show,
+  onModalHide,
+  testDetailsInput,
+  publishTest,
+  numOfQuestions,
+}) => {
   const onSubmit = () => {
-    if (validateTestDetails(testDetailsInput)) {
-      dispatch(create_test_action(testDetailsInput, uid));
-      history.push('/');
-    }
+    publishTest();
   };
 
   return (
@@ -77,7 +73,11 @@ const PublishTestModal = ({ show, onModalHide, testDetailsInput }) => {
           </Form.Group>
           <Form.Group>
             <Form.Label>Questions Added</Form.Label>
-            <Form.Control type="text" readOnly value={'30 Questions'} />
+            <Form.Control
+              type="text"
+              readOnly
+              value={`${numOfQuestions} Questions`}
+            />
           </Form.Group>
         </Form>
       </Modal.Body>
@@ -95,26 +95,3 @@ const PublishTestModal = ({ show, onModalHide, testDetailsInput }) => {
 };
 
 export default PublishTestModal;
-
-const validateTestDetails = (testDetailsInput) => {
-  let isTestDetailsOK = true;
-  let errorMessage = '';
-
-  Object.entries(testDetailsInput).map(([k, v]) => {
-    if (k === 'test_duration' && v <= 0) {
-      errorMessage += ' Enter a valid test duration. \n';
-      isTestDetailsOK = false;
-    }
-
-    if (v === '') {
-      errorMessage += ` Please fill the ${k} field! \n`;
-      isTestDetailsOK = false;
-    }
-  });
-
-  if (errorMessage) {
-    alert(errorMessage);
-  }
-
-  return isTestDetailsOK;
-};
