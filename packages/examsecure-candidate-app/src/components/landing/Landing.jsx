@@ -57,6 +57,9 @@ const Landing = ({ loadForSeconds, currentUser, questionSetMetadata }) => {
       );
       history.push('/');
     }
+    if (!questionSetMetadata) {
+      history.push('/selectQuestionSet');
+    }
     loadForSeconds();
     pageview(window.location.pathname + window.location.search);
     if (!document.isFullscreenListenerSet) {
