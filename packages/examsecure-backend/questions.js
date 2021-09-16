@@ -13,8 +13,9 @@ const respond = (httpStatusCode, response) => ({
 });
 
 exports.getQuestions = async (event) => {
-  let questionSetID = event.queryStringParameters.qSetID;
-  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/questions/${questionSetID}.json?auth=${firebaseApiKey}`;
+  let test_id = event.queryStringParameters.test_id;
+  let test_by = event.queryStringParameters.test_by;
+  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/tests/${test_by}/${test_id}.json?auth=${firebaseApiKey}`;
   let questions;
 
   await fetch(firebaseURL)
