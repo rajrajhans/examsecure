@@ -14,6 +14,7 @@ export const create_test_action = (testDetails, uid) => {
     updates[`tests_list/${newTestKey}`] = {
       test_name: testDetails.test_name,
       test_duration: testDetails.test_duration,
+      test_by: uid,
     };
 
     database
