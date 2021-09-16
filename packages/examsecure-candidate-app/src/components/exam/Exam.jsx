@@ -11,13 +11,17 @@ import { mode } from '../helpers/modeSetter';
 import useAnswerResponse from '../helpers/useAnswerResponse';
 import { pageview } from 'react-ga';
 
-const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
+const Exam = ({ loadForSeconds, currentUser, testData }) => {
   const [isWebCamReady, setisWebcamReady] = useState(false);
   const [warning, setWarning] = useState({
     title: '',
     text: '',
     isWarningModalActive: false,
   });
+  console.log({ testData });
+  // const questionsData = undefined;
+
+  const questions = testData.questions.questions;
   const [
     answerResponse,
     answerResponseHandler,
@@ -29,7 +33,7 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
   const history = useHistory();
 
   useEffect(() => {
-    if (questionsData.questions.length === 0) {
+    if (questions.length === 0) {
       history.push('/selectQuestionSet').catch((e) => {
         console.log(e);
       });
@@ -39,7 +43,7 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
     document.oncontextmenu = () => false; // Disables Right Click
     startExam().catch((e) => console.log(e));
     gateway
-      .getSavedAnswers(currentUser, questionsData.questionSetID)
+      .getSavedAnswers(currentUser, testData.test_id)
       .then((data) => setAnswerResponse(data.savedAnswers))
       .catch((e) => console.log(e));
     getSnapshotInitial();
@@ -51,7 +55,6 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
 
   const webcam = useRef(undefined);
   const isStreaming = useRef(true);
-  const currentUrl = window.location.href;
 
   const timeUp = () => {
     isStreaming.current = false;
@@ -60,7 +63,7 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
 
   const getLastAlive = async () => {
     return gateway
-      .getLastAlive(currentUser, questionsData.questionSetID)
+      .getLastAlive(currentUser, testData.test_id)
       .then((res) => {
         return res;
       })
@@ -71,7 +74,7 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
 
   const startExam = async () => {
     return gateway
-      .startExam(currentUser, questionsData.questionSetID)
+      .startExam(currentUser, testData.test_id)
       .then((res) => {
         return res;
       })
@@ -123,11 +126,7 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
 
         if (mode === 1) {
           gateway
-            .processImage(
-              b64EncodedImg,
-              currentUser,
-              questionsData.questionSetID,
-            )
+            .processImage(b64EncodedImg, currentUser, testData.test_id)
             .then((res) => {
               if (res) {
                 // If "Objects of Interest" test fails
@@ -181,7 +180,7 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
   };
 
   function onEndExam() {
-    gateway.endExam(currentUser, questionsData.questionSetID).catch((e) => {
+    gateway.endExam(currentUser, testData.test_id).catch((e) => {
       console.log(e);
     });
     setShouldIntervalBeCancelled(true);
@@ -230,19 +229,19 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
       {isWebCamReady ? (
         <>
           <Timer
-            examDuration={questionsData.selectedQSetDuration * 60}
+            examDuration={testData.test_duration * 60}
             getLastAlive={getLastAlive}
             callBackFn={timeUp}
             currentUser={currentUser}
-            questionSetID={questionsData.questionSetID}
+            questionSetID={testData.test_id}
           />
           <div className={'examQuestions'}>
-            {questionsData.questions.map((q) => (
+            {questions.map((q) => (
               <div className={'questionsWrapper'} key={q.id}>
                 <Question
-                  questionID={q.id}
-                  question={q.question}
-                  opts={q.opts}
+                  questionID={q.question_id}
+                  question={q.question_text}
+                  opts={q.choices}
                   handleAnswerChange={handleAnswerChange}
                   isRadioChecked={isRadioChecked}
                 />
@@ -282,20 +281,20 @@ const Question = ({
           </div>
 
           {opts.map((opt) => (
-            <div className="form-check mcqOption" key={opt.optID}>
+            <div className="form-check mcqOption" key={opt.choice_id}>
               <input
                 className="form-check-input"
                 type="radio"
                 name={questionID}
-                id={opt.optID}
-                value={opt.optID}
+                id={opt.choice_id}
+                value={opt.choice_text}
                 onChange={handleAnswerChange}
                 checked={
-                  isRadioChecked(questionID, opt.optID) ? 'checked' : null
+                  isRadioChecked(questionID, opt.choice_id) ? 'checked' : null
                 }
               />
-              <label htmlFor={opt.optID} className="form-check-label">
-                {opt.optText}
+              <label htmlFor={opt.choice_id} className="form-check-label">
+                {opt.choice_text}
               </label>
             </div>
           ))}
