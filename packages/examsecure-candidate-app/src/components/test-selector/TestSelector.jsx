@@ -29,9 +29,20 @@ const TestSelector = ({ fetchQuestions, questions, currentUser }) => {
     gateway
       .getQuestionSets()
       .then((data) => {
-        setSelectedQSetMetadata(data['questionSets'][0]);
-        setSelectedQSet(data['questionSets'][0].qSetID);
-        setQsets(data['questionSets']);
+        const tests = Object.entries(data['questionSets']).map(
+          ([id, metadata]) => {
+            return {
+              test_id: id,
+              ...metadata,
+            };
+          },
+        );
+
+        console.log({ tests, selectedQSet, qSets, selectedQSetMetadata });
+
+        setSelectedQSetMetadata(tests[0]);
+        setSelectedQSet(tests[0].test_id);
+        setQsets(tests);
       })
       .catch((e) => {
         console.log(e);
@@ -44,8 +55,9 @@ const TestSelector = ({ fetchQuestions, questions, currentUser }) => {
     const { options } = e.target;
     const selectedDataset = options[e.target.selectedIndex].dataset;
     const selectedQSetMetaData = {
-      duration: selectedDataset.duration,
-      qSetName: selectedDataset.qsetname,
+      test_duration: selectedDataset.duration,
+      test_id: selectedDataset.test_id,
+      test_name: selectedDataset.test_name,
     };
     setSelectedQSetMetadata(selectedQSetMetaData);
   };
@@ -60,7 +72,7 @@ const TestSelector = ({ fetchQuestions, questions, currentUser }) => {
         <Card style={{ maxWidth: '600px', margin: '70px auto' }}>
           <Card.Header>
             <Card.Title style={{ marginBottom: '0' }}>
-              To begin, select a Question Set available to you
+              To begin, select a test available to you
             </Card.Title>
           </Card.Header>
           <Form onSubmit={handleSubmit}>
@@ -68,7 +80,7 @@ const TestSelector = ({ fetchQuestions, questions, currentUser }) => {
               <Form.Group>
                 {qSets.length > 0 && isSpinnerActive === false ? (
                   <>
-                    <Form.Label>Select a Question Set</Form.Label>
+                    <Form.Label>Select a test</Form.Label>
                     <Form.Control
                       as={'select'}
                       custom
@@ -77,12 +89,13 @@ const TestSelector = ({ fetchQuestions, questions, currentUser }) => {
                     >
                       {qSets.map((questionSet) => (
                         <option
-                          key={questionSet.qSetID}
-                          value={questionSet.qSetID}
-                          data-duration={questionSet.duration}
-                          data-qSetName={questionSet.qSetName}
+                          key={questionSet.test_id}
+                          value={questionSet.test_id}
+                          data-test_duration={questionSet.test_duration}
+                          data-test_name={questionSet.test_name}
+                          data-test_id={questionSet.test_id}
                         >
-                          {questionSet.qSetName}
+                          {questionSet.test_name}
                         </option>
                       ))}
                     </Form.Control>
