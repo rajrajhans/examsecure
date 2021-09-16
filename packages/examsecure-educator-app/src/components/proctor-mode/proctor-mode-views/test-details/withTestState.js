@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useForm from '../../../../utils/useForm';
 import useAddQuestionForm from '../../../create-test/questions-pane/add-question-modal/useAddQuestionForm';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,6 +17,10 @@ const withCreateTestState = (Component) => (props) => {
   const uid = useSelector((state) => state.firebase.auth.uid);
   const dispatch = useDispatch();
   const history = useHistory();
+
+  useEffect(() => {
+    setQuestions(props?.test?.questions);
+  }, [props.test]);
 
   const publishTest = () => {
     testDetailsInput.questions = questions;
