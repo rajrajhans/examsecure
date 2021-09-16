@@ -20,9 +20,7 @@ const TestSelector = ({ fetchQuestions, questions, currentUser }) => {
     e.preventDefault();
     setIsSpinnerActive(true);
     fetchQuestions(selectedQSet, selectedQSetMetadata);
-    history.push('/landing').catch((e) => {
-      console.log(e);
-    });
+    history.push('/landing');
   };
 
   useEffect(() => {
