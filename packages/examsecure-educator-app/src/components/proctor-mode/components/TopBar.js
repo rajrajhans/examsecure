@@ -25,8 +25,20 @@ const TestTimeDisplay = ({ datetime, type }) => {
 const ProctorModeTopBar = ({ test }) => {
   return (
     <div className="proc-mode-top-bar">
-      <div className="proc-mode-top-bar-test-name">
-        {test ? <>{`${test.test_name}`}</> : 'Loading...'}
+      <div className="proc-mode-top-bar-test-name" title={test?.test_name}>
+        {test ? (
+          <>{`${
+            test.test_name.length <= 15
+              ? test.test_name
+              : test.test_name
+                  .substring(0, 54)
+                  .split(' ')
+                  .slice(0, -1)
+                  .join(' ') + '...'
+          }`}</>
+        ) : (
+          'Loading...'
+        )}
       </div>
       <div className="proc-mode-top-bar-test-details">
         <div>Ongoing</div>
