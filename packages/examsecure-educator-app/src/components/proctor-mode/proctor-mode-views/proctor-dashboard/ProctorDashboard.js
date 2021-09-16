@@ -5,8 +5,9 @@ import { Title } from '@examsecure/design-system';
 import FlaggedImageRecord from './FlaggedImageRecord';
 import DetailsModal from './DetailsModal';
 import DisqualifyModal from './DisqualifyModal';
+import LoadingSpinner from '../../../helpers/LoadingSpinner';
 
-const ProctorDashboard = () => {
+const ProctorDashboard = ({ test }) => {
   const [isDetailsModalVisible, setIsDetailsModalVisible] = useState(false);
   const [isDisqualifyModalVisible, setIsDisqualifyModalVisible] = useState(
     false,
@@ -23,7 +24,7 @@ const ProctorDashboard = () => {
   return (
     <>
       <div className="proc-dash-container">
-        <TopBar />
+        <TopBar test={test} />
 
         <div className="proc-dash-flagged-images">
           <Title value={'Flagged Images'} />
@@ -36,26 +37,34 @@ const ProctorDashboard = () => {
             depth image analysis report.
           </div>
 
-          {[1, 2, 3, 4, 5, 6].map((i) => (
-            <FlaggedImageRecord
-              key={i}
-              archived={false}
-              toggleDetailsModal={toggleDetailsModal}
-              toggleDisqualifyModal={toggleDisqualifyModal}
-            />
-          ))}
-        </div>
+          {!test ? (
+            <div className="loading-spinner">
+              <LoadingSpinner />
+            </div>
+          ) : (
+            <>
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <FlaggedImageRecord
+                  key={i}
+                  archived={false}
+                  toggleDetailsModal={toggleDetailsModal}
+                  toggleDisqualifyModal={toggleDisqualifyModal}
+                />
+              ))}
 
-        <div className="proc-dash-flagged-images">
-          <Title value={'Flagged Images (Archived)'} />
-          {[14, 235, 623].map((i) => (
-            <FlaggedImageRecord
-              key={i}
-              archived={true}
-              toggleDetailsModal={toggleDetailsModal}
-              toggleDisqualifyModal={toggleDisqualifyModal}
-            />
-          ))}
+              <div className="proc-dash-flagged-images">
+                <Title value={'Flagged Images (Archived)'} />
+                {[14, 235, 623].map((i) => (
+                  <FlaggedImageRecord
+                    key={i}
+                    archived={true}
+                    toggleDetailsModal={toggleDetailsModal}
+                    toggleDisqualifyModal={toggleDisqualifyModal}
+                  />
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
 

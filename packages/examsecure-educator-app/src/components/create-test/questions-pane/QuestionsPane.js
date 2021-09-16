@@ -3,7 +3,7 @@ import SingleQuestion from './SingleQuestion';
 import './QuestionsPane.scss';
 
 const QuestionsPaneTopBar = ({ questions, testDuration }) => {
-  const totalScore = questions.reduce(
+  const totalScore = questions?.reduce(
     (acc, val) => acc + val.question_max_score,
     0,
   );
@@ -11,7 +11,7 @@ const QuestionsPaneTopBar = ({ questions, testDuration }) => {
   return (
     <div className="dash-qp-top-bar">
       <div className="dash-qp-top-bar-left">
-        Total Questions Added: {questions.length}
+        Total Questions Added: {questions?.length}
       </div>
 
       <div className="dash-qp-top-bar-right">

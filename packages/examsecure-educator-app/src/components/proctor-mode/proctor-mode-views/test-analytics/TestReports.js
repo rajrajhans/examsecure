@@ -1,5 +1,6 @@
 import React from 'react';
 import { Title } from '@examsecure/design-system';
+import ComingSoon from './ComingSoon';
 
 const TestReports = () => {
   return (
@@ -10,6 +11,7 @@ const TestReports = () => {
           This is an overview of the test based on candidate performance, time
           taken to complete the test, etc.
         </div>
+        <ComingSoon />
       </div>
     </div>
   );

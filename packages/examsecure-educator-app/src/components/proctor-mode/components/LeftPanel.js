@@ -13,6 +13,7 @@ import {
 } from './constants';
 import { useRouteMatch } from 'react-router';
 import { Link, useLocation } from 'react-router-dom';
+import logo from '../../../assets/logo.png';
 
 const ProctorModeLeftPanel = ({ testID }) => {
   const { url } = useRouteMatch();
@@ -25,69 +26,76 @@ const ProctorModeLeftPanel = ({ testID }) => {
     }`;
 
   return (
-    <div className="proc-mode-left-panel">
-      <Link to={generateLink(PROC_MODE_DASHBOARD)}>
-        <div className={generateClassName(PROC_MODE_DASHBOARD)}>
-          Proctor Mode
-        </div>
-      </Link>
+    <>
+      <div className="proc-mode-left-panel-logo">
+        <img alt={'examsecure'} src={logo} width={40} />
+      </div>
+      <div className="proc-mode-left-panel">
+        <Link to={generateLink(PROC_MODE_DASHBOARD)}>
+          <div className={generateClassName(PROC_MODE_DASHBOARD)}>
+            Proctor Mode
+          </div>
+        </Link>
 
-      <div className="proc-mode-left-panel-title">Candidates</div>
+        <div className="proc-mode-left-panel-title">Candidates</div>
 
-      <Link to={generateLink(PROC_MODE_CURRENT_CANDIDATES)}>
-        <div className={generateClassName(PROC_MODE_CURRENT_CANDIDATES)}>
-          Currently Taking (10)
-        </div>
-      </Link>
+        <Link to={generateLink(PROC_MODE_CURRENT_CANDIDATES)}>
+          <div className={generateClassName(PROC_MODE_CURRENT_CANDIDATES)}>
+            Currently Taking (10)
+          </div>
+        </Link>
 
-      <Link to={generateLink(PROC_MODE_CANDIDATES_TEST_TAKEN)}>
-        <div className={generateClassName(PROC_MODE_CANDIDATES_TEST_TAKEN)}>
-          Test Taken (5)
-        </div>
-      </Link>
+        <Link to={generateLink(PROC_MODE_CANDIDATES_TEST_TAKEN)}>
+          <div className={generateClassName(PROC_MODE_CANDIDATES_TEST_TAKEN)}>
+            Test Taken (5)
+          </div>
+        </Link>
 
-      <Link to={generateLink(PROC_MODE_CANDIDATES_TEST_INVITED)}>
-        <div className={generateClassName(PROC_MODE_CANDIDATES_TEST_INVITED)}>
-          Invited (5)
-        </div>
-      </Link>
+        <Link to={generateLink(PROC_MODE_CANDIDATES_TEST_INVITED)}>
+          <div className={generateClassName(PROC_MODE_CANDIDATES_TEST_INVITED)}>
+            Invited (5)
+          </div>
+        </Link>
 
-      <Link to={generateLink(PROC_MODE_CANDIDATES_TEST_DISQUALIFIED)}>
-        <div
-          className={generateClassName(PROC_MODE_CANDIDATES_TEST_DISQUALIFIED)}
-        >
-          Disqualified (5)
-        </div>
-      </Link>
+        <Link to={generateLink(PROC_MODE_CANDIDATES_TEST_DISQUALIFIED)}>
+          <div
+            className={generateClassName(
+              PROC_MODE_CANDIDATES_TEST_DISQUALIFIED,
+            )}
+          >
+            Disqualified (5)
+          </div>
+        </Link>
 
-      <div className="proc-mode-left-panel-title">Analytics</div>
+        <div className="proc-mode-left-panel-title">Analytics</div>
 
-      <Link to={generateLink(PROC_MODE_TEST_REPORTS)}>
-        <div className={generateClassName(PROC_MODE_TEST_REPORTS)}>
-          Test Analytics
-        </div>
-      </Link>
+        <Link to={generateLink(PROC_MODE_TEST_REPORTS)}>
+          <div className={generateClassName(PROC_MODE_TEST_REPORTS)}>
+            Test Analytics
+          </div>
+        </Link>
 
-      <Link to={generateLink(PROC_MODE_QUESTIONS_ANALYTICS)}>
-        <div className={generateClassName(PROC_MODE_QUESTIONS_ANALYTICS)}>
-          Questions Analytics
-        </div>
-      </Link>
+        <Link to={generateLink(PROC_MODE_QUESTIONS_ANALYTICS)}>
+          <div className={generateClassName(PROC_MODE_QUESTIONS_ANALYTICS)}>
+            Questions Analytics
+          </div>
+        </Link>
 
-      <div className="proc-mode-left-panel-title">Test Details</div>
+        <div className="proc-mode-left-panel-title">Test Details</div>
 
-      <Link to={generateLink(PROC_MODE_TEST_OVERVIEW)}>
-        <div className={generateClassName(PROC_MODE_TEST_OVERVIEW)}>
-          Test Overview
-        </div>
-      </Link>
+        <Link to={generateLink(PROC_MODE_TEST_OVERVIEW)}>
+          <div className={generateClassName(PROC_MODE_TEST_OVERVIEW)}>
+            Test Overview
+          </div>
+        </Link>
 
-      <Link to={generateLink(PROC_MODE_TEST_QUESTIONS)}>
-        <div className={generateClassName(PROC_MODE_TEST_QUESTIONS)}>
-          Questions
-        </div>
-      </Link>
-    </div>
+        <Link to={generateLink(PROC_MODE_TEST_QUESTIONS)}>
+          <div className={generateClassName(PROC_MODE_TEST_QUESTIONS)}>
+            Questions
+          </div>
+        </Link>
+      </div>
+    </>
   );
 };
 
