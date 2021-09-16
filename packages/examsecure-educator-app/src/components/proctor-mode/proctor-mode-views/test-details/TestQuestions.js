@@ -1,6 +1,6 @@
 import React from 'react';
 import { Title } from '@examsecure/design-system';
-import QuestionsPane from '../../create-test/questions-pane/QuestionsPane';
+import QuestionsPane from '../../../create-test/questions-pane/QuestionsPane';
 
 const TestQuestions = () => {
   return (
