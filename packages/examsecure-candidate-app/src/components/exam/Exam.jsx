@@ -22,6 +22,8 @@ const Exam = ({ loadForSeconds, currentUser, testData }) => {
   // const questionsData = undefined;
 
   const questions = testData.questions.questions;
+  console.log({ questions });
+
   const [
     answerResponse,
     answerResponseHandler,
@@ -229,7 +231,7 @@ const Exam = ({ loadForSeconds, currentUser, testData }) => {
       {isWebCamReady ? (
         <>
           <Timer
-            examDuration={testData.test_duration * 60}
+            examDuration={testData.metadata.test_duration * 60}
             getLastAlive={getLastAlive}
             callBackFn={timeUp}
             currentUser={currentUser}
@@ -237,7 +239,7 @@ const Exam = ({ loadForSeconds, currentUser, testData }) => {
           />
           <div className={'examQuestions'}>
             {questions.map((q) => (
-              <div className={'questionsWrapper'} key={q.id}>
+              <div className={'questionsWrapper'} key={q.question_id}>
                 <Question
                   questionID={q.question_id}
                   question={q.question_text}
@@ -281,19 +283,17 @@ const Question = ({
           </div>
 
           {opts.map((opt) => (
-            <div className="form-check mcqOption" key={opt.choice_id}>
+            <div className="form-check mcqOption" key={opt.id}>
               <input
                 className="form-check-input"
                 type="radio"
                 name={questionID}
-                id={opt.choice_id}
+                id={opt.id}
                 value={opt.choice_text}
                 onChange={handleAnswerChange}
-                checked={
-                  isRadioChecked(questionID, opt.choice_id) ? 'checked' : null
-                }
+                checked={isRadioChecked(questionID, opt.id) ? 'checked' : null}
               />
-              <label htmlFor={opt.choice_id} className="form-check-label">
+              <label htmlFor={opt.id} className="form-check-label">
                 {opt.choice_text}
               </label>
             </div>

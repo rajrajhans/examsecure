@@ -10,7 +10,7 @@ function fetchQuestions(test_id, selectedQSetMetadata) {
           type: FETCH_QUESTIONS,
           payload: {
             ...questionsData,
-            questionSetID: test_id,
+            test_id: test_id,
             selectedQSetDuration: selectedQSetMetadata.duration,
             metadata: selectedQSetMetadata,
           },
