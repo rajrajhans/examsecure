@@ -9,7 +9,7 @@ import PostSubmit from './components/post-exam/PostSubmit';
 import Loading from './components/layout/Loading';
 import Caught from './components/post-exam/Caught';
 import Demo from './components/demo/Demo';
-import QuestionSetSelectorContainer from './components/question-set-selector/QuestionSetSelectorContainer';
+import QuestionSetSelectorContainer from './components/test-selector/TestSelectorContainer';
 import ExamContainer from './components/exam/ExamContainer';
 import LandingContainer from './components/landing/LandingContainer';
 import DemoVideos from './components/demo/DemoVideos';

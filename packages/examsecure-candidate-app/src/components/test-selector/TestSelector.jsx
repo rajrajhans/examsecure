@@ -8,7 +8,7 @@ import gateway from '../../utils/gateway';
 import Spinner from 'react-bootstrap/Spinner';
 import { pageview } from 'react-ga';
 
-const QuestionSetSelector = ({ fetchQuestions, questions, currentUser }) => {
+const TestSelector = ({ fetchQuestions, questions, currentUser }) => {
   const [selectedQSet, setSelectedQSet] = useState('');
   const [selectedQSetMetadata, setSelectedQSetMetadata] = useState({});
   const [qSets, setQsets] = useState([]);
@@ -118,4 +118,4 @@ const QuestionSetSelector = ({ fetchQuestions, questions, currentUser }) => {
   );
 };
 
-export default QuestionSetSelector;
+export default TestSelector;
