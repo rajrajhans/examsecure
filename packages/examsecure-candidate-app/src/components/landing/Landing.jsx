@@ -223,11 +223,11 @@ const Landing = ({ loadForSeconds, currentUser, questionSetMetadata }) => {
         {questionSetMetadata ? (
           <div className={'confirmationText'}>
             <div>
-              Selected Exam: <b>{questionSetMetadata.qSetName}</b>
+              Selected Exam: <b>{questionSetMetadata.test_name}</b>
             </div>
             <div>
               Duration of the Exam:{' '}
-              <b>{questionSetMetadata.duration} minutes</b>
+              <b>{questionSetMetadata.test_duration} minutes</b>
             </div>
           </div>
         ) : null}
