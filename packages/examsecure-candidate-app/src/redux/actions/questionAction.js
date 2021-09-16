@@ -1,19 +1,21 @@
-import { FETCH_QUESTIONS } from "./types";
-import gateway from "../../utils/gateway";
+import { FETCH_QUESTIONS } from './types';
+import gateway from '../../utils/gateway';
 
-function fetchQuestions(qSetID, selectedQSetMetadata) {
+function fetchQuestions(test_id, selectedQSetMetadata) {
   return function (dispatch) {
-    gateway.getQuestions(qSetID).then((questionsData) => {
-      dispatch({
-        type: FETCH_QUESTIONS,
-        payload: {
-          ...questionsData,
-          questionSetID: qSetID,
-          selectedQSetDuration: selectedQSetMetadata.duration,
-          metadata: selectedQSetMetadata,
-        },
+    gateway
+      .getQuestions(test_id, selectedQSetMetadata.test_by)
+      .then((questionsData) => {
+        dispatch({
+          type: FETCH_QUESTIONS,
+          payload: {
+            ...questionsData,
+            questionSetID: test_id,
+            selectedQSetDuration: selectedQSetMetadata.duration,
+            metadata: selectedQSetMetadata,
+          },
+        });
       });
-    });
   };
 }
 

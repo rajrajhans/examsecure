@@ -1,15 +1,15 @@
-import request from "./request";
+import request from './request';
 
 export default {
   addIndexFace(image, fullName) {
-    return request("/faces/index", "post", {
+    return request('/faces/index', 'post', {
       image: image,
       fullName: fullName,
     });
   },
 
   processImage(image, username, questionSetID) {
-    return request("/process", "post", {
+    return request('/process', 'post', {
       image: image,
       username: username,
       questionSetID: questionSetID,
@@ -17,37 +17,40 @@ export default {
   },
 
   processDemoImage(image, username) {
-    return request("/process-demo-image", "post", {
+    return request('/process-demo-image', 'post', {
       image: image,
       username: username,
-      questionSetID: "null",
+      questionSetID: 'null',
     });
   },
 
   startExam(username, questionSetID) {
-    return request("/start-exam", "post", {
+    return request('/start-exam', 'post', {
       username: username,
       questionSetID: questionSetID,
     });
   },
 
   endExam(username, questionSetID) {
-    return request("/end-exam", "post", {
+    return request('/end-exam', 'post', {
       username: username,
       questionSetID: questionSetID,
     });
   },
 
   getQuestionSets() {
-    return request("/get-questionsets", "get");
+    return request('/get-questionsets', 'get');
   },
 
-  getQuestions(qSetID) {
-    return request(`/get-questions?qSetID=${qSetID}`, "get");
+  getQuestions(test_id, test_by) {
+    return request(
+      `/get-questions?test_id=${test_id}&test_by=${test_by}`,
+      'get',
+    );
   },
 
   updateAnswer(username, questionSetID, questionID, userSelectedAnswer) {
-    return request("/update-answers", "post", {
+    return request('/update-answers', 'post', {
       username: username,
       qSetID: questionSetID,
       qID: questionID,
@@ -56,14 +59,14 @@ export default {
   },
 
   getSavedAnswers(username, questionSetID) {
-    return request("/get-saved-answers", "post", {
+    return request('/get-saved-answers', 'post', {
       username: username,
       qSetID: questionSetID,
     });
   },
 
   checkIsDisqualified(username, questionSetID, timeRemaining) {
-    return request("/is-disqualified", "post", {
+    return request('/is-disqualified', 'post', {
       username: username,
       questionSetID: questionSetID,
       timeRemaining: timeRemaining,
@@ -71,7 +74,7 @@ export default {
   },
 
   getLastAlive(username, questionSetID) {
-    return request("/get-lastalive", "post", {
+    return request('/get-lastalive', 'post', {
       username: username,
       questionSetID: questionSetID,
     });
