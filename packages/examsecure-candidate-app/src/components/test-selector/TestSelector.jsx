@@ -38,8 +38,6 @@ const TestSelector = ({ fetchQuestions, questions, currentUser }) => {
           },
         );
 
-        console.log({ tests, selectedQSet, qSets, selectedQSetMetadata });
-
         setSelectedQSetMetadata(tests[0]);
         setSelectedQSet(tests[0].test_id);
         setQsets(tests);
@@ -58,6 +56,7 @@ const TestSelector = ({ fetchQuestions, questions, currentUser }) => {
       test_duration: selectedDataset.duration,
       test_id: selectedDataset.test_id,
       test_name: selectedDataset.test_name,
+      test_by: selectedDataset.test_by,
     };
     setSelectedQSetMetadata(selectedQSetMetaData);
   };
@@ -94,6 +93,7 @@ const TestSelector = ({ fetchQuestions, questions, currentUser }) => {
                           data-test_duration={questionSet.test_duration}
                           data-test_name={questionSet.test_name}
                           data-test_id={questionSet.test_id}
+                          data-test_by={questionSet.test_by}
                         >
                           {questionSet.test_name}
                         </option>
