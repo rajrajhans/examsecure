@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useFirebaseConnect } from 'react-redux-firebase';
 import LoadingSpinner from '../helpers/LoadingSpinner';
-import SingleTestView from '../dashboard/SingleTestView';
 
 const ProctorModeTestSelector = () => {
   const router = useHistory();
