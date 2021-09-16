@@ -1,11 +1,33 @@
 import React from 'react';
 import { ReactComponent as CopyIcon } from '../../../assets/icons/copy.svg';
 import './TopBar.scss';
+import moment from 'moment';
+import { DATE_TIME_FORMAT } from '../../../utils/constants';
 
-const ProctorModeTopBar = () => {
+const TestTimeDisplay = ({ datetime, type }) => {
+  if (!datetime) {
+    return null;
+  }
+
+  const test_datetime = moment(datetime, DATE_TIME_FORMAT);
+  const isNowBeforeTestDate = moment().isBefore(test_datetime);
+  let text = '';
+
+  if (type === 'start') {
+    text = isNowBeforeTestDate ? 'Will start at ' : 'Started at';
+  } else {
+    text = isNowBeforeTestDate ? 'Will end at ' : 'Ended at';
+  }
+
+  return <>{`${text} ${datetime}`}</>;
+};
+
+const ProctorModeTopBar = ({ test }) => {
   return (
     <div className="proc-mode-top-bar">
-      <div className="proc-mode-top-bar-test-name">Compiler Design Test</div>
+      <div className="proc-mode-top-bar-test-name">
+        {test ? <>{`${test.test_name}`}</> : 'Loading...'}
+      </div>
       <div className="proc-mode-top-bar-test-details">
         <div>Ongoing</div>
         <div>|</div>
@@ -13,9 +35,13 @@ const ProctorModeTopBar = () => {
           <CopyIcon /> Test Link
         </div>
         <div>|</div>
-        <div>Started at 11/09/21 06:09 AM</div>
+        <div>
+          <TestTimeDisplay datetime={test?.test_starts_at} type={'start'} />
+        </div>
         <div>|</div>
-        <div>Ends at 11/09/21 04:20 PM</div>
+        <div>
+          <TestTimeDisplay datetime={test?.test_ends_at} type={'end'} />
+        </div>
       </div>
     </div>
   );

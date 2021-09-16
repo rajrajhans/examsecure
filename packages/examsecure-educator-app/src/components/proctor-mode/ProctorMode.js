@@ -14,7 +14,7 @@ const ProctorMode = ({ testID }) => {
 
   return (
     <>
-      <TopBar />
+      <TopBar test={test} />
       <div className="proc-mode-content-container">
         <LeftPanel testID={testID} />
         <div className="proc-mode-content">
