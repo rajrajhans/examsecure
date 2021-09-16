@@ -4,7 +4,7 @@ import { Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useHistory } from 'react-router-dom';
-import gateway from '../utils/gateway';
+import gateway from '../../utils/gateway';
 import Spinner from 'react-bootstrap/Spinner';
 import { pageview } from 'react-ga';
 

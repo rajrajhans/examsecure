@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Timer from './helpers/Timer';
+import Timer from '../helpers/Timer';
 import Button from 'react-bootstrap/Button';
 import { useHistory } from 'react-router-dom';
-import '../styles/exam.css';
+import '../../styles/exam.css';
 import Webcam from 'react-webcam';
-import gateway from '../utils/gateway';
-import signOut from '../utils/signOut';
-import ExamWarningModal from './helpers/ExamWarningModal';
-import { mode } from './helpers/modeSetter';
-import useAnswerResponse from './helpers/useAnswerResponse';
+import gateway from '../../utils/gateway';
+import signOut from '../../utils/signOut';
+import ExamWarningModal from '../helpers/ExamWarningModal';
+import { mode } from '../helpers/modeSetter';
+import useAnswerResponse from '../helpers/useAnswerResponse';
 import { pageview } from 'react-ga';
 
 const Exam = ({ loadForSeconds, currentUser, questionsData }) => {

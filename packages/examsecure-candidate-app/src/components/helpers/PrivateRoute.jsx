@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SignIn from '../SignIn';
+import SignIn from '../auth/SignIn';
 
 class PrivateRoute extends Component {
   render() {

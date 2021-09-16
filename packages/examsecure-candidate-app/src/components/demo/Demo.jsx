@@ -1,15 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
-import Container from "react-bootstrap/Container";
-import { Col, Row } from "react-bootstrap";
-import Webcam from "react-webcam";
-import gateway from "../utils/gateway";
-import Button from "react-bootstrap/Button";
-import Spinner from "react-bootstrap/Spinner";
-import Table from "react-bootstrap/Table";
-import Alert from "react-bootstrap/Alert";
-import Card from "react-bootstrap/Card";
-import { getHeadPoseInterpretation } from "../utils/headPoseAnalysisUtils";
-import { pageview } from "react-ga";
+import React, { useEffect, useRef, useState } from 'react';
+import Container from 'react-bootstrap/Container';
+import { Col, Row } from 'react-bootstrap';
+import Webcam from 'react-webcam';
+import gateway from '../../utils/gateway';
+import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
+import Table from 'react-bootstrap/Table';
+import Alert from 'react-bootstrap/Alert';
+import Card from 'react-bootstrap/Card';
+import { getHeadPoseInterpretation } from '../../utils/headPoseAnalysisUtils';
+import { pageview } from 'react-ga';
 
 const Demo = ({ currentUser }) => {
   const [isWebCamReady, setIsWebcamReady] = useState(false);
@@ -28,7 +28,7 @@ const Demo = ({ currentUser }) => {
       const image = webcam.current.getScreenshot();
 
       if (image) {
-        const b64EncodedImg = image.split(",")[1];
+        const b64EncodedImg = image.split(',')[1];
 
         let res = await gateway.processDemoImage(b64EncodedImg, currentUser);
         if (res) {
@@ -36,39 +36,39 @@ const Demo = ({ currentUser }) => {
           setTestRes(res);
 
           // If "Objects of Interest" test fails
-          if (res[0]["Success"] === false) {
+          if (res[0]['Success'] === false) {
             handleFailTestResults(
-              "Warning: Phone",
-              "There seem to be multiple people in your camera frame."
+              'Warning: Phone',
+              'There seem to be multiple people in your camera frame.',
             );
           }
 
           // If "Person Detection" test fails TODO: Change this alert to custom modal
-          if (res[1]["Success"] === false && res[3]["Details"] > 1) {
+          if (res[1]['Success'] === false && res[3]['Details'] > 1) {
             handleFailTestResults(
-              "Warning: Multiple Persons",
-              "There seem to be multiple people in your camera frame."
+              'Warning: Multiple Persons',
+              'There seem to be multiple people in your camera frame.',
             );
           }
 
           // If "Person Recognition" test fails TODO: Change this alert to custom modal
-          if (res[2]["Success"] === false && res[3]["Success"] === true) {
+          if (res[2]['Success'] === false && res[3]['Success'] === true) {
             handleFailTestResults(
-              "Impersonation Warning!",
-              "Person in the camera frame is not recognised. Ensure your face is clearly visible!"
+              'Impersonation Warning!',
+              'Person in the camera frame is not recognised. Ensure your face is clearly visible!',
             );
           }
 
           // If "Face Detection" test fails TODO: Change this alert to custom modal
-          if (res[3]["Success"] === false && res[3]["Details"] === 0) {
+          if (res[3]['Success'] === false && res[3]['Details'] === 0) {
             handleFailTestResults(
-              "Warning: Face Not Detected!",
-              "Your face was not detected in the webcam. Ensure your face is clearly visible!"
+              'Warning: Face Not Detected!',
+              'Your face was not detected in the webcam. Ensure your face is clearly visible!',
             );
           }
         }
       } else {
-        console.log("Waiting for camera to start responding");
+        console.log('Waiting for camera to start responding');
         setTimeout(getSnapshot, 500);
       }
     }
@@ -93,15 +93,15 @@ const Demo = ({ currentUser }) => {
   };
 
   const handleAnalyze = () => {
-    let numOfCaptures = Number(localStorage.getItem("examsecure_democaptures"));
-    localStorage.setItem("examsecure_democaptures", String(numOfCaptures + 1));
+    let numOfCaptures = Number(localStorage.getItem('examsecure_democaptures'));
+    localStorage.setItem('examsecure_democaptures', String(numOfCaptures + 1));
 
     if (numOfCaptures < 5) {
       setIsFetching(true);
       setTestRes(null);
       getSnapshot().then(() => setIsFetching(false));
     } else {
-      alert("Sorry, you have exceeded the limit of trials.");
+      alert('Sorry, you have exceeded the limit of trials.');
     }
   };
 
@@ -127,18 +127,18 @@ const Demo = ({ currentUser }) => {
           <Col xs={12} md={6}>
             <Webcam
               ref={setupWebcam}
-              screenshotFormat={"image/jpeg"}
+              screenshotFormat={'image/jpeg'}
               videoConstraints={{
                 width: 1280,
                 height: 640,
-                facingMode: "user",
+                facingMode: 'user',
               }}
-              style={{ width: "100%" }}
+              style={{ width: '100%' }}
             />
             <div
-              className={"container"}
+              className={'container'}
               style={{
-                margin: "20px auto 30px auto",
+                margin: '20px auto 30px auto',
               }}
             >
               {isWebCamReady ? (
@@ -146,20 +146,20 @@ const Demo = ({ currentUser }) => {
                   {isFetching ? (
                     <div
                       style={{
-                        margin: "20px auto",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
+                        margin: '20px auto',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
                       }}
                     >
                       <Button
                         disabled
-                        style={{ display: "flex", alignItems: "center" }}
+                        style={{ display: 'flex', alignItems: 'center' }}
                       >
                         <Spinner
-                          animation={"border"}
-                          size={"sm"}
-                          style={{ marginRight: "8px" }}
+                          animation={'border'}
+                          size={'sm'}
+                          style={{ marginRight: '8px' }}
                         />
                         Processing
                       </Button>
@@ -182,45 +182,46 @@ const Demo = ({ currentUser }) => {
                                 <td>1</td>
                                 <td>Roll</td>
                                 <td>
-                                  {testRes[3]["MoreDetails"][0]
-                                    ? testRes[3]["MoreDetails"][0]["Pose"].Roll
-                                    : "No Face Detected"}
+                                  {testRes[3]['MoreDetails'][0]
+                                    ? testRes[3]['MoreDetails'][0]['Pose'].Roll
+                                    : 'No Face Detected'}
                                 </td>
                               </tr>
                               <tr>
                                 <td>2</td>
                                 <td>Pitch</td>
                                 <td>
-                                  {testRes[3]["MoreDetails"][0]
-                                    ? testRes[3]["MoreDetails"][0]["Pose"].Pitch
-                                    : "No Face Detected"}
+                                  {testRes[3]['MoreDetails'][0]
+                                    ? testRes[3]['MoreDetails'][0]['Pose'].Pitch
+                                    : 'No Face Detected'}
                                 </td>
                               </tr>
                               <tr>
                                 <td>3</td>
                                 <td>Yaw</td>
                                 <td>
-                                  {testRes[3]["MoreDetails"][0]
-                                    ? testRes[3]["MoreDetails"][0]["Pose"].Yaw
-                                    : "No Face Detected"}
+                                  {testRes[3]['MoreDetails'][0]
+                                    ? testRes[3]['MoreDetails'][0]['Pose'].Yaw
+                                    : 'No Face Detected'}
                                 </td>
                               </tr>
                               <tr>
                                 <td>4</td>
                                 <td>Interpretation</td>
                                 <td>
-                                  {testRes[3]["MoreDetails"][0] ? (
+                                  {testRes[3]['MoreDetails'][0] ? (
                                     <b>
                                       {getHeadPoseInterpretation(
-                                        testRes[3]["MoreDetails"][0]["Pose"]
+                                        testRes[3]['MoreDetails'][0]['Pose']
                                           .Roll,
-                                        testRes[3]["MoreDetails"][0]["Pose"]
+                                        testRes[3]['MoreDetails'][0]['Pose']
                                           .Pitch,
-                                        testRes[3]["MoreDetails"][0]["Pose"].Yaw
+                                        testRes[3]['MoreDetails'][0]['Pose']
+                                          .Yaw,
                                       )}
                                     </b>
                                   ) : (
-                                    "No Face Detected"
+                                    'No Face Detected'
                                   )}
                                 </td>
                               </tr>
@@ -230,10 +231,10 @@ const Demo = ({ currentUser }) => {
                       ) : null}
                       <div
                         style={{
-                          margin: "20px auto",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
+                          margin: '20px auto',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
                         }}
                       >
                         <Button onClick={handleAnalyze}>
@@ -244,7 +245,7 @@ const Demo = ({ currentUser }) => {
                   )}
                 </>
               ) : (
-                "Waiting for Webcam ..."
+                'Waiting for Webcam ...'
               )}
             </div>
           </Col>
@@ -265,7 +266,7 @@ const Demo = ({ currentUser }) => {
                       <tr>
                         <td>1</td>
                         <td>Number of Faces Detected</td>
-                        <td>{testRes ? testRes[3]["Details"] : "-"}</td>
+                        <td>{testRes ? testRes[3]['Details'] : '-'}</td>
                       </tr>
                       <tr>
                         <td>2</td>
@@ -273,12 +274,12 @@ const Demo = ({ currentUser }) => {
                         <td>
                           {testRes ? (
                             <>
-                              {testRes[2]["Success"]
-                                ? `Yes. Identity: ${testRes[2]["Details"]}`
-                                : "No"}
+                              {testRes[2]['Success']
+                                ? `Yes. Identity: ${testRes[2]['Details']}`
+                                : 'No'}
                             </>
                           ) : (
-                            "-"
+                            '-'
                           )}
                         </td>
                       </tr>
@@ -288,14 +289,14 @@ const Demo = ({ currentUser }) => {
                         <td>
                           {testRes ? (
                             <>
-                              {testRes[3]["Details"] > 1 ? (
+                              {testRes[3]['Details'] > 1 ? (
                                 <b>Multiple Persons Detected!</b>
                               ) : (
-                                "No"
+                                'No'
                               )}
                             </>
                           ) : (
-                            "-"
+                            '-'
                           )}
                         </td>
                       </tr>
@@ -305,14 +306,14 @@ const Demo = ({ currentUser }) => {
                         <td>
                           {testRes ? (
                             <>
-                              {testRes[3]["Details"] === 0 ? (
+                              {testRes[3]['Details'] === 0 ? (
                                 <b>Cannot detect any face!</b>
                               ) : (
-                                "No"
+                                'No'
                               )}
                             </>
                           ) : (
-                            "-"
+                            '-'
                           )}
                         </td>
                       </tr>
@@ -322,17 +323,17 @@ const Demo = ({ currentUser }) => {
                         <td>
                           {testRes ? (
                             <>
-                              {testRes[0]["Success"] === false
-                                ? `Yes. ${testRes[0]["Details"]}`
-                                : "No"}
+                              {testRes[0]['Success'] === false
+                                ? `Yes. ${testRes[0]['Details']}`
+                                : 'No'}
                             </>
                           ) : (
-                            "-"
+                            '-'
                           )}
                         </td>
                       </tr>
                       <tr>
-                        <td colSpan={"3"}>
+                        <td colSpan={'3'}>
                           <i>
                             Predicted attributes of the most prominent face
                             detected -
@@ -343,13 +344,13 @@ const Demo = ({ currentUser }) => {
                         <td>6</td>
                         <td>Predicted Age Range</td>
                         <td>
-                          {testRes[3]["MoreDetails"][0] ? (
+                          {testRes[3]['MoreDetails'][0] ? (
                             <>
-                              {testRes[3]["MoreDetails"][0]["AgeRange"].Low} -{" "}
-                              {testRes[3]["MoreDetails"][0]["AgeRange"].High}
+                              {testRes[3]['MoreDetails'][0]['AgeRange'].Low} -{' '}
+                              {testRes[3]['MoreDetails'][0]['AgeRange'].High}
                             </>
                           ) : (
-                            "-"
+                            '-'
                           )}
                         </td>
                       </tr>
@@ -357,10 +358,10 @@ const Demo = ({ currentUser }) => {
                         <td>7</td>
                         <td>Predicted Gender</td>
                         <td>
-                          {testRes[3]["MoreDetails"][0] ? (
-                            <>{testRes[3]["MoreDetails"][0]["Gender"].Value}</>
+                          {testRes[3]['MoreDetails'][0] ? (
+                            <>{testRes[3]['MoreDetails'][0]['Gender'].Value}</>
                           ) : (
-                            "-"
+                            '-'
                           )}
                         </td>
                       </tr>
@@ -368,16 +369,16 @@ const Demo = ({ currentUser }) => {
                         <td>9</td>
                         <td>Eyewear</td>
                         <td>
-                          {testRes[3]["MoreDetails"][0] ? (
+                          {testRes[3]['MoreDetails'][0] ? (
                             <>
-                              {testRes[3]["MoreDetails"][0]["Eyeglasses"]
+                              {testRes[3]['MoreDetails'][0]['Eyeglasses']
                                 .Value ||
-                              testRes[3]["MoreDetails"][0]["Sunglasses"].Value
-                                ? "Yes"
-                                : "No"}
+                              testRes[3]['MoreDetails'][0]['Sunglasses'].Value
+                                ? 'Yes'
+                                : 'No'}
                             </>
                           ) : (
-                            "-"
+                            '-'
                           )}
                         </td>
                       </tr>
@@ -385,14 +386,14 @@ const Demo = ({ currentUser }) => {
                         <td>10</td>
                         <td>Facial Expression - Smile</td>
                         <td>
-                          {testRes[3]["MoreDetails"][0] ? (
+                          {testRes[3]['MoreDetails'][0] ? (
                             <>
-                              {testRes[3]["MoreDetails"][0]["Smile"].Value
-                                ? "Yes"
-                                : "No"}
+                              {testRes[3]['MoreDetails'][0]['Smile'].Value
+                                ? 'Yes'
+                                : 'No'}
                             </>
                           ) : (
-                            "-"
+                            '-'
                           )}
                         </td>
                       </tr>
@@ -400,14 +401,14 @@ const Demo = ({ currentUser }) => {
                         <td>11</td>
                         <td>Facial Expression - Eyes Open?</td>
                         <td>
-                          {testRes[3]["MoreDetails"][0] ? (
+                          {testRes[3]['MoreDetails'][0] ? (
                             <>
-                              {testRes[3]["MoreDetails"][0]["EyesOpen"].Value
-                                ? "Yes"
-                                : "No"}
+                              {testRes[3]['MoreDetails'][0]['EyesOpen'].Value
+                                ? 'Yes'
+                                : 'No'}
                             </>
                           ) : (
-                            "-"
+                            '-'
                           )}
                         </td>
                       </tr>
@@ -416,14 +417,14 @@ const Demo = ({ currentUser }) => {
                         <td>12</td>
                         <td>Facial Expression - Mouth Open?</td>
                         <td>
-                          {testRes[3]["MoreDetails"][0] ? (
+                          {testRes[3]['MoreDetails'][0] ? (
                             <>
-                              {testRes[3]["MoreDetails"][0]["MouthOpen"].Value
-                                ? "Yes"
-                                : "No"}
+                              {testRes[3]['MoreDetails'][0]['MouthOpen'].Value
+                                ? 'Yes'
+                                : 'No'}
                             </>
                           ) : (
-                            "-"
+                            '-'
                           )}
                         </td>
                       </tr>
@@ -432,23 +433,23 @@ const Demo = ({ currentUser }) => {
                         <td>13</td>
                         <td>Predicted Prominent Emotion</td>
                         <td>
-                          {testRes[3]["MoreDetails"][0] ? (
+                          {testRes[3]['MoreDetails'][0] ? (
                             <>
                               {
-                                testRes[3]["MoreDetails"][0]["Emotions"][0][
-                                  "Type"
+                                testRes[3]['MoreDetails'][0]['Emotions'][0][
+                                  'Type'
                                 ]
-                              }{" "}
-                              -{" "}
+                              }{' '}
+                              -{' '}
                               {Math.floor(
-                                testRes[3]["MoreDetails"][0]["Emotions"][0][
-                                  "Confidence"
-                                ]
+                                testRes[3]['MoreDetails'][0]['Emotions'][0][
+                                  'Confidence'
+                                ],
                               )}
                               %
                             </>
                           ) : (
-                            "-"
+                            '-'
                           )}
                         </td>
                       </tr>
@@ -458,35 +459,35 @@ const Demo = ({ currentUser }) => {
               ) : (
                 <>
                   {isWebCamReady ? (
-                    <Alert variant={"info"}>
+                    <Alert variant={'info'}>
                       Click on the button to capture and analyze your camera
                       frame image
                     </Alert>
                   ) : (
                     <>
                       <Alert
-                        variant={"warning"}
-                        width={"500px"}
-                        className={"instructionsBox"}
+                        variant={'warning'}
+                        width={'500px'}
+                        className={'instructionsBox'}
                       >
-                        <Alert.Heading className={"instrHeading"}>
+                        <Alert.Heading className={'instrHeading'}>
                           Please allow required permissions to continue
                         </Alert.Heading>
-                        <ul className={"instructionsBoxList"}>
+                        <ul className={'instructionsBoxList'}>
                           <li>
                             When prompted, you need to click <i>Allow</i> to use
                             the application with your webcam.
                           </li>
                           <li>
-                            If you don't see the dialog, try{" "}
+                            If you don't see the dialog, try{' '}
                             <a href={window.location}>
                               opening the application
-                            </a>{" "}
+                            </a>{' '}
                             in a new incognito window, or review your webcam
                             settings on your browser.
                           </li>
                           <li>
-                            We recommend using the latest version of{" "}
+                            We recommend using the latest version of{' '}
                             <b>Google Chrome</b> for a hassle-free experience.
                           </li>
                         </ul>

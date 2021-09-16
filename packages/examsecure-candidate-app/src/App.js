@@ -1,19 +1,19 @@
 import React, { Component, useState } from 'react';
-import Layout from './components/Layout';
+import Layout from './components/layout/Layout';
 import './styles/main.css';
 import Home from './components/Home';
-import SignIn from './components/SignIn';
+import SignIn from './components/auth/SignIn';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PrivateRoute from './components/helpers/PrivateRoute';
-import PostSubmit from './components/PostSubmit';
-import Loading from './components/Loading';
-import Caught from './components/Caught';
-import Demo from './components/Demo';
-import QuestionSetSelectorContainer from './components/containers/QuestionSetSelectorContainer';
-import ExamContainer from './components/containers/ExamContainer';
-import LandingContainer from './components/containers/LandingContainer';
-import DemoVideos from './components/DemoVideos';
-import SignUp from './components/SignUp';
+import PostSubmit from './components/post-exam/PostSubmit';
+import Loading from './components/layout/Loading';
+import Caught from './components/post-exam/Caught';
+import Demo from './components/demo/Demo';
+import QuestionSetSelectorContainer from './components/question-set-selector/QuestionSetSelectorContainer';
+import ExamContainer from './components/exam/ExamContainer';
+import LandingContainer from './components/landing/LandingContainer';
+import DemoVideos from './components/demo/DemoVideos';
+import SignUp from './components/auth/SignUp';
 
 class App extends Component {
   constructor(props) {

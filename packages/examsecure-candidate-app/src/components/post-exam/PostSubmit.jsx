@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import Toast from "react-bootstrap/Toast";
-import Card from "react-bootstrap/Card";
-import { exitFullScreen } from "../utils/fullscreenAPI";
+import React, { Component } from 'react';
+import Toast from 'react-bootstrap/Toast';
+import Card from 'react-bootstrap/Card';
+import { exitFullScreen } from '../../utils/fullscreenAPI';
 
 class PostSubmit extends Component {
   async componentDidMount() {
@@ -14,9 +14,9 @@ class PostSubmit extends Component {
   render() {
     return (
       <Card
-        style={{ margin: "100px auto", textAlign: "center", maxWidth: "800px" }}
+        style={{ margin: '100px auto', textAlign: 'center', maxWidth: '800px' }}
       >
-        <Card.Title style={{ marginTop: "10px" }}>
+        <Card.Title style={{ marginTop: '10px' }}>
           <strong className="mr-auto">Thank You!</strong>
         </Card.Title>
 

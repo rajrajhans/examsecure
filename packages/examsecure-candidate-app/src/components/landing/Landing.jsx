@@ -5,14 +5,14 @@ import Alert from 'react-bootstrap/Alert';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import { Link, useHistory } from 'react-router-dom';
-import '../styles/landing.css';
+import '../../styles/landing.css';
 import {
   defineFullscreenChangeEvent,
   makeFullScreen,
-} from '../utils/fullscreenAPI';
-import AddFaceBox from './helpers/AddFaceBox';
-import { mode } from './helpers/modeSetter';
-import isDeviceMobile from '../utils/checkMobileDeviceAPI';
+} from '../../utils/fullscreenAPI';
+import AddFaceBox from '../helpers/AddFaceBox';
+import { mode } from '../helpers/modeSetter';
+import isDeviceMobile from '../../utils/checkMobileDeviceAPI';
 import { pageview } from 'react-ga';
 
 const Landing = ({ loadForSeconds, currentUser, questionSetMetadata }) => {

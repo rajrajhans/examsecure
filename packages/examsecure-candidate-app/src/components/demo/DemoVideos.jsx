@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
-import missingDemo from '../static/videos/face_demo.mp4';
-import multiplePplDemo from '../static/videos/multiple_person_demo.mp4';
+import missingDemo from '../../static/videos/face_demo.mp4';
+import multiplePplDemo from '../../static/videos/multiple_person_demo.mp4';
 import { pageview } from 'react-ga';
 
 const DemoVideos = ({ navigate }) => {

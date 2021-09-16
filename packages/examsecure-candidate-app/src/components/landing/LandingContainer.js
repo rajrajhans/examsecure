@@ -1,5 +1,5 @@
-import { connect } from "react-redux";
-import Landing from "../Landing";
+import { connect } from 'react-redux';
+import Landing from './Landing';
 
 const mapStateToProps = (state, ownProps) => {
   return {

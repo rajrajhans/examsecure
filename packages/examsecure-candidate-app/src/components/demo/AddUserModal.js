@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { Alert, Button, Form, Modal } from "react-bootstrap";
+import React, { useState } from 'react';
+import { Alert, Button, Form, Modal } from 'react-bootstrap';
 
-import { isEmpty } from "../utils";
+import { isEmpty } from '../../utils';
 
 export default ({ onSave }) => {
-  const [formState, setFormState] = useState("initial");
-  const [fullName, setFullName] = useState("");
+  const [formState, setFormState] = useState('initial');
+  const [fullName, setFullName] = useState('');
   const [image, setImage] = useState(undefined);
   const [show, setShow] = useState(false);
   const [submitClicked, setSubmitClicked] = useState(false);
@@ -17,26 +17,26 @@ export default ({ onSave }) => {
   const processImage = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = () => setImage(reader.result.split(",")[1]);
-    reader.onerror = () => setFormState("error");
+    reader.onload = () => setImage(reader.result.split(',')[1]);
+    reader.onerror = () => setFormState('error');
   };
 
   const submitForm = (e) => {
     setSubmitClicked(true);
     if (isFormValid) {
-      setFormState("saving");
+      setFormState('saving');
       e.preventDefault();
       onSave({ fullName, image })
-        .then(() => setFormState("saved"))
-        .catch(() => setFormState("error"));
+        .then(() => setFormState('saved'))
+        .catch(() => setFormState('error'));
     }
   };
 
   const toggle = (reset) => {
     setShow(!show);
     if (reset) {
-      setFormState("initial");
-      setFullName("");
+      setFormState('initial');
+      setFullName('');
       setImage(undefined);
     }
   };
@@ -62,7 +62,7 @@ export default ({ onSave }) => {
           <Alert
             variant="warning"
             style={{
-              display: formState === "saving" ? "block" : "none",
+              display: formState === 'saving' ? 'block' : 'none',
             }}
           >
             Please wait
@@ -70,7 +70,7 @@ export default ({ onSave }) => {
           <Alert
             variant="danger"
             style={{
-              display: formState === "error" ? "block" : "none",
+              display: formState === 'error' ? 'block' : 'none',
             }}
           >
             An error happened. Retry.
@@ -78,14 +78,14 @@ export default ({ onSave }) => {
           <Alert
             variant="success"
             style={{
-              display: formState === "saved" ? "block" : "none",
+              display: formState === 'saved' ? 'block' : 'none',
             }}
           >
             The user has been added.
           </Alert>
           <form
             style={{
-              display: formState === "initial" ? "block" : "none",
+              display: formState === 'initial' ? 'block' : 'none',
             }}
           >
             <Form.Group controlId="fullName">
@@ -113,7 +113,7 @@ export default ({ onSave }) => {
             onClick={submitForm}
             variant="primary"
             type="submit"
-            disabled={!fullName || !image || formState !== "initial"}
+            disabled={!fullName || !image || formState !== 'initial'}
             show="false"
           >
             Add User

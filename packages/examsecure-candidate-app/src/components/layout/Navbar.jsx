@@ -1,10 +1,10 @@
 import Navbar from 'react-bootstrap/Navbar';
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import logo from '../static/logo.png';
-import LogoText from './helpers/LogoText';
+import logo from '../../static/logo.png';
+import LogoText from '../helpers/LogoText';
 import Nav from 'react-bootstrap/Nav';
-import signOut from '../utils/signOut';
+import signOut from '../../utils/signOut';
 
 const ESNavbar = ({ isSignedIn }) => {
   const history = useHistory();
