@@ -11,7 +11,10 @@ export const create_test_action = (testDetails, uid) => {
 
     const updates = {};
     updates[`tests/${uid}/${newTestKey}`] = testDetails;
-    updates[`tests_list/${newTestKey}`] = testDetails.test_name;
+    updates[`tests_list/${newTestKey}`] = {
+      test_name: testDetails.test_name,
+      test_duration: testDetails.test_duration,
+    };
 
     database
       .ref()
