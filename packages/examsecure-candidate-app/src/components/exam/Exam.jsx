@@ -26,7 +26,7 @@ const Exam = ({ loadForSeconds, currentUser, testData }) => {
     answerResponse,
     answerResponseHandler,
     setAnswerResponse,
-  ] = useAnswerResponse(currentUser, questionsData.questionSetID);
+  ] = useAnswerResponse(currentUser, testData.test_id);
   const [shouldIntervalBeCancelled, setShouldIntervalBeCancelled] = useState(
     false,
   );
