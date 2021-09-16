@@ -22,42 +22,42 @@ import ProctorDashboard from '../proctor-mode-views/proctor-dashboard/ProctorDas
 import { Route, Switch } from 'react-router-dom';
 import { useRouteMatch } from 'react-router';
 
-const ProctorModeContentWrapper = () => {
+const ProctorModeContentWrapper = ({ test }) => {
   const { path } = useRouteMatch();
 
   return (
     <Switch>
       <Route exact path={path}>
-        <ProctorDashboard />
+        <ProctorDashboard test={test} />
       </Route>
 
       <Route path={`${path}/${PROC_MODE_CURRENT_CANDIDATES}`}>
-        <CurrentCandidates />
+        <CurrentCandidates test={test} />
       </Route>
 
       <Route path={`${path}/${PROC_MODE_CANDIDATES_TEST_TAKEN}`}>
-        <TestTakenCandidates />
+        <TestTakenCandidates test={test} />
       </Route>
       <Route path={`${path}/${PROC_MODE_CANDIDATES_TEST_INVITED}`}>
-        <InvitedCandidates />
+        <InvitedCandidates test={test} />
       </Route>
       <Route path={`${path}/${PROC_MODE_CANDIDATES_TEST_DISQUALIFIED}`}>
-        <DisqualifiedCandidates />
+        <DisqualifiedCandidates test={test} />
       </Route>
       <Route path={`${path}/${PROC_MODE_TEST_REPORTS}`}>
-        <TestReports />
+        <TestReports test={test} />
       </Route>
       <Route path={`${path}/${PROC_MODE_QUESTIONS_ANALYTICS}`}>
-        <QuestionsAnalytics />
+        <QuestionsAnalytics test={test} />
       </Route>
       <Route path={`${path}/${PROC_MODE_TEST_OVERVIEW}`}>
-        <TestOverview />
+        <TestOverview test={test} />
       </Route>
       <Route path={`${path}/${PROC_MODE_TEST_QUESTIONS}`}>
-        <TestQuestions />
+        <TestQuestions test={test} />
       </Route>
       <Route path={`${path}/${PROC_MODE_DASHBOARD}`}>
-        <ProctorDashboard />
+        <ProctorDashboard test={test} />
       </Route>
     </Switch>
   );
