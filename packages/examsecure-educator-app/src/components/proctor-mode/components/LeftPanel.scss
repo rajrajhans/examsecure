@@ -1,6 +1,15 @@
+.proc-mode-left-panel-logo {
+  position: fixed;
+  top: 28px;
+  left: 80px;
+  z-index: -10;
+}
+
+
 .proc-mode-left-panel {
   padding: 10px 5px 10px 10px;
   border-right: 0.5px solid #c6c4c4;
+  position: fixed;
 
   a,
   a:link,
