@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import Layout from './components/layout/Layout';
 import './styles/main.css';
 import Home from './components/Home';
@@ -93,6 +93,8 @@ class App extends Component {
               currentUser={this.state.currentUser}
               loadForSeconds={this.loadForSeconds}
               setLoading={this.setLoading}
+              authState={this.state.authState}
+              setAuthState={this.setAuthState}
             />
             <PrivateRoute
               component={QuestionSetSelectorContainer}
@@ -110,6 +112,8 @@ class App extends Component {
               path={'/thankyou'}
               loadForSeconds={this.loadForSeconds}
               setLoading={this.setLoading}
+              authState={this.state.authState}
+              setAuthState={this.setAuthState}
             />
             <Caught path={'/caught'} loadForSeconds={this.loadForSeconds} />
             <Route path={'/'}>

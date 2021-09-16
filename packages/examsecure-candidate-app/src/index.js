@@ -27,7 +27,7 @@ Amplify.configure({
   Auth: {
     identityPoolId: settings.cognitoIdentityPool,
     region,
-    mandatorySignIn: true,
+    mandatorySignIn: false,
     userPoolId: settings.cognitoUserPoolId,
     userPoolWebClientId: settings.cognitoUserPoolClientId,
   },
