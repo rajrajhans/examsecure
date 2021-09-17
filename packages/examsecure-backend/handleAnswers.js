@@ -14,12 +14,12 @@ const respond = (httpStatusCode, response) => ({
 
 exports.updateAnswer = async (event) => {
   const body = JSON.parse(event.body);
-  let username = body.username.replace(/[., $, \[, \], #, \/]/g, '');
+  let email = body.email.replace(/[., $, \[, \], #, \/]/g, '');
   let questionSetID = body.qSetID;
   let questionID = body.qID;
   let userSelectedAnswer = body.selectedAnswer;
 
-  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}/${questionSetID}/userAnswers/${questionID}.json?auth=${firebaseApiKey}`;
+  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/candidates/${email}/${questionSetID}/candidate_answers/${questionID}.json?auth=${firebaseApiKey}`;
 
   await fetch(firebaseURL, {
     method: 'PUT',

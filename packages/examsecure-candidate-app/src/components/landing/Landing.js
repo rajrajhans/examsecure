@@ -5,14 +5,14 @@ import Alert from 'react-bootstrap/Alert';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import { Link, useHistory } from 'react-router-dom';
-import '../styles/landing.css';
+import '../../styles/landing.css';
 import {
   defineFullscreenChangeEvent,
   makeFullScreen,
-} from '../utils/fullscreenAPI';
-import AddFaceBox from './helpers/AddFaceBox';
-import { mode } from './helpers/modeSetter';
-import isDeviceMobile from '../utils/checkMobileDeviceAPI';
+} from '../../utils/fullscreenAPI';
+import AddFaceBox from '../helpers/AddFaceBox';
+import { mode } from '../helpers/modeSetter';
+import isDeviceMobile from '../../utils/checkMobileDeviceAPI';
 import { pageview } from 'react-ga';
 
 const Landing = ({ loadForSeconds, currentUser, questionSetMetadata }) => {
@@ -223,11 +223,11 @@ const Landing = ({ loadForSeconds, currentUser, questionSetMetadata }) => {
         {questionSetMetadata ? (
           <div className={'confirmationText'}>
             <div>
-              Selected Exam: <b>{questionSetMetadata.qSetName}</b>
+              Selected Exam: <b>{questionSetMetadata.test_name}</b>
             </div>
             <div>
               Duration of the Exam:{' '}
-              <b>{questionSetMetadata.duration} minutes</b>
+              <b>{questionSetMetadata.test_duration} minutes</b>
             </div>
           </div>
         ) : null}

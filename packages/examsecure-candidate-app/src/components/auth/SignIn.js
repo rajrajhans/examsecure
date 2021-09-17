@@ -3,7 +3,7 @@ import { Auth } from 'aws-amplify';
 import { pageview } from 'react-ga';
 import { Button, TextInput, Title, WhiteCard } from '@examsecure/design-system';
 import styled from 'styled-components';
-import backgroundImg from '../static/authbg1.jpg';
+import backgroundImg from '../../static/authbg1.jpg';
 import { Link } from 'react-router-dom';
 import colors from '@examsecure/design-system/src/colors';
 

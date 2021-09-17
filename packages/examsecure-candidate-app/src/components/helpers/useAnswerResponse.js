@@ -1,22 +1,28 @@
-import React, { useEffect, useState } from "react";
-import gateway from "../../utils/gateway";
+import { useEffect, useState } from 'react';
+import gateway from '../../utils/gateway';
 
-const useAnswerResponse = (username, questionSetID) => {
+const useAnswerResponse = (username, email, questionSetID) => {
   const [answerResponse, setAnswerResponse] = useState({});
 
   const updateAnswerHandler = (questionID, userSelectedAnswer) => {
     gateway
-      .updateAnswer(username, questionSetID, questionID, userSelectedAnswer)
+      .updateAnswer(
+        username,
+        email,
+        questionSetID,
+        questionID,
+        userSelectedAnswer,
+      )
       .catch((e) => {
-        console.log("error: ", e);
+        console.log('error: ', e);
       });
 
     setAnswerResponse({ ...answerResponse, [questionID]: userSelectedAnswer });
   };
 
   useEffect(() => {
-    console.log("answerResponse updated to ", answerResponse);
-    console.log("Making req to /answer-response");
+    console.log('answerResponse updated to ', answerResponse);
+    console.log('Making req to /answer-response');
   }, [answerResponse]);
 
   return [answerResponse, updateAnswerHandler, setAnswerResponse];

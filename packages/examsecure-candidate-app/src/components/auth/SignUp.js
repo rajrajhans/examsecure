@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Auth } from 'aws-amplify';
-import backgroundImg from '../static/authbg1.jpg';
+import backgroundImg from '../../static/authbg1.jpg';
 import { Title, TextInput, Button, WhiteCard } from '@examsecure/design-system';
 import colors from '@examsecure/design-system/src/colors';
 import { Link, useHistory } from 'react-router-dom';

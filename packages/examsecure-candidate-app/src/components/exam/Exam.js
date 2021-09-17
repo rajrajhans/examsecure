@@ -1,45 +1,44 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Timer from './helpers/Timer';
+import Timer from '../helpers/Timer';
 import Button from 'react-bootstrap/Button';
 import { useHistory } from 'react-router-dom';
-import '../styles/exam.css';
+import '../../styles/exam.css';
 import Webcam from 'react-webcam';
-import gateway from '../utils/gateway';
-import signOut from '../utils/signOut';
-import ExamWarningModal from './helpers/ExamWarningModal';
-import { mode } from './helpers/modeSetter';
-import useAnswerResponse from './helpers/useAnswerResponse';
+import gateway from '../../utils/gateway';
+import signOut from '../../utils/signOut';
+import ExamWarningModal from '../helpers/ExamWarningModal';
+import { mode } from '../helpers/modeSetter';
+import useAnswerResponse from '../helpers/useAnswerResponse';
 import { pageview } from 'react-ga';
+import Question from './Question';
 
-const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
+const Exam = ({ loadForSeconds, currentUser, email, testData }) => {
   const [isWebCamReady, setisWebcamReady] = useState(false);
   const [warning, setWarning] = useState({
     title: '',
     text: '',
     isWarningModalActive: false,
   });
+
+  const questions = testData.questions.questions;
+
   const [
     answerResponse,
     answerResponseHandler,
     setAnswerResponse,
-  ] = useAnswerResponse(currentUser, questionsData.questionSetID);
-  const [shouldIntervalBeCancelled, setShouldIntervalBeCancelled] = useState(
-    false,
-  );
+  ] = useAnswerResponse(currentUser, email, testData.test_id);
   const history = useHistory();
 
   useEffect(() => {
-    if (questionsData.questions.length === 0) {
-      history.push('/selectQuestionSet').catch((e) => {
-        console.log(e);
-      });
+    if (!questions) {
+      history.push('/selectQuestionSet');
     }
     loadForSeconds();
     pageview(window.location.pathname + window.location.search);
     document.oncontextmenu = () => false; // Disables Right Click
     startExam().catch((e) => console.log(e));
     gateway
-      .getSavedAnswers(currentUser, questionsData.questionSetID)
+      .getSavedAnswers(currentUser, testData.test_id)
       .then((data) => setAnswerResponse(data.savedAnswers))
       .catch((e) => console.log(e));
     getSnapshotInitial();
@@ -51,7 +50,6 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
 
   const webcam = useRef(undefined);
   const isStreaming = useRef(true);
-  const currentUrl = window.location.href;
 
   const timeUp = () => {
     isStreaming.current = false;
@@ -60,7 +58,7 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
 
   const getLastAlive = async () => {
     return gateway
-      .getLastAlive(currentUser, questionsData.questionSetID)
+      .getLastAlive(email, testData.test_id)
       .then((res) => {
         return res;
       })
@@ -71,7 +69,7 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
 
   const startExam = async () => {
     return gateway
-      .startExam(currentUser, questionsData.questionSetID)
+      .startExam(currentUser, email, testData.test_id)
       .then((res) => {
         return res;
       })
@@ -123,11 +121,7 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
 
         if (mode === 1) {
           gateway
-            .processImage(
-              b64EncodedImg,
-              currentUser,
-              questionsData.questionSetID,
-            )
+            .processImage(b64EncodedImg, email, testData.test_id)
             .then((res) => {
               if (res) {
                 // If "Objects of Interest" test fails
@@ -181,10 +175,9 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
   };
 
   function onEndExam() {
-    gateway.endExam(currentUser, questionsData.questionSetID).catch((e) => {
+    gateway.endExam(email, testData.test_id).catch((e) => {
       console.log(e);
     });
-    setShouldIntervalBeCancelled(true);
     history.push('/thankyou').catch((e) => {
       console.log(e);
     });
@@ -230,19 +223,19 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
       {isWebCamReady ? (
         <>
           <Timer
-            examDuration={questionsData.selectedQSetDuration * 60}
+            examDuration={Number(testData.metadata.test_duration) * 60}
             getLastAlive={getLastAlive}
             callBackFn={timeUp}
-            currentUser={currentUser}
-            questionSetID={questionsData.questionSetID}
+            email={email}
+            questionSetID={testData.test_id}
           />
           <div className={'examQuestions'}>
-            {questionsData.questions.map((q) => (
-              <div className={'questionsWrapper'} key={q.id}>
+            {questions.map((q) => (
+              <div className={'questionsWrapper'} key={q.question_id}>
                 <Question
-                  questionID={q.id}
-                  question={q.question}
-                  opts={q.opts}
+                  questionID={q.question_id}
+                  question={q.question_text}
+                  opts={q.choices}
                   handleAnswerChange={handleAnswerChange}
                   isRadioChecked={isRadioChecked}
                 />
@@ -262,45 +255,6 @@ const Exam = ({ loadForSeconds, currentUser, questionsData }) => {
           </div>
         </>
       ) : null}
-    </>
-  );
-};
-
-const Question = ({
-  questionID,
-  question,
-  opts,
-  handleAnswerChange,
-  isRadioChecked,
-}) => {
-  return (
-    <>
-      <div className="card questionCard">
-        <div className="card-body">
-          <div className="card-title">
-            <strong>{question}</strong>
-          </div>
-
-          {opts.map((opt) => (
-            <div className="form-check mcqOption" key={opt.optID}>
-              <input
-                className="form-check-input"
-                type="radio"
-                name={questionID}
-                id={opt.optID}
-                value={opt.optID}
-                onChange={handleAnswerChange}
-                checked={
-                  isRadioChecked(questionID, opt.optID) ? 'checked' : null
-                }
-              />
-              <label htmlFor={opt.optID} className="form-check-label">
-                {opt.optText}
-              </label>
-            </div>
-          ))}
-        </div>
-      </div>
     </>
   );
 };

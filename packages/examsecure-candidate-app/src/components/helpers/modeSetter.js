@@ -1,5 +1,5 @@
 // Temporary hack to easily disable calls to AWS Lambda and Rekognition for testing purposes without incurring charges
-let mode = 0;
+let mode = 1;
 
 if (
   process.env.NODE_ENV === 'production' ||

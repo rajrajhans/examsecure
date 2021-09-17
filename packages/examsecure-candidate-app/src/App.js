@@ -1,19 +1,20 @@
-import React, { Component, useState } from 'react';
-import Layout from './components/Layout';
+import React, { Component } from 'react';
+import Layout from './components/layout/Layout';
 import './styles/main.css';
 import Home from './components/Home';
-import SignIn from './components/SignIn';
+import SignIn from './components/auth/SignIn';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PrivateRoute from './components/helpers/PrivateRoute';
-import PostSubmit from './components/PostSubmit';
-import Loading from './components/Loading';
-import Caught from './components/Caught';
-import Demo from './components/Demo';
-import QuestionSetSelectorContainer from './components/containers/QuestionSetSelectorContainer';
-import ExamContainer from './components/containers/ExamContainer';
-import LandingContainer from './components/containers/LandingContainer';
-import DemoVideos from './components/DemoVideos';
-import SignUp from './components/SignUp';
+import PostSubmit from './components/post-exam/PostSubmit';
+import Loading from './components/layout/Loading';
+import Caught from './components/post-exam/Caught';
+import Demo from './components/demo/Demo';
+import QuestionSetSelectorContainer from './components/test-selector/TestSelectorContainer';
+import ExamContainer from './components/exam/ExamContainer';
+import LandingContainer from './components/landing/LandingContainer';
+import DemoVideos from './components/demo/DemoVideos';
+import SignUp from './components/auth/SignUp';
+import { Auth } from 'aws-amplify';
 
 class App extends Component {
   constructor(props) {
@@ -25,13 +26,27 @@ class App extends Component {
       isLoading: false,
       authState: undefined,
       currentUser: '',
+      currentUserEmail: '',
       isSignedIn: false,
     };
   }
 
   async setAuthState(s) {
     this.setState({ authState: s });
-    this.setState({ currentUser: s.username, isSignedIn: true });
+    this.setState({ isSignedIn: true });
+  }
+
+  componentDidMount() {
+    Auth.currentAuthenticatedUser()
+      .then((data) => {
+        this.setState({
+          currentUser: data.attributes.name,
+          currentUserEmail: data.attributes.email,
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
 
   setLoading(val) {
@@ -91,8 +106,11 @@ class App extends Component {
               isSignedIn={this.state.isSignedIn}
               path={'/exam'}
               currentUser={this.state.currentUser}
+              email={this.state.currentUserEmail}
               loadForSeconds={this.loadForSeconds}
               setLoading={this.setLoading}
+              authState={this.state.authState}
+              setAuthState={this.setAuthState}
             />
             <PrivateRoute
               component={QuestionSetSelectorContainer}
@@ -110,6 +128,8 @@ class App extends Component {
               path={'/thankyou'}
               loadForSeconds={this.loadForSeconds}
               setLoading={this.setLoading}
+              authState={this.state.authState}
+              setAuthState={this.setAuthState}
             />
             <Caught path={'/caught'} loadForSeconds={this.loadForSeconds} />
             <Route path={'/'}>

@@ -4,11 +4,11 @@ import { Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useHistory } from 'react-router-dom';
-import gateway from '../utils/gateway';
+import gateway from '../../utils/gateway';
 import Spinner from 'react-bootstrap/Spinner';
 import { pageview } from 'react-ga';
 
-const QuestionSetSelector = ({ fetchQuestions, questions, currentUser }) => {
+const TestSelector = ({ fetchQuestions, questions, currentUser }) => {
   const [selectedQSet, setSelectedQSet] = useState('');
   const [selectedQSetMetadata, setSelectedQSetMetadata] = useState({});
   const [qSets, setQsets] = useState([]);
@@ -20,18 +20,25 @@ const QuestionSetSelector = ({ fetchQuestions, questions, currentUser }) => {
     e.preventDefault();
     setIsSpinnerActive(true);
     fetchQuestions(selectedQSet, selectedQSetMetadata);
-    history.push('/landing').catch((e) => {
-      console.log(e);
-    });
+    history.push('/landing');
   };
 
   useEffect(() => {
     gateway
       .getQuestionSets()
       .then((data) => {
-        setSelectedQSetMetadata(data['questionSets'][0]);
-        setSelectedQSet(data['questionSets'][0].qSetID);
-        setQsets(data['questionSets']);
+        const tests = Object.entries(data['questionSets']).map(
+          ([id, metadata]) => {
+            return {
+              test_id: id,
+              ...metadata,
+            };
+          },
+        );
+
+        setSelectedQSetMetadata(tests[0]);
+        setSelectedQSet(tests[0].test_id);
+        setQsets(tests);
       })
       .catch((e) => {
         console.log(e);
@@ -44,8 +51,10 @@ const QuestionSetSelector = ({ fetchQuestions, questions, currentUser }) => {
     const { options } = e.target;
     const selectedDataset = options[e.target.selectedIndex].dataset;
     const selectedQSetMetaData = {
-      duration: selectedDataset.duration,
-      qSetName: selectedDataset.qsetname,
+      test_duration: selectedDataset.test_duration,
+      test_id: selectedDataset.test_id,
+      test_name: selectedDataset.test_name,
+      test_by: selectedDataset.test_by,
     };
     setSelectedQSetMetadata(selectedQSetMetaData);
   };
@@ -60,7 +69,7 @@ const QuestionSetSelector = ({ fetchQuestions, questions, currentUser }) => {
         <Card style={{ maxWidth: '600px', margin: '70px auto' }}>
           <Card.Header>
             <Card.Title style={{ marginBottom: '0' }}>
-              To begin, select a Question Set available to you
+              To begin, select a test available to you
             </Card.Title>
           </Card.Header>
           <Form onSubmit={handleSubmit}>
@@ -68,7 +77,7 @@ const QuestionSetSelector = ({ fetchQuestions, questions, currentUser }) => {
               <Form.Group>
                 {qSets.length > 0 && isSpinnerActive === false ? (
                   <>
-                    <Form.Label>Select a Question Set</Form.Label>
+                    <Form.Label>Select a test</Form.Label>
                     <Form.Control
                       as={'select'}
                       custom
@@ -77,12 +86,14 @@ const QuestionSetSelector = ({ fetchQuestions, questions, currentUser }) => {
                     >
                       {qSets.map((questionSet) => (
                         <option
-                          key={questionSet.qSetID}
-                          value={questionSet.qSetID}
-                          data-duration={questionSet.duration}
-                          data-qSetName={questionSet.qSetName}
+                          key={questionSet.test_id}
+                          value={questionSet.test_id}
+                          data-test_duration={questionSet.test_duration}
+                          data-test_name={questionSet.test_name}
+                          data-test_id={questionSet.test_id}
+                          data-test_by={questionSet.test_by}
                         >
-                          {questionSet.qSetName}
+                          {questionSet.test_name}
                         </option>
                       ))}
                     </Form.Control>
@@ -118,4 +129,4 @@ const QuestionSetSelector = ({ fetchQuestions, questions, currentUser }) => {
   );
 };
 
-export default QuestionSetSelector;
+export default TestSelector;

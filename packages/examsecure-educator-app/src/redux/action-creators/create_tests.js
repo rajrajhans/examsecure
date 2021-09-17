@@ -7,9 +7,19 @@ export const create_test_action = (testDetails, uid) => {
 
     dispatch(startLoading());
 
+    const newTestKey = database.ref(`tests/${uid}`).push().key;
+
+    const updates = {};
+    updates[`tests/${uid}/${newTestKey}`] = testDetails;
+    updates[`tests_list/${newTestKey}`] = {
+      test_name: testDetails.test_name,
+      test_duration: testDetails.test_duration,
+      test_by: uid,
+    };
+
     database
-      .ref(`tests/${uid}`)
-      .push(testDetails)
+      .ref()
+      .update(updates)
       .then(() => {
         dispatch(stopLoading());
       })

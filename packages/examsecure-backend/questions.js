@@ -1,4 +1,4 @@
-global.fetch = require("node-fetch");
+global.fetch = require('node-fetch');
 
 const { firebaseApiKey } = process.env;
 
@@ -6,15 +6,16 @@ const respond = (httpStatusCode, response) => ({
   isBase64Encoded: false,
   statusCode: httpStatusCode,
   headers: {
-    "Access-Control-Allow-Origin": "*",
-    "Content-Type": "application/json",
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'application/json',
   },
   body: JSON.stringify(response),
 });
 
 exports.getQuestions = async (event) => {
-  let questionSetID = event.queryStringParameters.qSetID;
-  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/questions/${questionSetID}.json?auth=${firebaseApiKey}`;
+  let test_id = event.queryStringParameters.test_id;
+  let test_by = event.queryStringParameters.test_by;
+  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/tests/${test_by}/${test_id}.json?auth=${firebaseApiKey}`;
   let questions;
 
   await fetch(firebaseURL)
@@ -22,7 +23,7 @@ exports.getQuestions = async (event) => {
     .then((data) => {
       questions = data;
     })
-    .catch(() => console.log("error"));
+    .catch(() => console.log('error'));
 
   return respond(200, { questions: questions });
 };
@@ -31,7 +32,7 @@ exports.getQuestionSets = async (event) => {
   // const body = JSON.parse(event.body);
   // let username = body.username;
 
-  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/questionSets/.json?auth=${firebaseApiKey}`;
+  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/tests_list/.json?auth=${firebaseApiKey}`;
   let questionSets;
 
   await fetch(firebaseURL)
@@ -39,7 +40,7 @@ exports.getQuestionSets = async (event) => {
     .then((data) => {
       questionSets = data;
     })
-    .catch(() => console.log("error"));
+    .catch(() => console.log('error'));
 
   return respond(200, { questionSets: questionSets });
 };
