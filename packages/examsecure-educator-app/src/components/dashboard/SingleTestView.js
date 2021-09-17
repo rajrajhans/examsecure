@@ -1,7 +1,8 @@
 import React from 'react';
 import { Button } from '@examsecure/design-system';
+import { Link } from 'react-router-dom';
 
-const SingleTestView = ({ test }) => {
+const SingleTestView = ({ test, id }) => {
   return (
     <div className="dash-single-test-view">
       <div className="dash-single-test-view-left">
@@ -20,8 +21,12 @@ const SingleTestView = ({ test }) => {
         </div>
       </div>
       <div className="dash-single-test-view-right">
-        <Button variant={'secondary'} label={'More Details'} />
-        <Button variant={'secondary'} label={'Proctor Mode'} />
+        <Link to={`/proctor-mode/test_overview?test=${id}`}>
+          <Button variant={'secondary'} label={'More Details'} />
+        </Link>
+        <Link to={`/proctor-mode/proctor_dashboard?test=${id}`}>
+          <Button variant={'secondary'} label={'Proctor Mode'} />
+        </Link>
       </div>
     </div>
   );
