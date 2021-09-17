@@ -14,6 +14,7 @@ import ExamContainer from './components/exam/ExamContainer';
 import LandingContainer from './components/landing/LandingContainer';
 import DemoVideos from './components/demo/DemoVideos';
 import SignUp from './components/auth/SignUp';
+import { Auth } from 'aws-amplify';
 
 class App extends Component {
   constructor(props) {
@@ -31,7 +32,17 @@ class App extends Component {
 
   async setAuthState(s) {
     this.setState({ authState: s });
-    this.setState({ currentUser: s.username, isSignedIn: true });
+    this.setState({ isSignedIn: true });
+  }
+
+  componentDidMount() {
+    Auth.currentAuthenticatedUser()
+      .then((data) => {
+        this.setState({ currentUser: data.attributes.name });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
 
   setLoading(val) {
