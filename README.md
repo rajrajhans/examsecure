@@ -38,22 +38,6 @@ In addition to the anti-cheating mechanisms, ExamSecure also has the features yo
 
 Note: ExamSecure is currently a **Work In Progress**. It is deployed [here](https://examsecure.rajrajhans.com) but only authorized test candidates are given access. If you want to test it, please follow [these steps](https://github.com/rajrajhans/examsecure#running-examsecure-locally) to run ExamSecure locally.
 
-## Codebase Organization
-
-The codebase is organized following the [monorepo architecture](https://www.toptal.com/front-end/guide-to-monorepos). It uses [Yarn Workspaces](https://classic.yarnpkg.com/en/docs/workspaces/) and [Lerna](https://lerna.js.org/) for managing the monorepo. The monorepo currently has three packages 
-
-- [`@examsecure/candidate-app`](packages/examsecure-candidate-app): React webapp for the candidate portal. It was created using Create React App, but is now [ejected](https://create-react-app.dev/docs/available-scripts/#npm-run-eject) to support custom Babel config for monorepo architecture. 
-- [`@examsecure/educator-app`](packages/examsecure-educator-app): React webapp for the educator portal. 
-- [`@examsecure/design-system`](packages/examsecure-design-system): A simple design system for shared UI components between both webapps. Created using [Storybook](https://storybook.js.org/).
-
-### The CI/CD pipeline
-
-Following tasks are run on every PR against `master`.
-- Build code and run tests for all three packages through [a Github Actions workflow](https://github.com/rajrajhans/examsecure/tree/master/.github/workflows). Since the project uses Lerna, it's easy to build and test all the packages in one single command. 
-- Upload test coverage to [codecov](https://about.codecov.io/).
-- Deploy each React app separately using [Netlify Deploy Previews](https://www.netlify.com/blog/2016/07/20/introducing-deploy-previews-in-netlify/). So, there will be three Netlify deploy previews, one each for the candidate app, educator app, and StoryBook design system.
-- Continuous Security Analysis and Automated Code Reviews using [LGTM.com](https://lgtm.com/).
-
 ## Screenshots
 
 Following is a sneak peek of how the interface looks.
@@ -91,6 +75,22 @@ For more, check out the [Demo Videos page](https://examsecure.rajrajhans.com/dem
 | Realtime Proctor Mode                             | Candidate Camera Capture Image Analysis                             |
 | ------------------------------------ | ------------------------------------ |
 | ![](docs/ss-educator-5.png) | ![](docs/ss-educator-6.png) |
+
+## Codebase Organization
+
+The codebase is organized following the [monorepo architecture](https://www.toptal.com/front-end/guide-to-monorepos). It uses [Yarn Workspaces](https://classic.yarnpkg.com/en/docs/workspaces/) and [Lerna](https://lerna.js.org/) for managing the monorepo. The monorepo currently has three packages 
+
+- [`@examsecure/candidate-app`](packages/examsecure-candidate-app): React webapp for the candidate portal. It was created using Create React App, but is now [ejected](https://create-react-app.dev/docs/available-scripts/#npm-run-eject) to support custom Babel config for monorepo architecture. 
+- [`@examsecure/educator-app`](packages/examsecure-educator-app): React webapp for the educator portal. 
+- [`@examsecure/design-system`](packages/examsecure-design-system): A simple design system for shared UI components between both webapps. Created using [Storybook](https://storybook.js.org/).
+
+### The CI/CD pipeline
+
+Following tasks are run on every PR against `master`.
+- Build code and run tests for all three packages through [a Github Actions workflow](https://github.com/rajrajhans/examsecure/tree/master/.github/workflows). Since the project uses Lerna, it's easy to build and test all the packages in one single command. 
+- Upload test coverage to [codecov](https://about.codecov.io/).
+- Deploy each React app separately using [Netlify Deploy Previews](https://www.netlify.com/blog/2016/07/20/introducing-deploy-previews-in-netlify/). So, there will be three Netlify deploy previews, one each for the candidate app, educator app, and StoryBook design system.
+- Continuous Security Analysis and Automated Code Reviews using [LGTM.com](https://lgtm.com/).
 
 ## What's next?
 
