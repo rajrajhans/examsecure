@@ -24,16 +24,16 @@ export default {
     });
   },
 
-  startExam(username, questionSetID) {
+  startExam(email, questionSetID) {
     return request('/start-exam', 'post', {
-      username: username,
+      email: email,
       questionSetID: questionSetID,
     });
   },
 
-  endExam(username, questionSetID) {
+  endExam(email, questionSetID) {
     return request('/end-exam', 'post', {
-      username: username,
+      email: email,
       questionSetID: questionSetID,
     });
   },
@@ -66,17 +66,17 @@ export default {
     });
   },
 
-  checkIsDisqualified(username, questionSetID, timeRemaining) {
+  checkIsDisqualified(email, questionSetID, timeRemaining) {
     return request('/is-disqualified', 'post', {
-      username: username,
+      email: email,
       questionSetID: questionSetID,
       timeRemaining: timeRemaining,
     });
   },
 
-  getLastAlive(username, questionSetID) {
+  getLastAlive(email, questionSetID) {
     return request('/get-lastalive', 'post', {
-      username: username,
+      email: email,
       questionSetID: questionSetID,
     });
   },

@@ -58,7 +58,7 @@ const Exam = ({ loadForSeconds, currentUser, email, testData }) => {
 
   const getLastAlive = async () => {
     return gateway
-      .getLastAlive(currentUser, testData.test_id)
+      .getLastAlive(email, testData.test_id)
       .then((res) => {
         return res;
       })
@@ -69,7 +69,7 @@ const Exam = ({ loadForSeconds, currentUser, email, testData }) => {
 
   const startExam = async () => {
     return gateway
-      .startExam(currentUser, testData.test_id)
+      .startExam(email, testData.test_id)
       .then((res) => {
         return res;
       })
@@ -175,7 +175,7 @@ const Exam = ({ loadForSeconds, currentUser, email, testData }) => {
   };
 
   function onEndExam() {
-    gateway.endExam(currentUser, testData.test_id).catch((e) => {
+    gateway.endExam(email, testData.test_id).catch((e) => {
       console.log(e);
     });
     history.push('/thankyou').catch((e) => {
@@ -226,7 +226,7 @@ const Exam = ({ loadForSeconds, currentUser, email, testData }) => {
             examDuration={testData.metadata.test_duration * 60}
             getLastAlive={getLastAlive}
             callBackFn={timeUp}
-            currentUser={currentUser}
+            email={email}
             questionSetID={testData.test_id}
           />
           <div className={'examQuestions'}>
