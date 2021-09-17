@@ -26,6 +26,7 @@ class App extends Component {
       isLoading: false,
       authState: undefined,
       currentUser: '',
+      currentUserEmail: '',
       isSignedIn: false,
     };
   }
@@ -38,7 +39,10 @@ class App extends Component {
   componentDidMount() {
     Auth.currentAuthenticatedUser()
       .then((data) => {
-        this.setState({ currentUser: data.attributes.name });
+        this.setState({
+          currentUser: data.attributes.name,
+          currentUserEmail: data.attributes.email,
+        });
       })
       .catch((e) => {
         console.log(e);
@@ -102,6 +106,7 @@ class App extends Component {
               isSignedIn={this.state.isSignedIn}
               path={'/exam'}
               currentUser={this.state.currentUser}
+              currentUserEmail={this.state.currentUserEmail}
               loadForSeconds={this.loadForSeconds}
               setLoading={this.setLoading}
               authState={this.state.authState}

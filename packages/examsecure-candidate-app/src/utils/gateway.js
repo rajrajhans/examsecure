@@ -49,9 +49,10 @@ export default {
     );
   },
 
-  updateAnswer(username, questionSetID, questionID, userSelectedAnswer) {
+  updateAnswer(username, email, questionSetID, questionID, userSelectedAnswer) {
     return request('/update-answers', 'post', {
       username: username,
+      email: email,
       qSetID: questionSetID,
       qID: questionID,
       selectedAnswer: userSelectedAnswer,

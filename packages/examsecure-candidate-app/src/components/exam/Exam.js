@@ -12,7 +12,7 @@ import useAnswerResponse from '../helpers/useAnswerResponse';
 import { pageview } from 'react-ga';
 import Question from './Question';
 
-const Exam = ({ loadForSeconds, currentUser, testData }) => {
+const Exam = ({ loadForSeconds, currentUser, email, testData }) => {
   const [isWebCamReady, setisWebcamReady] = useState(false);
   const [warning, setWarning] = useState({
     title: '',
@@ -26,7 +26,7 @@ const Exam = ({ loadForSeconds, currentUser, testData }) => {
     answerResponse,
     answerResponseHandler,
     setAnswerResponse,
-  ] = useAnswerResponse(currentUser, testData.test_id);
+  ] = useAnswerResponse(currentUser, email, testData.test_id);
   const history = useHistory();
 
   useEffect(() => {
