@@ -106,7 +106,7 @@ class App extends Component {
               isSignedIn={this.state.isSignedIn}
               path={'/exam'}
               currentUser={this.state.currentUser}
-              currentUserEmail={this.state.currentUserEmail}
+              email={this.state.currentUserEmail}
               loadForSeconds={this.loadForSeconds}
               setLoading={this.setLoading}
               authState={this.state.authState}
