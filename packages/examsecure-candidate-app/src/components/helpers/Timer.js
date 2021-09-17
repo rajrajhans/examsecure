@@ -14,9 +14,14 @@ class Timer extends Component {
     };
   }
 
-  checkForDisqualification = (email, questionSetID) => {
+  checkForDisqualification = (email, questionSetID, test_by) => {
     gateway
-      .checkIsDisqualified(email, questionSetID, this.state.timeRemaining)
+      .checkIsDisqualified(
+        email,
+        questionSetID,
+        test_by,
+        this.state.timeRemaining,
+      )
       .then((res) => {
         if (res.isDisqualified === 'true') {
           clearInterval(this.checkForDisqInterval);
@@ -46,6 +51,7 @@ class Timer extends Component {
       getLastAlive,
       email,
       questionSetID,
+      test_by,
     } = this.props;
 
     let remainingTimeGotFromServer, adjustedDuration;
@@ -74,7 +80,7 @@ class Timer extends Component {
     });
 
     this.checkForDisqInterval = setInterval(
-      () => this.checkForDisqualification(email, questionSetID),
+      () => this.checkForDisqualification(email, questionSetID, test_by),
       5000,
     );
   }

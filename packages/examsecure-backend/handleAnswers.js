@@ -18,8 +18,9 @@ exports.updateAnswer = async (event) => {
   let questionSetID = body.qSetID;
   let questionID = body.qID;
   let userSelectedAnswer = body.selectedAnswer;
+  let test_by = body.test_by;
 
-  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/candidates/${email}/${questionSetID}/candidate_answers/${questionID}.json?auth=${firebaseApiKey}`;
+  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/tests/${test_by}/${questionSetID}/candidates/${email}/candidate_answers/${questionID}.json?auth=${firebaseApiKey}`;
 
   await fetch(firebaseURL, {
     method: 'PUT',
@@ -31,11 +32,12 @@ exports.updateAnswer = async (event) => {
 
 exports.getSavedAnswers = async (event) => {
   const body = JSON.parse(event.body);
-  let username = body.username.replace(/[., $, \[, \], #, \/]/g, '');
+  let email = body.email.replace(/[., $, \[, \], #, \/]/g, '');
   let questionSetID = body.qSetID;
   let savedAnswers = null;
+  let test_by = body.test_by;
 
-  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}/${questionSetID}/userAnswers.json?auth=${firebaseApiKey}`;
+  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/tests/${test_by}/${questionSetID}/candidates/${email}/${questionSetID}/candidate_answers.json?auth=${firebaseApiKey}`;
 
   await fetch(firebaseURL)
     .then((res) => res.json())

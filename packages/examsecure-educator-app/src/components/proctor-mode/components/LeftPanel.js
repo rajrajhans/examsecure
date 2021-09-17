@@ -41,19 +41,19 @@ const ProctorModeLeftPanel = ({ testID }) => {
 
         <Link to={generateLink(PROC_MODE_CURRENT_CANDIDATES)}>
           <div className={generateClassName(PROC_MODE_CURRENT_CANDIDATES)}>
-            Currently Taking (10)
+            Currently Taking
           </div>
         </Link>
 
         <Link to={generateLink(PROC_MODE_CANDIDATES_TEST_TAKEN)}>
           <div className={generateClassName(PROC_MODE_CANDIDATES_TEST_TAKEN)}>
-            Test Taken (5)
+            Test Taken
           </div>
         </Link>
 
         <Link to={generateLink(PROC_MODE_CANDIDATES_TEST_INVITED)}>
           <div className={generateClassName(PROC_MODE_CANDIDATES_TEST_INVITED)}>
-            Invited (5)
+            Invited
           </div>
         </Link>
 
@@ -63,7 +63,7 @@ const ProctorModeLeftPanel = ({ testID }) => {
               PROC_MODE_CANDIDATES_TEST_DISQUALIFIED,
             )}
           >
-            Disqualified (5)
+            Disqualified
           </div>
         </Link>
 

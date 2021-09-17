@@ -13,6 +13,7 @@ import { pageview } from 'react-ga';
 import Question from './Question';
 
 const Exam = ({ loadForSeconds, currentUser, email, testData }) => {
+  console.log({ testData });
   const [isWebCamReady, setisWebcamReady] = useState(false);
   const [warning, setWarning] = useState({
     title: '',
@@ -26,7 +27,12 @@ const Exam = ({ loadForSeconds, currentUser, email, testData }) => {
     answerResponse,
     answerResponseHandler,
     setAnswerResponse,
-  ] = useAnswerResponse(currentUser, email, testData.test_id);
+  ] = useAnswerResponse(
+    currentUser,
+    email,
+    testData.test_id,
+    testData.metadata.test_by,
+  );
   const history = useHistory();
 
   useEffect(() => {
@@ -38,7 +44,7 @@ const Exam = ({ loadForSeconds, currentUser, email, testData }) => {
     document.oncontextmenu = () => false; // Disables Right Click
     startExam().catch((e) => console.log(e));
     gateway
-      .getSavedAnswers(currentUser, testData.test_id)
+      .getSavedAnswers(email, testData.test_id, testData.metadata.test_by)
       .then((data) => setAnswerResponse(data.savedAnswers))
       .catch((e) => console.log(e));
     getSnapshotInitial();
@@ -58,7 +64,7 @@ const Exam = ({ loadForSeconds, currentUser, email, testData }) => {
 
   const getLastAlive = async () => {
     return gateway
-      .getLastAlive(email, testData.test_id)
+      .getLastAlive(email, testData.test_id, testData.metadata.test_by)
       .then((res) => {
         return res;
       })
@@ -69,7 +75,12 @@ const Exam = ({ loadForSeconds, currentUser, email, testData }) => {
 
   const startExam = async () => {
     return gateway
-      .startExam(currentUser, email, testData.test_id)
+      .startExam(
+        currentUser,
+        email,
+        testData.test_id,
+        testData.metadata.test_by,
+      )
       .then((res) => {
         return res;
       })
@@ -121,7 +132,12 @@ const Exam = ({ loadForSeconds, currentUser, email, testData }) => {
 
         if (mode === 1) {
           gateway
-            .processImage(b64EncodedImg, email, testData.test_id)
+            .processImage(
+              b64EncodedImg,
+              email,
+              testData.test_id,
+              testData.metadata.test_by,
+            )
             .then((res) => {
               if (res) {
                 // If "Objects of Interest" test fails
@@ -175,9 +191,11 @@ const Exam = ({ loadForSeconds, currentUser, email, testData }) => {
   };
 
   function onEndExam() {
-    gateway.endExam(email, testData.test_id).catch((e) => {
-      console.log(e);
-    });
+    gateway
+      .endExam(email, testData.test_id, testData.metadata.test_by)
+      .catch((e) => {
+        console.log(e);
+      });
     history.push('/thankyou').catch((e) => {
       console.log(e);
     });
@@ -228,6 +246,7 @@ const Exam = ({ loadForSeconds, currentUser, email, testData }) => {
             callBackFn={timeUp}
             email={email}
             questionSetID={testData.test_id}
+            test_by={testData.metadata.test_by}
           />
           <div className={'examQuestions'}>
             {questions.map((q) => (
