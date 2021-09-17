@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ProctorDashboard.scss';
 import TopBar from './TopBar';
 import { Title } from '@examsecure/design-system';
@@ -12,6 +12,23 @@ const ProctorDashboard = ({ test }) => {
   const [isDisqualifyModalVisible, setIsDisqualifyModalVisible] = useState(
     false,
   );
+  const [flaggedImages, setFlaggedImages] = useState([]);
+
+  useEffect(() => {
+    if (test) {
+      setFlaggedImages(
+        Object.entries(test.flagged_candidates)
+          .map(([k, v]) =>
+            Object.entries(v).map(([key, val]) => {
+              val.candidate_name = test?.candidates[k].candidateName;
+              val.id = key;
+              return val;
+            }),
+          )
+          .flat(),
+      );
+    }
+  }, [test]);
 
   const toggleDetailsModal = () => {
     setIsDetailsModalVisible((prevState) => !prevState);
@@ -43,9 +60,10 @@ const ProctorDashboard = ({ test }) => {
             </div>
           ) : (
             <>
-              {[1, 2, 3, 4, 5, 6].map((i) => (
+              {flaggedImages.map((record) => (
                 <FlaggedImageRecord
-                  key={i}
+                  key={record.id}
+                  record={record}
                   archived={false}
                   toggleDetailsModal={toggleDetailsModal}
                   toggleDisqualifyModal={toggleDisqualifyModal}

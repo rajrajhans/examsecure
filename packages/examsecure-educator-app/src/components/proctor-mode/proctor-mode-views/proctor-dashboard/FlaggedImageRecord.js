@@ -7,30 +7,23 @@ const FlaggedImageRecord = ({
   archived,
   toggleDetailsModal,
   toggleDisqualifyModal,
+  record,
 }) => {
   return (
     <div className="proc-dash-flagged-image-record">
       <div className="proc-dash-flagged-image-src">
-        <img
-          src={
-            'https://imgsv.imaging.nikon.com/lineup/dslr/df/img/sample/img_01.jpg'
-          }
-          alt={'flagged image'}
-        />
+        <img src={record?.imageURL} alt={'flagged image'} />
       </div>
       <div className="proc-dash-flagged-image-details">
         <div>
           <strong>Candidate Name: </strong>
-          <span>John Doe</span>
+          <span>{record?.candidate_name}</span>
         </div>
         <div>
           <strong>Reason for Flag: </strong>
-          <span>Mobile phone detected in candidate's camera frame</span>
+          <span>{record?.reason}</span>
         </div>
-        <div>
-          <strong>Flag Timestamp: </strong>
-          <span>11/09/2021, 09:25 AM</span>
-        </div>
+
         <div className="proc-dash-flagged-image-details-btn">
           <Button
             label={'More Details'}
