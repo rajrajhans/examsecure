@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import gateway from '../../utils/gateway';
 
-const useAnswerResponse = (username, email, questionSetID) => {
+const useAnswerResponse = (username, email, questionSetID, test_by) => {
   const [answerResponse, setAnswerResponse] = useState({});
 
   const updateAnswerHandler = (questionID, userSelectedAnswer) => {
@@ -12,6 +12,7 @@ const useAnswerResponse = (username, email, questionSetID) => {
         questionSetID,
         questionID,
         userSelectedAnswer,
+        test_by,
       )
       .catch((e) => {
         console.log('error: ', e);

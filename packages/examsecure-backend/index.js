@@ -223,9 +223,10 @@ async function uploadFlaggedImagetoFirebase(
   testRes,
   reason,
   questionSetID,
+  test_by,
 ) {
   let uniqueID = uuid();
-  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/flagged_candidates/${questionSetID}/${username}/${uniqueID}.json?auth=${firebaseApiKey}`;
+  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/tests/${test_by}/${questionSetID}/flagged_candidates/${username}/${uniqueID}.json?auth=${firebaseApiKey}`;
 
   let data = {
     imageURL: s3ImgURL,
@@ -244,6 +245,7 @@ async function checkIfFrameisOffendingAndUpload(
   image,
   username,
   questionSetID,
+  test_by,
 ) {
   if (res[3]['Success'] === false && res[3]['Details'] === 0) {
     let s3URL = await uploadToS3(image);
@@ -253,6 +255,7 @@ async function checkIfFrameisOffendingAndUpload(
       res,
       "Face Not Detected in Candidate's Camera Frame",
       questionSetID,
+      test_by,
     );
   } else if (res[1]['Success'] === false && res[3]['Details'] > 1) {
     let s3URL = await uploadToS3(image);
@@ -262,6 +265,7 @@ async function checkIfFrameisOffendingAndUpload(
       res,
       "Multiple People Detected in Candidate's Camera Frame",
       questionSetID,
+      test_by,
     );
   } else if (res[0]['Success'] === false) {
     let s3URL = await uploadToS3(image);
@@ -271,6 +275,7 @@ async function checkIfFrameisOffendingAndUpload(
       res,
       "Mobile Phone Detected in Candidate's Camera Frame",
       questionSetID,
+      test_by,
     );
   } else if (res[3]['MoreDetails'][0]) {
     let headPoseAnalysis = isHeadPoseOK(
@@ -286,6 +291,7 @@ async function checkIfFrameisOffendingAndUpload(
         res,
         headPoseAnalysis,
         questionSetID,
+        test_by,
       );
     }
   }
@@ -295,6 +301,7 @@ exports.processHandler = async (event) => {
   const body = JSON.parse(event.body);
   const email = body.email.replace(/[., $, \[, \], #, \/]/g, '');
   const questionSetID = body.questionSetID;
+  const test_by = body.test_by;
   const imageBytes = Buffer.from(body.image, 'base64');
 
   const result = await Promise.all([
@@ -305,7 +312,13 @@ exports.processHandler = async (event) => {
 
   const res = result.flat();
 
-  await checkIfFrameisOffendingAndUpload(res, body.image, email, questionSetID);
+  await checkIfFrameisOffendingAndUpload(
+    res,
+    body.image,
+    email,
+    questionSetID,
+    test_by,
+  );
 
   return respond(200, res);
 };

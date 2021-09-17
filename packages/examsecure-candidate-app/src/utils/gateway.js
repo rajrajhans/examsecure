@@ -8,11 +8,12 @@ export default {
     });
   },
 
-  processImage(image, email, questionSetID) {
+  processImage(image, email, questionSetID, test_by) {
     return request('/process', 'post', {
       image: image,
       email: email,
       questionSetID: questionSetID,
+      test_by: test_by,
     });
   },
 
@@ -24,18 +25,20 @@ export default {
     });
   },
 
-  startExam(username, email, questionSetID) {
+  startExam(username, email, questionSetID, test_by) {
     return request('/start-exam', 'post', {
       username: username,
       email: email,
       questionSetID: questionSetID,
+      test_by: test_by,
     });
   },
 
-  endExam(email, questionSetID) {
+  endExam(email, questionSetID, test_by) {
     return request('/end-exam', 'post', {
       email: email,
       questionSetID: questionSetID,
+      test_by: test_by,
     });
   },
 
@@ -50,35 +53,46 @@ export default {
     );
   },
 
-  updateAnswer(username, email, questionSetID, questionID, userSelectedAnswer) {
+  updateAnswer(
+    username,
+    email,
+    questionSetID,
+    questionID,
+    userSelectedAnswer,
+    test_by,
+  ) {
     return request('/update-answers', 'post', {
       username: username,
       email: email,
       qSetID: questionSetID,
       qID: questionID,
       selectedAnswer: userSelectedAnswer,
+      test_by: test_by,
     });
   },
 
-  getSavedAnswers(username, questionSetID) {
+  getSavedAnswers(email, questionSetID, test_by) {
     return request('/get-saved-answers', 'post', {
-      username: username,
+      email: email,
       qSetID: questionSetID,
+      test_by: test_by,
     });
   },
 
-  checkIsDisqualified(email, questionSetID, timeRemaining) {
+  checkIsDisqualified(email, questionSetID, test_by, timeRemaining) {
     return request('/is-disqualified', 'post', {
       email: email,
       questionSetID: questionSetID,
       timeRemaining: timeRemaining,
+      test_by: test_by,
     });
   },
 
-  getLastAlive(email, questionSetID) {
+  getLastAlive(email, questionSetID, test_by) {
     return request('/get-lastalive', 'post', {
       email: email,
       questionSetID: questionSetID,
+      test_by: test_by,
     });
   },
 };
