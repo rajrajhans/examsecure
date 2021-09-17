@@ -36,10 +36,8 @@ const Exam = ({ loadForSeconds, currentUser, testData }) => {
   const history = useHistory();
 
   useEffect(() => {
-    if (questions.length === 0) {
-      history.push('/selectQuestionSet').catch((e) => {
-        console.log(e);
-      });
+    if (!questions) {
+      history.push('/selectQuestionSet');
     }
     loadForSeconds();
     pageview(window.location.pathname + window.location.search);
