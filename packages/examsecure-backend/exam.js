@@ -17,10 +17,11 @@ const respond = (httpStatusCode, response) => ({
 exports.startExamHandler = async (event) => {
   const body = JSON.parse(event.body);
 
-  let username = body.username.replace(/[., $, \[, \], #, \/]/g, '');
+  let username = body.username;
+  let email = body.email.replace(/[., $, \[, \], #, \/]/g, '');
   let questionSetID = body.questionSetID;
 
-  let firebaseUserExamObjectURL = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}/${questionSetID}.json?auth=${firebaseApiKey}`;
+  let firebaseUserExamObjectURL = `https://project2-e6924-default-rtdb.firebaseio.com/candidates/${email}/${questionSetID}.json?auth=${firebaseApiKey}`;
 
   let userExamObj = null;
   let userExamStartedAt = null;
@@ -41,6 +42,7 @@ exports.startExamHandler = async (event) => {
       isDisqualified: false,
       startedAt: Date.now(),
       loginCount: 1,
+      candidateName: username,
     };
   }
 
@@ -54,12 +56,12 @@ exports.startExamHandler = async (event) => {
 
 exports.endExamHandler = async (event) => {
   const body = JSON.parse(event.body);
-  let username = body.username.replace(/[., $, \[, \], #, \/]/g, '');
+  let email = body.email.replace(/[., $, \[, \], #, \/]/g, '');
 
   let questionSetID = body.questionSetID;
   let timestamp = Date.now();
 
-  let firebaseUserExamObjectURL = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}/${questionSetID}.json?auth=${firebaseApiKey}`;
+  let firebaseUserExamObjectURL = `https://project2-e6924-default-rtdb.firebaseio.com/candidates/${email}/${questionSetID}.json?auth=${firebaseApiKey}`;
 
   let userExamObj = null;
 
@@ -83,13 +85,13 @@ exports.endExamHandler = async (event) => {
 
 exports.checkIsDisqualified = async (event) => {
   const body = JSON.parse(event.body);
-  let username = body.username.replace(/[., $, \[, \], #, \/]/g, '');
+  let email = body.email.replace(/[., $, \[, \], #, \/]/g, '');
   let isDisqualified = false;
   let questionSetID = body.questionSetID;
   let timestamp = body.timeRemaining;
 
-  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}/${questionSetID}/isDisqualified.json?auth=${firebaseApiKey}`;
-  let firebaseLastAliveURL = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}/${questionSetID}/timeRemaining.json?auth=${firebaseApiKey}`;
+  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/candidates/${email}/${questionSetID}/isDisqualified.json?auth=${firebaseApiKey}`;
+  let firebaseLastAliveURL = `https://project2-e6924-default-rtdb.firebaseio.com/candidates/${email}/${questionSetID}/timeRemaining.json?auth=${firebaseApiKey}`;
 
   await fetch(firebaseURL)
     .then((data) => data.text())
@@ -108,11 +110,11 @@ exports.checkIsDisqualified = async (event) => {
 
 exports.getLastAlive = async (event) => {
   const body = JSON.parse(event.body);
-  let username = body.username.replace(/[., $, \[, \], #, \/]/g, '');
+  let email = body.email.replace(/[., $, \[, \], #, \/]/g, '');
   let timeRemaining = null;
   let questionSetID = body.questionSetID;
 
-  let firebaseTimeRemainingURL = `https://project2-e6924-default-rtdb.firebaseio.com/users/${username}/${questionSetID}/timeRemaining.json?auth=${firebaseApiKey}`;
+  let firebaseTimeRemainingURL = `https://project2-e6924-default-rtdb.firebaseio.com/candidates/${email}/${questionSetID}/timeRemaining.json?auth=${firebaseApiKey}`;
 
   await fetch(firebaseTimeRemainingURL)
     .then((data) => data.text())
