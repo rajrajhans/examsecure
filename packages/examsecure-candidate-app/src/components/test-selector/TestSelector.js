@@ -51,7 +51,7 @@ const TestSelector = ({ fetchQuestions, questions, currentUser }) => {
     const { options } = e.target;
     const selectedDataset = options[e.target.selectedIndex].dataset;
     const selectedQSetMetaData = {
-      test_duration: selectedDataset.duration,
+      test_duration: selectedDataset.test_duration,
       test_id: selectedDataset.test_id,
       test_name: selectedDataset.test_name,
       test_by: selectedDataset.test_by,
