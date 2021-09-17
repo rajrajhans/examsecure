@@ -58,6 +58,8 @@ Following tasks are run on every PR against `master`.
 
 Following is a sneak peek of how the interface looks.
 
+### ExamSecure Candidate Interface
+
 | Home,  Log In                              | Allow Camera Permissions                             |
 | ------------------------------------ | ------------------------------------ |
 | ![](/docs/examsecure_screenrecord.gif) | ![](docs/ss_permissions.png) |
@@ -75,6 +77,20 @@ Following is a sneak peek of how the interface looks.
 | ![](docs/ss_mobile.png) | ![](docs/ss_force_logout.png) |
 
 For more, check out the [Demo Videos page](https://examsecure.rajrajhans.com/demoVideos), and [the Image Analysis Demo](https://examsecure.rajrajhans.com/demo)
+
+### ExamSecure Educator Interface
+
+| Educator Dashboard                              | Create New Test                             |
+| ------------------------------------ | ------------------------------------ |
+| ![](/docs/ss-educator-1.png) | ![](docs/ss-educator-2.png) |
+
+| Add Questions                              | View, Edit, Delete Added Questions                             |
+| ------------------------------------ | ------------------------------------ |
+| ![](docs/ss-educator-3.png) | ![](docs/ss-educator-4.png) |
+
+| Realtime Proctor Mode                             | Candidate Camera Capture Image Analysis                             |
+| ------------------------------------ | ------------------------------------ |
+| ![](docs/ss-educator-5.png) | ![](docs/ss-educator-6.png) |
 
 ## What's next?
 
