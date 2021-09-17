@@ -225,7 +225,7 @@ async function uploadFlaggedImagetoFirebase(
   questionSetID,
 ) {
   let uniqueID = uuid();
-  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/triggeredUsers/${questionSetID}/${username}/${uniqueID}.json?auth=${firebaseApiKey}`;
+  let firebaseURL = `https://project2-e6924-default-rtdb.firebaseio.com/flagged_candidates/${questionSetID}/${username}/${uniqueID}.json?auth=${firebaseApiKey}`;
 
   let data = {
     imageURL: s3ImgURL,
@@ -293,7 +293,7 @@ async function checkIfFrameisOffendingAndUpload(
 
 exports.processHandler = async (event) => {
   const body = JSON.parse(event.body);
-  const username = body.username.replace(/[., $, \[, \], #, \/]/g, '');
+  const email = body.email.replace(/[., $, \[, \], #, \/]/g, '');
   const questionSetID = body.questionSetID;
   const imageBytes = Buffer.from(body.image, 'base64');
 
@@ -305,12 +305,7 @@ exports.processHandler = async (event) => {
 
   const res = result.flat();
 
-  await checkIfFrameisOffendingAndUpload(
-    res,
-    body.image,
-    username,
-    questionSetID,
-  );
+  await checkIfFrameisOffendingAndUpload(res, body.image, email, questionSetID);
 
   return respond(200, res);
 };

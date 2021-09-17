@@ -8,10 +8,10 @@ export default {
     });
   },
 
-  processImage(image, username, questionSetID) {
+  processImage(image, email, questionSetID) {
     return request('/process', 'post', {
       image: image,
-      username: username,
+      email: email,
       questionSetID: questionSetID,
     });
   },

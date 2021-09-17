@@ -121,7 +121,7 @@ const Exam = ({ loadForSeconds, currentUser, email, testData }) => {
 
         if (mode === 1) {
           gateway
-            .processImage(b64EncodedImg, currentUser, testData.test_id)
+            .processImage(b64EncodedImg, email, testData.test_id)
             .then((res) => {
               if (res) {
                 // If "Objects of Interest" test fails
