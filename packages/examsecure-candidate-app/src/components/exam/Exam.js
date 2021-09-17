@@ -223,7 +223,7 @@ const Exam = ({ loadForSeconds, currentUser, email, testData }) => {
       {isWebCamReady ? (
         <>
           <Timer
-            examDuration={testData.metadata.test_duration * 60}
+            examDuration={Number(testData.metadata.test_duration) * 60}
             getLastAlive={getLastAlive}
             callBackFn={timeUp}
             email={email}
