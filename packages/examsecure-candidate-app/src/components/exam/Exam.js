@@ -19,20 +19,14 @@ const Exam = ({ loadForSeconds, currentUser, testData }) => {
     text: '',
     isWarningModalActive: false,
   });
-  console.log({ testData });
-  // const questionsData = undefined;
 
   const questions = testData.questions.questions;
-  console.log({ questions });
 
   const [
     answerResponse,
     answerResponseHandler,
     setAnswerResponse,
   ] = useAnswerResponse(currentUser, testData.test_id);
-  const [shouldIntervalBeCancelled, setShouldIntervalBeCancelled] = useState(
-    false,
-  );
   const history = useHistory();
 
   useEffect(() => {
@@ -184,7 +178,6 @@ const Exam = ({ loadForSeconds, currentUser, testData }) => {
     gateway.endExam(currentUser, testData.test_id).catch((e) => {
       console.log(e);
     });
-    setShouldIntervalBeCancelled(true);
     history.push('/thankyou').catch((e) => {
       console.log(e);
     });
