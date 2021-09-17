@@ -1,20 +1,28 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import SignIn from '../auth/SignIn';
+import { Auth } from 'aws-amplify';
 
-class PrivateRoute extends Component {
-  render() {
-    let { component: Comp, ...propxs } = this.props;
+const PrivateRoute = (props) => {
+  const [isCurrentSession, setIsCurrentSession] = useState(false);
 
-    return (
-      <>
-        {this.props.isSignedIn ? (
-          <Comp {...propxs} />
-        ) : (
-          <SignIn isSignedIn={this.props.isSignedIn} {...propxs} />
-        )}
-      </>
-    );
-  }
-}
+  let { component: Comp, ...propxs } = props;
+  Auth.currentSession()
+    .then((data) => {
+      setIsCurrentSession(true);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+
+  return (
+    <>
+      {isCurrentSession ? (
+        <Comp {...propxs} />
+      ) : (
+        <SignIn isSignedIn={props.isSignedIn} {...propxs} />
+      )}
+    </>
+  );
+};
 
 export default PrivateRoute;
