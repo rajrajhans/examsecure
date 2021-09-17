@@ -21,12 +21,15 @@ const Question = ({
                 className="form-check-input"
                 type="radio"
                 name={questionID}
-                id={opt.id}
-                value={opt.choice_text}
+                id={`${questionID}-${opt.id}`}
+                value={opt.id}
                 onChange={handleAnswerChange}
                 checked={isRadioChecked(questionID, opt.id) ? 'checked' : null}
               />
-              <label htmlFor={opt.id} className="form-check-label">
+              <label
+                htmlFor={`${questionID}-${opt.id}`}
+                className="form-check-label"
+              >
                 {opt.choice_text}
               </label>
             </div>
