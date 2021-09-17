@@ -9,6 +9,7 @@ import LoadingSpinner from '../../../helpers/LoadingSpinner';
 
 const ProctorDashboard = ({ test }) => {
   const [isDetailsModalVisible, setIsDetailsModalVisible] = useState(false);
+  const [detailsFlagRecord, setDetailsFlagRecord] = useState(undefined);
   const [isDisqualifyModalVisible, setIsDisqualifyModalVisible] = useState(
     false,
   );
@@ -67,6 +68,7 @@ const ProctorDashboard = ({ test }) => {
                   archived={false}
                   toggleDetailsModal={toggleDetailsModal}
                   toggleDisqualifyModal={toggleDisqualifyModal}
+                  setDetailsFlagRecord={setDetailsFlagRecord}
                 />
               ))}
 
@@ -89,6 +91,8 @@ const ProctorDashboard = ({ test }) => {
       <DetailsModal
         onModalHide={toggleDetailsModal}
         show={isDetailsModalVisible}
+        detailsFlagRecord={detailsFlagRecord}
+        flaggedImages={flaggedImages}
       />
 
       <DisqualifyModal

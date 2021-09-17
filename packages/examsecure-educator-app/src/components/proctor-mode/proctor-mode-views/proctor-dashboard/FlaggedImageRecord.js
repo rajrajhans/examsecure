@@ -8,7 +8,12 @@ const FlaggedImageRecord = ({
   toggleDetailsModal,
   toggleDisqualifyModal,
   record,
+  setDetailsFlagRecord,
 }) => {
+  const handleModalClick = () => {
+    toggleDetailsModal();
+    setDetailsFlagRecord(record.id);
+  };
   return (
     <div className="proc-dash-flagged-image-record">
       <div className="proc-dash-flagged-image-src">
@@ -28,7 +33,7 @@ const FlaggedImageRecord = ({
           <Button
             label={'More Details'}
             variant={'secondary'}
-            onClick={toggleDetailsModal}
+            onClick={handleModalClick}
           />
         </div>
       </div>
