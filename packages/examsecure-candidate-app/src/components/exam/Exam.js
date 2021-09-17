@@ -69,7 +69,7 @@ const Exam = ({ loadForSeconds, currentUser, email, testData }) => {
 
   const startExam = async () => {
     return gateway
-      .startExam(email, testData.test_id)
+      .startExam(currentUser, email, testData.test_id)
       .then((res) => {
         return res;
       })

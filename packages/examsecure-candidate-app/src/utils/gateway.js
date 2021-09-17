@@ -24,8 +24,9 @@ export default {
     });
   },
 
-  startExam(email, questionSetID) {
+  startExam(username, email, questionSetID) {
     return request('/start-exam', 'post', {
+      username: username,
       email: email,
       questionSetID: questionSetID,
     });
