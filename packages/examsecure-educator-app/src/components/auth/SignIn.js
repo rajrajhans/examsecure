@@ -55,8 +55,8 @@ const HelperText = styled.div`
 `;
 
 const SignIn = (props) => {
-  const [email, setEmail] = useState('');
-  const [pwd, setPwd] = useState('');
+  const [email, setEmail] = useState('es@rajrajhans.com');
+  const [pwd, setPwd] = useState('password');
 
   const onBlur = () => {};
 
