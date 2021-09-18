@@ -9,7 +9,7 @@
     box-sizing: border-box;
     border: 0 solid #e2e8f0;
     text-decoration: inherit;
-    padding: 1.25rem 2rem;
+    padding: 1rem;
     font-weight: 700;
     background-color: #35519f;
     color: rgb(247, 250, 252);
@@ -28,6 +28,10 @@
     background-color: #152140;
     color: rgb(237, 242, 247);
     text-decoration: none;
+}
+
+.heroSectionButtonSecondary {
+    background-color: #4e4f51;
 }
 
 .demoButtonHome {
