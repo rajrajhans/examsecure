@@ -16,8 +16,6 @@ ExamSecure is a platform for conducting secure remote examinations and deter can
 
 ## Features
 
-ExamSecure uses the following techniques to prevent cheating by the candidates -
-
 1. **Complete Browser Lockdown**: In the exam environment, ExamSecure completely locks down the candidate's browser, triggering a warning if the candidate tries to switch tabs, open a new window, exit full screen mode or click anywhere else except the Exam screen. Text Selection, Text Copying, and Right Click is also disabled in Exam environment. 
 
 2. **Multiple Persons Detection**: Furthermore, ExamSecure uses the candidate's camera feed to perform advanced image analysis in real time to determine if there are multiple people in the candidate's frame, or if there is no one in the candidate's frame. 
@@ -28,13 +26,13 @@ ExamSecure uses the following techniques to prevent cheating by the candidates -
 
 5. **Electronic Objects Detection**: ExamSecure is also able to detect Electronic objects like Mobile Phones, Earphones in the candidate's camera frame and trigger a warning. 
 
-It uses the [AWS Rekognition](https://aws.amazon.com/rekognition/) API for Object Detection, Person Detection, and Face Analysis.
+6. **Realtime Monitoring & Disqualification**: Educators can monitor the exam activity via the ExamSecure Educator Interface and can also disqualify candidates if they find any camera frames to be objectionable.
 
-In addition to the anti-cheating mechanisms, ExamSecure also has the features you might expect in an e-exam software.
-- ExamSecure automatically syncs the candidate's answers with the server as he/she is attempting the test. The timer is synced as well. So, if there is a loss of connectivity in between, the candidate can continue from where he left off.
-- Educators who are monitoring the exam can disqualify candidates if they find any camera frames to be objectionable.
+7. **Automatic Test Progress Sync**: ExamSecure automatically syncs the candidate's answers with the server as he/she is attempting the test. The timer is synced as well. So, if there is a loss of connectivity in between, the candidate can continue from where he left off.
 
-... and many more features to be added soon.
+... and many more features to be added soon, including detailed test and question level analytics for the educators!
+
+ExamSecure uses the [AWS Rekognition](https://aws.amazon.com/rekognition/) API for Object Detection, Person Detection, and Face Analysis.
 
 Note: ExamSecure is currently a **Work In Progress**. It is deployed [here](https://examsecure.rajrajhans.com) but only authorized test candidates are given access. If you want to test it, please follow [these steps](https://github.com/rajrajhans/examsecure#running-examsecure-locally) to run ExamSecure locally.
 
