@@ -58,8 +58,8 @@ const HelperText = styled.div`
 `;
 
 const SignIn = ({ isSignedIn, authState, setAuthState, setLoading }) => {
-  const [email, setEmail] = useState('');
-  const [pwd, setPwd] = useState('');
+  const [email, setEmail] = useState('es@rajrajhans.com');
+  const [pwd, setPwd] = useState('password');
   const [confirmPwd, setConfirmPwd] = useState('');
   const [verificationCode, setVerificationCode] = useState('');
   const [stage, setStage] = useState(0); // 0 for sign in, 1 for forget password, 2 for verification
@@ -139,8 +139,8 @@ const SignIn = ({ isSignedIn, authState, setAuthState, setLoading }) => {
                 <Title value={'Sign In as a Candidate'} />
                 <HelperText>
                   <div style={{ paddingBottom: '20px', paddingTop: '16px' }}>
-                    For a test drive of the platform, enter "demo@vit.edu" as
-                    both the username and password.
+                    For a test drive of the platform, simply click Sign In with
+                    prefilled credentials.
                   </div>
                 </HelperText>
                 <div>

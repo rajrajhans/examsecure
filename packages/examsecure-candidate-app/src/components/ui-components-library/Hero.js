@@ -19,7 +19,7 @@ const TextColumn = tw(
 )`mr-auto lg:mr-0 max-w-lg lg:max-w-xl xl:max-w-2xl`;
 const Heading = tw(
   SectionHeading,
-)`text-left text-primary-900 leading-snug xl:text-6xl`;
+)`text-left text-primary-900 leading-snug xl:text-5xl`;
 const Description = tw(
   SectionDescription,
 )`mt-4 lg:text-base text-gray-700 max-w-lg`;
@@ -56,7 +56,11 @@ export default ({
         <ContentWithVerticalPadding>
           <Row>
             <TextColumn>
-              <Heading>Better, Safer, Secure Remote Exams</Heading>
+              <Heading>
+                Better, Safer, Secure
+                <br />
+                Remote Exams
+              </Heading>
               <Description className={'primaryText'}>
                 Ensure the authenticity and integrity of your examinations with
                 ExamSecure's AI-powered proctoring solution for remote
@@ -68,9 +72,20 @@ export default ({
                 className={'heroSectionButton'}
                 href={'#'}
                 onClick={() => history.push('/selectQuestionSet')}
+                style={{ marginRight: '20px' }}
               >
-                Get Started
+                Try out as a Candidate
               </PrimaryButton>
+
+              <PrimaryButton
+                as="a"
+                css={buttonRoundedCss}
+                className={'heroSectionButton heroSectionButtonSecondary'}
+                href={'https://examsecure-educator.rajrajhans.com'}
+              >
+                Try out as an Educator
+              </PrimaryButton>
+
               <FeatureList>
                 {features.map((feature, index) => (
                   <Feature key={index}>

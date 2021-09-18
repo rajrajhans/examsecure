@@ -14,6 +14,7 @@ const ESNavbar = ({ isSignedIn }) => {
       className={'navContainer'}
       expand={'lg'}
       collapseOnSelect={true}
+      activeKey={history.location.pathname}
     >
       <Navbar.Brand style={{ display: 'flex', alignContent: 'center' }}>
         <Link to={'/'} style={{ textDecoration: 'none' }}>
@@ -27,8 +28,12 @@ const ESNavbar = ({ isSignedIn }) => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav" className={'justify-content-end'}>
         <Nav>
-          <Nav.Link onClick={() => history.push('/demo')} eventKey={'1'}>
-            Demo
+          <Nav.Link as={Link} to={'/demoVideos'} eventKey={'/demoVideos'}>
+            Demo Videos
+          </Nav.Link>
+
+          <Nav.Link as={Link} to={'/demo'} eventKey={'/demo'}>
+            Image Analysis Demo
           </Nav.Link>
 
           {isSignedIn ? (

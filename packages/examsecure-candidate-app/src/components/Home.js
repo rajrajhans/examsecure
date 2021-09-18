@@ -11,9 +11,11 @@ import FeaturesTwoColSection from './ui-components-library/FeaturesTwoColSection
 import browserLockdownImg from '../static/browser_lockdown.svg';
 import headposepng from '../static/headposeestimation.png';
 import aiIllus from '../static/ai_illustration.png';
+import educator_interface from '../static/educator_screenshot.png';
 import FeaturesTwoColSection2 from './ui-components-library/FeaturesTwoColSection2';
 import FeaturesTwoColSection3 from './ui-components-library/FeaturesTwoColSection3';
 import { mode } from './helpers/modeSetter';
+import FeaturesTwoColSection4 from './ui-components-library/FeaturesTwoColSection4';
 
 const HighlightedText = tw.span`text-primary-500`;
 
@@ -47,6 +49,12 @@ export default () => {
           heading={'Head Pose Estimation'}
           subheading={'Detects loss of attention from the screen'}
           imageSrc={headposepng}
+        />
+        <FeaturesTwoColSection4
+          textOnLeft={true}
+          heading={'Feature Rich Educator Interface'}
+          subheading={'Realtime Exam Monitoring'}
+          imageSrc={educator_interface}
         />
         <FAQ
           heading={
